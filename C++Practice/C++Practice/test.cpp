@@ -55,4 +55,211 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//
+//using namespace std;
+//
+//namespace aaa
+//{
+//	int a = 10;
+//	int b = 20;
+//	int Add(int x, int y)
+//	{
+//		return x + y;
+//	}
+//}
+//
+//using namespace aaa;
+//
+//int main()
+//{
+//	aaa::a;
+//
+//	cout << a << endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//int main()
+//{
+//	std::cout << "hello world" << std::endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//using namespace std;
+//
+//int endl = 10;
+//
+//int main()
+//{
+//	cout << endl << std::endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//using namespace std;
+//
+//namespace calculator
+//{
+//	int a = 10;
+//	int Add(int x, int y)
+//	{
+//		return x + y;
+//	}
+//}
+//
+//using namespace calculator;
+//
+//int main()
+//{
+//	int sum = Add(10, 20);
+//
+//	cout << sum << " " << a << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//using namespace std;
+//
+//int Add(int x = 0, int y = 0, int z = 0)
+//{
+//	return x + y + z;
+//}
+//
+//int main()
+//{
+//	int sum = Add();
+//	cout << sum << endl;
+//
+//	int sum1 = Add(1, 3);
+//	cout << sum1 << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//using namespace std;
+//
+//int Add(int x , int y=0, int z=0)
+//{
+//	return x + y + z;
+//}
+//
+//int main()
+//{
+//	int sum = Add(10, , 3);
+//	cout<<sum<<endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//int Add(double x, double y)//类型不同
+//{
+//	return x + y;
+//}
+//
+//int Add(double x, double y, double z)//个数不同
+//{
+//	return x + y + z;
+//}
+//
+//
+//void Add(int i, char a)
+//{
+//	;
+//}
+//
+//void Add(char a, int i)//顺序不同
+//{
+//	;
+//}
+//
+//int main()
+//{
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	int a = 10;
+//	int& ra = a;
+//
+//	cout << &a << endl;
+//	cout << &ra << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//int main()
+//{
+//	const int a = 10;
+//	int& ra = a;//编译不能通过，因为const 修饰的变量a只能读不能写，而ra可读可写，权限放大了
+//
+//	const int b = 20;
+//	const int& rb = 20;//编译能通过
+//
+//	int c = 30;
+//	const int& rc = c;//编译能通过，因为c可读可写，rc只可读，权限缩小
+//
+//	//总结，权限可以缩小，但不能放大
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//
+//int main()
+//{
+//	int i = 0;
+//	double aaa = i;
+//	double& bd = i;
+//
+//	int a = 1;
+//	const double& pa = a;
+//
+//	return 0;
+//}
+
 #include<iostream>
+using namespace std;
+
+
+int Count1()
+{
+	static int a = 0;
+	a++;
+	return a;
+}
+
+//int& Count2()
+//{
+//	a++;
+//	return a;
+//}
+
+int main()
+{
+	int tmp = Count1();	
+
+	return 0;
+}
+
