@@ -239,27 +239,190 @@
 //	return 0;
 //}
 
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
+//
+//
+//int Count1()
+//{
+//	static int a = 0;
+//	a++;
+//	return a;
+//}
+//
+////int& Count2()
+////{
+////	a++;
+////	return a;
+////}
+//
+//int main()
+//{
+//	int tmp = Count1();	
+//
+//	return 0;
+//}
 
+//#include<iostream>
+//using namespace std;
+//
+////C语言交换两个数的写法
+//void Swap_C(int* p1, int* p2)
+//{
+//	int tmp = *p1;
+//	*p1 = *p2;
+//	*p2 = tmp;
+//}
+//
+////C++使用引用交换两个数
+//void Swap_CPP(int& a, int& b)
+//{
+//	int tmp = a;
+//	a = b;
+//	b = tmp;
+//}
+//
+//int main()
+//{
+//	int x = 10;
+//	int y = 20;
+//
+//	Swap_C(&x, &y);
+//
+//	cout << x << " " << y << endl;
+//
+//	Swap_CPP(x, y);
+//
+//	cout << x << " " << y << endl;
+//
+//	return 0;
+//}
 
-int Count1()
-{
-	static int a = 0;
-	a++;
-	return a;
-}
-
-//int& Count2()
+//#include<iostream>
+//using namespace std;
+//
+//int a = 0;//全局变量a
+//
+//int& Count1()
 //{
 //	a++;
 //	return a;
 //}
+//
+//int main()
+//{
+//	int& tmp = Count1();
+//	cout << a << endl;
+//	tmp++;
+//	cout << a << endl;
+//
+//	return 0;
+//}
 
-int main()
-{
-	int tmp = Count1();	
+//#include<iostream>
+//using namespace std;
+//
+//inline void Swap(int& a, int& b)
+//{
+//	int tmp = a;
+//	a = b;
+//	b = tmp;
+//}
+//
+//int main()
+//{
+//	int x = 10;
+//	int y = 20;
+//	Swap(x, y);
+//	cout << x << " " << y << endl;
+//	return 0;
+//}
 
-	return 0;
-}
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5 };
+//
+//	for (auto& e : arr)
+//	{
+//		e *= 2;
+//		cout << e;
+//	}
+//	cout << endl;
+//
+//
+//	return 0;
+//}
+
+//#include"game.h"
+//
+//int main()
+//{
+//
+//
+//	GameStart();
+//	GameRun();
+//	GameEnd();
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	char arr[10];
+//	cin >> arr;
+//	cout << arr << endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int Count(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//double Count(double x, double y)
+//{
+//	return x + y;
+//}
+//
+//int main()
+//{
+//	Count(1, 2);
+//	Count(1.2, 3.5);
+//	return 0;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//private:
+//	int a;
+//	char b;
+//	char c;
+//	char d;
+//	char e;
+//	char g;
+//};
+//
+//class B
+//{
+//	;
+//};
+//
+//int main()
+//{
+//	cout << sizeof(A) << endl;
+//	cout << sizeof(B) << endl;
+//	return 0;
+//}
 
