@@ -426,3 +426,148 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//////用struct定义类
+////struct Date
+////{
+////	void Show()
+////	{
+////		cout << _year << "-" << _month << "-" << _day << endl;
+////	}
+////
+////	int _year;
+////	int _month;
+////	int _day;
+////};
+//
+////用class定义类
+//class date
+//{
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1;
+//	d1.Show();
+//
+//	date d2;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Data
+//{
+//public:
+//	void Show();
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//void Data::Show()
+//{
+//	cout << _year << "-" << _month << "-" << _day << endl;
+//}
+//
+//int main()
+//{
+//	Data d1;
+//	cout << sizeof(d1) << endl;
+//	return 0;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//class Data
+//{
+//public:
+//	void Init(int year, int month, int day)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Data d1;
+//	Data d2;
+//	d1.Init(2024, 3, 5);
+//	d2.Init(2024, 3, 6);
+//
+//	d1.Show();
+//	d2.Show();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//	bool operator>(Date& d)
+//	{
+//		if (_year > d._year)
+//		{
+//			return true;
+//		}
+//		else if (_year == d._year && _month > d._month)
+//		{
+//			return true;
+//		}
+//		else if (_year == d._year && _month == d._month && _day > d._day)
+//		{
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 3, 7);
+//	Date d2(2024, 3, 7);
+//
+//	bool ret = d1.operator>(d2);
+//	cout << ret << endl;
+//
+//	return 0;
+//}
