@@ -571,3 +571,269 @@
 //
 //	return 0;
 //}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	//void Init(int year,int month,int day)
+//	//{
+//	//	_year = year;
+//	//	_month = month;
+//	//	_day = day;
+//	//}
+//	//Date(int year = 0,int month = 1,int day = 1)
+//	//{
+//	//	_year = year;
+//	//	_month = month;
+//	//	_day = day;
+//	//}
+//
+//	Date()
+//	{
+//		_year = 0;
+//		_month = 1;
+//		_day = 1;
+//	}
+//
+//	Date(int year = 0, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{	
+//
+//	//Date d1(2024, 3, 9);
+//	//Date d2;
+//	Date d1;
+//	Date d2(2024, 3, 8);
+//
+//	d1.Show();
+//	d2.Show();
+//
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Time
+//{
+//public:
+//	Time()
+//	{
+//		_hour = 0;
+//		_min = 1;
+//		_second = 1;
+//		cout << "Time" << endl;
+//		cout << _hour << "-" << _min << "-" << _second << endl;
+//	}
+//private:
+//	int _hour;
+//	int _min;
+//	int _second;
+//};
+//
+//class Date
+//{
+//public:
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//
+//	Time _t;
+//};
+//
+//int main()
+//{
+//	Date d1;
+//	d1.Show();
+//
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class Time
+//{
+//public:
+//	Time(int hour = 24, int min = 0, int second = 0)
+//	{
+//		_hour = hour;
+//		_min = min;
+//		_second = second;
+//	}
+//
+//	void Show()
+//	{
+//		cout << _hour << "-" << _min << "-" << _second << endl;
+//	}
+//
+//	~Time()
+//	{
+//		cout << "Time类 析构完成" << endl;
+//	}
+//private:
+//	int _hour;
+//	int _min;
+//	int _second;
+//};
+//
+//class Date
+//{
+//public:
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//
+//	Date(int year = 0, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//	~Date()
+//	{
+//		cout << "Date类 析构完成" << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//
+//	Time _t;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 3, 8);
+//
+//	d1.Show();
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<assert.h>
+//using namespace std;
+//
+//class Stack
+//{
+//public:
+//	//构造函数
+//	Stack(int n = 10)//栈的初始化
+//	{
+//		int* tmp = (int*)malloc(sizeof(int) * n);
+//		if (tmp == nullptr)
+//		{
+//			cout << "开辟失败" << endl;
+//			exit(-1);
+//		}
+//		_a = tmp;
+//		_size = 0;
+//		_capacity = n;
+//	}
+//
+//	//栈的扩容
+//	void CheckCapacity()
+//	{
+//		if (_size == _capacity)
+//		{
+//			int* tmp = (int*)realloc(_a, sizeof(int) * (_capacity * 2));
+//			if (tmp == nullptr)
+//			{
+//				cout << "扩容失败" << endl;
+//				exit(-1);
+//			}
+//			_a = tmp;
+//			_capacity *= 2;
+//		}
+//	}
+//
+//	//入栈
+//	void Push(int x)
+//	{
+//		CheckCapacity();
+//		_a[_size] = x;
+//		_size++;
+//	}
+//
+//	//出栈
+//	void Pop()
+//	{
+//		assert(_size > 0);
+//		_size--;
+//	}
+//
+//	//遍历栈
+//	void Print()
+//	{
+//		int i = 0;
+//		while (i < _size)
+//		{
+//			cout << _a[i] << " ";
+//			i++;
+//		}
+//	}
+//
+//	//析构函数
+//	~Stack()
+//	{
+//		free(_a);
+//		_size = 0;
+//		_capacity = 0;
+//		_a == nullptr;
+//	}
+//
+//private:
+//	int* _a;//栈数组
+//	int _size;//栈中现有元素个数
+//	int _capacity;//栈的容量
+//};
+//
+//int main()
+//{
+//	Stack s1;
+//
+//	s1.Push(1);
+//	s1.Push(2);
+//	s1.Push(3);
+//	s1.Push(4);
+//	s1.Push(5);
+//
+//	s1.Pop();
+//	s1.Pop();
+//	s1.Pop();
+//
+//	s1.Print();
+//
+//	return 0;
+//}
+
