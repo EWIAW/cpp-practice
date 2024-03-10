@@ -966,7 +966,7 @@ public:
 		}
 		else
 		{
-			/*cout << "非法日期" << endl;*/
+			cout << "非法日期" << endl;
 			_year = -1;
 			_month = -1;
 			_day = -1;
@@ -1023,9 +1023,253 @@ public:
 		return !(*this >= d);
 	}
 
-	//日期-日期
+	bool operator!=(const Date& d)//判断日期是否不相等
+	{
+		return !(*this == d);
+	}
 
-	//日期加天数
+	bool operator<=(const Date& d)//判断日期是否小于等于日期
+	{
+		return !(*this >= d);
+	}
+
+	//日期+或+=天数
+	Date operator+(int day)//日期+天数
+	{
+		Date ret(*this);
+
+		ret._day += day;
+
+		while (ret._day > GetMonthDay(ret._year, ret._month))
+		{
+			ret._day -= GetMonthDay(ret._year, ret._month);
+			ret._month++;
+
+			if (ret._month > 12)
+			{
+				ret._year++;
+				ret._month -= 12;
+			}
+		}
+		return ret;
+	}
+
+	void operator+=(int day)//日期+=天数
+	{
+		_day += day;
+
+		while (_day > GetMonthDay(_year, _month))
+		{
+			_day -= GetMonthDay(_year, _month);
+			_month++;
+
+			if (_month > 12)
+			{
+				_year++;
+				_month -= 12;
+			}
+		}
+	}
+
+	//日期-或者-=天数
+	Date operator-(int day)//日期-天数
+	{
+		Date ret(*this);
+
+		ret._day -= day;
+		while (ret._day <= 0)
+		{
+			ret._month--;
+			if (ret._month <= 0)
+			{
+				ret._month = 12;
+				ret._year--;
+			}
+
+			ret._day += GetMonthDay(ret._year, ret._month);
+		}
+
+		return ret;
+	}
+
+	void operator-=(int day)//日期-=天数
+	{
+		_day -= day;
+
+		while (_day <= 0)
+		{
+			_month--;
+			if (_month <= 0)
+			{
+				_year--;
+				_month = 12;
+			}
+			_day += GetMonthDay(_year, _month);
+		}
+	}
+
+	//日期 前置++
+	void operator++()
+	{
+		//_day++;
+		//while (_day > GetMonthDay(_year, _month))
+		//{
+		//	_day -= GetMonthDay(_year, _month);
+		//	_month++;
+
+		//	if (_month > 12)
+		//	{
+		//		_year++;
+		//		_month = 1;
+		//	}
+		//}
+		(*this) += 1;
+	}
+
+	//日期 后置++
+	Date operator++(int)
+	{
+		//Date ret(*this);
+
+		//ret._day++;
+
+		//while (ret._day > GetMonthDay(_year, _month))
+		//{
+		//	ret._day -= GetMonthDay(_year, _month);
+		//	ret._month++;
+
+		//	if (ret._month > 12)
+		//	{
+		//		ret._year++;
+		//		ret._month = 1;
+		//	}
+		//}
+		//return ret;
+
+		Date ret(*this);
+		ret += 1;
+		return ret;
+	}
+
+	//日期 前置--
+	void operator--()
+	{
+		//_day--;
+
+		//while (_day == 0)
+		//{
+		//	_month--;
+		//	if (_month == 0)
+		//	{
+		//		_year--;
+		//		_month = 12;
+		//	}
+		//	_day += GetMonthDay(_year, _month);
+		//}
+
+		(*this) -= 1;
+	}
+
+	//日期 后置--
+	Date operator--(int)
+	{
+		//Date ret(*this);
+		//ret._day--;
+		//while (ret._day == 0)
+		//{
+		//	ret._month--;
+		//	if (ret._month == 0)
+		//	{
+		//		ret._year--;
+		//		ret._month = 12;
+		//	}
+		//	ret._day += GetMonthDay(ret._year, ret._month);
+		//}
+		Date ret(*this);
+		ret -= 1;
+		return ret;
+	}
+
+	//日期-日期
+	int operator-(const Date& d)
+	{
+		int ret = 0;//返回的差值天数
+
+		Date tmp(d);
+
+		//第一种情况 d1日期大于d
+		if ((*this) > d)
+		{
+			while (tmp._year != _year)
+			{
+				ret -= 365;
+				tmp += 365;
+			}
+
+			while (tmp._month != _month)
+			{
+				if (_month > tmp._month)
+				{
+					ret -= GetMonthDay(tmp._year, tmp._month);
+					tmp += GetMonthDay(tmp._year, tmp._month);
+				}
+				else
+				{
+					ret += GetMonthDay(tmp._year, tmp._month);
+					tmp -= GetMonthDay(tmp._year, tmp._month);
+				}
+			}
+
+			if (_day > tmp._day)
+			{
+				ret -= (_day - tmp._day);
+			}
+			else
+			{
+				ret += (tmp._day - _day);
+			}
+		}
+
+		//第二种情况 d1日期小于d
+		if ((*this) < d)
+		{
+			while (tmp._year != _year)
+			{
+				ret += 365;
+				tmp -= 365;
+			}
+
+			while (tmp._month != _month)
+			{
+				if (_month < tmp._month)
+				{
+					ret += GetMonthDay(tmp._year, tmp._month);
+					tmp -= GetMonthDay(tmp._year, tmp._month);
+				}
+				else
+				{
+					ret -= GetMonthDay(tmp._year, tmp._month);
+					tmp += GetMonthDay(tmp._year, tmp._month);
+				}
+			}
+
+			if (_day < tmp._day)
+			{
+				ret -= (_day-tmp._day);
+			}
+			else
+			{
+				ret += (tmp._day - _day);
+			}
+		}
+
+		//第三种情况 d1日期等于d
+		if ((*this) == d)
+		{
+			return ret;
+		}
+		return ret;
+	}
 
 	//输出信息函数
 	void Show()
@@ -1041,10 +1285,10 @@ private:
 
 int main()
 {
-	Date d1(2024, 3, 9);
-	Date d2(2024, 3, 8);
+	Date d1(2024, 8, 10);
+	--d1;
 
-	cout << (d1 < d2) << endl;
+	d1.Show();
 
 	return 0;
 }
