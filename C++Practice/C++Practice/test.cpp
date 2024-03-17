@@ -935,360 +935,956 @@
 //	return 0;
 //}
 
+
+
+
+//时间类完整的实现
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	//获取当月的天数
+//	int GetMonthDay(int year, int month)
+//	{
+//		int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//		//判断是否闰年
+//		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+//		{
+//			arr[2]++;//二月份天数++
+//		}
+//		return arr[month];
+//	}
+//
+//	//构造函数
+//	Date(int year = 0, int month = 0, int day = 0)
+//	{
+//		if (year >= 0 
+//			&& month >= 1 && month <= 12 
+//			&& day >= 1 && day <= GetMonthDay(year, month))
+//		{
+//			_year = year;
+//			_month = month;
+//			_day = day;
+//		}
+//		else
+//		{
+//			/*cout << "非法日期" << endl;*/
+//			_year = -1;
+//			_month = -1;
+//			_day = -1;
+//		}
+//	}
+//
+//	//拷贝构造
+//	Date(const Date& d)
+//	{
+//		_year = d._year;
+//		_month = d._month;
+//		_day = d._day;
+//	}
+//
+//	//日期比较
+//	bool operator==(const Date& d)//判断日期是否相等
+//	{
+//		if (_year == d._year
+//			&& _month == d._month
+//			&& _day == d._day)
+//		{
+//			return true;
+//		}
+//		else
+//		{
+//			return false;
+//		}
+//	}
+//
+//	bool operator>(const Date& d)//判读日期是否大于日期
+//	{
+//		if (_year > d._year)
+//		{
+//			return true;
+//		}
+//		else if (_year == d._year && _month > d._month)
+//		{
+//			return true;
+//		}
+//		else if (_year == d._year && _month == d._month && _day > d._day)
+//		{
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//	bool operator>=(const Date& d)//判读日期是否大于等于日期
+//	{
+//		return (*this == d) || (*this > d);
+//	}
+//
+//	bool operator<(const Date& d)//判断日期是否小于日期
+//	{
+//		return !(*this >= d);
+//	}
+//
+//	bool operator!=(const Date& d)//判断日期是否不相等
+//	{
+//		return !(*this == d);
+//	}
+//
+//	bool operator<=(const Date& d)//判断日期是否小于等于日期
+//	{
+//		return !(*this >= d);
+//	}
+//
+//	//日期+或+=天数
+//	Date operator+(int day)//日期+天数
+//	{
+//		Date ret(*this);
+//
+//		ret._day += day;
+//
+//		while (ret._day > GetMonthDay(ret._year, ret._month))
+//		{
+//			ret._day -= GetMonthDay(ret._year, ret._month);
+//			ret._month++;
+//
+//			if (ret._month > 12)
+//			{
+//				ret._year++;
+//				ret._month -= 12;
+//			}
+//		}
+//		return ret;
+//	}
+//
+//	Date& operator+=(int day)//日期+=天数
+//	{
+//		_day += day;
+//
+//		while (_day > GetMonthDay(_year, _month))
+//		{
+//			_day -= GetMonthDay(_year, _month);
+//			_month++;
+//
+//			if (_month > 12)
+//			{
+//				_year++;
+//				_month -= 12;
+//			}
+//		}
+//		return (*this);
+//	}
+//
+//	//日期-或者-=天数
+//	Date operator-(int day)//日期-天数
+//	{
+//		//Date ret(*this);
+//
+//		//ret._day -= day;
+//		//while (ret._day <= 0)
+//		//{
+//		//	ret._month--;
+//		//	if (ret._month <= 0)
+//		//	{
+//		//		ret._month = 12;
+//		//		ret._year--;
+//		//	}
+//
+//		//	ret._day += GetMonthDay(ret._year, ret._month);
+//		//}
+//
+//		//return ret;
+//
+//		Date ret(*this);
+//		ret -= day;
+//		return ret;
+//	}
+//
+//	Date& operator-=(int day)//日期-=天数
+//	{
+//		_day -= day;
+//
+//		while (_day <= 0)
+//		{
+//			_month--;
+//			if (_month <= 0)
+//			{
+//				_year--;
+//				_month = 12;
+//			}
+//			_day += GetMonthDay(_year, _month);
+//		}
+//
+//		return (*this);
+//	}
+//
+//	//日期 前置++
+//	void operator++()
+//	{
+//		//_day++;
+//		//while (_day > GetMonthDay(_year, _month))
+//		//{
+//		//	_day -= GetMonthDay(_year, _month);
+//		//	_month++;
+//
+//		//	if (_month > 12)
+//		//	{
+//		//		_year++;
+//		//		_month = 1;
+//		//	}
+//		//} 
+//		(*this) += 1;
+//	}
+//
+//	//日期 后置++
+//	Date operator++(int)
+//	{
+//		//Date ret(*this);
+//
+//		//ret._day++;
+//
+//		//while (ret._day > GetMonthDay(_year, _month))
+//		//{
+//		//	ret._day -= GetMonthDay(_year, _month);
+//		//	ret._month++;
+//
+//		//	if (ret._month > 12)
+//		//	{
+//		//		ret._year++;
+//		//		ret._month = 1;
+//		//	}
+//		//}
+//		//return ret;
+//
+//		Date ret(*this);
+//		ret += 1;
+//		return ret;
+//	}
+//
+//	//日期 前置--
+//	void operator--()
+//	{
+//		//_day--;
+//
+//		//while (_day == 0)
+//		//{
+//		//	_month--;
+//		//	if (_month == 0)
+//		//	{
+//		//		_year--;
+//		//		_month = 12;
+//		//	}
+//		//	_day += GetMonthDay(_year, _month);
+//		//}
+//
+//		(*this) -= 1;
+//	}
+//
+//	//日期 后置--
+//	Date operator--(int)
+//	{
+//		//Date ret(*this);
+//		//ret._day--;
+//		//while (ret._day == 0)
+//		//{
+//		//	ret._month--;
+//		//	if (ret._month == 0)
+//		//	{
+//		//		ret._year--;
+//		//		ret._month = 12;
+//		//	}
+//		//	ret._day += GetMonthDay(ret._year, ret._month);
+//		//}
+//		Date ret(*this);
+//		ret -= 1;
+//		return ret;
+//	}
+//
+//	//日期-日期
+//	int operator-(const Date& d)
+//	{
+//		int ret = 0;//返回的差值天数
+//
+//		Date tmp(d);
+//
+//		//第一种情况 d1日期大于d
+//		if ((*this) > d)
+//		{
+//			while (tmp._year != _year)
+//			{
+//				ret -= 365;
+//				tmp += 365;
+//			}
+//
+//			while (tmp._month != _month)
+//			{
+//				if (_month > tmp._month)
+//				{
+//					ret -= GetMonthDay(tmp._year, tmp._month);
+//					tmp += GetMonthDay(tmp._year, tmp._month);
+//				}
+//				else
+//				{
+//					ret += GetMonthDay(tmp._year, tmp._month);
+//					tmp -= GetMonthDay(tmp._year, tmp._month);
+//				}
+//			}
+//
+//			if (_day > tmp._day)
+//			{
+//				ret -= (_day - tmp._day);
+//			}
+//			else
+//			{
+//				ret += (tmp._day - _day);
+//			}
+//		}
+//
+//		//第二种情况 d1日期小于d
+//		if ((*this) < d)
+//		{
+//			while (tmp._year != _year)
+//			{
+//				ret += 365;
+//				tmp -= 365;
+//			}
+//
+//			while (tmp._month != _month)
+//			{
+//				if (_month < tmp._month)
+//				{
+//					ret += GetMonthDay(tmp._year, tmp._month);
+//					tmp -= GetMonthDay(tmp._year, tmp._month);
+//				}
+//				else
+//				{
+//					ret -= GetMonthDay(tmp._year, tmp._month);
+//					tmp += GetMonthDay(tmp._year, tmp._month);
+//				}
+//			}
+//
+//			if (_day < tmp._day)
+//			{
+//				ret -= (_day-tmp._day);
+//			}
+//			else
+//			{
+//				ret += (tmp._day - _day);
+//			}
+//		}
+//
+//		//第三种情况 d1日期等于d
+//		if ((*this) == d)
+//		{
+//			return ret;
+//		}
+//		return ret;
+//	}
+//
+//	//赋值运算符重载
+//	Date& operator=(const Date& d)
+//	{
+//		if (this != &d)
+//		{
+//			_year = d._year;
+//			_month = d._month;
+//			_day = d._day;
+//			return (*this);
+//		}
+//	}
+//
+//	//输出信息函数
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 8, 10);
+//	Date d2;
+//	d2 = d1;
+//	d2.Show();
+//
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 0, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 3, 12);
+//	d1.Show();
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+////类实现栈
+//class Stack
+//{
+//public:
+//	Stack(int n = 10)//栈的构造函数
+//	{
+//		int* tmp = (int*)malloc(sizeof(int) * n);
+//		_a = tmp;
+//		_size = 0;
+//		_capacity = 0;
+//	}
+//	~Stack()//栈的析构函数
+//	{
+//		free(_a);
+//		_a = nullptr;
+//		_size = _capacity = 0;
+//	}
+//private:
+//	int* _a;//指向栈的指针
+//	int _size;//栈中元素个数
+//	int _capacity;//栈的容量
+//};
+//
+//int main()
+//{
+//	Stack s1(4);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)//构造函数
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 3, 12);
+//	//下面两种写法相同 Date d2(d1)等价于Date d3=d1
+//	Date d2(d1);
+//	Date d3 = d1;
+//
+//	d1.Show();
+//	d2.Show();
+//	d3.Show();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Stack//栈类
+//{
+//public:
+//	Stack(int n = 10)//栈的构造函数
+//	{
+//		int* tmp = (int*)malloc(sizeof(int) * n);
+//		_a = tmp;
+//		_size = _capacity = 0;
+//	}
+//	~Stack()//栈的析构函数
+//	{
+//		free(_a);
+//		_a = nullptr;
+//		_size = _capacity = 0;
+//	}
+//private:
+//	int* _a;//指向栈的指针
+//	int _size;//栈中元素个数
+//	int _capacity;//栈的容量
+//};
+//
+//int main()
+//{
+//	Stack s1;
+//	Stack s2(s1);
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	Date& operator=(const Date& d)
+//	{
+//		_year = d._year;
+//		_month = d._month;
+//		_day = d._day;
+//		return (*this);
+//	}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 3, 13);
+//	Date d2;
+//	d2 = d1;
+//
+//	d1.Show();
+//	d2.Show();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Time
+//{
+//public:
+//	Time(int hour, int min, int second)
+//	{
+//		cout << "Time()" << endl;
+//		_hour = hour;
+//		_min = min;
+//		_second = second;
+//	}
+//	void Show()
+//	{
+//		cout << _hour << "-" << _min << "-" << _second << endl;
+//	}
+//private:
+//	int _hour;
+//	int _min;
+//	int _second;
+//};
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1, int* tmp = nullptr)
+//		:ret(*tmp)
+//		, _t(1, 2, 3)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//
+//	int& ret;
+//
+//	Time _t;
+//};
+//
+//int main()
+//{
+//	int a = 10;
+//	int* pa = &a;
+//	Date d1(2024, 3, 15, pa);
+//	d1.Show();
+//	return 0;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year)
+//	{
+//		_year;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1(1);
+//	Date d2 = 2;
+//	Date d3 = d1;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//		_n++;
+//	}
+//	Date(const Date& d)
+//	{
+//		_year = d._year;
+//		_month = d._month;
+//		_day = d._year;
+//		_n++;
+//	}
+//	int ret()
+//	{
+//		return _n;
+//	}
+//private:
+//	static int _n;
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int Date::_n = 0;
+//
+//int main()
+//{
+//	Date d1(2024, 3, 15);
+//	Date d2 = d1;
+//
+//	cout << d1.ret() << endl;
+//	return 0;
+//}
+
+//#include <climits>
+//#include <iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//    Date(int year, int month, int day)
+//    {
+//        _year = year;
+//        _month = month;
+//        _day = day;
+//    }
+//
+//    int GetMonthoDay(int year, int month)
+//    {
+//        int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+//        {
+//            arr[2]++;
+//        }
+//        return arr[month];
+//    }
+//
+//    Date& dayadd(Date& d)
+//    {
+//        d._day++;
+//        if (d._day > GetMonthoDay(d._year, d._month))
+//        {
+//            d._day -= GetMonthoDay(d._year, d._month);
+//            d._month++;
+//        }
+//        if (d._month > 12)
+//        {
+//            d._year++;
+//            d._month = 1;
+//        }
+//        return d;
+//    }
+//
+//    int Judge(Date& d1, Date& d2)
+//    {
+//        if (d1._year == d2._year && d1._month == d2._month && d1._day == d2._day)
+//        {
+//            return 1;
+//        }
+//        else
+//        {
+//            return 0;
+//        }
+//    }
+//private:
+//    int _year;
+//    int _month;
+//    int _day;
+//};
+//
+//int main()
+//{
+//    int year;
+//    int month;
+//    int day;
+//    cin >> year;
+//    cin >> month;
+//    cin >> day;
+//
+//    int ret = 1;
+//
+//    Date d(year, month, day);
+//
+//    Date tmp(year, 1, 1);
+//
+//    while (!d.Judge(d, tmp))
+//    {
+//        ret++;
+//        tmp.dayadd(tmp);
+//    }
+//
+//    cout << ret << endl;
+//
+//    return 0;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//	const Date* operator&() const
+//	{
+//		return this;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1;
+//	cout << &d1 << endl;
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//
+//    int GetMonthDay(int year, int month)
+//    {
+//        int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+//        {
+//            arr[2]++;
+//        }
+//        return arr[month];
+//    }
+//
+//    Date(int year = 0, int month = 1, int day = 1)
+//        :_year(year)
+//        , _month(month)
+//        , _day(day)
+//    {}
+//
+//    Date operator+(int day)
+//    {
+//        Date d(*this);
+//        d._day += day;
+//        while (d._day > GetMonthDay(d._year, d._month))
+//        {
+//            d._day -= GetMonthDay(d._year, d._month);
+//            d._month++;
+//            if (d._month > 12)
+//            {
+//                d._year++;
+//                d._month = 1;
+//            }
+//        }
+//        return d;
+//    }
+//
+//    void Show()
+//    {
+//        printf("%d-%02d-%02d\n", _year, _month, _day);
+//    }
+//
+//private:
+//    int _year;
+//    int _month;
+//    int _day;
+//};
+//
+//int main()
+//{
+//    int year;
+//    int month;
+//    int day;
+//    int add;
+//    cin >> year >> month >> day >> add;
+//    Date d1(year, month, day);
+//    Date ret = d1 + add;
+//    ret.Show();
+//    return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//
+//		_count++;
+//	}
+//	Date(const Date& d)
+//	{
+//		_year = d._year;
+//		_month = d._month;
+//		_day = d._day;
+//
+//		_count++;
+//	}
+//
+//	void Show()
+//	{
+//		int ret = GetCount();
+//		cout << ret << endl;
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//
+//	static int GetCount()
+//	{
+//		return _count;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//
+//	static int _count;
+//};
+//
+//int Date::_count = 0;
+//
+//int main()
+//{
+//	Date d1(2024, 3, 17);
+//	Date d2 = d1;
+//
+//	d1.Show();
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
 
 class Date
 {
+	friend ostream& operator<<(ostream& out, Date& d);
+	friend istream& operator>>(istream& in, Date& d);
+
 public:
-	//获取当月的天数
-	int GetMonthDay(int year, int month)
+	Date(int year=1, int month=0, int day=0)
 	{
-		int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-		//判断是否闰年
-		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-		{
-			arr[2]++;//二月份天数++
-		}
-		return arr[month];
+		_year = year;
+		_month = month;
+		_day = day;
 	}
 
-	//构造函数
-	Date(int year = 0, int month = 0, int day = 0)
+	void operator<<(ostream& out)
 	{
-		if (year >= 0 
-			&& month >= 1 && month <= 12 
-			&& day >= 1 && day <= GetMonthDay(year, month))
-		{
-			_year = year;
-			_month = month;
-			_day = day;
-		}
-		else
-		{
-			cout << "非法日期" << endl;
-			_year = -1;
-			_month = -1;
-			_day = -1;
-		}
-	}
-
-	//拷贝构造
-	Date(const Date& d)
-	{
-		_year = d._year;
-		_month = d._month;
-		_day = d._day;
-	}
-
-	//日期比较
-	bool operator==(const Date& d)//判断日期是否相等
-	{
-		if (_year == d._year
-			&& _month == d._month
-			&& _day == d._day)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	bool operator>(const Date& d)//判读日期是否大于日期
-	{
-		if (_year > d._year)
-		{
-			return true;
-		}
-		else if (_year == d._year && _month > d._month)
-		{
-			return true;
-		}
-		else if (_year == d._year && _month == d._month && _day > d._day)
-		{
-			return true;
-		}
-		return false;
-	}
-
-	bool operator>=(const Date& d)//判读日期是否大于等于日期
-	{
-		return (*this == d) || (*this > d);
-	}
-
-	bool operator<(const Date& d)//判断日期是否小于日期
-	{
-		return !(*this >= d);
-	}
-
-	bool operator!=(const Date& d)//判断日期是否不相等
-	{
-		return !(*this == d);
-	}
-
-	bool operator<=(const Date& d)//判断日期是否小于等于日期
-	{
-		return !(*this >= d);
-	}
-
-	//日期+或+=天数
-	Date operator+(int day)//日期+天数
-	{
-		Date ret(*this);
-
-		ret._day += day;
-
-		while (ret._day > GetMonthDay(ret._year, ret._month))
-		{
-			ret._day -= GetMonthDay(ret._year, ret._month);
-			ret._month++;
-
-			if (ret._month > 12)
-			{
-				ret._year++;
-				ret._month -= 12;
-			}
-		}
-		return ret;
-	}
-
-	void operator+=(int day)//日期+=天数
-	{
-		_day += day;
-
-		while (_day > GetMonthDay(_year, _month))
-		{
-			_day -= GetMonthDay(_year, _month);
-			_month++;
-
-			if (_month > 12)
-			{
-				_year++;
-				_month -= 12;
-			}
-		}
-	}
-
-	//日期-或者-=天数
-	Date operator-(int day)//日期-天数
-	{
-		Date ret(*this);
-
-		ret._day -= day;
-		while (ret._day <= 0)
-		{
-			ret._month--;
-			if (ret._month <= 0)
-			{
-				ret._month = 12;
-				ret._year--;
-			}
-
-			ret._day += GetMonthDay(ret._year, ret._month);
-		}
-
-		return ret;
-	}
-
-	void operator-=(int day)//日期-=天数
-	{
-		_day -= day;
-
-		while (_day <= 0)
-		{
-			_month--;
-			if (_month <= 0)
-			{
-				_year--;
-				_month = 12;
-			}
-			_day += GetMonthDay(_year, _month);
-		}
-	}
-
-	//日期 前置++
-	void operator++()
-	{
-		//_day++;
-		//while (_day > GetMonthDay(_year, _month))
-		//{
-		//	_day -= GetMonthDay(_year, _month);
-		//	_month++;
-
-		//	if (_month > 12)
-		//	{
-		//		_year++;
-		//		_month = 1;
-		//	}
-		//}
-		(*this) += 1;
-	}
-
-	//日期 后置++
-	Date operator++(int)
-	{
-		//Date ret(*this);
-
-		//ret._day++;
-
-		//while (ret._day > GetMonthDay(_year, _month))
-		//{
-		//	ret._day -= GetMonthDay(_year, _month);
-		//	ret._month++;
-
-		//	if (ret._month > 12)
-		//	{
-		//		ret._year++;
-		//		ret._month = 1;
-		//	}
-		//}
-		//return ret;
-
-		Date ret(*this);
-		ret += 1;
-		return ret;
-	}
-
-	//日期 前置--
-	void operator--()
-	{
-		//_day--;
-
-		//while (_day == 0)
-		//{
-		//	_month--;
-		//	if (_month == 0)
-		//	{
-		//		_year--;
-		//		_month = 12;
-		//	}
-		//	_day += GetMonthDay(_year, _month);
-		//}
-
-		(*this) -= 1;
-	}
-
-	//日期 后置--
-	Date operator--(int)
-	{
-		//Date ret(*this);
-		//ret._day--;
-		//while (ret._day == 0)
-		//{
-		//	ret._month--;
-		//	if (ret._month == 0)
-		//	{
-		//		ret._year--;
-		//		ret._month = 12;
-		//	}
-		//	ret._day += GetMonthDay(ret._year, ret._month);
-		//}
-		Date ret(*this);
-		ret -= 1;
-		return ret;
-	}
-
-	//日期-日期
-	int operator-(const Date& d)
-	{
-		int ret = 0;//返回的差值天数
-
-		Date tmp(d);
-
-		//第一种情况 d1日期大于d
-		if ((*this) > d)
-		{
-			while (tmp._year != _year)
-			{
-				ret -= 365;
-				tmp += 365;
-			}
-
-			while (tmp._month != _month)
-			{
-				if (_month > tmp._month)
-				{
-					ret -= GetMonthDay(tmp._year, tmp._month);
-					tmp += GetMonthDay(tmp._year, tmp._month);
-				}
-				else
-				{
-					ret += GetMonthDay(tmp._year, tmp._month);
-					tmp -= GetMonthDay(tmp._year, tmp._month);
-				}
-			}
-
-			if (_day > tmp._day)
-			{
-				ret -= (_day - tmp._day);
-			}
-			else
-			{
-				ret += (tmp._day - _day);
-			}
-		}
-
-		//第二种情况 d1日期小于d
-		if ((*this) < d)
-		{
-			while (tmp._year != _year)
-			{
-				ret += 365;
-				tmp -= 365;
-			}
-
-			while (tmp._month != _month)
-			{
-				if (_month < tmp._month)
-				{
-					ret += GetMonthDay(tmp._year, tmp._month);
-					tmp -= GetMonthDay(tmp._year, tmp._month);
-				}
-				else
-				{
-					ret -= GetMonthDay(tmp._year, tmp._month);
-					tmp += GetMonthDay(tmp._year, tmp._month);
-				}
-			}
-
-			if (_day < tmp._day)
-			{
-				ret -= (_day-tmp._day);
-			}
-			else
-			{
-				ret += (tmp._day - _day);
-			}
-		}
-
-		//第三种情况 d1日期等于d
-		if ((*this) == d)
-		{
-			return ret;
-		}
-		return ret;
-	}
-
-	//输出信息函数
-	void Show()
-	{
-		cout << _year << "-" << _month << "-" << _day << endl;
+		out << _year << "-" << _month << "-" << _day << endl;
 	}
 
 private:
-	int _year;
-	int _month;
-	int _day;
+	int _year = 0;
+	int _month = 1;
+	int _day = 1;
 };
+
+ostream& operator<<(ostream& out, Date& d)
+{
+	out << d._year << "-" << d._month << "-" << d._day << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Date& d)
+{
+	in >> d._year >> d._month >> d._day;
+	return in;
+}
 
 int main()
 {
-	Date d1(2024, 8, 10);
-	--d1;
+	Date d1;
+	Date d2;
 
-	d1.Show();
-
+	cin >> d1 >> d2;
+	cout << d1 << d2;
 	return 0;
 }
