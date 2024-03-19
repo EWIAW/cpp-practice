@@ -1840,51 +1840,158 @@
 //	return 0;
 //}
 
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//	friend ostream& operator<<(ostream& out, Date& d);
+//	friend istream& operator>>(istream& in, Date& d);
+//
+//public:
+//	Date(int year=1, int month=0, int day=0)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//	void operator<<(ostream& out)
+//	{
+//		out << _year << "-" << _month << "-" << _day << endl;
+//	}
+//
+//private:
+//	int _year = 0;
+//	int _month = 1;
+//	int _day = 1;
+//};
+//
+//ostream& operator<<(ostream& out, Date& d)
+//{
+//	out << d._year << "-" << d._month << "-" << d._day << endl;
+//	return out;
+//}
+//
+//istream& operator>>(istream& in, Date& d)
+//{ 
+//	in >> d._year >> d._month >> d._day;
+//	return in;
+//}
+//
+//int main()
+//{
+//	Date d1;
+//	Date d2;
+//
+//	cin >> d1 >> d2;
+//	cout << d1 << d2;
+//	return 0;
+//}
 
-class Date
-{
-	friend ostream& operator<<(ostream& out, Date& d);
-	friend istream& operator>>(istream& in, Date& d);
+//#include<iostream>
+//using namespace std;
+//
+//class Time
+//{
+//	friend class Date;
+//public:
+//	Time(int hour = 24, int min = 0, int second = 0)
+//		:_hour(hour)
+//		,_min(min)
+//		,_second(second)
+//	{}
+//	void Show()
+//	{
+//		cout << _hour << "-" << _min << "-" << _second << endl;
+//	}
+//private:
+//	int _hour;
+//	int _min;
+//	int _second;
+//};
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{}
+//	void SetTime(int hour = 24, int min = 0, int second = 0)
+//	{
+//		_t._hour = hour;
+//		_t._min = min;
+//		_t._second = second;
+//	}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//
+//	Time _t;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 3, 18);
+//	d1.SetTime(20, 38, 26);
+//	d1.Show();
+//	return 0;
+//}
 
-public:
-	Date(int year=1, int month=0, int day=0)
-	{
-		_year = year;
-		_month = month;
-		_day = day;
-	}
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//		class Time
+//		{
+//		public:
+//			Time(int hour=24,int min=0,int second=0)
+//				:_hour(hour)
+//				,_min(min)
+//				,_second(second)
+//			{}
+//		private:
+//			int _hour;
+//			int _min;
+//			int _second;
+//		};
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{}
+//	void SetTime()
+//	{
+//
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
 
-	void operator<<(ostream& out)
-	{
-		out << _year << "-" << _month << "-" << _day << endl;
-	}
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int num[10] = { 1,2,3 };
+//	cout << sizeof(num) << endl;
+//	return 0;
+//}
 
-private:
-	int _year = 0;
-	int _month = 1;
-	int _day = 1;
-};
-
-ostream& operator<<(ostream& out, Date& d)
-{
-	out << d._year << "-" << d._month << "-" << d._day << endl;
-	return out;
-}
-
-istream& operator>>(istream& in, Date& d)
-{
-	in >> d._year >> d._month >> d._day;
-	return in;
-}
-
-int main()
-{
-	Date d1;
-	Date d2;
-
-	cin >> d1 >> d2;
-	cout << d1 << d2;
-	return 0;
-}
