@@ -1995,3 +1995,83 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year=0,int month=1,int day=1)
+//	{
+//		cout << "Date()" << endl;
+//	}
+//	~Date()
+//	{
+//		cout << "~Date()" << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	int* ptr1 = (int*)malloc(sizeof(int));
+//	int* ptr2 = new int;
+//
+//	Date* ptr3 = new Date;
+//	Date* ptr4 = new Date[3];
+//
+//	delete ptr3;
+//	delete[] ptr4;
+//
+//	return 0;
+//}
+//s
+
+//
+//#include<iostream>
+//using namespace std;
+//
+//class ListNode
+//{
+//public:
+//	ListNode(int val = 0)
+//		:_val(val)
+//		,_prev(nullptr)
+//		,_tail(nullptr)
+//	{
+//		cout << "ListNode()" << endl;
+//	}
+//	~ListNode()
+//	{
+//		cout << "~ListNode()" << endl;
+//	}
+//private:
+//	int _val;
+//	ListNode* _prev;
+//	ListNode* _tail;
+//};
+//
+//int main()
+//{
+//	//ListNode* ptr1 = new ListNode;
+//	//delete ptr1;
+//
+//	//int n = 10;
+//	//ListNode* ptr2 = new ListNode[n];
+//	//cout << sizeof(ListNode) << endl;
+//	//delete[] ptr2;
+//
+//	//long long size = 30;
+//	//int* tmp = (int*)operator new(size * 1024 * 1024 * 1024);
+//	//cout << tmp << endl;
+//
+//	//long long size = 10;
+//	//int* ptr1 = new int[size * 1024 * 1024 * 1024];
+//	//cout << ptr1 << endl;
+//
+//	return 0;
+//}
+
