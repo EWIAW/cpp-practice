@@ -2075,3 +2075,45 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	size_t n = 2;
+//	char* ptr = new char[n * 1024 * 1024 * 1024];
+//	cout << &ptr << endl;
+//	const char* p = "abcd";
+//	cout << &p << endl;
+//
+//	return 0;
+//}
+
+#include<iostream>
+using namespace std;
+
+template<class T>
+
+void Swap(T& x, T& y)
+{
+	T tmp = x;
+	x = y;
+	y = tmp;
+}
+
+int main()
+{
+	int a = 10;
+	int b = 20;
+	Swap(a, b);
+
+	double c = 1.1;
+	double d = 2.22;
+	cout << a << b << endl;
+
+	Swap(c, d);
+
+	cout << c << d << endl;
+
+	return 0;
+}
