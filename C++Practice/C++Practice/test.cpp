@@ -2089,31 +2089,177 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//template<class T>
+//
+//void Swap(T& x, T& y)
+//{
+//	T tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	Swap(a, b);
+//
+//	double c = 1.1;
+//	double d = 2.22;
+//	cout << a << b << endl;
+//
+//	Swap(c, d);
+//
+//	cout << c << d << endl;
+//
+//	return 0;
+//}
+//
+//#include"test.h"
+//
+//int Add(int a=0, int b=0)
+//{
+//	return a + b;
+//}
+//
+//int main()
+//{
+//	int ret = Add();
+//	cout << ret << endl;
+//
+//	return 0;
+//}
+
+//#include"test.h"
+//
+//typedef char* ptr;
+//
+//int main()
+//{
+//	ptr p1;
+//	ptr* p2;
+//	return 0;
+//}
+
+//#include"test.h"
+//
+//int main()
+//{
+//	auto a = 1;
+//	auto b = 1.2;
+//	auto c = 'c';
+//
+//	cout << typeid(a).name() << endl;
+//	cout << typeid(b).name() << endl;
+//	cout << typeid(c).name() << endl;
+//	return 0;
+//}
+
+//#include"test.h"
+//
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5 };
+//	for (auto& e : arr)
+//	{
+//		cout << e << " ";
+//	}
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	//初始化列表用法
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	Date d1;
+//	d1.Show();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	//无默认构造函数（默认构造函数是指：不需要传参的的构造函数）
+//	Date(int year,int month,int day)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//class Temp
+//{
+//public:
+//	Temp(int& ptmp)
+//		:_b(10)
+//		,_a(ptmp)
+//		,_d(0,0,0)
+//	{}
+//	void Show()
+//	{
+//		cout << _a << " " << _b << endl;
+//	}
+//private:
+//	//必须要用初始化列表的三个成员变量
+//	int& _a;
+//	const int _b;
+//	Date _d;//自定义类型，且无默认构造函数
+//};
+//
+//int main()
+//{
+//	int tmp = 0;
+//	Temp t1(tmp);
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
 
-template<class T>
-
-void Swap(T& x, T& y)
+class Date
 {
-	T tmp = x;
-	x = y;
-	y = tmp;
-}
+private:
+	int _year;
+	static int count;
+};
+
+int Date::count = 0;
 
 int main()
 {
-	int a = 10;
-	int b = 20;
-	Swap(a, b);
-
-	double c = 1.1;
-	double d = 2.22;
-	cout << a << b << endl;
-
-	Swap(c, d);
-
-	cout << c << d << endl;
-
 	return 0;
 }
