@@ -2247,19 +2247,160 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//private:
+//	int _year;
+//	static int count;
+//};
+//
+//int Date::count = 0;
+//
+//int main()
+//{
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//	friend ostream& operator<<(ostream& _out, const Date& d);
+//public:
+//	Date(int year=0,int month=1,int day=1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//ostream& operator<<(ostream& _out, const Date& d)
+//{
+//	_out << d._year << "-" << d._month << "-" << d._day << endl;
+//	return _out;
+//}
+//
+//int main()
+//{
+//	Date d1(2024, 3, 24);
+//	Date d2(2024, 3, 25);
+//
+//	cout << d1 << d2;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Time
+//{
+//	friend class Date;//声明Date类是它的朋友
+//public:
+//	Time(int hour=0,int min=0,int second=0)
+//		:_hour(hour)
+//		,_min(min)
+//		,_second(second)
+//	{}
+//private:
+//	int _hour;
+//	int _min;
+//	int _second;
+//};
+//
+//class Date
+//{
+//public:
+//	Date(int year,int month,int day)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	void SetTime(int hour, int min, int second)//这个函数可以突破访问权限去访问Time的成员变量
+//	{
+//		_t._hour = hour;
+//		_t._min = min;
+//		_t._second = second;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//
+//	Time _t;
+//};
+//
+//int main()
+//{
+//	Date d1(2024, 3, 24);
+//	d1.SetTime(0, 0, 0);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	class Time
+//	{
+//	public:
+//		Time(int hour=0,int min=0,int second=0)
+//			:_hour(hour)
+//			,_min(min)
+//			,_second(second)
+//		{}
+//		void SetDate(int year = 0, int month = 1, int day)
+//		{
+//			_year = year;
+//		}
+//	private:
+//		int _hour;
+//		int _min;
+//		int _second;
+//	};
+//
+//public:
+//	Date(int year = 0, int month = 1, int day)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
 
-class Date
+class Solution
 {
-private:
-	int _year;
-	static int count;
+public:
+	int GetSum(int n)
+	{
+		return n;
+	}
 };
-
-int Date::count = 0;
 
 int main()
 {
+	Solution().GetSum(10);
 	return 0;
 }
