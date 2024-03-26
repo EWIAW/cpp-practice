@@ -2387,20 +2387,29 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int GetSum(int n)
+//	{
+//		return n;
+//	}
+//};
+//
+//int main()
+//{
+//	Solution().GetSum(10);
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
 
-class Solution
-{
-public:
-	int GetSum(int n)
-	{
-		return n;
-	}
-};
-
 int main()
 {
-	Solution().GetSum(10);
+
 	return 0;
 }
