@@ -2414,10 +2414,115 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//template<class T>
+//class Vetor
+//{
+//public:
+//	Vetor(int size=0,int capacity=0)
+//		:_a(nullptr)
+//		,_size(size)
+//		,_capacity(capacity)
+//	{}
+//	~Vetor()
+//	{
+//		delete[] _a;
+//		_size = 0;
+//		_capacity = 0;
+//	}
+//	void Push(const T& x)
+//	{
+//		if (_size == _capacity)
+//		{
+//			int newcapacity = _capacity == 0 ? 2 : _capacity * 2;
+//			T* tmp = new T[newcapacity];
+//			memcpy(tmp, _a, sizeof(T) * _capacity);
+//			_capacity = newcapacity;
+//			delete[] _a;
+//			_a = tmp;
+//		}
+//
+//		_a[_size] = x;
+//		_size++;
+//	}
+//	T& operator[](const int& i)
+//	{
+//		return _a[i];
+//	}
+//	int Getsize()
+//	{
+//		return _size;
+//	}
+//private:
+//	T* _a;
+//	int _size;
+//	int _capacity;
+//};
+//
+//int main()
+//{
+//	Vetor<int> v;
+//	v.Push(1);
+//	v.Push(2);
+//	v.Push(3);
+//	v.Push(4);
+//
+//	for (int i = 0; i < v.Getsize(); i++)
+//	{
+//		cout << v[i] << " ";
+//	}
+//	cout << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	string s1("hello");
+//	s1.push_back('a');
+//	s1.append("world");
+//	s1 += 'b';
+//	s1 += "ccc";
+//
+//	cout << s1 << " " << s1.size() << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	string s1("12345");
+//
+//	int num = 0;
+//
+//	for (int i = 0; i < s1.size(); i++)
+//	{
+//		num *= 10;
+//		num += s1[i] - '0';
+//	}
+//	cout << num << endl;
+//
+//	return 0;
+//}
+
 #include<iostream>
+using namespace std;
 
 int main()
 {
+	char c1 = '1';
+	for (int i = 0; i < 10; i++)
+	{
+		c1++;
+	}
 
 	return 0;
 }
