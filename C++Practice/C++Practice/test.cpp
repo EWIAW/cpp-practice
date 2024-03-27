@@ -2513,16 +2513,177 @@
 //	return 0;
 //}
 
-#include<iostream>
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	char c1 = '1';
+//	for (int i = 0; i < 10; i++)
+//	{
+//		c1++;
+//	}
+//
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    string addStrings(string num1, string num2)
+//    {
+//        int size1 = num1.size();
+//        int size2 = num2.size();
+//        string ret("");
+//        int i = size1 - 1;
+//        int j = size2 - 1;
+//
+//        int flag = 0;
+//
+//        while (i >= 0 && j >= 0)
+//        {
+//            int tmp = num1[i] + num2[j] + flag - '0' - '0';
+//            if (tmp >= 10)
+//            {
+//                flag = 1;
+//            }
+//            else
+//            {
+//                flag = 0;
+//            }
+//            tmp %= 10;
+//            ret += tmp + '0';
+//            i--;
+//            j--;
+//        }
+//        while (i >= 0)
+//        {
+//            int tmp = num1[i] + flag - '0';
+//            if (tmp >= 10)
+//            {
+//                flag = 1;
+//            }
+//            else
+//            {
+//                flag = 0;
+//            }
+//            tmp %= 10;
+//            ret += tmp + '0';
+//            i--;
+//        }
+//        while (j >= 0)
+//        {
+//            int tmp = num2[j] + flag - '0';
+//            if (tmp >= 10)
+//            {
+//                flag = 1;
+//            }
+//            else
+//            {
+//                flag = 0;
+//            }
+//            tmp %= 10;
+//            ret += tmp + '0';
+//            j--;
+//        }
+//        if (flag == 1)
+//        {
+//            ret += 1 + '0';
+//        }
+//        int size = ret.size();
+//        for (int i = 0; i < size / 2; i++)
+//        {
+//            char ch = ret[i];
+//            ret[i] = ret[size - i - 1];
+//            ret[size -i- 1] = ch;
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    string num1("999");
+//    string num2("999");
+//
+//    string ret = Solution().addStrings(num1, num2);
+//
+//
+//    return 0;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int num = INT_MAX;
+//	//cout << (num ^ 4) << endl;
+//	//cout << (num ^ 78) << endl;
+//	//cout << (num ^ 12) << endl;
+//	//cout << (num ^ 1) << endl;
+//	//cout << (num ^ 3) << endl;
+//
+//	//cout << (2147483635 ^ 12) << endl;
+//	//cout << (2147483632 ^ 12) << endl;
+//	//cout << (2147483632 ^ 1) << endl;
+//	//cout << (2147483632 ^ 3) << endl;
+//
+//	//cout << (78 ^ 12 ^ 1 ^ 3) << endl;
+//	//cout << (1 ^ 12 ^ 78 ^ 3) << endl;
+//	//cout << (1 ^ 78 ^ 3 ^ 12) << endl;
+//	//cout << (78 ^ 1 ^ 12 ^ 3) << endl;
+//
+//	//cout << (64 ^ 2147483632) << endl;
+//	//cout << (78 ^ 12 ^ 1 ^ 3^2147483632) << endl;
+//
+//	cout << (64 ^ 2147483583) << endl;
+//
+//	return 0;
+//}
+
+#include <iostream>
 using namespace std;
 
 int main()
 {
-	char c1 = '1';
-	for (int i = 0; i < 10; i++)
-	{
-		c1++;
-	}
+    int arr[100] = {
+        5, 6, 8, 6, 9, 1, 6, 1, 2, 4, 9, 1, 9, 8, 2, 3, 6, 4, 7, 7,
+        5, 9, 5, 0, 3, 8, 7, 5, 8, 1, 5, 8, 6, 1, 8, 3, 0, 3, 7, 9,
+        2, 7, 0, 5, 8, 8, 5, 7, 0, 9, 9, 1, 9, 4, 4, 6, 8, 6, 3, 3,
+        8, 5, 1, 6, 3, 4, 6, 7, 0, 7, 8, 2, 7, 6, 8, 9, 5, 6, 5, 6,
+        1, 4, 0, 1, 0, 0, 9, 4, 8, 0, 9, 1, 2, 8, 5, 0, 2, 5, 3, 3
+    };
 
-	return 0;
+    int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+    int month[13] = { 0,1,2,3,4,5,6,7,8,9,10,11,12 };
+    int count = 0;
+
+    for (int i = 1; i <= 12; i++)
+    {
+        for (int j = 1; j <= day[i]; j++)
+        {
+            int data[8] = { 2,0,2,3,month[i] / 10,month[i] % 10,j / 10,j % 10 };
+            int l = 0;
+
+            for (int k = 0; k < 100; k++)
+            {
+                if (data[l] == arr[k])
+                {
+                    l++;
+                }
+                if (l == 8)
+                {
+                    count++;
+                    break;
+                }
+            }
+
+        }
+    }
+    cout << count << endl;
+    return 0;
 }
