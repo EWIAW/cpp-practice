@@ -2645,45 +2645,275 @@
 //	return 0;
 //}
 
-#include <iostream>
+//#include <iostream>
+//using namespace std;
+//
+//int main()
+//{
+//    int arr[100] = {
+//        5, 6, 8, 6, 9, 1, 6, 1, 2, 4, 9, 1, 9, 8, 2, 3, 6, 4, 7, 7,
+//        5, 9, 5, 0, 3, 8, 7, 5, 8, 1, 5, 8, 6, 1, 8, 3, 0, 3, 7, 9,
+//        2, 7, 0, 5, 8, 8, 5, 7, 0, 9, 9, 1, 9, 4, 4, 6, 8, 6, 3, 3,
+//        8, 5, 1, 6, 3, 4, 6, 7, 0, 7, 8, 2, 7, 6, 8, 9, 5, 6, 5, 6,
+//        1, 4, 0, 1, 0, 0, 9, 4, 8, 0, 9, 1, 2, 8, 5, 0, 2, 5, 3, 3
+//    };
+//
+//    int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//    int month[13] = { 0,1,2,3,4,5,6,7,8,9,10,11,12 };
+//    int count = 0;
+//
+//    for (int i = 1; i <= 12; i++)
+//    {
+//        for (int j = 1; j <= day[i]; j++)
+//        {
+//            int data[8] = { 2,0,2,3,month[i] / 10,month[i] % 10,j / 10,j % 10 };
+//            int l = 0;
+//
+//            for (int k = 0; k < 100; k++)
+//            {
+//                if (data[l] == arr[k])
+//                {
+//                    l++;
+//                }
+//                if (l == 8)
+//                {
+//                    count++;
+//                    break;
+//                }
+//            }
+//
+//        }
+//    }
+//    cout << count << endl;
+//    return 0;
+//}
+////
+//#include<iostream>
+//using namespace std;
+//
+//extern class AAA;
+//
+//class BBB
+//{
+//public:
+//	void GetA()
+//	{
+//		cout << _A._a << endl;
+//	}
+//private:
+//	int _size;
+//	AAA _A;
+//};
+//
+//class AAA
+//{
+//	/*friend void BBB::GetA();*/
+//	friend class BBB;
+//private:
+//	int _a;
+//};
+//
+//int main()
+//{
+//	BBB b1;
+//	b1.GetA();
+//	return 0;
+//}
+
+// 前置声明
+
+//#include<iostream>
+//
+//class A; // 前置声明
+//
+//class B {
+//public:
+//    // 声明B类中有待定义的display函数，它将成为A类的友元函数
+//    friend void display(A& aRef);
+//};
+//
+//class A {
+//private:
+//    int mimi = 42; // 初始化私有成员
+//public:
+//    // 由于B类已经完成定义，这里可以直接使用B::display作为友元
+//};
+//
+//// 在这里定义B类的display函数
+//void B::display(A& aRef) {
+//    std::cout << "A的秘密是: " << aRef.mimi << std::endl;
+//}
+//
+//int main() {
+//    A a;
+//    B b;
+//    b.display(a); // 此时调用的display函数能够访问A类的私有成员
+//    return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{}
+//	void Show()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//
+//	Time _t;
+//};
+//
+//class Time
+//{
+//public:
+//	Time(int hour = 24, int min = 0, int second = 0)
+//		:_hour(hour)
+//		, _min(min)
+//		, _second(second)
+//	{}
+//	void Show()
+//	{
+//		cout << _hour << "-" << _min << "-" << _second << endl;
+//	}
+//private:
+//	int _hour;
+//	int _min;
+//	int _second;
+//};
+//
+//int main()
+//{
+//	Date d1;
+//	d1.Show();
+//
+//	return 0;
+//}
+
+
+//#include"Date.h"
+//#include"Time.h"
+//
+//Date::Date(int year,int month,int day)
+//	:_year(year)
+//	,_month(month)
+//	,_day(day)
+//{}
+//
+//void Date::Show()
+//{
+//	cout << _year << "-" << _month << "-" << _day << endl;
+//}
+//
+//
+//
+//Time::Time(int hour , int min , int second )
+//	:_hour(hour)
+//	,_min(min)
+//	,_second(second)
+//{}
+//
+//void Time::Show()
+//{
+//	cout << _hour << "-" << _min << "-" << _second << endl;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int global = 0;
+//static int i = 0;
+//
+//
+//int main()
+//{
+//	int a = 1;
+//	int b = 20;
+//
+//	int* tmp = (int*)malloc(sizeof(int));
+//	int* tp = new int;
+//
+//	static int j = 0;
+//
+//	const char* s = "abcd";
+//	char s2[10] = "abcd";
+//
+//	return 0;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int* tmp1 = new int;//申请一个int类型的空间
+//	int* tmp2 = new int[10];//申请一个int类型的数组
+//	int* tmp3 = new int(10);//申请一个int类型的空间，并初始化为10
+//
+//	delete tmp1;//释放tmp1指向的空间
+//	delete[] tmp2;//释放tmp2指向的数组空间
+//	delete tmp3;//释放tmp3指向的空间
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 0, int day = 0)
+//	{
+//		cout << "Date()" << endl;
+//	}
+//	
+//	~Date()
+//	{
+//		cout << "~Date()" << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	cout << "malloc的方式" << endl;
+//	Date* d1 = (Date*)malloc(sizeof(Date));
+//	free(d1);
+//
+//	cout << "中间隔开便于观察" << endl;
+//
+//	cout << "new的方式" << endl;
+//	Date* d2 = new Date;
+//	delete d2;
+//	return 0;
+//}
+
+
+#include<iostream>
+#include<string>
 using namespace std;
 
 int main()
 {
-    int arr[100] = {
-        5, 6, 8, 6, 9, 1, 6, 1, 2, 4, 9, 1, 9, 8, 2, 3, 6, 4, 7, 7,
-        5, 9, 5, 0, 3, 8, 7, 5, 8, 1, 5, 8, 6, 1, 8, 3, 0, 3, 7, 9,
-        2, 7, 0, 5, 8, 8, 5, 7, 0, 9, 9, 1, 9, 4, 4, 6, 8, 6, 3, 3,
-        8, 5, 1, 6, 3, 4, 6, 7, 0, 7, 8, 2, 7, 6, 8, 9, 5, 6, 5, 6,
-        1, 4, 0, 1, 0, 0, 9, 4, 8, 0, 9, 1, 2, 8, 5, 0, 2, 5, 3, 3
-    };
+	int arr[] = { 1,2,3,4,5 };
 
-    int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-    int month[13] = { 0,1,2,3,4,5,6,7,8,9,10,11,12 };
-    int count = 0;
-
-    for (int i = 1; i <= 12; i++)
-    {
-        for (int j = 1; j <= day[i]; j++)
-        {
-            int data[8] = { 2,0,2,3,month[i] / 10,month[i] % 10,j / 10,j % 10 };
-            int l = 0;
-
-            for (int k = 0; k < 100; k++)
-            {
-                if (data[l] == arr[k])
-                {
-                    l++;
-                }
-                if (l == 8)
-                {
-                    count++;
-                    break;
-                }
-            }
-
-        }
-    }
-    cout << count << endl;
-    return 0;
+	for (auto& e : arr)
+	{
+		cout << e << endl; 
+	}
+	return 0;
 }
