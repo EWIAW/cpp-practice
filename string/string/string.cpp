@@ -112,6 +112,7 @@ void TestString4()
 	cout << s1.empty() << endl;
 }
 
+//中间删除，中间插入
 void TestString5()
 {
 	//insert在中间插入字符串
@@ -134,64 +135,60 @@ void TestString5()
 	cout << s1 << endl;
 }
 
+//find  rfind
 void TestString6()
 {
-	//char str[] = "中国";
-	//cout << str << endl;
+	////find
+	//string s1("hello world");
+	//string s2("orld");
+	//
+	////int ret = s1.find(s2,0);//在s1中，从0位置开始照s2
+	////cout << ret << endl;
+
+	////int ret = s1.rfind("a");
+	////cout << ret << endl;
+
+	//int ret = s1.find("world", 0, 3);//s1中找world，并且从0下标开始找，并且找匹配world的前三个字符
+	//cout << ret << endl;
+
+	//rfind
+	string s1("hello world");
+
+	int ret = s1.rfind("rld");
+	cout << ret << endl;
+
 
 }
 
-//int main()
-//{
-//	//TestString1();
-//	//TestString2();
-//	//TestString3();
-//	//TestString4();
-//	//TestString5();
-//	TestString6();
-//	return 0;
-//}
-class Solution {
-public:
-	bool isPalindrome(string s)
-	{
-		for (int i = 0; i < s.size(); i++)
-		{
-			s[i] = tolower(s[i]);
-		}
+//resize
+void TestString7()
+{
+	string str("hello");
+	str.resize(10);
+	str += "world";
+	cout << str << endl;
 
-		int begin = 0;
-		int end = s.size() - 1;
-		while (begin < end)
-		{
-			while (begin < end && (!isalpha(s[begin]) && !isalnum(s[begin])))
-			{
-				begin++;
-			}
-			while (begin < end && (!isalpha(s[end]) && !isalnum(s[begin])))
-			{
-				end--;
-			}
-			if (s[begin] == s[end])
-			{
-				begin++;
-				end--;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-};
+	printf("\0");
+}
 
-#include<iostream>
-using namespace std;
+//测试
+void TestString8()
+{
+	string s1("hello");
+	s1.insert(3, "world");
+
+	cout << s1 << endl;
+}
 
 int main()
 {
-	string str("A man, a plan, a canal: Panama");
-	Solution().isPalindrome(str);
+	//TestString1();
+	//TestString2();
+	//TestString3();
+	//TestString4();
+	//TestString5();
+	//TestString6();
+	//TestString7();
+	TestString8();
 	return 0;
 }
