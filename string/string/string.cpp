@@ -174,9 +174,11 @@ void TestString7()
 //²âÊÔ
 void TestString8()
 {
-	string s1("hello");
-	s1.insert(3, "world");
+	string s1;
+	cin >> s1;
+	cout << s1 << endl;
 
+	cin >> s1;
 	cout << s1 << endl;
 }
 
