@@ -16,6 +16,11 @@ int main()
 	//String::Test5();
 	//String::Test6();
 	//String::Test7();
-	String::Test8();
+	//String::Test8();
+	//String::Test9();
+	//String::Test10();
+	//String::Test11();
+
+	String_Copy::Test1();
 	return 0;
 }

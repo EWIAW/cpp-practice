@@ -161,18 +161,6 @@ namespace String
 			strcpy(_str, pstr._str);
 		}
 
-		//迭代器
-		typedef char* iterator;
-		iterator begin()
-		{
-			return _str;
-		}
-
-		iterator end()
-		{
-			return _str + _size;
-		}
-
 		//赋值运算符重载
 		string& operator=(const string& pstr)
 		{
@@ -186,6 +174,18 @@ namespace String
 
 				return *this;
 			}
+		}
+
+		//迭代器
+		typedef char* iterator;
+		iterator begin()
+		{
+			return _str;
+		}
+
+		iterator end()
+		{
+			return _str + _size;
 		}
 
 		//获取字符串的有效字符个数
@@ -214,17 +214,17 @@ namespace String
 		}
 
 		//调整它的size
-		void resize(size_t i)
+		void resize(size_t i,char ch= '0')
 		{
 			if (i > _size)//如果需要调整后的size比之前大
 			{
 				//如果调整后的size比底层的capacity大，则需要扩容
 				if (i > _capacity)
 				{
-					reserve(i);
+					reserve(i);	
 				}
-
-				memset(_str + _size, 0, sizeof(char) * _capacity - _size);
+				 
+				memset(_str + _size, ch, sizeof(char) * (i - _size));
 
 				_size = i;
 				//char* tmp = new char[i + 1];//开一个更大的空间
@@ -300,27 +300,123 @@ namespace String
 			append(pstr);
 		}
 
-		void insert(size_t pos, const char* pstr)
+		string& insert(size_t pos, const char* pstr)
 		{
 			assert(pos <= _size);
+			size_t newcapacity = _size + strlen(pstr);//确定插入新字符串后的新容量大小
+			reserve(newcapacity);//扩容
+			memmove(_str + pos + strlen(pstr), _str + pos, sizeof(char) * (_size - pos + 1));//将pos之后的字符往后拷贝到正确的位置上
+			memmove(_str + pos, pstr, sizeof(char) * strlen(pstr));//将要插入的字符拷贝到正确的位置上上
+			_size = newcapacity;//调整_size的值
 
+			return *this;
 		}
 
-		void erase;
+		void erase(size_t pos, size_t len = -1)
+		{
+			assert(pos < _size);//如果要删除的位置大于_size，则断言
 
-		void find;
-		
-		operator==();
+			if ((pos + len) > _size)//如果要删除的长度，长于后面的字符串，则将要删除的长度给到末尾
+			{
+				len = _size - pos;
+			}
 
-		operator!=();
+			strcpy(_str + pos, _str + pos + len);//用后面的字符串覆盖前面的
+			_size = _size - len;
+		}
 
-		operator>();
+		size_t find(const char* pstr, size_t pos =0)
+		{
+			assert(pos < _size);
 
-		operator>=();
+			char* ret = strstr(_str + pos, pstr);//字符串查找
+			if (ret == nullptr)//如果没找到
+			{
+				return -1;
+			}
 
-		operator<();
+			int count = 0;
+			for (int i = 0; i < _size; i++)
+			{
+				if ((_str + i) == ret)//查找ret指针指向的字符的下标
+				{
+					break;
+				}
+				count++;
+			}
+			return count;
+		}
 
-		operator<=();
+		bool operator==(const char* pstr)
+		{
+			int len = strlen(pstr);
+
+			if (_size != len)
+			{
+				return false;
+			}
+
+			for (int i = 0; i < _size; i++)
+			{
+				if (_str[i] != pstr[i])
+				{
+					return false;
+				}
+			}
+			
+			return true;
+		}
+
+		bool operator!=(const char* pstr)
+		{
+			return !(*this == pstr);
+		}
+
+		bool operator>(const char* pstr)
+		{
+			int ret = strcmp(_str, pstr);
+			if (ret == 1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool operator>=(const char* pstr)
+		{
+			return *this > pstr || *this == pstr;
+		}
+
+		bool operator<(const char* pstr)
+		{
+			return !(*this >= pstr);
+		}
+
+		bool operator<=(const char* pstr)
+		{
+			return !(*this > pstr);
+		}
+
+		void geline()//实现可以输入空格
+		{
+			resize(0);//输入之前先把原来的内容清空
+			char ch;
+			while (1)
+			{
+				ch = cin.get();
+				if (ch == '\n')
+				{
+					break;
+				}
+				else
+				{
+					*this += ch;
+				}
+			}
+		}
 
 	private:
 		char* _str;
@@ -340,17 +436,37 @@ namespace String
 	}
 
 	//重载cin>>
+	//istream& operator>>(istream& in, string& pstr)
+	//{
+	//	char arr[10];
+	//	cin >> arr;
+	//	int len = strlen(arr);
+	//	pstr.reserve(len+1);
+	//	pstr.resize(len);
+
+	//	for (int i = 0; i < pstr.size(); i++)
+	//	{
+	//		pstr[i] = arr[i];
+	//	}
+
+	//	return in;
+	//}
+
 	istream& operator>>(istream& in, string& pstr)
 	{
-		char arr[10];
-		cin >> arr;
-		int len = strlen(arr);
-		pstr.reserve(len+1);
-		pstr.resize(len);
-
-		for (int i = 0; i < pstr.size(); i++)
+		pstr.resize(0);//输入之前先把原来的内容清空
+		char ch;
+		while (1)
 		{
-			pstr[i] = arr[i];
+			ch = in.get();
+			if (ch == ' ' || ch == '\n')
+			{
+				break;
+			}
+			else
+			{
+				pstr += ch;
+			}
 		}
 
 		return in;
@@ -375,7 +491,8 @@ namespace String
 	{
 		string s1("hello");
 		cout << s1 << endl;
-		s1.resize(10);
+		s1.reserve(50);
+		s1.resize(10,'8');
 		s1[9] = 'a';
 		cout << s1 << endl;
 
@@ -442,16 +559,160 @@ namespace String
 		cout << endl;
 	}
 
-	//测试重载cin>>
+	//测试重载cin>>  和  getline
 	void Test8()
 	{
 		string s1;
-		cin >> s1;
+		s1.geline();
 		cout << s1 << endl;
 
-		cin >> s1;
+		s1.geline();
 		cout << s1 << endl;
+	}
+
+	//测试insert和erase
+	void Test9()
+	{
+		string s1("helloabcdefghijk");
+
+		//s1.insert(5, " world");
+		
+		s1.erase(0,3);
+
+		cout << s1 << endl;
+	}
+
+	//测试find
+	void Test10()
+	{
+		string s1("hello world");
+		int ret = s1.find("ha");
+		cout << ret << endl;
+	}
+
+	//测试==、>、<等运算符
+	void Test11()
+	{
+		string s1("hello");
+		bool ret1 = (s1 >= "hella");
+
+		cout << ret1 << endl;
 	}
 }
 
 
+//拷贝构造的现代写法
+namespace String_Copy
+{
+	class string
+	{
+	public:
+		//构造函数
+		string(const char* pstr="")
+			:_str(new char[strlen(pstr)+1])
+		{
+			strcpy(_str, pstr);
+		}
+
+		//析构函数
+		~string()
+		{
+			delete[] _str;
+			_str = nullptr;
+		}
+
+		//拷贝构造的传统写法
+		//string s3(s2)
+		//string(const string& pstr)
+		//	:_str(new char[strlen(pstr._str)+1])
+		//{
+		//	strcpy(_str, pstr._str);
+		//}
+
+		//拷贝构造的现代写法
+		//string s2(s3)
+		string(const string& pstr)
+			:_str(nullptr)
+		{
+			string tmp(pstr._str);
+			swap(_str, tmp._str);
+		}
+
+		//赋值=重载的传统写法
+		//string s3;
+		//s3=s2
+		//string& operator=(const string& pstr)
+		//{
+		//	if (this != &pstr)
+		//	{
+		//		char* tmp = new char[strlen(pstr._str) + 1];
+		//		strcpy(tmp, pstr._str);
+		//		delete[] _str;
+		//		_str = tmp;
+
+		//		return *this;
+		//	}
+		//}
+
+		//赋值=重载的现代写法
+		//string s3
+		//s3=s2
+		//string& operator=(string& pstr)
+		//{
+		//	if (this != &pstr)
+		//	{
+		//		string tmp(pstr._str);
+		//		swap(_str, tmp._str);
+		//	}
+		//	return *this;
+		//}
+
+		string& operator=(string pstr)
+		{
+			if (this != &pstr)
+			{
+				swap(_str, pstr._str);
+			}
+			return *this;
+		}
+
+		char& operator[](size_t size)
+		{
+			return _str[size];
+		}
+
+		size_t size()
+		{
+			return strlen(_str);
+		}
+
+	private:
+		char* _str;
+	};
+
+	void Test1()
+	{
+		string s1("hello");
+		string s2(s1);
+		string s3;
+		s3 = s2;
+
+		for (int i = 0; i < s1.size(); i++)
+		{
+			cout << s1[i];
+		}
+		cout << endl;
+
+		for (int i = 0; i < s2.size(); i++)
+		{
+			cout << s2[i];
+		}
+		cout << endl;
+
+		for (int i = 0; i < s3.size(); i++)
+		{
+			cout << s3[i];
+		}
+		cout << endl;
+	}
+}
