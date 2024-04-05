@@ -3006,44 +3006,245 @@
 //    return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+////字符串转数字
+//int ConvertNum(string& str)
+//{
+//	int count = 0;
+//	for (int i = 0; i < str.size(); i++)
+//	{
+//		count *= 10;
+//		count += str[i] - '0';
+//	}
+//	return count;
+//}
+//
+////数字转字符串
+//string ConvertStr(int num)
+//{
+//	string s;
+//	while (num > 0)
+//	{
+//		int tmp = num % 10;
+//		s += tmp + '0';
+//		num /= 10;
+//	}
+//	reverse(s.begin(), s.end());
+//	return s;
+//}
+//
+//int main()
+//{
+//	string str("12345");
+//	int ret = ConvertNum(str);
+//	cout << ret << endl;
+//
+//	int num = 456;
+//	string s = ConvertStr(num);
+//	cout << s << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//void Swap(int& x, int& y)
+//{
+//	int tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+//
+//void Swap(double& x, double& y)
+//{
+//	double tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+//
+//void Swap(char& x, char& y)
+//{
+//	char tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//template<class T>
+//void Swap(T& x, T& y)
+//{
+//	T tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+//
+//void Swap(int& x, int& y)
+//{
+//	int tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+//
+//int main()
+//{
+//	int x1 = 10;
+//	int y1 = 20;
+//
+//	Swap(x1, y1);
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+////定义一个自己的栈
+//template<class T>
+//class Stack
+//{
+//public:
+//	//栈的一系列操作
+//	//…………
+//private:
+//	T* _arr;//一个指向栈的指针
+//};
+//
+//class Stack
+//{
+//public:
+//	//栈的一系列操作
+//	//…………
+//private:
+//	int* _arr;//一个指向栈的指针
+//};
+//
+//class Stack
+//{
+//public:
+//	//栈的一系列操作
+//	//…………
+//private:
+//	double* _arr;//一个指向栈的指针
+//};
+//
+//class Stack
+//{
+//public:
+//	//栈的一系列操作
+//	//…………
+//private:
+//	char* _arr;//一个指向栈的指针
+//};
+//
+//int main()
+//{
+//	Stack<int> s1;//存放int类型的栈
+//	Stack<double> s2;//存放double类型的栈
+//	Stack<char> s3;//存放char类型的栈
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int singleNumber(vector<int>& nums)
+//    {
+//        vector<int> v;
+//        v.resize(32);
+//        for (int i = 0; i < nums.size(); i++)//获取每个nums的值；
+//        {
+//            for (int j = 0; j < 32; j++)
+//            {
+//                int tmp = nums[i];
+//                tmp = tmp >> j;//对nums[i]进行右移操作
+//                if ((tmp & 1) == 1)//如果右移之后的nums[i]与1按位与等于1，即该nums[i]的第一位是1，记录下来++
+//                {
+//                    v[31 - j]++;
+//                }
+//            }
+//        }
+//
+//        int ret = 0;
+//        for (int i = v.size() - 1; i >= 0; i--)//遍历数组v
+//        {
+//            v[i] %= 3;//对每个v[i]进行取模3，最后即可保留唯一出现一次数字的二进制码
+//            if (v[i] == 1)
+//            {
+//                ret += pow(2, 31 - i);//通过二进制码来计算它的值
+//            }
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    vector<int> nums;
+//    nums.push_back(0);
+//    nums.push_back(1);
+//    nums.push_back(0);
+//    nums.push_back(1);
+//    nums.push_back(0);
+//    nums.push_back(1);
+//    nums.push_back(99);
+//
+//    int ret = Solution().singleNumber(nums);
+//    cout << ret << endl;
+//    return 0;
+//}
 #include<iostream>
+#include<vector>
 using namespace std;
 
-//字符串转数字
-int ConvertNum(string& str)
-{
-	int count = 0;
-	for (int i = 0; i < str.size(); i++)
-	{
-		count *= 10;
-		count += str[i] - '0';
-	}
-	return count;
-}
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows)
+    {
+        vector<vector<int>>* ret = new vector<vector<int>>;//开辟一个二维数组空间
+        ret->resize(numRows);//调整二维数组的size为5，即5个一维数组组成的
 
-//数字转字符串
-string ConvertStr(int num)
-{
-	string s;
-	while (num > 0)
-	{
-		int tmp = num % 10;
-		s += tmp + '0';
-		num /= 10;
-	}
-	reverse(s.begin(), s.end());
-	return s;
-}
+        //调整每个一维数组的size
+        for (int i = 0; i < ret->size(); i++)
+        {
+            ret->at(i).resize(i + 1);//设置每个一维数组的size
+            int& ret1 = (ret->at(i)).at(0);//给每个一维数组的第一个位置赋值为1
+            ret1 = 1;
+            int& ret2 = (ret->at(i)).at(i);//给每个一维数组的最后一个位置赋值为1
+            ret2 = 1;
+        }
+
+        for (int i = 2; i < ret->size(); i++)
+        {
+            //从第三个vector开始进行赋值
+            for (int j = 1; j < (ret->at(i).size() - 1); j++)
+            {
+                int& ret1 = (ret->at(i)).at(j);
+                int& ret2 = (ret->at(i - 1)).at(j - 1);
+                int& ret3 = (ret->at(i - 1)).at(j);
+                ret1 = ret2 + ret3;
+            }
+        }
+
+        return *ret;
+    }
+};
 
 int main()
 {
-	string str("12345");
-	int ret = ConvertNum(str);
-	cout << ret << endl;
-
-	int num = 456;
-	string s = ConvertStr(num);
-	cout << s << endl;
-
-	return 0;
+    Solution().generate(5);
+    return 0;
 }

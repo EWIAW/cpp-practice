@@ -129,7 +129,7 @@ namespace My_String
 
 
 
-//模拟实现string的增删改查
+//模拟实现完整string的增删改查
 namespace String
 {
 	class string
@@ -152,28 +152,53 @@ namespace String
 			_size = _capacity = 0;
 		}
 
-		//拷贝构造
+		//拷贝构造	传统写法
+		//string(const string& pstr)
+		//	:_str(new char[pstr.size()+1])
+		//	,_size(pstr._size)
+		//	,_capacity(pstr._capacity)
+		//{
+		//	strcpy(_str, pstr._str);
+		//}
+
+		//拷贝构造	现代写法
+		//string s2(s1)
 		string(const string& pstr)
-			:_str(new char[pstr.size()+1])
-			,_size(pstr._size)
-			,_capacity(pstr._capacity)
+			:_str(nullptr)
 		{
-			strcpy(_str, pstr._str);
+			string tmp(pstr._str);
+			Swap(tmp);
 		}
 
-		//赋值运算符重载
-		string& operator=(const string& pstr)
+		void Swap(string& pstr)
 		{
-			if (this != &pstr)
-			{
-				char* tmp = new char[pstr.size() + 1];//开一块新的空间给this
-				strcpy(tmp, pstr._str);//将要赋值的内容给到新开的空间
-				delete[] _str;
-				_str = tmp;
-				_size = _capacity = pstr._size;
+			swap(_str, pstr._str);
+			swap(_size, pstr._size);
+			swap(_capacity, pstr._capacity);
+		}
 
-				return *this;
-			}
+		//赋值运算符重载	传统写法
+		//string& operator=(const string& pstr)
+		//{
+		//	if (this != &pstr)
+		//	{
+		//		char* tmp = new char[pstr.size() + 1];//开一块新的空间给this
+		//		strcpy(tmp, pstr._str);//将要赋值的内容给到新开的空间
+		//		delete[] _str;
+		//		_str = tmp;
+		//		_size = _capacity = pstr._size;
+
+		//		return *this;
+		//	}
+		//}
+
+		//赋值=重载	现代写法
+		//string s3;
+		//s3=s2;
+		string& operator=(string pstr)
+		{
+			Swap(pstr);
+			return *this;
 		}
 
 		//迭代器
@@ -303,7 +328,7 @@ namespace String
 		string& insert(size_t pos, const char* pstr)
 		{
 			assert(pos <= _size);
-			size_t newcapacity = _size + strlen(pstr);//确定插入新字符串后的新容量大小
+			size_t newcapacity = _size + strlen(pstr);//确定插入新字符串后的新容量大小	
 			reserve(newcapacity);//扩容
 			memmove(_str + pos + strlen(pstr), _str + pos, sizeof(char) * (_size - pos + 1));//将pos之后的字符往后拷贝到正确的位置上
 			memmove(_str + pos, pstr, sizeof(char) * strlen(pstr));//将要插入的字符拷贝到正确的位置上上
@@ -575,9 +600,9 @@ namespace String
 	{
 		string s1("helloabcdefghijk");
 
-		//s1.insert(5, " world");
+		s1.insert(0, " world");
 		
-		s1.erase(0,3);
+		//s1.erase(0,3);
 
 		cout << s1 << endl;
 	}

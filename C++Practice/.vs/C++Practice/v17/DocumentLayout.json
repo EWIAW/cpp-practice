@@ -5,6 +5,9 @@
     {
       "AbsoluteMoniker": "D:0:0:{2BEB97A2-20EE-4E9C-A4A2-A599F92C4A8E}|C\u002B\u002BPractice\\C\u002B\u002BPractice.vcxproj|E:\\github\\cpp-practice\\C\u002B\u002BPractice\\C\u002B\u002BPractice\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{2BEB97A2-20EE-4E9C-A4A2-A599F92C4A8E}|C\u002B\u002BPractice\\C\u002B\u002BPractice.vcxproj|solutionrelative:C\u002B\u002BPractice\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BEB97A2-20EE-4E9C-A4A2-A599F92C4A8E}|C\u002B\u002BPractice\\C\u002B\u002BPractice.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.39.33519\\INCLUDE\\VECTOR||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,10 +27,21 @@
               "RelativeDocumentMoniker": "C\u002B\u002BPractice\\test.cpp",
               "ToolTip": "E:\\github\\cpp-practice\\C\u002B\u002BPractice\\C\u002B\u002BPractice\\test.cpp",
               "RelativeToolTip": "C\u002B\u002BPractice\\test.cpp",
-              "ViewState": "AQIAAMALAAAAAAAAAAAAAMoLAAAYAAAA",
+              "ViewState": "AQIAAIYMAAAAAAAAAIAwwIwMAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-02-28T15:10:01.147Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "vector",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
+              "ViewState": "AQIAAFEIAAAAAAAAAIAwwGYIAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-04-05T14:58:23.083Z",
               "EditorCaption": ""
             }
           ]

@@ -9,7 +9,7 @@ int main()
 	//My_String::Test2();
 	//My_String::Test3();
 
-	//String::Test1();
+	String::Test1();
 	//String::Test2();
 	//String::Test3();
 	//String::Test4();
@@ -21,6 +21,6 @@ int main()
 	//String::Test10();
 	//String::Test11();
 
-	String_Copy::Test1();
+	//String_Copy::Test1();
 	return 0;
 }

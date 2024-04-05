@@ -12,30 +12,23 @@ E:\github\cpp-practice\模拟string\模拟string\string.h(52,5): warning C4996: 
 E:\github\cpp-practice\模拟string\模拟string\string.h(144,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (编译源文件“string.cpp”)
   
-E:\github\cpp-practice\模拟string\模拟string\string.h(161,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\github\cpp-practice\模拟string\模拟string\string.h(276,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (编译源文件“string.cpp”)
   
-E:\github\cpp-practice\模拟string\模拟string\string.h(170,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\github\cpp-practice\模拟string\模拟string\string.h(313,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (编译源文件“string.cpp”)
   
-E:\github\cpp-practice\模拟string\模拟string\string.h(251,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\github\cpp-practice\模拟string\模拟string\string.h(349,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (编译源文件“string.cpp”)
   
-E:\github\cpp-practice\模拟string\模拟string\string.h(288,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\github\cpp-practice\模拟string\模拟string\string.h(377,12): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   (编译源文件“string.cpp”)
   
-E:\github\cpp-practice\模拟string\模拟string\string.h(324,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\github\cpp-practice\模拟string\模拟string\string.h(614,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   (编译源文件“string.cpp”)
   
-E:\github\cpp-practice\模拟string\模拟string\string.h(352,12): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  (编译源文件“string.cpp”)
-  
-E:\github\cpp-practice\模拟string\模拟string\string.h(589,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  (编译源文件“string.cpp”)
-  
-E:\github\cpp-practice\模拟string\模拟string\string.h(614,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\github\cpp-practice\模拟string\模拟string\string.h(639,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (编译源文件“string.cpp”)
   
 E:\github\cpp-practice\模拟string\模拟string\string.h(58,1): warning C4715: “My_String::string::operator=”: 不是所有的控件路径都返回值
-E:\github\cpp-practice\模拟string\模拟string\string.h(177,1): warning C4715: “String::string::operator=”: 不是所有的控件路径都返回值
   模拟string.vcxproj -> E:\github\cpp-practice\模拟string\x64\Debug\模拟string.exe
