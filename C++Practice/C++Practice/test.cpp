@@ -3212,39 +3212,78 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> generate(int numRows)
+    vector<int> singleNumber(vector<int>& nums)
     {
-        vector<vector<int>>* ret = new vector<vector<int>>;//开辟一个二维数组空间
-        ret->resize(numRows);//调整二维数组的size为5，即5个一维数组组成的
-
-        //调整每个一维数组的size
-        for (int i = 0; i < ret->size(); i++)
+        //对数进行分组，放到两个vector中
+        vector<int> v1;
+        vector<int> v2;
+        //将nums中的数全部异或在一起，找到唯一的两个数的异或结果
+        int result = 0;
+        for (int i = 0; i < nums.size(); i++)
         {
-            ret->at(i).resize(i + 1);//设置每个一维数组的size
-            int& ret1 = (ret->at(i)).at(0);//给每个一维数组的第一个位置赋值为1
-            ret1 = 1;
-            int& ret2 = (ret->at(i)).at(i);//给每个一维数组的最后一个位置赋值为1
-            ret2 = 1;
+            result ^= nums[i];
         }
 
-        for (int i = 2; i < ret->size(); i++)
+        //cout<<result<<endl;
+
+        //对异或结果的二进制位进行遍历，找到第一次出现二进制1的位置，后续通过这个1的位置来进行分组
+        int flag = 0;
+        for (int i = 0; i < 32; i++)
         {
-            //从第三个vector开始进行赋值
-            for (int j = 1; j < (ret->at(i).size() - 1); j++)
+            if (result & 1 == 1)
             {
-                int& ret1 = (ret->at(i)).at(j);
-                int& ret2 = (ret->at(i - 1)).at(j - 1);
-                int& ret3 = (ret->at(i - 1)).at(j);
-                ret1 = ret2 + ret3;
+                flag = i;
+                break;
+            }
+            result >>= 1;
+        }
+
+        //cout<<flag<<endl;
+
+        //遍历nums进行分组
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int tmp = 1;
+            tmp <<= flag;
+            //cout<<tmp<<endl;
+            if (nums[i] & tmp == 1)
+            {
+                v1.push_back(nums[i]);
+            }
+            else
+            {
+                v2.push_back(nums[i]);
             }
         }
 
-        return *ret;
+        vector<int> ret;
+        int count = 0;
+        for (int i = 0; i < v1.size(); i++)
+        {
+            count ^= v1[i];
+        }
+        ret.push_back(count);
+
+        count = 0;
+        for (int i = 0; i < v2.size(); i++)
+        {
+            count ^= v2[i];
+        }
+        ret.push_back(count);
+        return ret;
     }
 };
 
 int main()
 {
-    Solution().generate(5);
+    vector<int> nums;
+    nums.push_back(1);
+    nums.push_back(2);
+    nums.push_back(1);
+    nums.push_back(3);
+    nums.push_back(2);
+    nums.push_back(5);
+
+    Solution().singleNumber(nums);
     return 0;
 }

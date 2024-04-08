@@ -1,2 +1,4 @@
 ﻿  test.cpp
+E:\github\cpp-practice\C++Practice\C++Practice\test.cpp(3233,1): warning C4554: “&”: 检查运算符优先级是否存在的可能的错误；使用括号阐明优先级
+E:\github\cpp-practice\C++Practice\C++Practice\test.cpp(3249,1): warning C4554: “&”: 检查运算符优先级是否存在的可能的错误；使用括号阐明优先级
   C++Practice.vcxproj -> E:\github\cpp-practice\C++Practice\x64\Debug\C++Practice.exe
