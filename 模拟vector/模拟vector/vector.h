@@ -1,6 +1,7 @@
 #pragma once
 #include<assert.h>
 #include<iostream>
+#include<string>
 using namespace std;
 
 namespace My_vector
@@ -9,7 +10,8 @@ namespace My_vector
 	class vector
 	{
 	public:
-		typedef T* iterator;
+		typedef T* iterator;//可读可写迭代器
+		typedef const T* const_iterator;//只能读迭代器
 
 		//构造函数
 		vector()
@@ -29,18 +31,26 @@ namespace My_vector
 
 		//拷贝构造
 		//vector<int> v2(v1)
-		vector(const vector<T>& tmp)
-			:_start(new T[tmp.capacity()])
-			,_finish(_start+tmp.size())
-			,_endofstorage(_start+tmp.capacity())
+		vector(const vector<T>& v)
+			:_start(new T[v.capacity()])
+			,_finish(_start)
+			,_endofstorage(_start+v.capacity())
 		{
-			memmove(_start, tmp._start, sizeof(T) * tmp.size());
+			//memmove(_start, tmp._start, sizeof(T) * tmp.size());
+
+			iterator pos = v._start;
+			while (pos != v._finish)//将v1的数据赋值给v2
+			{
+				*_finish = *pos;
+				pos++;
+				_finish++;
+			}
 		}
 
 		//赋值=重载
 		//vector<int> v3;
 		//v3=v2;
-		vector<T>& operator=(const vector<T>& tmp)//函数传参：用v2拷贝构造出一个tmp
+		vector<T>& operator=(const vector<T>& tmp)
 		{
 			if (this != &tmp)//判断防止自己给自己拷贝
 			{
@@ -51,13 +61,25 @@ namespace My_vector
 		}
 
 		//begin迭代器
-		iterator begin() const
+		iterator begin() 
 		{
 			return _start;
 		}
 
 		//end迭代器
-		iterator end() const
+		iterator end() 
+		{
+			return _finish;
+		}
+
+		//const_begin迭代器
+		const_iterator begin() const
+		{
+			return _start;
+		}
+
+		//const_end迭代器
+		const_iterator end() const
 		{
 			return _finish;
 		}
@@ -71,7 +93,13 @@ namespace My_vector
 
 				if (_start != nullptr)
 				{
-					memmove(tmp, _start, sizeof(T) * size());//将原来空间的数据拷贝到新空间中
+					//memmove(tmp, _start, sizeof(T) * size());//将原来空间的数据拷贝到新空间中
+					iterator pos1 = _start;
+					iterator pos2 = tmp;
+					while (pos1 != _finish)//将原来空间的数据拷贝到新空间中
+					{
+						*pos2++ = *pos1++;
+					}
 				}
 
 				//注意！！！ 下面这两行代码一定要写在delete的前面
@@ -84,9 +112,38 @@ namespace My_vector
 		}
 
 		//调整size值
-		void resize(size_t sz)
+		void resize(const size_t sz, const T& val = T() )//给一个T类型的缺省值
 		{
-			;
+			if (sz < size())
+			{
+				_finish = _start + sz;
+			}
+			if (sz > size())
+			{
+				if (sz > capacity())//如果需要调整的size值大于容量，则需要扩容
+				{
+					reserve(sz);
+				}
+
+				while (_finish != _endofstorage)
+				{
+					*(_finish) = val;
+					_finish++;
+				}
+			}
+		}
+
+		//判断vector是否为空
+		bool empty() const
+		{
+			if (size() == 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		//尾插
@@ -113,8 +170,73 @@ namespace My_vector
 			_finish++;
 		}
 
+		//尾删
+		void pop_back()
+		{
+			assert(size() != 0);
+			_finish--;
+		}
+
+		//中间插入	!!!
+		iterator insert(iterator pos, const T& val)
+		{
+			assert(pos >= _start && pos <= _finish);
+
+			if (size() == capacity())//如果容量已满，则需要扩容，增容后，需要重新给pos迭代器赋值，否则会有迭代器失效问题
+			{
+				size_t tmp = pos - _start;
+				size_t newcapacity = (capacity() == 0 ? 2 : capacity() * 2);
+				reserve(newcapacity);
+				pos = begin() + tmp;
+			}
+
+			iterator prev = _finish - 1;
+			iterator tail = _finish;
+
+			/*int flag = _finish - pos;*///要挪动的次数
+			while (prev >= pos)//pos之后的元素往后挪
+			{
+				*tail = *prev;
+				tail--;
+				prev--;
+			}
+
+			//挪完数据后，_finish需要++
+			_finish++;
+
+			*pos = val;
+
+			return pos;
+		}
+
+		//中间删除	!!!	
+		iterator erase(iterator pos)
+		{
+			assert(pos < _finish);
+
+			iterator prev = pos;
+			iterator tail = pos + 1;
+
+			while (tail<_finish)
+			{
+				*prev = *tail;
+				prev++;
+				tail++;
+			}
+
+			_finish--;
+
+			return pos;
+		}
+
 		//重载[]
 		T& operator[](const size_t pos) 
+		{
+			assert(pos < size());
+			return *(_start + pos);
+		}
+
+		const T& operator[](const size_t pos) const
 		{
 			assert(pos < size());
 			return *(_start + pos);
@@ -142,6 +264,18 @@ namespace My_vector
 			swap(_endofstorage, tmp._endofstorage);
 		}
 
+		//输出vector
+		void print_arr() const
+		{
+			vector<int>::const_iterator it = begin();
+			while (it != end())
+			{
+				cout << *it << " ";
+				it++;
+			}
+			cout << endl;
+		}
+
 	private:
 		iterator _start;//一个迭代器指向第一个元素
 		iterator _finish;//一个迭代器指向最后一个元素的下一个位置
@@ -150,7 +284,7 @@ namespace My_vector
 
 
 
-	//测试构造函数
+	//测试构造函数	拷贝构造函数
 	void Test1()
 	{
 		vector<int> v1;
@@ -163,15 +297,8 @@ namespace My_vector
 
 		vector<int> v2(v1);
 
-		cout << v1[0] << endl;
-		cout << v1[1] << endl;
-		cout << v1[2] << endl;
-		cout << v1[3] << endl;
-
-		cout << v2[0] << endl;
-		cout << v2[1] << endl;
-		cout << v2[2] << endl;
-		cout << v2[3] << endl;
+		v1.print_arr();
+		v2.print_arr();
 	}
 
 	//测试赋值=
@@ -187,13 +314,11 @@ namespace My_vector
 		vector<int> v2;
 		v2 = v1;
 
-		cout << v2[0] << endl;
-		cout << v2[1] << endl;
-		cout << v2[2] << endl;
-		cout << v2[3] << endl;
+		v1.print_arr();
+		v2.print_arr();
 	}
 
-	//测试迭代器和范围for
+	//测试迭代器
 	void Test3()
 	{
 		vector<int> v1;
@@ -203,37 +328,69 @@ namespace My_vector
 		v1.push_back(4);
 		v1.push_back(5);
 
-		vector<int>::iterator it = v1.begin();
-		while (it != v1.end())
-		{
-			(*it)++;
-			cout << *it << " ";
-			it++;	
-		}
-		cout << endl;	
-
-		for (auto e : v1)
-		{
-			cout << e << " ";
-		}
-		cout << endl;
+		const vector<int> v2(v1);
+		v2.print_arr();
 	}
 
+	//测试resize
 	void Test4()
 	{
 		vector<int> v1;
 		v1.push_back(1);
 		v1.push_back(2);
 		v1.push_back(3);
-		v1.push_back(4);
-		v1.push_back(5);
 
-		v1[0] = 10;
+		v1.resize(10);
 
-		for (auto e : v1)
-		{
-			cout << e << " ";
-		}
-		cout << endl;
+		v1.resize(20, 10);
+
+		v1.print_arr();
+	}
+
+	//测试尾删
+	void Test5()
+	{
+		vector<int> v1;
+		v1.push_back(1);
+		v1.push_back(2);
+		v1.push_back(3);
+
+		v1.pop_back();
+		v1.pop_back();
+
+		v1.print_arr();
+	}
+
+	//测试中间插入，中间删除
+	void Test6()
+	{
+		vector<int> v1;
+
+		v1.insert(v1.begin(), 10);
+		v1.insert(v1.end(), 20);
+		v1.insert(v1.end(), 30);
+
+		//v1.erase(v1.begin());
+		//v1.erase(v1.end() - 2);
+
+		vector<int> v2;
+		v2.erase(v2.begin());
+
+		v1.print_arr();
+	}
+
+	//测试reserve
+	void Test7()
+	{
+		vector<string> v1;
+		v1.push_back("11111");
+		v1.push_back("22222");
+		v1.push_back("33333");
+		v1.push_back("44444");
+
+		cout << v1[0] << endl;
+		cout << v1[1] << endl;
+		cout << v1[2] << endl;
+		cout << v1[3] << endl;
 	}
 }
