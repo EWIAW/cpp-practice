@@ -3206,84 +3206,159 @@
 //    cout << ret << endl;
 //    return 0;
 //}
-#include<iostream>
-#include<vector>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    vector<int> singleNumber(vector<int>& nums)
+//    {
+//        //对数进行分组，放到两个vector中
+//        vector<int> v1;
+//        vector<int> v2;
+//        //将nums中的数全部异或在一起，找到唯一的两个数的异或结果
+//        int result = 0;
+//        for (int i = 0; i < nums.size(); i++)
+//        {
+//            result ^= nums[i];
+//        }
+//
+//        //cout<<result<<endl;
+//
+//        //对异或结果的二进制位进行遍历，找到第一次出现二进制1的位置，后续通过这个1的位置来进行分组
+//        int flag = 0;
+//        for (int i = 0; i < 32; i++)
+//        {
+//            if (result & 1 == 1)
+//            {
+//                flag = i;
+//                break;
+//            }
+//            result >>= 1;
+//        }
+//
+//        //cout<<flag<<endl;
+//
+//        //遍历nums进行分组
+//        for (int i = 0; i < nums.size(); i++)
+//        {
+//            int tmp = 1;
+//            tmp <<= flag;
+//            //cout<<tmp<<endl;
+//            if (nums[i] & tmp == 1)
+//            {
+//                v1.push_back(nums[i]);
+//            }
+//            else
+//            {
+//                v2.push_back(nums[i]);
+//            }
+//        }
+//
+//        vector<int> ret;
+//        int count = 0;
+//        for (int i = 0; i < v1.size(); i++)
+//        {
+//            count ^= v1[i];
+//        }
+//        ret.push_back(count);
+//
+//        count = 0;
+//        for (int i = 0; i < v2.size(); i++)
+//        {
+//            count ^= v2[i];
+//        }
+//        ret.push_back(count);
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    vector<int> nums;
+//    nums.push_back(1);
+//    nums.push_back(2);
+//    nums.push_back(1);
+//    nums.push_back(3);
+//    nums.push_back(2);
+//    nums.push_back(5);
+//
+//    Solution().singleNumber(nums);
+//    return 0;
+//}
 
-class Solution {
-public:
-    vector<int> singleNumber(vector<int>& nums)
-    {
-        //对数进行分组，放到两个vector中
-        vector<int> v1;
-        vector<int> v2;
-        //将nums中的数全部异或在一起，找到唯一的两个数的异或结果
-        int result = 0;
-        for (int i = 0; i < nums.size(); i++)
-        {
-            result ^= nums[i];
+//#include<iostream>
+//#include<stdbool.h>
+//using namespace std;
+//
+//bool Solution(int (*arr)[4], int row, int col, int num)
+//{
+//	if (arr == nullptr)
+//	{
+//		return false;
+//	}
+//
+//	int brow = 0;//行
+//	int bcol = col - 1;//列
+//
+//	while (brow < row && bcol >= 0)
+//	{
+//		if (arr[brow][bcol] == num)
+//		{
+//			return true;
+//		}
+//		else if (arr[brow][bcol] > num)
+//		{
+//			bcol--;
+//		}
+//		else
+//		{
+//			brow++;
+//		}
+//	}
+//	return false;
+//}
+//
+//void Test(arr)
+//
+//int main()
+//{
+//	int arr[4][4] = { {1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15} };
+//	//cout << arr << endl;
+//	//cout << arr + 1 << endl;
+//
+//	//cout << (*arr)[3] << endl;
+//	//cout << (*(arr + 1))[3] << endl;
+//	cout << Solution(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]) / sizeof(arr[0][0]), 7) << endl;
+//	//cout << Solution(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]), 7) << endl;
+//	return 0;
+//}
+
+#include <iostream>
+
+template <size_t rows, size_t cols>
+void printArray1(int (&arr)[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            arr[i][j]++;
         }
-
-        //cout<<result<<endl;
-
-        //对异或结果的二进制位进行遍历，找到第一次出现二进制1的位置，后续通过这个1的位置来进行分组
-        int flag = 0;
-        for (int i = 0; i < 32; i++)
-        {
-            if (result & 1 == 1)
-            {
-                flag = i;
-                break;
-            }
-            result >>= 1;
-        }
-
-        //cout<<flag<<endl;
-
-        //遍历nums进行分组
-        for (int i = 0; i < nums.size(); i++)
-        {
-            int tmp = 1;
-            tmp <<= flag;
-            //cout<<tmp<<endl;
-            if (nums[i] & tmp == 1)
-            {
-                v1.push_back(nums[i]);
-            }
-            else
-            {
-                v2.push_back(nums[i]);
-            }
-        }
-
-        vector<int> ret;
-        int count = 0;
-        for (int i = 0; i < v1.size(); i++)
-        {
-            count ^= v1[i];
-        }
-        ret.push_back(count);
-
-        count = 0;
-        for (int i = 0; i < v2.size(); i++)
-        {
-            count ^= v2[i];
-        }
-        ret.push_back(count);
-        return ret;
     }
-};
+}
 
-int main()
-{
-    vector<int> nums;
-    nums.push_back(1);
-    nums.push_back(2);
-    nums.push_back(1);
-    nums.push_back(3);
-    nums.push_back(2);
-    nums.push_back(5);
+template <size_t rows, size_t cols>
+void printArray2(int(&arr)[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            std::cout << arr[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
 
-    Solution().singleNumber(nums);
+int main() {
+    int arr[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };
+    printArray1(arr); // 输出：1 2 3 4  5 6 7 8  9 10 11 12
+    printArray2(arr); // 输出：1 2 3 4  5 6 7 8  9 10 11 12
     return 0;
 }
