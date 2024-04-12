@@ -142,6 +142,7 @@ ostream& operator<<(ostream& out, Date& d)
 	return out;
 }
 
+//²âÊÔlist<Date>
 void Test5()
 {
 	list<Date> l1;
@@ -160,12 +161,31 @@ void Test5()
 	cout << endl;
 }
 
+void Test6()
+{
+	list<int> l1;
+	l1.push_back(1);
+	l1.push_back(2);
+	l1.push_back(3);
+	l1.push_back(4);
+
+	list<int>::const_iterator cit = l1.begin();
+	while (cit != l1.end())
+	{
+		(*cit)++;
+		cout << *cit << " ";
+		cit++;
+	}
+	cout << endl;
+}
+
 int main()
 {
 	//Test1();
 	//Test2();
 	//Test3();
 	//Test4();
-	Test5();
+	//Test5();
+	Test6();
 	return 0;
 }

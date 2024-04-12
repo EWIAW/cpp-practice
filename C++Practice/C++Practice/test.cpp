@@ -3335,30 +3335,51 @@
 //	return 0;
 //}
 
-#include <iostream>
+//#include <iostream>
+//
+//template <size_t rows, size_t cols>
+//void printArray1(int (&arr)[rows][cols]) {
+//    for (int i = 0; i < rows; i++) {
+//        for (int j = 0; j < cols; j++) {
+//            arr[i][j]++;
+//        }
+//    }
+//}
+//
+//template <size_t rows, size_t cols>
+//void printArray2(int(&arr)[rows][cols]) {
+//    for (int i = 0; i < rows; i++) {
+//        for (int j = 0; j < cols; j++) {
+//            std::cout << arr[i][j] << " ";
+//        }
+//        std::cout << std::endl;
+//    }
+//}
+//
+//int main() {
+//    int arr[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };
+//    printArray1(arr); // 输出：1 2 3 4  5 6 7 8  9 10 11 12
+//    printArray2(arr); // 输出：1 2 3 4  5 6 7 8  9 10 11 12
+//    return 0;
+//}
 
-template <size_t rows, size_t cols>
-void printArray1(int (&arr)[rows][cols]) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            arr[i][j]++;
-        }
-    }
+
+#include<iostream>
+using namespace std;
+
+void fun2(int& pa)
+{
+	pa++;
 }
 
-template <size_t rows, size_t cols>
-void printArray2(int(&arr)[rows][cols]) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            std::cout << arr[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+void fun1()
+{
+	int a = 10;
+	fun2(a);
 }
 
-int main() {
-    int arr[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };
-    printArray1(arr); // 输出：1 2 3 4  5 6 7 8  9 10 11 12
-    printArray2(arr); // 输出：1 2 3 4  5 6 7 8  9 10 11 12
-    return 0;
+int main()
+{
+	fun1();
+	return 0;
 }
