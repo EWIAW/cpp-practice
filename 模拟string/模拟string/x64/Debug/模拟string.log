@@ -30,5 +30,26 @@ E:\github\cpp-practice\模拟string\模拟string\string.h(614,11): warning C4267
 E:\github\cpp-practice\模拟string\模拟string\string.h(639,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (编译源文件“string.cpp”)
   
-E:\github\cpp-practice\模拟string\模拟string\string.h(58,1): warning C4715: “My_String::string::operator=”: 不是所有的控件路径都返回值
+E:\github\cpp-practice\模拟string\模拟string\string.h(765,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (编译源文件“string.cpp”)
+  
+E:\github\cpp-practice\模拟string\模拟string\string.h(775,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (编译源文件“string.cpp”)
+  
+E:\github\cpp-practice\模拟string\模拟string\string.h(795,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (编译源文件“string.cpp”)
+  
+E:\github\cpp-practice\模拟string\模拟string\string.h(845,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (编译源文件“string.cpp”)
+  
+E:\github\cpp-practice\模拟string\模拟string\string.h(970,12): warning C4018: “>=”: 有符号/无符号不匹配
+  (编译源文件“string.cpp”)
+  
+E:\github\cpp-practice\模拟string\模拟string\string.h(976,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (编译源文件“string.cpp”)
+  
+E:\github\cpp-practice\模拟string\模拟string\string.h(992,16): warning C4244: “return”: 从“__int64”转换到“int”，可能丢失数据
+  (编译源文件“string.cpp”)
+  
+E:\github\cpp-practice\模拟string\模拟string\string.h(58,1): warning C4715: “Simple_String::string::operator=”: 不是所有的控件路径都返回值
   模拟string.vcxproj -> E:\github\cpp-practice\模拟string\x64\Debug\模拟string.exe
