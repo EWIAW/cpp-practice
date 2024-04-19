@@ -1,9 +1,10 @@
 #pragma once
 #include<assert.h>
 #include<iostream>
-#include<string>
+#include<vector>
 using namespace std;
 
+																				//第一次练习模拟vector
 namespace My_vector
 {
 	template<class T>
@@ -392,5 +393,464 @@ namespace My_vector
 		cout << v1[1] << endl;
 		cout << v1[2] << endl;
 		cout << v1[3] << endl;
+	}
+}
+
+
+
+																			//第二次模拟vector，并用于写blog
+namespace Vector_blog
+{
+	template<class T>
+	class vector
+	{
+	public:
+		typedef T* iterator;//可读可写迭代器
+		typedef const T* const_iterator;//只可读迭代器
+
+		//begin迭代器
+		iterator begin()
+		{
+			return _start;
+		}
+
+		//end迭代器
+		iterator end()
+		{
+			return _finish;
+		}
+
+		//const begin迭代器
+		const_iterator begin() const
+		{
+			return _start;
+		}
+
+		//const end迭代器
+		const_iterator end() const
+		{
+			return _finish;
+		}
+	public:
+		//无参构造函数：直接全部给nullptr即可
+		vector()
+			:_start(nullptr)
+			,_finish(nullptr)
+			,_endofstorage(nullptr)
+		{}
+
+		//拷贝构造函数
+		//vector<int> v1;
+		//vector<int> v2(v1);
+		vector(const vector<T>& v)
+			:_start(nullptr)
+			,_finish(nullptr)
+			,_endofstorage(nullptr)
+		{
+			const_iterator move = v.begin();
+			while (move != v.end())
+			{
+				push_back(*move);
+				move++;
+			}
+		}
+
+		//析构函数
+		~vector()
+		{
+			delete[] _start;
+			_start = _finish = _endofstorage = nullptr;
+		}
+
+		//交换函数，用于交换两个vector
+		void Swap(vector<T>& v)
+		{
+			swap(_start, v._start);
+			swap(_finish, v._finish);
+			swap(_endofstorage, v._endofstorage);
+		}
+
+		//赋值=重载函数
+		//vector<int> v1;
+		//v1=v2;
+		vector<T>& operator=(const vector<T>& v)
+		{
+			if (this != &v)
+			{
+				vector<T> tmp(v);
+				Swap(tmp);
+			}
+			return *this;
+		}
+
+		//调整vector的数据个数
+		void resize(const size_t n, const T& val = T())//第二个参数为一个T类型的缺省值
+		{
+			if (n < size())
+			{
+				_finish = _start + n;
+			}
+			else if (n > size())
+			{
+				if (n > capacity())//如果调整后的n大于容量，则需要扩容
+				{
+					reserve(n);
+				}
+				iterator it1 = begin() + n;
+				iterator it2 = end();
+				while (it2 < it1)
+				{
+					push_back(val);
+					it2++;
+				}
+			}
+		}
+
+		//调整vector的容量
+		void reserve(const size_t n)
+		{
+			//如果要调整的容量大于原来的容量才做调整
+			if (n > capacity())
+			{
+				T* tmp = new T[n];//开辟一块新空间
+				T* tmp_start = _start;
+				T* tmp_move = tmp;
+				while (tmp_start != _finish)
+				{
+					*tmp_move++ = *tmp_start++;
+				}
+
+				//释放旧空间，并调整_start,_finish,_endofstorage的位置
+				_finish = tmp + size();
+				_endofstorage = tmp + n;
+				delete[] _start;
+				_start = tmp;
+			}
+		}
+
+		//判断vector是否为空
+		bool empty() const
+		{
+			return !size();
+		}
+
+		//尾部插入
+		void push_back(const T& val)
+		{
+			insert(end(), val);
+		}
+
+		//尾删
+		void pop_back()
+		{
+			erase(end() - 1);
+		}
+
+		//中间插入
+		iterator insert(iterator pos, const T& val)
+		{
+			assert(pos <= end());
+			//如果容量已满，则扩容
+			if (size() == capacity())
+			{
+				size_t n = pos - begin();//扩容之前需要记住pos对于_start的偏移量，以防出现迭代器失效问题
+				size_t newcapacity = size() == 0 ? 4 : capacity() * 2;
+				reserve(newcapacity);
+				pos = _start + n;//更新pos位置
+			}
+
+			//将pos位置及其后面所以数据往后挪动
+			iterator move = end();
+			while (move != pos)
+			{
+				*move = *(move - 1);
+				move--;
+			}
+
+			*pos = val;
+			_finish++;
+
+			return pos;
+		}
+
+		//中间删除
+		iterator erase(iterator pos)
+		{
+			assert(pos < end());
+
+			iterator tmp = pos + 1;
+			while (tmp != end())
+			{
+				*(tmp - 1) = *tmp;
+				tmp++;
+			}
+
+			_finish--;
+
+			return pos;
+		}
+
+		//获取数据个数
+		size_t size() const
+		{
+			return _finish - _start;
+		}
+
+		//获取容量
+		size_t capacity() const
+		{
+			return _endofstorage - _start;
+		}
+
+		//重载operator[]
+		T& operator[](size_t pos)
+		{
+			assert(pos < size());
+			return *(_start + pos);
+		}
+
+		//重载operator[] const 
+		const T& operator[](size_t pos) const
+		{
+			assert(pos < size());
+			return *(_start + pos);
+		}
+
+		//front函数
+		T& front()
+		{
+			assert(size() > 0);
+			return *_start;
+		}
+
+		//front函数 const
+		const T& front() const
+		{
+			assert(size() > 0);
+			return *_start;
+		}
+
+		//back函数
+		T& back()
+		{
+			assert(size() > 0);
+			return *(_start + size() - 1);
+		}
+
+		//back函数 const
+		const T& back() const
+		{
+			assert(size() > 0);
+			return *(_start + size() - 1);
+		}
+
+		//clear函数
+		void clear()
+		{
+			_finish = _start;
+		}
+
+		bool operator==(const vector<T>& v)
+		{
+			if (size() == v.size())
+			{
+				iterator it1 = begin();
+				iterator it2 = v.begin();
+				while (it1 < end() && it2 < v.end())
+				{
+					if (*it1 == *it2)
+					{
+						it1++;
+						it2++;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool operator!=(const vector<T>& v)
+		{
+			return !(*this == v);
+		}
+
+		bool operator>(const vector<T>& v)
+		{
+			iterator it1 = begin();
+			iterator it2 = v.begin();
+
+			while (it1 < end() && it2 < v.end())
+			{
+				if (*it1 > *it2)
+				{
+					return true;
+				}
+				else if(*it1 < *it1)
+				{
+					return false;
+				}
+				else
+				{
+					it1++;
+					it2++;
+				}
+			}
+
+			if (it1 == end())
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		bool operator>=(const vector<T>& v)
+		{
+			return (*this > v || *this == v);
+		}
+
+		bool operator<(const vector<T>& v)
+		{
+			return !(*this >= v);
+		}
+
+		bool operator<=(const vector<T>& v)
+		{
+			return !(*this > v);
+		}
+
+	private:
+		iterator _start;
+		iterator _finish;
+		iterator _endofstorage;
+	};
+
+	//测试构造函数、拷贝构造、赋值=重载
+	void Test1()
+	{
+		vector<int> v1;
+		v1.insert(v1.end(), 1);
+		v1.insert(v1.end(), 2);
+		v1.insert(v1.end(), 3);
+		v1.insert(v1.end(), 4);
+		v1.insert(v1.end(), 5);
+		v1.insert(v1.end(), 6);
+
+		vector<int> v2(v1);
+		vector<int> v3;
+		v3 = v2;
+
+		vector<int>::iterator it1 = v1.begin();
+		while (it1 != v1.end())
+		{
+			cout << *it1 << " ";
+			it1++;
+		}
+		cout << endl;
+
+		vector<int>::iterator it2 = v2.begin();
+		while (it2 != v2.end())
+		{
+			cout << *it2 << " ";
+			it2++;
+		}
+		cout << endl;
+
+		vector<int>::iterator it3 = v3.begin();
+		while (it3 != v3.end())
+		{
+			cout << *it3 << " ";
+			it3++;
+		}
+		cout << endl;
+	}
+
+	//测试resize和reserve
+	void Test2()
+	{
+		vector<int> v1;
+		v1.insert(v1.end(), 1);
+		v1.insert(v1.end(), 2);
+		v1.insert(v1.end(), 3);
+		v1.insert(v1.end(), 4);
+
+		v1.reserve(10);
+		v1.resize(15, 20);
+
+		vector<int>::iterator it1 = v1.begin();
+		while (it1 != v1.end())
+		{
+			cout << *it1 << " ";
+			it1++;
+		}
+		cout << endl;
+
+		cout << v1.empty() << endl;
+	}
+
+	//测试operator[]
+	void Test3()
+	{
+		vector<int> v1;
+		v1.push_back(1);
+		v1.push_back(2);
+		v1.push_back(3);
+		v1.push_back(4);
+
+		for (int i = 0; i < v1.size(); i++)
+		{
+			cout << v1[i] << " ";
+		}
+		cout << endl;
+
+		cout << v1.front() << endl;
+		cout << v1.back() << endl;
+	}
+
+	//测试insert和erase
+	void Test4()
+	{
+		vector<int> v1;
+		v1.push_back(1);
+		v1.push_back(2);
+		v1.push_back(3);
+		v1.push_back(4);
+
+		v1.insert(v1.begin() + 2, 50);
+		v1.erase(v1.begin());
+		v1.erase(v1.end() - 1);
+		v1.erase(v1.begin() + 1);
+
+		for (int i = 0; i < v1.size(); i++)
+		{
+			cout << v1[i] << " ";
+		}
+		cout << endl;
+	}
+
+	//
+	void Test5()
+	{
+		vector<int> v1;
+		v1.push_back(1);
+		v1.push_back(2);
+		v1.push_back(3);
+		v1.push_back(4);
+		v1.clear();
+
+		for (int i = 0; i < v1.size(); i++)
+		{
+			cout << v1[i] << " ";
+		}
+		cout << endl;
 	}
 }
