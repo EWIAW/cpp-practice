@@ -227,6 +227,64 @@ void Test_Vector8()
 
 }
 
+void Test_Vector9()
+{
+	vector<int> v1;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+	v1.insert(v1.begin() + 2, 10);
+
+}
+
+void Test_Vector10()
+{
+	vector<int> v1;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+	v1.reserve(10);
+
+	vector<int>::iterator it = v1.begin();
+	it = v1.insert(it, 10);
+	it = v1.insert(it, 20);
+	for (int i = 0; i < v1.size(); i++)
+	{
+		cout << v1[i] << " ";
+	}
+	cout << endl;
+}
+
+void Test_Vector11()
+{
+	vector<int> v1;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+
+	vector<int>::iterator it = v1.begin();
+
+	v1.push_back(5);
+
+	cout << *it << endl;
+}
+
+void Test_Vector12()
+{
+	vector<int> v1;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+
+	vector<int>::iterator it = v1.begin();
+	it = v1.erase(it);
+	cout << *it << endl;
+}
+
 int main()
 {
 	//Test_Vector1();
@@ -236,7 +294,11 @@ int main()
 	//Test_Vector5();
 	//Test_Vector6();
 	//Test_Vector7();
-	Test_Vector8();
+	//Test_Vector8();
+	//Test_Vector9();
+	//Test_Vector10();
+	//Test_Vector11();
+	Test_Vector12();
 	return 0;
 }
 

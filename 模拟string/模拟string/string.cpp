@@ -24,11 +24,11 @@ int main()
 	//String_Copy::Test1();
 
 
-	//string_blog::Test1();
+	string_blog::Test1();
 	//string_blog::Test2();
 	//string_blog::Test3();
 	//string_blog::Test4();
-	string_blog::Test5();
+	//string_blog::Test5();
 
 	return 0;
 }

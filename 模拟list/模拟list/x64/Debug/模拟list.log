@@ -1,2 +1,181 @@
 ﻿  test.cpp
-  模拟list.vcxproj -> E:\github\cpp-practice\模拟list\x64\Debug\模拟list.exe
+E:\github\cpp-practice\模拟list\模拟list\list.h(505,7): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+  (编译源文件“test.cpp”)
+  E:\github\cpp-practice\模拟list\模拟list\list.h(505,7):
+  模板实例化上下文(最早的实例化上下文)为
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(497,9):
+  	在编译类模板“list_blog::ReverseListIterator”时
+  
+E:\github\cpp-practice\模拟list\模拟list\list.h(505,1): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+  (编译源文件“test.cpp”)
+  
+E:\github\cpp-practice\模拟list\模拟list\list.h(506,1): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+  (编译源文件“test.cpp”)
+  
+E:\github\cpp-practice\模拟list\模拟list\list.h(936,10): error C2679: 二元“!=”: 没有找到接受“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”类型的右操作数的运算符(或没有可接受的转换)
+E:\github\cpp-practice\模拟list\模拟list\list.h(936,10): error C2679:         with
+E:\github\cpp-practice\模拟list\模拟list\list.h(936,10): error C2679:         [
+E:\github\cpp-practice\模拟list\模拟list\list.h(936,10): error C2679:             T=int
+E:\github\cpp-practice\模拟list\模拟list\list.h(936,10): error C2679:         ]
+  (编译源文件“test.cpp”)
+  E:\github\cpp-practice\模拟list\模拟list\list.h(518,8):
+  可能是“bool list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>::operator !=(const Iterator &)”
+          with
+          [
+              T=int,
+              Iterator=list_blog::__list_iterator<int,int &,int *>
+          ]
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>::operator !=(const Iterator &)”: 无法将参数 2 从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”转换为“const Iterator &”
+          with
+          [
+              T=int,
+              Iterator=list_blog::__list_iterator<int,int &,int *>
+          ]
+          and
+          [
+              T=int
+          ]
+          and
+          [
+              Iterator=list_blog::__list_iterator<int,int &,int *>
+          ]
+  		E:\github\cpp-practice\模拟list\模拟list\list.h(936,24):
+  		原因如下: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”转换为“const Iterator”
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              Iterator=list_blog::__list_iterator<int,int &,int *>
+          ]
+  		E:\github\cpp-practice\模拟list\模拟list\list.h(936,24):
+  		没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\memory(3534,17):
+  或    “bool std::operator !=(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::unique_ptr<_Ty,_Dx> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\memory(3529,17):
+  或    “bool std::operator !=(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::unique_ptr<_Ty,_Dx> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\memory(3476,17):
+  或    “bool std::operator !=(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::unique_ptr<_Ty,_Dx> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\memory(1900,17):
+  或    “bool std::operator !=(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::shared_ptr<_Ty> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\memory(1895,17):
+  或    “bool std::operator !=(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::shared_ptr<_Ty> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\memory(1853,17):
+  或    “bool std::operator !=(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::shared_ptr<_Ty> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(5084,17):
+  或    “bool std::operator !=(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const ) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const ) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::basic_string<_Elem,_Traits,_Alloc> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(5078,17):
+  或    “bool std::operator !=(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const _Elem *const ”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(5072,17):
+  或    “bool std::operator !=(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::basic_string<_Elem,_Traits,_Alloc> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xmemory(1048,17):
+  或    “bool std::operator !=(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::allocator<_Ty> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\iterator(495,17):
+  或    “bool std::operator !=(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::istreambuf_iterator<_Elem,_Traits> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\iterator(313,17):
+  或    “bool std::operator !=(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xutility(4243,30):
+  或    “bool std::operator !=(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::move_iterator<_Iter> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xutility(1701,5):
+  或    “bool std::operator !=(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::reverse_iterator<_BidIt> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(507,27):
+  或    “bool std::operator !=(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)”
+  	E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  	“bool std::operator !=(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)”: 无法从“list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>”推导出“const std::pair<_Ty1,_Ty2> &”的 模板 参数
+          with
+          [
+              T=int
+          ]
+  E:\github\cpp-practice\模拟list\模拟list\list.h(936,10):
+  尝试匹配参数列表“(list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>, list_blog::ReverseListIterator<list_blog::__list_iterator<T,T &,T *>>)”时
+          with
+          [
+              T=int
+          ]
+  

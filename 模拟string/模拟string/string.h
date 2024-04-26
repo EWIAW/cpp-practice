@@ -767,12 +767,27 @@ namespace string_blog
 
 		//拷贝构造函数
 		//string s2(s1);
-		string(const string& tmp)
-			:_str(new char[tmp.size()+1])//size()函数在后面实现
-			,_size(tmp._size)
-			,_capacity(tmp._capacity)
+		//string(const string& tmp)
+		//	:_str(new char[tmp.size()+1])//size()函数在后面实现
+		//	,_size(tmp._size)
+		//	,_capacity(tmp._capacity)
+		//{
+		//	strcpy(_str, tmp._str);
+		//}
+
+		void Swap(string& s)//交换函数，交换两个string类对象
 		{
-			strcpy(_str, tmp._str);
+			swap(_str, s._str);
+			swap(_size, s._size);
+			swap(_capacity, s._capacity);
+		}
+
+		//拷贝构造现代写法
+		string(const string& s)
+			:_str(nullptr)
+		{
+			string tmp(s._str);//用s的字符串去构造tmp
+			Swap(tmp);//用tmp和this进行交换
 		}
 
 		//析构函数
@@ -786,16 +801,27 @@ namespace string_blog
 		//赋值=重载
 		//string s1("hello world");
 		//s1=s2;
-		string& operator=(const string& tmp)
+		//string& operator=(const string& tmp)
+		//{
+		//	if (this != &tmp)//防止自己给自己赋值
+		//	{
+		//		delete[] _str;//先释放原来的字符串
+		//		char* ptr = new char[tmp.size() + 1];//开一块新空间给_str
+		//		strcpy(ptr, tmp._str);//将tmp的内容拷贝给ptr
+		//		_str = ptr;
+		//		_size = tmp._size;
+		//		_capacity = tmp._capacity;
+		//	}
+		//	return *this;
+		//}
+
+		//赋值=重载的现代写法
+		string& operator=(const string& s)
 		{
-			if (this != &tmp)//防止自己给自己赋值
+			if (this != &s)
 			{
-				delete[] _str;//先释放原来的字符串
-				char* ptr = new char[tmp.size() + 1];//开一块新空间给_str
-				strcpy(ptr, tmp._str);//将tmp的内容拷贝给ptr
-				_str = ptr;
-				_size = tmp._size;
-				_capacity = tmp._capacity;
+				string tmp(s);//用s去构造一个临时对象
+				Swap(tmp);//交换两个string对象
 			}
 			return *this;
 		}

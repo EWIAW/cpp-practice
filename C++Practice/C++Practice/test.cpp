@@ -3364,22 +3364,884 @@
 //}
 
 
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
+//
+//void fun2(int& pa)
+//{
+//	pa++;
+//}
+//
+//void fun1()
+//{
+//	int a = 10;
+//	fun2(a);	
+//}
+//
+//int main()
+//{
+//	fun1();
+//	return 0;
+//}
+//#include<iostream>
+//#include<vector>
+//#include<stdbool.h>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    /**
+//     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+//     *
+//     *
+//     * @param pushV int整型vector
+//     * @param popV int整型vector
+//     * @return bool布尔型
+//     */
+//    bool IsPopOrder(vector<int>& pushV, vector<int>& popV)
+//    {
+//        //下一个popV值必须下面这个区间
+//        int begin = 0;
+//        int end = pushV.size() - 1;
+//        while (!pushV.empty())
+//        {
+//            for (int i = 0; i < popV.size(); i++)
+//            {
+//                int tmp = popV[i];
+//                //遍历区间，看存不存在
+//                int j = 0;
+//                for (j = begin; j <= end; j++)
+//                {
+//                    if (tmp == pushV[j])//当 当前popV值在该区间存在，则删除pushV中的popV值，并刷新区间
+//                    {
+//                        pushV.erase(pushV.begin() + j);
+//                        begin = j - 1;
+//                        end = end - 1;
+//                        break;
+//                    }
+//                }
+//                if (j == pushV.size())//如果遍历整个区间都没有找到需要的popV值，则说明不符合，返回false
+//                {
+//                    return false;;
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//};
+//
+//int main()
+//{
+//    vector<int> pushV;
+//    pushV.push_back(1);
+//    pushV.push_back(2);
+//    pushV.push_back(3);
+//    pushV.push_back(4);
+//    pushV.push_back(5);
+//
+//    vector<int> popV;
+//    popV.push_back(4);
+//    popV.push_back(5);
+//    popV.push_back(3);
+//    popV.push_back(2);
+//    popV.push_back(1);
+//
+//    bool ret = Solution().IsPopOrder(pushV, popV);
+//    cout << ret << endl;
+//
+//    return 0;
+//}
 
-void fun2(int& pa)
-{
-	pa++;
-}
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v;
+//	v.push_back(1);
+//	v.push_back(2);
+//	v.push_back(3);
+//	v.push_back(4);
+//	v.push_back(5);
+//	v.push_back(6);
+//
+//	vector<int>::iterator it = v.begin();
+//	while (it != v.end())
+//	{
+//		cout << *it << " ";
+//		it += 10;
+//	}
+//	cout << endl;
+//
+//	return 0;
+//}
 
-void fun1()
-{
-	int a = 10;
-	fun2(a);
-}
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//int main()
+//{
+//	string s1("hello world");
+//
+//	string::iterator it = s1.begin();
+//	while (it != s1.end())
+//	{
+//		cout << *it << " ";
+//		it += 2;
+//	}
+//	cout << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//void Print1(int (*parr)[5], int rows, int cols)
+//{
+//	for (int i = 0; i < rows; i++)
+//	{
+//		for (int j = 0; j < cols; j++)
+//		{
+//			cout << (*(parr + i))[j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+//}
+//
+//void Print2(int* parr, int rows, int cols)
+//{
+//	for (int i = 0; i < rows; i++)
+//	{
+//		for (int j = 0; j < cols; j++)
+//		{
+//			cout << *(parr + i * cols + j) << " ";
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+//}
+//
+//void Print3(int(&parr)[4][5],int rows,int cols)
+//{
+//	for (int i = 0; i < rows; i++)
+//	{
+//		for (int j = 0; j < cols; j++)
+//		{
+//			cout << parr[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+//}
+//
+//template<size_t row, size_t col>
+//void Print4(int(&parr)[row][col])
+//{
+//	for (int i = 0; i < row; i++)
+//	{
+//		for (int j = 0; j < col; j++)
+//		{
+//			cout << parr[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+//}
+//
+//int main()
+//{
+//	int arr[][5] = { {1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15},{16,17,18,19,20} };
+//	Print1(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]) / sizeof(arr[0][0]));
+//	Print2(&arr[0][0], sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]) / sizeof(arr[0][0]));
+//	Print3(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]) / sizeof(arr[0][0]));
+//	Print4(arr);
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//#include<list>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v;
+//	v.push_back(1);
+//	v.push_back(2);
+//	v.push_back(3);
+//	v.push_back(4);
+//
+//	vector<int>::iterator it1 = v.begin();
+//	while (it1 != v.end())
+//	{
+//		cout << *it1 << " ";
+//		it1 = it1 + 1;
+//	}
+//
+//	list<int> l;
+//	l.push_back(1);
+//	l.push_back(2);
+//	l.push_back(3);
+//	l.push_back(4);
+//
+//	list<int>::iterator it2 = l.begin();
+//	while (it2 != l.end())
+//	{
+//		cout << *it2 << " ";
+//		it2 = it2 + 1;
+//	}
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//typedef const int INT;
+//
+//INT add(int num1, int num2)
+//{
+//	return num1 + num2;
+//}
+//
+//int main()
+//{
+//	int x = 10;
+//	int y = 20;
+//	int ret = add(x, y);
+//	ret++;
+//	cout << ret << endl;
+//	return 0;
+//}
+//第一次模拟实现list
+//namespace My_list
+//{
+//	//封装链表结点类	
+//	template<class T>
+//	struct __list_node
+//	{
+//		//成员变量
+//		T _data;
+//		__list_node<T>* _prev;
+//		__list_node<T>* _next;
+//
+//		//成员函数
+//		__list_node(const T& val = T())
+//			:_data(val)
+//			, _prev(nullptr)
+//			, _next(nullptr)
+//		{
+//		}
+//	};
+//
+//	//封装迭代器类
+//	//__list_iterator<T,T&,T> -> iterator
+//	//__list_iterator<T,const T&,const T*> -> const iterator
+//	template<class T, class Ref, class Ptr>
+//	struct __list_iterator
+//	{
+//		typedef __list_node<T> Node;
+//		typedef __list_iterator<T, Ref, Ptr> iterator;
+//
+//		//构造函数	构造迭代器
+//		__list_iterator(Node* node = nullptr)
+//			:_node(node)
+//		{
+//		}
+//
+//		//返回迭代器指向数据的引用
+//		Ref operator*() const
+//		{
+//			return _node->_data;
+//		}
+//
+//		//用于测试list里面存Date类的解引用操作		返回的是迭代器指向数据的指针
+//		Ptr operator->() const
+//		{
+//			return &_node->_data;
+//		}
+//
+//		//迭代器前置++操作
+//		iterator operator++()
+//		{
+//			_node = _node->_next;
+//			return *this;
+//		}
+//
+//		//迭代器前置--操作
+//		iterator operator--()
+//		{
+//			_node = _node->_prev;
+//			return *this;
+//		}
+//
+//		//迭代器后置++
+//		iterator operator++(int)
+//		{
+//			iterator tmp(*this);
+//			//_node = _node->_next;
+//			++(*this);
+//			return tmp;
+//		}
+//		//迭代器后置--
+//		iterator operator--(int)
+//		{
+//			iterator tmp(*this);
+//			//_node = _node->_prev;
+//			--(*this);
+//			return tmp;
+//		}
+//
+//		//重载operator!=
+//		bool operator!=(const iterator it) const
+//		{
+//			if (_node != it._node)
+//			{
+//				return true;
+//			}
+//			else
+//			{
+//				return false;
+//			}
+//		}
+//
+//		//重载operator==
+//		bool operator==(const iterator it) const
+//		{
+//			return !(*this != it);
+//		}
+//
+//		//成员变量
+//		Node* _node;
+//	};
+//
+//	//list类
+//	template<class T>
+//	class list
+//	{
+//		//链表结点类
+//		typedef __list_node<T> Node;
+//	public:
+//		//迭代器类
+//		typedef __list_iterator<T, T&, T*> iterator;
+//		typedef __list_iterator<T, const T&, const T*> const_iterator;
+//
+//		//begin迭代器
+//		iterator begin()
+//		{
+//			iterator it(_head->_next);
+//			return it;
+//		}
+//
+//		//end迭代器
+//		iterator end()
+//		{
+//			iterator it(_head);
+//			return it;
+//		}
+//
+//		//const_begin迭代器
+//		const_iterator begin() const
+//		{
+//			const_iterator cit(_head->_next);
+//			return cit;
+//		}
+//
+//		//const_end迭代器
+//		const_iterator end() const
+//		{
+//			const_iterator cit(_head);
+//			return cit;
+//		}
+//
+//		//构造函数
+//		list()
+//			:_head(new Node)
+//		{
+//			//_head = new Node;	
+//			_head->_prev = _head;
+//			_head->_next = _head;
+//		}
+//
+//		//析构函数
+//		~list()
+//		{
+//			clear();
+//			delete _head;
+//			_head = nullptr;
+//		}
+//
+//		//拷贝构造
+//		//list<int> l2(l1)
+//		list(const list<T>& tmp)
+//			:_head(new Node)
+//		{
+//			_head->_next = _head;
+//			_head->_prev = _head;
+//
+//			const_iterator it = tmp.begin();
+//			while (it != tmp.end())
+//			{
+//				push_back(*it);
+//				it++;
+//			}
+//		}
+//
+//		//赋值=重载
+//		//list<int> l3;
+//		//l3=l2;
+//		list<T>& operator=(const list<T>& tmp)
+//		{
+//			if (this != &tmp)
+//			{
+//				list<T> l(tmp);
+//				Swap(l);
+//			}
+//			return *this;
+//		}
+//
+//		//交换两个链表
+//		//l1.Swap(l2);
+//		void Swap(list<T>& tmp)
+//		{
+//			swap(_head, tmp._head);
+//		}
+//
+//		//clear清理函数	后续改进为调用erase函数
+//		void clear()
+//		{
+//			Node* headnext = _head->_next;//找到头结点的下一个结点
+//			//释放除头结点外的所有结点
+//			while (headnext != _head)
+//			{
+//				Node* tmp = headnext->_next;
+//				delete headnext;
+//				headnext = tmp;
+//			}
+//
+//			_head->_next = _head;
+//			_head->_prev = _head;
+//		}
+//
+//		//尾插
+//		void push_back(const T& val)
+//		{
+//			////生成一个新结点，给新结点赋值
+//			//Node* newnode = new Node(val);
+//			//Node* tail = _head->_prev;//先找到尾结点
+//
+//			//tail->_next = newnode;
+//			//newnode->_prev = tail;
+//			//newnode->_next = _head;
+//			//_head->_prev = newnode;
+//
+//			insert(end(), val);
+//		}
+//
+//		//尾删
+//		void pop_back()
+//		{
+//			iterator it = end();
+//			erase(--it);
+//		}
+//
+//		//头插
+//		void push_front(const T& val)
+//		{
+//			insert(begin(), val);
+//		}
+//
+//		//头删
+//		void pop_front()
+//		{
+//			iterator it(begin());
+//			erase(it);
+//		}
+//
+//		//中间插入
+//		iterator insert(iterator pos, const T& val)
+//		{
+//			Node* newnode = new Node(val);
+//			Node* posprev = pos._node->_prev;
+//
+//			posprev->_next = newnode;
+//			newnode->_prev = posprev;
+//			newnode->_next = pos._node;
+//			pos._node->_prev = newnode;
+//
+//			iterator it(newnode);
+//			return it;
+//		}
+//
+//		//中间删除
+//		iterator erase(iterator pos)
+//		{
+//			assert(pos != end());
+//
+//			Node* posprev = pos._node->_prev;
+//			Node* posnext = pos._node->_next;
+//
+//			posprev->_next = posnext;
+//			posnext->_prev = posprev;
+//
+//			delete pos._node;
+//
+//			iterator it(posnext);
+//			return it;
+//		}
+//
+//	private:
+//		Node* _head;
+//	};
+//
+//	//测试list里面存Date类型
+//	class Date
+//	{
+//	public:
+//		Date(int year = 0, int month = 0, int day = 0)
+//			:_year(year)
+//			, _month(month)
+//			, _day(day)
+//		{
+//
+//		}
+//		//private:
+//		int _year;
+//		int _month;
+//		int _day;
+//	};
+//
+//	void Test1()
+//	{
+//		list<int> l1;
+//		l1.push_back(1);
+//		l1.push_back(2);
+//		l1.push_back(3);
+//		l1.push_back(4);
+//		l1.push_front(0);
+//		l1.push_front(-1);
+//		l1.push_front(-2);
+//		l1.push_front(-3);
+//
+//		l1.pop_back();
+//		l1.pop_back();
+//
+//		l1.pop_front();
+//		l1.pop_front();
+//
+//		list<int>::iterator it = l1.begin();
+//		while (it != l1.end())
+//		{
+//			cout << *it << " ";
+//			++it;
+//		}
+//		cout << endl;
+//	}
+//
+//	void Test2()
+//	{
+//		list<Date> l1;
+//		l1.push_back(Date());
+//		l1.push_back(Date());
+//		l1.push_back(Date());
+//		l1.push_back(Date());
+//
+//		list<Date>::iterator it = l1.begin();
+//		while (it != l1.end())
+//		{
+//			cout << it->_year << "-" << it->_month << "-" << it->_day << endl;
+//			it++;
+//		}
+//
+//	}
+//
+//	//测试迭代器的非const和const
+//	void Test3()
+//	{
+//		list<int> l1;
+//		l1.push_back(1);
+//		l1.push_back(2);
+//		l1.push_back(3);
+//		l1.push_back(4);
+//
+//		list<int>::iterator it = l1.begin();
+//		while (it != l1.end())
+//		{
+//			(*it)++;
+//			cout << *it << " ";
+//			it++;
+//		}
+//		cout << endl;
+//
+//	}
+//
+//	//测试拷贝构造 和 赋值=重载
+//	void Test4()
+//	{
+//		list<int> l1;
+//		l1.push_back(1);
+//		l1.push_back(2);
+//		l1.push_back(3);
+//		l1.push_back(4);
+//
+//		list<int> l2(l1);
+//
+//		list<int> l3;
+//		l3 = l2;
+//
+//		list<int>::iterator it1 = l1.begin();
+//		while (it1 != l1.end())
+//		{
+//			(*it1)++;
+//			cout << *it1 << " ";
+//			it1++;
+//		}
+//		cout << endl;
+//
+//		list<int>::iterator it2 = l2.begin();
+//		while (it2 != l2.end())
+//		{
+//			(*it2)++;
+//			cout << *it2 << " ";
+//			it2++;
+//		}
+//		cout << endl;
+//
+//		list<int>::iterator it3 = l3.begin();
+//		while (it3 != l3.end())
+//		{
+//			(*it3)++;
+//			cout << *it3 << " ";
+//			it3++;
+//		}
+//
+//		cout << endl;
+//	}
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//template<class T,size_t N>
+//class arr
+//{
+//public:
+//
+//private:
+//	T _arr[N];
+//};
+//
+//int main()
+//{
+//	arr<int,100> a1;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//
+//template<class T>
+//bool Compare(T& left, T& right)
+//{
+//	if (left == right)
+//	{
+//		return true;
+//	}
+//	else
+//	{
+//		return false;
+//	}
+//}
+//
+//template<>
+//bool Compare<char*>(char*& left, char*& right)
+//{
+//	if (strcmp(left, right) == 0)
+//	{
+//		return true;
+//	}
+//	else
+//	{
+//		return false;
+//	}
+//}
+//
+//int main()
+//{
+//	char p1[] = "hello";
+//	char p2[] = "hello";
+//	
+//	cout << Compare(p1, p2) << endl;
+//
+//	char* p3 = p1;
+//	char* p4 = p2;
+//
+//	cout << Compare(p3, p4) << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//template<class T1,class T2>
+//class Date
+//{
+//public:
+//	Date()
+//	{
+//		cout << "Date<T1,T2>" << endl;
+//	}
+//private:
+//	T1 _data1;
+//	T2 _data2;
+//};
+//
+//template<>
+//class Date<int,char>
+//{
+//public:
+//	Date()
+//	{
+//		cout << "Date<int,char>" << endl;
+//	}
+//private:
+//	int _data1;
+//	char _data2;
+//};
+//
+//int main()
+//{
+//	Date<int, int> d1;
+//	Date<int, double> d2;
+//
+//	Date<int, char> d3;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//template<class T,size_t N>
+//class Arr
+//{
+//public:
+//
+//private:
+//	T _arr[N];
+//};
+//
+//int main()
+//{
+//	Arr<int, 10> a1;;
+//	Arr<int, 100> a2;;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//template<class T>
+//bool Compare(T& left, T& right)//比较函数，比较两个值是否相等
+//{
+//	if (left == right)
+//		return true;
+//	else
+//		return false;
+//}
+//
+//template<>
+//bool Compare<char*>(char*& left, char*& right)
+//{
+//	if (strcmp(left, right) == 0)
+//		return true;
+//	else
+//		return false;
+//}
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 10;
+//	cout << Compare(a, b) << endl;
+//
+//	char arr1[] = "hello";
+//	char arr2[] = "hello";
+//
+//	char* p1 = arr1;
+//	char* p2 = arr2;
+//
+//	cout << Compare(p1, p2) << endl;
+//
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//template<class T1,class T2>
+//class Date
+//{
+//public:
+//	Date()
+//	{
+//		cout << "Date<T1,T2>" << endl;
+//	}
+//private:
+//	T1 _data1;
+//	T2 _data2;
+//};
+//
+//template<class T1,class T2>
+//class Date<T1*,T2*>
+//{
+//public:
+//	Date()
+//	{
+//		cout << "Date<T1*,T2*>" << endl;
+//	}
+//private:
+//	T1* _data1;
+//	T2* _data2;
+//};
+//
+//template<class T1, class T2>
+//class Date<T1&, T2&>
+//{
+//public:
+//	Date()
+//	{
+//		cout << "Date<T1&,T2&>" << endl;
+//	}
+//private:
+//	const T1& _data1 = 10;
+//	const T2& _data2 = 20;
+//};
+//
+//int main()
+//{
+//	Date<int, int> d1;
+//	Date<int*, int*> d2;
+//	Date<int&, int&> d3;
+//	return 0;
+//}
+
+
+
+#include"Add.h"
 
 int main()
 {
-	fun1();
+	int a = 1;
+	int b = 2;
+	int ret = Add(a, b);
+	cout << ret << endl;
 	return 0;
 }

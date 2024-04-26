@@ -5,6 +5,7 @@
 #include<algorithm>
 using namespace std;
 
+//第一次模拟实现list
 namespace My_list
 {
 	//封装链表结点类	
@@ -406,6 +407,539 @@ namespace My_list
 			it3++;
 		}
 
+		cout << endl;
+	}
+}
+
+
+
+//第二次模拟实现list，并用于创作博客
+namespace list_blog
+{
+	//链表结点
+	template<class T>
+	struct __List_Node
+	{
+		//构造函数
+		__List_Node(const T& val = T())
+			:_val(val)
+			,_prev(nullptr)
+			,_next(nullptr)
+		{}
+		//成员变量
+		T _val;
+		__List_Node<T>* _prev;
+		__List_Node<T>* _next;
+	};
+
+	//封装正向迭代器
+	template<class T,class Ref,class Ptr>
+	struct __list_iterator
+	{
+		typedef __List_Node<T> Node;
+		typedef __list_iterator<T, Ref, Ptr> iterator;
+		//构造函数
+		__list_iterator(Node* val)
+			:_node(val)
+		{}
+
+		//重载*
+		Ref operator*() const
+		{
+			return _node->_val;
+		}
+
+		//重载前置++
+		iterator& operator++()
+		{
+			_node = _node->_next;
+			return *this;
+		}
+
+		//重载后置++
+		iterator operator++(int)
+		{
+			iterator tmp(*this);
+			_node = _node->_next;
+			return tmp;
+		}
+
+		//重载前置--
+		iterator& operator--()
+		{
+			_node = _node->_prev;
+			return *this;
+		}
+
+		//重载后置--
+		iterator operator--(int)
+		{
+			iterator tmp(*this);
+			_node = _node->_prev;
+			return tmp;
+		}
+
+		//重载!=
+		bool operator!=(const iterator& it)
+		{
+			if (this->_node != it._node)
+				return true;
+			else
+				return false;
+		}
+
+		//成员变量
+		Node* _node;//是一个指针结点的指针
+	};
+
+	//封装反向迭代器
+	template<class Iterator>
+	struct ReverseListIterator
+	{
+		typedef typename 
+
+		//构造函数
+		ReverseListIterator(Iterator it)
+			:_it(it)
+		{}
+
+		//重载*
+		Ref operator*()
+		{
+			return *_it;
+		}
+
+		//重载前置++
+		Iterator operator++()
+		{
+			_it--;
+			return *this;
+		}
+
+		//重载！=
+		bool operator!=(const Iterator& it)
+		{
+			return _it != it;
+		}
+
+		//成员变量
+		Iterator _it;
+	};
+
+	//list类
+	template<class T>
+	class list
+	{
+	public:
+		typedef __List_Node<T> Node;
+		typedef __list_iterator<T, T&, T*> iterator;//正向非const迭代器
+		typedef __list_iterator<T, const T&, const T*> const_iterator;//正向const迭代器
+		typedef ReverseListIterator<iterator> reverse_iterator;//反向非const迭代器
+	public:
+		//非const正向begin
+		iterator begin()
+		{
+			iterator it(_head->_next);
+			return it;
+		}
+
+		//非const正向end
+		iterator end()
+		{
+			iterator it(_head);
+			return it;
+		}
+
+		//const正向begin
+		const_iterator begin() const
+		{
+			const_iterator it(_head->_next);
+			return it;
+		}
+
+		//const正向end
+		const_iterator end() const
+		{
+			const_iterator it(_head);
+			return it;
+		}
+
+		//非const反向rbegin
+		reverse_iterator rbegin()
+		{
+			reverse_iterator rit(--end());//
+			return rit;
+		}
+
+		//非const反向rend
+		reverse_iterator rend()
+		{
+			reverse_iterator rit(end());
+			return rit;
+		}
+
+		//构造函数
+		list()
+			:_head(new Node)
+		{
+			_head->_next = _head;
+			_head->_prev = _head;
+		}
+
+		//拷贝构造函数
+		list(const list<T>& l)
+			:_head(new Node)
+		{
+			_head->_next = _head;
+			_head->_prev = _head;
+
+			list<T>::const_iterator it = l.begin();
+			while (it != l.end())
+			{
+				push_back(*it);
+				++it;
+			}
+		}
+
+		//clear函数
+		void clear()
+		{
+			Node* move = _head->_next;
+			while (move != _head)//依次遍历每一个结点，并将结点释放
+			{
+				Node* moveNext = move->_next;
+				delete move;
+				move = moveNext;
+			}
+			_head->_next = _head;//保留头指针
+			_head->_prev = _head;
+		}
+
+		//析构函数
+		~list()
+		{
+			clear();
+			delete _head;
+			_head = nullptr;
+		}
+
+		//交换函数，用于交换两个list
+		void Swap(list<T>& l)
+		{
+			swap(_head, l._head);
+		}
+
+		//赋值=重载
+		list<T>& operator=(const list<T>& l)
+		{
+			if (this != &l)
+			{
+				list<T> tmp(l);
+				Swap(tmp);
+			}
+			return *this;
+		}
+
+		//求链表的大小
+		size_t size() const
+		{
+			size_t count = 0;
+			const_iterator cit = begin();
+			while (cit != end())
+			{
+				count++;
+				cit++;
+			}
+			return count;
+		}
+
+		//判断链表是否为空
+		bool empty() const
+		{
+			if (size() == 0)
+				return true;
+			else
+				return false;
+		}
+
+		//front函数
+		T& front()
+		{
+			assert(size());//断言list是否没有数据
+			return *(begin());
+		}
+
+		const T& front() const
+		{
+			assert(size());//断言list是否没有数据
+			return *(begin());
+		}
+
+		//back函数
+		T& back()
+		{
+			assert(size());
+			return *(--end());
+		}
+
+		const T& back() const
+		{
+			assert(size());
+			return *(--end());
+		}
+
+		//insert函数
+		iterator insert(iterator pos, const T& val)
+		{
+			Node* newnode = new Node(val);//开辟一个新结点
+
+			Node* posNext = pos._node->_next;//找到pos的下一个结点
+
+			pos._node->_next = newnode;
+			newnode->_prev = pos._node;
+			newnode->_next = posNext;
+			posNext->_prev = newnode;
+
+			return iterator(newnode);
+		}
+
+		//erase函数
+		iterator erase(iterator pos)
+		{
+			assert(pos != end());//要删除的结点不能是_head
+			Node* posPrev = pos._node->_prev;
+			Node* posNext = pos._node->_next;
+
+			posPrev->_next = posNext;
+			posNext->_prev = posPrev;
+
+			delete pos._node;
+			
+			return iterator(posNext);
+		}
+
+		//尾插
+		void push_back(const T& val)
+		{
+			//Node* newnode = new Node(val);//开辟一个新结点
+
+			////开始将新结点链接到尾部
+			//Node* tail = _head->_prev;//先找到尾结点
+			//tail->_next = newnode;
+			//newnode->_prev = tail;
+			//newnode->_next = _head;
+			//_head->_prev = newnode;
+
+			insert(--end(), val);
+		}
+
+		//尾删
+		void pop_back()
+		{
+			assert(size());
+			erase(--end());
+		}
+
+		//头插
+		void push_front(const T& val)
+		{
+			insert(end(), val);
+		}
+
+		//头删
+		void pop_front()
+		{
+			assert(size());
+			erase(begin());
+		}
+
+		//resize函数
+		void resize(const size_t& n, const T& val = T())
+		{
+			if (n > size())
+			{
+				size_t tmp=n-size();
+				while (tmp--)
+				{
+					push_back(val);
+				}
+			}
+			else if (n < size())
+			{
+				size_t tmp = size() - n;
+				while (tmp--)
+				{
+					pop_back();
+				}
+			}
+		}
+	private:
+		Node* _head;
+	};
+
+	//测试正向迭代器
+	void Test1()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+
+		list<int>::iterator it = l1.begin();
+		while (it != l1.end())
+		{
+			cout << *it << " ";
+			it++;
+		}
+		cout << endl;
+
+		const list<int> l2(l1);
+		list<int>::const_iterator cit = l2.begin();
+		while (cit != l2.end())
+		{
+			cout << *cit << " ";
+			cit++;
+		}
+		cout << endl;
+
+	}
+
+	//测试赋值=重载
+	void Test2()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+		
+		list<int> l2;
+		l1 = l2;
+
+		list<int>::iterator it = l1.begin();
+		while (it != l1.end())
+		{
+			cout << *it << " ";
+			it++;
+		}
+		cout << endl;
+	}
+
+	//测试size和empty
+	void Test3()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+
+		cout << l1.size() << endl;
+		cout << l1.empty() << endl;
+	}
+
+	//测试front和back函数
+	void Test4()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+
+		cout << l1.front() << endl;
+		cout << l1.back() << endl;
+	}
+
+	//测试insert和erase
+	void Test5()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+
+		list<int>::iterator it = l1.begin();
+		it++;
+		it++;
+		l1.insert(it, 10);
+
+		it = l1.begin();
+		it++;
+		l1.erase(it);
+
+		it = l1.begin();
+		while (it != l1.end())
+		{
+			cout << *it << " ";
+			it++;
+		}
+		cout << endl;
+	}
+
+	//测试头插、头删、尾插、尾删
+	void Test6()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.pop_back();
+		l1.pop_back();
+
+		l1.push_front(0);
+		l1.push_front(-1);
+		l1.push_front(-2);
+		l1.pop_front();
+		l1.pop_front();
+
+		list<int>::iterator it = l1.begin();
+		while (it != l1.end())
+		{
+			cout << *it << " ";
+			it++;
+		}
+		cout << endl;
+	}
+
+	//测试resize
+	void Test7()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+		l1.push_back(5);
+		l1.resize(10);
+
+		list<int>::iterator it = l1.begin();
+		while (it != l1.end())
+		{
+			cout << *it << " ";
+			it++;
+		}
+		cout << endl;
+	}
+
+	//测试反向迭代器
+	void Test8()
+	{
+		list<int> l1;
+		l1.push_back(1);
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+		l1.push_back(5);
+
+		list<int>::reverse_iterator rit = l1.rbegin();
+		while (rit != l1.rend())
+		{
+			cout << *rit << " ";
+			++rit;
+		}
 		cout << endl;
 	}
 }
