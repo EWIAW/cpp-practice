@@ -413,7 +413,7 @@ namespace My_list
 
 
 
-//第二次模拟实现list，并用于创作博客
+																									//第二次模拟实现list，并用于创作博客
 namespace list_blog
 {
 	//链表结点
@@ -438,6 +438,9 @@ namespace list_blog
 	{
 		typedef __List_Node<T> Node;
 		typedef __list_iterator<T, Ref, Ptr> iterator;
+
+		typedef Ref Ref;
+		typedef Ptr Ptr;
 		//构造函数
 		__list_iterator(Node* val)
 			:_node(val)
@@ -492,39 +495,39 @@ namespace list_blog
 		Node* _node;//是一个指针结点的指针
 	};
 
-	//封装反向迭代器
-	template<class Iterator>
-	struct ReverseListIterator
-	{
-		typedef typename 
+	////封装反向迭代器
+	//template<class Iterator>
+	//struct __list_reverse_iterator
+	//{
+	//	typedef __list_reverse_iterator<Iterator> reverse_iterator;
 
-		//构造函数
-		ReverseListIterator(Iterator it)
-			:_it(it)
-		{}
+	//	typedef typename Iterator::Ref Ref;
+	//	typedef typename Iterator::Ptr Ptr;
 
-		//重载*
-		Ref operator*()
-		{
-			return *_it;
-		}
+	//	//构造函数
+	//	__list_reverse_iterator(Iterator it)
+	//		:_it(it)
+	//	{}
 
-		//重载前置++
-		Iterator operator++()
-		{
-			_it--;
-			return *this;
-		}
+	//	Ref operator*()
+	//	{
+	//		return (*_it);
+	//	}
 
-		//重载！=
-		bool operator!=(const Iterator& it)
-		{
-			return _it != it;
-		}
+	//	reverse_iterator& operator++()
+	//	{
+	//		--_it;
+	//		return *this;
+	//	}
 
-		//成员变量
-		Iterator _it;
-	};
+	//	bool operator!=(const reverse_iterator& tmp)
+	//	{
+	//		return _it != tmp._it;
+	//	}
+
+	//	//成员变量(成员变量其实就是一个正向迭代器)
+	//	Iterator _it;
+	//};
 
 	//list类
 	template<class T>
@@ -534,7 +537,8 @@ namespace list_blog
 		typedef __List_Node<T> Node;
 		typedef __list_iterator<T, T&, T*> iterator;//正向非const迭代器
 		typedef __list_iterator<T, const T&, const T*> const_iterator;//正向const迭代器
-		typedef ReverseListIterator<iterator> reverse_iterator;//反向非const迭代器
+
+		//typedef __list_reverse_iterator<iterator> reverse_iterator;//反向非const迭代器
 	public:
 		//非const正向begin
 		iterator begin()
@@ -565,18 +569,18 @@ namespace list_blog
 		}
 
 		//非const反向rbegin
-		reverse_iterator rbegin()
-		{
-			reverse_iterator rit(--end());//
-			return rit;
-		}
+		//reverse_iterator rbegin()
+		//{
+		//	reverse_iterator rit(--end());//
+		//	return rit;
+		//}
 
-		//非const反向rend
-		reverse_iterator rend()
-		{
-			reverse_iterator rit(end());
-			return rit;
-		}
+		////非const反向rend
+		//reverse_iterator rend()
+		//{
+		//	reverse_iterator rit(end());
+		//	return rit;
+		//}
 
 		//构造函数
 		list()
@@ -925,21 +929,21 @@ namespace list_blog
 	}
 
 	//测试反向迭代器
-	void Test8()
-	{
-		list<int> l1;
-		l1.push_back(1);
-		l1.push_back(2);
-		l1.push_back(3);
-		l1.push_back(4);
-		l1.push_back(5);
+	//void Test8()
+	//{
+	//	list<int> l1;
+	//	l1.push_back(1);
+	//	l1.push_back(2);
+	//	l1.push_back(3);
+	//	l1.push_back(4);
+	//	l1.push_back(5);
 
-		list<int>::reverse_iterator rit = l1.rbegin();
-		while (rit != l1.rend())
-		{
-			cout << *rit << " ";
-			++rit;
-		}
-		cout << endl;
-	}
+	//	list<int>::reverse_iterator rit = l1.rbegin();
+	//	while (rit != l1.rend())
+	//	{
+	//		cout << *rit << " ";
+	//		++rit;
+	//	}
+	//	cout << endl;
+	//}
 }
