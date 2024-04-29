@@ -4235,13 +4235,84 @@
 
 
 
-#include"Add.h"
+//#include"Add.h"
+//
+//int main()
+//{
+//	int a = 1;
+//	int b = 2;
+//	int ret = Add(a, b);
+//	cout << ret << endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	void Print()
+//	{
+//		cout << "name:" << _name << endl;
+//		cout << "age:" << _age << endl;
+//	}
+//protected:
+//	char _name[20] = "aaaaa";
+//private:
+//	int _age = 20;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	void Print()
+//	{
+//		cout << "name:" << _name << endl;
+//		cout << "stdid:" << _stdid << endl;
+//	}
+//protected:
+//	int _stdid = 12345678;//学号
+//};
+//
+//int main()
+//{
+//	Person p1;
+//	Student s1;
+//
+//	p1.Print();
+//	s1.Print();
+//	return 0;
+//}
+
+#include<iostream>
+using namespace std;
+
+class Person
+{
+public:
+
+protected:
+	char _name[20] = "aaaaa";
+	int age = 20;
+};
+
+class Student :public Person
+{
+protected:
+	int _stdid = 12345678;
+};
 
 int main()
 {
-	int a = 1;
-	int b = 2;
-	int ret = Add(a, b);
-	cout << ret << endl;
+	Student s1;
+
+	//子类对象可以赋值给父类对象、指针、引用
+	Person p1 = s1;
+	Person* p2 = &s1;
+	Person& p3 = s1;
+
+	Student* s2 = (Student*)p2;
+
 	return 0;
 }
