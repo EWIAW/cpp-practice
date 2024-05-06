@@ -67,6 +67,7 @@ namespace My_Stack
 			cout << s1.top() << " ";
 			s1.pop();
 		}
+		cout << endl;
 	}
 
 	void Test2()
@@ -120,5 +121,6 @@ namespace deque_stack
 			cout << s1.top() << " ";
 			s1.pop();
 		}
+		cout << endl;
 	}
 }

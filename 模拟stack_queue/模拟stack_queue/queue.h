@@ -78,6 +78,7 @@ namespace My_queue
 			cout << q1.front() << " ";
 			q1.pop();
 		}
+		cout << endl;
 	}
 }
 
@@ -118,5 +119,6 @@ namespace deque_queue
 			cout << q1.front() << " ";
 			q1.pop();
 		}
+		cout << endl;
 	}
 }
