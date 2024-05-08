@@ -4285,34 +4285,332 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//
+//protected:
+//	char _name[20] = "aaaaa";
+//	int age = 20;
+//};
+//
+//class Student :public Person
+//{
+//protected:
+//	int _stdid = 12345678;
+//};
+//
+//int main()
+//{
+//	Student s1;
+//
+//	//子类对象可以赋值给父类对象、指针、引用
+//	Person p1 = s1;
+//	Person* p2 = &s1;
+//	Person& p3 = s1;
+//
+//	Student* s2 = (Student*)p2;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//namespace My_less_greater
+//{
+//	template<class T>
+//	struct less
+//	{
+//		bool operator()(const T& x1, const T& x2)//重载一个operator()
+//		{
+//			return x1 < x2;
+//		}
+//	};
+//
+//	template<class T>
+//	struct greater
+//	{
+//		bool operator()(const T& x1, const T& x2)
+//		{
+//			return x1 > x2;
+//		}
+//	};
+//}
+//
+//int main()
+//{
+//	My_less_greater::less<int> lessFunc;//定义一个less的对象
+//	int a = 10;
+//	int b = 20;
+//	bool ret = lessFunc(a, b);//等价于 lessFunc.operator()(a,b)
+//	cout << ret << endl;
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	void Print()
+//	{
+//		cout << _name << ":" << _age << endl;
+//	}
+//protected:
+//	string _name = "hello";
+//	int _age = 18;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	void Print()
+//	{
+//		cout << _name << ":" << _age << ":" << _sno << endl;
+//	}
+//protected:
+//	int _sno = 12345678;
+//};
+//
+//int main()
+//{
+//	//Person p1;
+//	//p1.Print();
+//
+//	//Student s1;
+//	//s1.Print();
+//
+//	Student s1;
+//	Person p1 = s1;
+//	Person* p2 = &s1;
+//	Person& p3 = s1;
+//
+//
+//
+//	return 0;
+//}
+
+
+
+//
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	//构造函数
+//	Person()
+//	{
+//		cout << "Person()" << endl;
+//	}
+//
+//	//析构函数
+//	~Person()
+//	{
+//		cout << "~Person()" << endl;
+//	}
+//
+//	//拷贝构造
+//	Person(const Person& tmp)
+//	{
+//		cout << "Person(const Person& tmp)" << endl;
+//	}
+//
+//	//赋值=重载
+//	Person& operator=(const Person& tmp)
+//	{
+//		cout << "Person:operator=()" << endl;
+//		return *this;
+//	}
+//protected:
+//	string _name;
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	//构造函数
+//	Student()
+//	{
+//		cout << "Student()" << endl;
+//	}
+//
+//	//析构函数
+//	~Student()
+//	{
+//		cout << "~Student()" << endl;
+//	}
+//
+//	//拷贝构造
+//	Student(const Student& tmp)
+//		:Person(tmp)
+//	{
+//		cout << "Student(const Student& tmp)" << endl;
+//	}
+//
+//	//赋值=重载
+//	Student& operator=(const Student& tmp)
+//	{
+//		Person::operator=(tmp);
+//		cout << "Student:operator=()" << endl;
+//		return *this;
+//	}
+//protected:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	//Person p1;
+//	Student s1;
+//	//cout << endl;
+//	//Student s2(s1);
+//
+//	Student s2;
+//	s2 = s1;
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	Person(const char* name = "name", const int& age = -1)
+//		:_name(name)
+//		,_age(age)
+//	{
+//		cout << "Person()" << endl;
+//	}
+//protected:
+//	string _name;
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	Student(const char* name = "name", const int& age = -1, const int& sno = 11111111)
+//		:Person(name, age)
+//		,_sno(sno)
+//	{
+//		cout << "Student()" << endl;
+//	}
+//protected:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	Person p1("hello", 18);
+//	Student s1;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	int _age;
+//};
+//
+//class Student :virtual public Person
+//{
+//public:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	Person p1;
+//	p1._age = 1;
+//	Student s1;
+//	s1._age = 2;
+//	s1._sno = 3;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//
+//	int _age;
+//};
+//
+//class Student :virtual public Person
+//{
+//public:
+//
+//	int _sno;
+//};
+//
+//class Teacher :virtual public Person
+//{
+//public:
+//
+//	int _tno;
+//};
+//
+//class Assistant :public Student, public Teacher
+//{
+//public:
+//
+//	int _aaa;
+//};
+//
+//int main()
+//{
+//	Assistant a1;
+//	cout << sizeof(a1) << endl;
+//
+//	a1.Student::_age = 1;
+//	a1.Teacher::_age = 2;
+//	a1._sno = 3;
+//	a1._tno = 4;
+//	a1._aaa = 5;
+//
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
 
 class Person
 {
 public:
-
-protected:
-	char _name[20] = "aaaaa";
-	int age = 20;
+	int _age = 1;//年龄
 };
 
+//继承了父类Person的所有成员
 class Student :public Person
 {
-protected:
-	int _stdid = 12345678;
+public:
+	int _sno = 2;//学号
 };
 
 int main()
 {
 	Student s1;
-
-	//子类对象可以赋值给父类对象、指针、引用
-	Person p1 = s1;
-	Person* p2 = &s1;
-	Person& p3 = s1;
-
-	Student* s2 = (Student*)p2;
-
 	return 0;
 }
