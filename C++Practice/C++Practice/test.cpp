@@ -4593,24 +4593,517 @@
 //	return 0;
 //}
 
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	int _age = 1;//年龄
+//};
+//
+////继承了父类Person的所有成员
+//class Student :public Person
+//{
+//public:
+//	int _sno = 2;//学号
+//};
+//
+//int main()
+//{
+//	Student s1;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "买票-全价" << endl;
+//	}
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "买票-半价" << endl;
+//	}
+//};
+//
+//void Func1(Person& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//void Func2(Student& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//int main()
+//{
+//	Person p1;
+//
+//	Student s1;
+//
+//	Func1(p1);
+//
+//	Func1(s1);
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	virtual ~A()
+//	{
+//		cout << "~A" << endl;
+//	}
+//};
+//
+//class B :public A
+//{
+//public:
+//	 virtual~B()
+//	{
+//		cout << "~b" << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	A* pa = new A;
+//	delete pa;
+//
+//	A* pb = new B;
+//	delete pb;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "买票-全价" << endl;
+//	}
+//
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	//virtual void BuyTichet()
+//	//{
+//	//	cout << "买票-半价" << endl;
+//	//}
+//
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	Person p1;
+//
+//	Student s1;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	virtual void ButTicket() = 0;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual void ButTicket()
+//	{
+//		cout << "买票-半价" << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	Person p1;
+//	Student s1;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Base
+//{
+//public:
+//	virtual void Func1()
+//	{
+//		cout << "Base::Func1()" << endl;
+//	}
+//
+//	virtual void Func2()
+//	{
+//		cout << "Base::Func2()" << endl;
+//	}
+//
+//	void Func3()
+//	{
+//		cout << "Base::Func3()" << endl;
+//	}
+//protected:
+//	int _b = 1;
+//};
+//
+//class Derive :public Base
+//{
+//public:
+//	virtual void Func1()
+//	{
+//		cout << "Derive::Func1()" << endl;
+//	}
+//protected:
+//	int _d = 2;
+//};
+//
+//int main()
+//{
+//	Base b;
+//	Derive d;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	void BuyTicket()
+//	{
+//		cout << "买票-全价" << endl;
+//	}
+//
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	void BuyTicket()
+//	{
+//		cout << "买票-半价" << endl;
+//	}
+//
+//	int _sno;
+//};
+//
+//template<class T>
+//void BuyTicket(T& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//
+//int main()
+//{
+//	Person p1;
+//
+//	Student s1;
+//
+//	BuyTicket(p1);
+//	BuyTicket(s1);
+//
+//	return 0;
+//}
+
+//#include<iostream> 
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	void Print()
+//	{
+//
+//	}
+//protected:
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	
+//private:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//protected:
+//	string _name;
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//protected:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	Student s1;
+//	//以下这些行为都是允许的
+//	Person p1 = s1;
+//	Person* p2 = &s1;
+//	Person& p3 = s1;
+//
+//	s1 = p1;//反过来就不可以
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//
+//	int _age = 1;
+//	int _num = 2;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//
+//	int _num = 10;
+//};
+//
+//int main()
+//{
+//	Person p1;
+//	Student s1;
+//
+//	cout << s1._num << endl;//默认情况直接输出_num是子类的_num
+//	cout << s1.Person::_num << endl;//如果想要输出基类的_num，就要指定Person的作用域
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	void Print()
+//	{
+//		cout << "Person" << endl;
+//	}
+//protected:
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	void Print(int i)
+//	{
+//		cout << "Student" << endl;
+//	}
+//protected:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	Person(int i)
+//	{
+//		cout << "Person()" << endl;
+//	}
+//protected:
+//	string _name;
+//	int _age;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	Student()
+//		:Person(1)
+//	{
+//		cout << "Student()" << endl;
+//	}
+//protected:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	Person p1(1);
+//	cout << endl;
+//	Student s1;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	~Person()
+//	{
+//		cout << "~Person()" << endl;
+//	}
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	~Student()
+//	{
+//		cout << "~Student()" << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	Student s1;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	Person(const char* name="name")
+//		:_name(name)
+//	{}
+//
+//	Person(const Person& tmp)
+//	{
+//		cout << "Person(const Person& tmp)" << endl;
+//	}
+//protected:
+//	string _name;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	Student(const char* name = "name", int sno = 1)
+//		:Person(name)
+//		,_sno(sno)
+//	{}
+//
+//	Student(const Student& tmp)
+//		:Person(tmp)
+//	{
+//		cout << "Student(const Student& tmp)" << endl;
+//	}
+//protected:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	Student s1;
+//	Student s2(s1);
+//	return 0;
+//}
+
+//#include<iostream> 
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	Person& operator=(const Person& tmp)
+//	{
+//		cout << "operator=(const Person& tmp)" << endl;
+//		return *this;
+//	}
+//protected:
+//	string _name;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	Student& operator=(const Student& tmp)
+//	{
+//		Person::operator=(tmp);
+//		cout << "operator=(const Student& tmp)" << endl;
+//		return *this;
+//	}
+//protected:
+//	int _sno;
+//};
+//
+//int main()
+//{
+//	Student s1;
+//	Student s2;
+//	s2 = s1;
+//	return 0;
+//}
 
 class Person
-{
-public:
-	int _age = 1;//年龄
-};
 
-//继承了父类Person的所有成员
 class Student :public Person
-{
-public:
-	int _sno = 2;//学号
-};
 
-int main()
-{
-	Student s1;
-	return 0;
-}
+class PostGraduate :public Student
