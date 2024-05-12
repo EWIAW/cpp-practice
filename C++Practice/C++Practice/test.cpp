@@ -5102,8 +5102,145 @@
 //	return 0;
 //}
 
+//class Person
+//
+//class Student :public Person
+//
+//class PostGraduate :public Student
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	int _arr[10];
+//};
+//
+//class Student :virtual public Person
+//{
+//public:
+//	int _sno;//学生学号
+//};
+//
+//class Teacher :virtual public Person
+//{
+//public:
+//	int _tno;//教师编号
+//};
+//
+//class Assiant :public Student, public Teacher
+//{
+//public:
+//	int _aaa;
+//};
+//
+//int main()
+//{
+//	cout << sizeof(Assiant);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	int _age;
+//};
+//
+//class Student
+//{
+//public:
+//	Person p1;
+//	int _sno;
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "买票-全价" << endl;
+//	}
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "买票-半价" << endl;
+//	}
+//};
+//
+//void Func(Person& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//int main()
+//{
+//	Person p1;
+//	Student s1;
+//
+//	Func(p1);
+//	Func(s1);
+//
+//	return 0;
+//}
+
+#include<iostream>
+using namespace std;
+
+class A
+{};
+
+class B:public A
+{};
+
 class Person
+{
+public:
+	virtual A* BuyTicket()
+	{
+		cout << "买票-全价" << endl;
+		return new A;
+	}
+};
 
 class Student :public Person
+{
+public:
+	virtual B* BuyTicket()
+	{
+		cout << "买票-半价" << endl;
+		return new B;
+	}
+};
 
-class PostGraduate :public Student
+void Func(Person& tmp)
+{
+	tmp.BuyTicket();
+}
+
+int main()
+{
+	Person p1;
+	Student s1;
+
+	Func(p1);
+	Func(s1);
+
+	return 0;
+}
