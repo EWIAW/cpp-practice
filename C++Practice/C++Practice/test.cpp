@@ -5200,47 +5200,218 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{};
+//
+//class B:public A
+//{};
+//
+//class Person
+//{
+//public:
+//	virtual A* BuyTicket()
+//	{
+//		cout << "ÂòÆ±-È«¼Û" << endl;
+//		return new A;
+//	}
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual B* BuyTicket()
+//	{
+//		cout << "ÂòÆ±-°ë¼Û" << endl;
+//		return new B;
+//	}
+//};
+//
+//void Func(Person& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//int main()
+//{
+//	Person p1;
+//	Student s1;
+//
+//	Func(p1);
+//	Func(s1);
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//#include<queue>
+//using namespace std;
+//
+//struct TreeNode
+//{
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//
+//    TreeNode(const int& tmp)
+//        :val(tmp)
+//        , left(nullptr)
+//        , right(nullptr)
+//    {}
+//};
+//
+//vector<vector<int>> levelOrder(TreeNode* root)
+//{
+//    vector<vector<int>> vv;
+//    queue<TreeNode*> q;
+//    if (root == nullptr)
+//    {
+//        return vv;
+//    }
+//
+//    q.push(root);
+//    while (!q.empty())
+//    {
+//        vector<int> v;
+//        for (int i = 0; i < q.size(); i++)
+//        {
+//            TreeNode* node = q.front();
+//            v.push_back(node->val);
+//            q.pop();
+//            if (node->left)
+//                q.push(node->left);
+//            if (node->right)
+//                q.push(node->right);
+//        }
+//        vv.push_back(v);
+//    }
+//    return vv;
+//}
+//
+//int main()
+//{
+//	TreeNode* A = new TreeNode(3);
+//	TreeNode* B = new TreeNode(9);
+//	TreeNode* C = new TreeNode(20);
+//	TreeNode* D = new TreeNode(15);
+//	TreeNode* E = new TreeNode(7);
+//
+//	A->left = B;
+//	A->right = C;
+//	C->left = D;
+//	C->right = E;
+//
+//
+//    vector<vector<int>> ret = levelOrder(A);
+//
+//    for (int i = 0; i < ret.size(); i++)
+//    {
+//        for (int j = 0; j < ret[i].size(); j++)
+//        {
+//            cout << ret[i][j] << " ";
+//        }
+//        cout << endl;
+//    }
+//
+//}
+
 #include<iostream>
 using namespace std;
 
-class A
-{};
-
-class B:public A
-{};
-
-class Person
+struct TreeNode
 {
-public:
-	virtual A* BuyTicket()
-	{
-		cout << "ÂòÆ±-È«¼Û" << endl;
-		return new A;
-	}
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(const int& tmp)
+        :val(tmp)
+        , left(nullptr)
+        , right(nullptr)
+    {}
 };
 
-class Student :public Person
+bool Find(TreeNode* root, TreeNode* tmp)
 {
-public:
-	virtual B* BuyTicket()
-	{
-		cout << "ÂòÆ±-°ë¼Û" << endl;
-		return new B;
-	}
-};
+    if (root->left == tmp)
+    {
+        return true;
+    }
+    else if (root->right == tmp)
+    {
+        return false;
+    }
+    else
+    {
+        if (root->left != nullptr)
+        {
+            Find(root->left, tmp);
+        }
+        if (root->right != nullptr)
+        {
+            Find(root->right, tmp);
+        }
+    }
+    return false;
+}
 
-void Func(Person& tmp)
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
 {
-	tmp.BuyTicket();
+    if (root == p || root == q)
+    {
+        return root;
+    }
+
+    bool pInLeft, pInRight;
+    bool qInLeft, qInRight;
+
+    pInLeft = Find(root, p);
+    pInRight = !pInLeft;
+
+    qInLeft = Find(root, q);
+    qInRight = !qInLeft;
+
+    if ((pInLeft && qInRight) || (pInRight && qInLeft))
+    {
+        return root;
+    }
+    else if (pInLeft && qInLeft)
+    {
+        return lowestCommonAncestor(root->left, p, q);
+    }
+    else
+    {
+        return lowestCommonAncestor(root->right, p, q);
+    }
 }
 
 int main()
 {
-	Person p1;
-	Student s1;
+    TreeNode* A = new TreeNode(3);
+    TreeNode* B = new TreeNode(5);
+    TreeNode* C = new TreeNode(1);
+    TreeNode* D = new TreeNode(6);
+    TreeNode* E = new TreeNode(2);
+    TreeNode* F = new TreeNode(0);
+    TreeNode* G = new TreeNode(8);
+    TreeNode* H = new TreeNode(7);
+    TreeNode* I = new TreeNode(4);
 
-	Func(p1);
-	Func(s1);
+    A->left = B;
+    A->right = C;
+    B->left = D;
+    B->right = E;
+    C->left = F;
+    C->right = G;
+    E->left = H;
+    E->right = I;
 
-	return 0;
+    TreeNode* ret = lowestCommonAncestor(A, B, I);
+    cout << ret->val << endl;
+
+    return 0;
 }
+
