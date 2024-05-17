@@ -5318,7 +5318,105 @@
 //
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//struct TreeNode
+//{
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//
+//    TreeNode(const int& tmp)
+//        :val(tmp)
+//        , left(nullptr)
+//        , right(nullptr)
+//    {}
+//};
+//
+//bool Find(TreeNode* root, TreeNode* tmp)
+//{
+//    if (root->left == tmp)
+//    {
+//        return true;
+//    }
+//    else if (root->right == tmp)
+//    {
+//        return false;
+//    }
+//    else
+//    {
+//        if (root->left != nullptr)
+//        {
+//            Find(root->left, tmp);
+//        }
+//        if (root->right != nullptr)
+//        {
+//            Find(root->right, tmp);
+//        }
+//    }
+//    return false;
+//}
+//
+//TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+//{
+//    if (root == p || root == q)
+//    {
+//        return root;
+//    }
+//
+//    bool pInLeft, pInRight;
+//    bool qInLeft, qInRight;
+//
+//    pInLeft = Find(root, p);
+//    pInRight = !pInLeft;
+//
+//    qInLeft = Find(root, q);
+//    qInRight = !qInLeft;
+//
+//    if ((pInLeft && qInRight) || (pInRight && qInLeft))
+//    {
+//        return root;
+//    }
+//    else if (pInLeft && qInLeft)
+//    {
+//        return lowestCommonAncestor(root->left, p, q);
+//    }
+//    else
+//    {
+//        return lowestCommonAncestor(root->right, p, q);
+//    }
+//}
+//
+//int main()
+//{
+//    TreeNode* A = new TreeNode(3);
+//    TreeNode* B = new TreeNode(5);
+//    TreeNode* C = new TreeNode(1);
+//    TreeNode* D = new TreeNode(6);
+//    TreeNode* E = new TreeNode(2);
+//    TreeNode* F = new TreeNode(0);
+//    TreeNode* G = new TreeNode(8);
+//    TreeNode* H = new TreeNode(7);
+//    TreeNode* I = new TreeNode(4);
+//
+//    A->left = B;
+//    A->right = C;
+//    B->left = D;
+//    B->right = E;
+//    C->left = F;
+//    C->right = G;
+//    E->left = H;
+//    E->right = I;
+//
+//    TreeNode* ret = lowestCommonAncestor(A, B, I);
+//    cout << ret->val << endl;
+//
+//    return 0;
+//}
+
 #include<iostream>
+#include<vector>
 using namespace std;
 
 struct TreeNode
@@ -5334,84 +5432,97 @@ struct TreeNode
     {}
 };
 
-bool Find(TreeNode* root, TreeNode* tmp)
+//在中序遍历中找到tmp的下标
+int Find(vector<int>& inorder, int begin, int end, int tmp)
 {
-    if (root->left == tmp)
+    int ret = 0;
+    for (int i = begin; i <= end; i++)
     {
-        return true;
-    }
-    else if (root->right == tmp)
-    {
-        return false;
-    }
-    else
-    {
-        if (root->left != nullptr)
+        if (inorder[i] == tmp)
         {
-            Find(root->left, tmp);
+            return ret;
         }
-        if (root->right != nullptr)
+        else
         {
-            Find(root->right, tmp);
+            ret++;
         }
     }
-    return false;
+    return 0;
 }
 
-TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+//先构建根，再去递归构造根的左子树和右子树
+TreeNode* _buildTree(vector<int>& preorder, int begin1, int end1, vector<int>& inorder, int begin2, int end2)
 {
-    if (root == p || root == q)
-    {
-        return root;
-    }
+    TreeNode* root = new TreeNode(preorder[begin1]);//先构造根节点
 
-    bool pInLeft, pInRight;
-    bool qInLeft, qInRight;
+    int mid = Find(inorder, begin2, end2, preorder[begin1]);//找到根节点在中序遍历的位置
+    //更新begin1,end1,begin2,end2
+    int left = mid - begin2;
+    int right = end2 - mid;
 
-    pInLeft = Find(root, p);
-    pInRight = !pInLeft;
+    int fbegin1 = begin1;
+    begin1 = fbegin1 + 1;
+    end1 = fbegin1 + left;
 
-    qInLeft = Find(root, q);
-    qInRight = !qInLeft;
+    begin2 = 0;
+    end2 = mid - 1;
 
-    if ((pInLeft && qInRight) || (pInRight && qInLeft))
-    {
-        return root;
-    }
-    else if (pInLeft && qInLeft)
-    {
-        return lowestCommonAncestor(root->left, p, q);
-    }
+    if (begin1 <= end1)
+        root->left = _buildTree(preorder, begin1, end1, inorder, begin2, end2);
     else
+        return root;
+
+    begin1 = fbegin1 + left + 1;
+    end1 = fbegin1 + left + right;
+
+    begin2 = mid + 1;
+    end2 = mid + right;
+
+    if (begin2 <= end2)
+        root->right = _buildTree(preorder, begin1, end1, inorder, begin2, end2);
+    else
+        return root;
+
+    return root;
+}
+
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder)
+{
+    return _buildTree(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
+}
+
+void Print(TreeNode* root)
+{
+    if (root == nullptr)
     {
-        return lowestCommonAncestor(root->right, p, q);
+        return;
     }
+
+    cout << root->val << " ";
+    Print(root->left);
+    Print(root->right);
 }
 
 int main()
 {
-    TreeNode* A = new TreeNode(3);
-    TreeNode* B = new TreeNode(5);
-    TreeNode* C = new TreeNode(1);
-    TreeNode* D = new TreeNode(6);
-    TreeNode* E = new TreeNode(2);
-    TreeNode* F = new TreeNode(0);
-    TreeNode* G = new TreeNode(8);
-    TreeNode* H = new TreeNode(7);
-    TreeNode* I = new TreeNode(4);
+    vector<int> preorder;
+    vector<int> inorder;
+    int arr1[] = { 3,9,20,15,7 };
+    int arr2[] = { 9,3,15,20,7 };
 
-    A->left = B;
-    A->right = C;
-    B->left = D;
-    B->right = E;
-    C->left = F;
-    C->right = G;
-    E->left = H;
-    E->right = I;
+    for (auto& e : arr1)
+    {
+        preorder.push_back(e);
+    }
 
-    TreeNode* ret = lowestCommonAncestor(A, B, I);
-    cout << ret->val << endl;
+    for (auto& e : arr2)
+    {
+        inorder.push_back(e);
+    }
+
+    TreeNode* ret = buildTree(preorder, inorder);
+
+    Print(ret);
 
     return 0;
 }
-
