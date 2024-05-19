@@ -5415,114 +5415,284 @@
 //    return 0;
 //}
 
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//struct TreeNode
+//{
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//
+//    TreeNode(const int& tmp)
+//        :val(tmp)
+//        , left(nullptr)
+//        , right(nullptr)
+//    {}
+//};
+//
+////在中序遍历中找到tmp的下标
+//int Find(vector<int>& inorder, int begin, int end, int tmp)
+//{
+//    int ret = begin;
+//    for (int i = begin; i <= end; i++)
+//    {
+//        if (inorder[i] == tmp)
+//        {
+//            return ret;
+//        }
+//        else
+//        {
+//            ret++;
+//        }
+//    }
+//    return 0;
+//}
+//
+////先构建根，再去递归构造根的左子树和右子树
+//TreeNode* _buildTree(vector<int>& preorder, int begin1, int end1, vector<int>& inorder, int begin2, int end2)
+//{
+//    TreeNode* root = new TreeNode(preorder[begin1]);//先构造根节点
+//
+//    int mid = Find(inorder, begin2, end2, preorder[begin1]);//找到根节点在中序遍历的位置
+//    //更新begin1,end1,begin2,end2
+//    int left = mid - begin2;
+//    int right = end2 - mid;
+//
+//    int fbegin = begin1;
+//    begin1 = fbegin + 1;
+//    end1 = fbegin + left;
+//
+//    begin2 = mid - left;
+//    end2 = mid - 1;
+//
+//    if (begin1 <= end1 && begin2 <= end2)
+//        root->left = _buildTree(preorder, begin1, end1, inorder, begin2, end2);
+//    else
+//        root->left = nullptr;
+//
+//    begin1 = fbegin + left + 1;
+//    end1 = fbegin + left + right;
+//
+//    begin2 = mid + 1;
+//    end2 = mid + right;
+//
+//    if (begin1 <= end1 && begin2 <= end2)
+//        root->right = _buildTree(preorder, begin1, end1, inorder, begin2, end2);
+//    else
+//        root->right = nullptr;
+//
+//    return root;
+//}
+//
+//TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder)
+//{
+//    return _buildTree(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
+//}
+//
+//void Print(TreeNode* root)
+//{
+//    if (root == nullptr)
+//    {
+//        return;
+//    }
+//
+//    cout << root->val << " ";
+//    Print(root->left);
+//    Print(root->right);
+//}
+//
+//int main()
+//{
+//    vector<int> preorder;
+//    vector<int> inorder;
+//    int arr1[] = { 3,9,20,15,7 };
+//    int arr2[] = { 9,3,15,20,7 };
+//
+//    for (auto& e : arr1)
+//    {
+//        preorder.push_back(e);
+//    }
+//
+//    for (auto& e : arr2)
+//    {
+//        inorder.push_back(e);
+//    }
+//
+//    TreeNode* ret = buildTree(preorder, inorder);
+//
+//    Print(ret);
+//
+//    return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<map>
+//using namespace std;
+//
+//vector<string> topKFrequent(vector<string>& words, int k)
+//{
+//    vector<string> ret;
+//    map<string, int> Countmap;
+//    for (auto& e : words)
+//    {
+//        map<string, int>::iterator it = Countmap.find(e);
+//        if (it == Countmap.end())
+//        {
+//            Countmap.insert(make_pair(e, 1));
+//        }
+//        else
+//        {
+//            it->second++;
+//        }
+//    }
+//
+//    for (int i = k; i > 0; i--)
+//    {
+//        map<string, int>::iterator itmax = Countmap.begin();
+//        map<string, int>::iterator itcom = ++itmax;
+//        while (itcom != Countmap.end())
+//        {
+//            if (itcom->second > itmax->second)
+//            {
+//                itmax = itcom;
+//            }
+//            itcom++;
+//        }
+//        ret.push_back(itmax->first);
+//        Countmap.erase(itmax);
+//    }
+//    return ret;
+//}
+//
+//int main()
+//{
+//    string words[] = { "i", "love", "leetcode", "i", "love", "coding" };
+//    vector<string> str;
+//    for (auto& e : words)
+//    {
+//        str.push_back(e);
+//    }
+//    int k = 2;
+//
+//    vector<string> ret = topKFrequent(str, k);
+//    for (auto& e : ret)
+//    {
+//        cout << e << " ";
+//    }
+//    cout << endl;
+//    return 0;
+//}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{};
+//class B:public A
+//{};
+//
+//class Person
+//{
+//public:
+//	virtual A* BuyTicket()
+//	{
+//		cout << "普通人：买票-全价" << endl;
+//		return new A;
+//	}
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual B* BuyTicket()
+//	{
+//		cout << "学  生：买票-半价" << endl;
+//		return new B;
+//	}
+//};
+//
+//void func(Person& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//int main()
+//{
+//	Person p;
+//	Student s;
+//	func(p);
+//	func(s);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	virtual ~Person()
+//	{
+//		cout << "~Person()" << endl;
+//	}
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual ~Student()
+//	{
+//		cout << "~Student()" << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	Person* p = new Person;
+//	Person* s = new Student;
+//	delete p;
+//	delete s;
+//	return 0;
+//}
+
 #include<iostream>
-#include<vector>
 using namespace std;
 
-struct TreeNode
+class Person
 {
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-
-    TreeNode(const int& tmp)
-        :val(tmp)
-        , left(nullptr)
-        , right(nullptr)
-    {}
+public:
+	virtual void BuyTicket() 
+	{
+		cout << "普通人：买票-全价" << endl;
+	}
 };
 
-//在中序遍历中找到tmp的下标
-int Find(vector<int>& inorder, int begin, int end, int tmp)
+class Student :public Person
 {
-    int ret = 0;
-    for (int i = begin; i <= end; i++)
-    {
-        if (inorder[i] == tmp)
-        {
-            return ret;
-        }
-        else
-        {
-            ret++;
-        }
-    }
-    return 0;
-}
+public:
+	virtual void BuyTicktt() override
+	{
+		cout << "学  生：买票-半价" << endl;
+	}
+};
 
-//先构建根，再去递归构造根的左子树和右子树
-TreeNode* _buildTree(vector<int>& preorder, int begin1, int end1, vector<int>& inorder, int begin2, int end2)
+void func(Person& tmp)
 {
-    TreeNode* root = new TreeNode(preorder[begin1]);//先构造根节点
-
-    int mid = Find(inorder, begin2, end2, preorder[begin1]);//找到根节点在中序遍历的位置
-    //更新begin1,end1,begin2,end2
-    int left = mid - begin2;
-    int right = end2 - mid;
-
-    int fbegin1 = begin1;
-    begin1 = fbegin1 + 1;
-    end1 = fbegin1 + left;
-
-    begin2 = 0;
-    end2 = mid - 1;
-
-    if (begin1 <= end1)
-        root->left = _buildTree(preorder, begin1, end1, inorder, begin2, end2);
-    else
-        return root;
-
-    begin1 = fbegin1 + left + 1;
-    end1 = fbegin1 + left + right;
-
-    begin2 = mid + 1;
-    end2 = mid + right;
-
-    if (begin2 <= end2)
-        root->right = _buildTree(preorder, begin1, end1, inorder, begin2, end2);
-    else
-        return root;
-
-    return root;
-}
-
-TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder)
-{
-    return _buildTree(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
-}
-
-void Print(TreeNode* root)
-{
-    if (root == nullptr)
-    {
-        return;
-    }
-
-    cout << root->val << " ";
-    Print(root->left);
-    Print(root->right);
+	tmp.BuyTicket();
 }
 
 int main()
 {
-    vector<int> preorder;
-    vector<int> inorder;
-    int arr1[] = { 3,9,20,15,7 };
-    int arr2[] = { 9,3,15,20,7 };
-
-    for (auto& e : arr1)
-    {
-        preorder.push_back(e);
-    }
-
-    for (auto& e : arr2)
-    {
-        inorder.push_back(e);
-    }
-
-    TreeNode* ret = buildTree(preorder, inorder);
-
-    Print(ret);
-
-    return 0;
+	Person p;
+	Student s;
+	func(p);
+	func(s);
+	return 0;
 }
