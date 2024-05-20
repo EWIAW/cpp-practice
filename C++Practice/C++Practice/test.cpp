@@ -5662,37 +5662,153 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	virtual void BuyTicket() 
+//	{
+//		cout << "普通人：买票-全价" << endl;
+//	}
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "学  生：买票-半价" << endl;
+//	}
+//};
+//
+//void func(Person& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//int main()
+//{
+//	Person p;
+//	Student s;
+//	func(p);
+//	func(s);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	virtual void BuyTicket() = 0;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "学  生：买票-半价" << endl;
+//	}
+//};
+//
+//void func(Person& tmp)
+//{
+//	tmp.BuyTicket();
+//}
+//
+//int main()
+//{
+//	Student s;
+//	func(s);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	virtual void Print(int x = 0)
+//	{
+//		cout << x << endl;
+//	}
+//};
+//
+//class B :public A
+//{
+//public:
+//	virtual void Print(int x = 1)
+//	{
+//		cout << x << endl;
+//	}
+//};
+//
+//void func(A& tmp)
+//{
+//	tmp.Print();
+//}
+//
+//int main()
+//{
+//	B b;
+//	func(b);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Base
+//{
+//public:
+//	virtual void Print()
+//	{
+//		cout << "Base()" << endl;
+//	}
+//
+//	int _val;
+//};
+//
+//int main()
+//{
+//	Base b;
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
-
-class Person
+class A
 {
 public:
-	virtual void BuyTicket() 
+	virtual void func1()
 	{
-		cout << "普通人：买票-全价" << endl;
+		cout << "A:func1()" << endl;
+	}
+	virtual void func2()
+	{
+		cout << "A:func2()" << endl;
+	}
+	void func3()
+	{
+		cout << "A::func3()" << endl;
 	}
 };
-
-class Student :public Person
+class B :public A
 {
 public:
-	virtual void BuyTicktt() override
+	virtual void func1()
 	{
-		cout << "学  生：买票-半价" << endl;
+		cout << "B:func1()" << endl;
 	}
 };
-
-void func(Person& tmp)
-{
-	tmp.BuyTicket();
-}
-
 int main()
 {
-	Person p;
-	Student s;
-	func(p);
-	func(s);
+	A a;
+	B b;
 	return 0;
 }
