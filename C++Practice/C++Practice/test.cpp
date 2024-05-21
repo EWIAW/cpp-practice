@@ -5780,35 +5780,131 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//	virtual void func1()
+//	{
+//		cout << "A:func1()" << endl;
+//	}
+//	virtual void func2()
+//	{
+//		cout << "A:func2()" << endl;
+//	}
+//	void func3()
+//	{
+//		cout << "A::func3()" << endl;
+//	}
+//};
+//class B :public A
+//{
+//public:
+//	virtual void func1()
+//	{
+//		cout << "B:func1()" << endl;
+//	}
+//};
+//int main()
+//{
+//	A a;
+//	B b;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "普通人：买票-全价" << endl;
+//	}
+//};
+//class Student :public Person
+//{
+//public:
+//	virtual void BuyTicket()
+//	{
+//		cout << "学  生：买票-半价" << endl;
+//	}
+//};
+//void Print()
+//{
+//	cout << "111" << endl;
+//}
+//void func(Person& tmp)
+//{
+//	Print();
+//	tmp.BuyTicket();
+//}
+//int main()
+//{
+//	Person p;
+//	Student t;
+//	func(p);
+//	func(t);
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
+
 class A
 {
 public:
 	virtual void func1()
 	{
-		cout << "A:func1()" << endl;
+		cout << "A::func1()" << endl;
 	}
+
 	virtual void func2()
 	{
-		cout << "A:func2()" << endl;
-	}
-	void func3()
-	{
-		cout << "A::func3()" << endl;
+		cout << "A::func2()" << endl;
 	}
 };
+
 class B :public A
 {
 public:
 	virtual void func1()
 	{
-		cout << "B:func1()" << endl;
+		cout << "B::func1()" << endl;
+	}
+
+	virtual void func3()
+	{
+		cout << "B::func3()" << endl;
+	}
+
+	virtual void func4()
+	{
+		cout << "B::func4()" << endl;
 	}
 };
+
+typedef void(*VFTable) ();//函数指针
+
+void Print(VFTable* table)
+{
+	for (int i = 0; *(table+i) != 0; i++)
+	{
+		cout << table[i] << "->";
+		VFTable f = table[i];
+		f();
+		cout << endl;
+	}
+}
+
 int main()
 {
 	A a;
 	B b;
+
+	VFTable* p = (VFTable*)(*((int*)(&b)));
+	Print(p);
+
 	return 0;
 }
