@@ -106,24 +106,24 @@ public:
 				//4.左右单旋
 				if (curparent->_bf == 2)
 				{
-					if (curparent->_right == 1)
+					if (curparent->_right->_bf == 1)
 					{
 						RotateL(curparent);//左单旋
 					}
 					else
 					{
-
+						RotateRL(curparent);
 					}
 				}
 				else if(curparent->_bf == -2)
 				{
-					if (curparent->_left == -1)
+					if (curparent->_left->_bf == -1)
 					{
 						RotateR(curparent);//右单旋
 					}
 					else
 					{
-
+						RotateLR(curparent);
 					}
 				}
 
@@ -170,7 +170,7 @@ public:
 			{
 				ppNode->_right = second;
 			}
-			second->_parent = firstParent;
+			second->_parent = ppNode;
 		}
 
 		//更新平衡因子
@@ -213,8 +213,124 @@ public:
 			second->_parent = ppNode;
 		}
 
-		first->_bf == second->_bf = 0;
+		first->_bf = second->_bf = 0;
 
+	}
+
+	//右左双旋
+	void RotateRL(Node* first)
+	{
+		Node* second = first->_right;
+		Node* third = second->_left;
+
+		int bf = third->_bf;
+
+		RotateR(second);//先右单旋
+		RotateL(first);//再左单旋
+
+		//旋转完成后，更新平衡因子
+		if (bf == 1)
+		{
+			first->_bf = -1;
+			second->_bf = 0;
+			third->_bf = 0;
+		}
+		else if (bf == -1)
+		{
+			first->_bf = 0;
+			second->_bf = 1;
+			third->_bf = 0;
+		}
+		else if (bf == 0)
+		{
+			first->_bf = 0;
+			second->_bf = 0;
+			third->_bf = 0;
+		}
+	}
+
+	//左右双旋
+	void RotateLR(Node* first)
+	{
+		Node* second = first->_left;
+		Node* third = second->_right;
+
+		int bf = third->_bf;
+
+		RotateL(second);
+		RotateR(first);
+
+		if (bf == 1)
+		{
+			first->_bf = 0;
+			second->_bf = -1;
+			third->_bf = 0;
+		}
+		else if (bf == -1)
+		{
+			first->_bf = 1;
+			second->_bf = 0;
+			third->_bf = 0;
+		}
+		else if (bf == 0)
+		{
+			first->_bf = 0;
+			second->_bf = 0;
+			third->_bf = 0;
+		}
+	}
+
+	void _InOrder(Node* root)
+	{
+		if (root == nullptr)
+		{
+			return;
+		}
+
+		_InOrder(root->_left);
+
+		cout << root->_key << ":" << root->_val << endl;
+
+		_InOrder(root->_right);
+	}
+
+	//中序遍历
+	void InOrder()
+	{
+		_InOrder(_root);
+	}
+
+	//求二叉树的高度
+	int Height(Node* root)
+	{
+		if (root == nullptr)
+		{
+			return 0;
+		}
+
+		return fmax(Height(root->_left), Height(root->_right)) + 1;
+	}
+
+	bool _JudgeBalance(Node* root)
+	{
+		if (root == nullptr)
+		{
+			return true;
+		}
+
+		int heightleft = Height(root->_left);
+		int heightright = Height(root->_right);
+
+		return abs(heightleft - heightright) < 2
+			&& _JudgeBalance(root->_left)
+			&& _JudgeBalance(root->_right);
+	}
+
+	//判断是否平衡
+	bool JudgeBalance()
+	{
+		Node* root = _root;
+		return _JudgeBalance(root);
 	}
 
 private:
