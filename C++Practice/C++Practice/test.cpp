@@ -5849,62 +5849,105 @@
 //	return 0;
 //}
 
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	virtual void func1()
+//	{
+//		cout << "A::func1()" << endl;
+//	}
+//	virtual void func2()
+//	{
+//		cout << "A::func2()" << endl;
+//	}
+//};
+//class B :public A
+//{
+//public:
+//	virtual void func1()
+//	{
+//		cout << "B::func1()" << endl;
+//	}
+//	virtual void func3()
+//	{
+//		cout << "B::func3()" << endl;
+//	}
+//	virtual void func4()
+//	{
+//		cout << "B::func4()" << endl;
+//	}
+//};
+//
+//typedef void(*VFTable) ();//函数指针
+//
+//void Print(VFTable* table)
+//{
+//	for (int i = 0; *(table+i) != 0; i++)
+//	{
+//		cout << *(table + i) << "->";
+//		VFTable f = *(table + i);
+//		f();
+//	}
+//}
+//
+//int main()
+//{
+//	A a;
+//	B b;
+//
+//	VFTable* p = (VFTable*)(*((int*)(&b)));
+//	Print(p);
+//
+//	return 0;
+//}
 
-class A
-{
-public:
-	virtual void func1()
-	{
-		cout << "A::func1()" << endl;
-	}
-
-	virtual void func2()
-	{
-		cout << "A::func2()" << endl;
-	}
-};
-
-class B :public A
-{
-public:
-	virtual void func1()
-	{
-		cout << "B::func1()" << endl;
-	}
-
-	virtual void func3()
-	{
-		cout << "B::func3()" << endl;
-	}
-
-	virtual void func4()
-	{
-		cout << "B::func4()" << endl;
-	}
-};
-
-typedef void(*VFTable) ();//函数指针
-
-void Print(VFTable* table)
-{
-	for (int i = 0; *(table+i) != 0; i++)
-	{
-		cout << table[i] << "->";
-		VFTable f = table[i];
-		f();
-		cout << endl;
-	}
-}
-
-int main()
-{
-	A a;
-	B b;
-
-	VFTable* p = (VFTable*)(*((int*)(&b)));
-	Print(p);
-
-	return 0;
-}
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	virtual void func1() {cout << "A::func1()" << endl;}
+//	virtual void func2() {cout << "A::func2()" << endl;}
+//};
+//
+//class B
+//{
+//public:
+//	virtual void func1() {cout << "B::func1()" << endl;}
+//	virtual void func2() {cout << "B::func2()" << endl;}
+//};
+//
+//class C :public A, public B
+//{
+//public:
+//	virtual void func1() {cout << "C::func1()" << endl;}
+//	virtual void func3() {cout << "C::func3()" << endl;}
+//};
+//
+//typedef void(*VFTable)();
+//
+//void Print(VFTable* tmp)
+//{
+//	for (int i = 0; *(tmp + i) != nullptr; i++)
+//	{
+//		cout << *(tmp + i) << "->";
+//		VFTable f = *(tmp + i);
+//		f();
+//	}
+//	cout << endl;
+//}
+//
+//int main()
+//{
+//	C c;
+//
+//	VFTable* p1 = (VFTable*)(*((int*)(&c)));//第一张虚函数表的第一个虚函数的地址
+//	VFTable* p2 = (VFTable*)(*(int*)((char*)(&c) + sizeof(A)));
+//	Print(p1);
+//	Print(p2);
+//	return 0;
+//}
