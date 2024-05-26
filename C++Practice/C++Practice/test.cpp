@@ -5951,3 +5951,22 @@
 //	Print(p2);
 //	return 0;
 //}
+
+#include<iostream>
+#include<map>
+using namespace std;
+
+int main()
+{
+	map<int, int> m;
+
+	m.insert(make_pair(1, 1));
+	m.insert(make_pair(2, 2));
+	m.insert(make_pair(3, 3));
+	m.insert(make_pair(4, 4));
+	m.insert(make_pair(5, 5));
+
+	map<int, int>::iterator it = m.begin();
+
+	return 0;
+}

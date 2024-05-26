@@ -12,8 +12,31 @@ void Test1()
 	cout << root.JudgeBalance() << endl;
 }
 
+void Test2()
+{
+	srand(time(0));
+	const int a = 10000000;
+	vector<int> v;
+	for (int i = 0; i < a; i++)
+	{
+		v.push_back(rand());
+	}
+
+	size_t begin = clock();
+
+	AVLTree<int, int> root;
+	for (auto& e : v)
+	{
+		root.insert(make_pair(e, e));
+	}
+	
+	size_t end = clock();
+	cout << end - begin << endl;
+}
+
 int main()
 {
-	Test1();
+	//Test1();
+	Test2();
 	return 0;
 }

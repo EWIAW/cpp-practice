@@ -1,5 +1,7 @@
 #pragma once
 #include<iostream>
+#include<vector>
+#include<time.h>
 using namespace std;
 
 //AVLTree的实现，基于map来实现的key，value模型
