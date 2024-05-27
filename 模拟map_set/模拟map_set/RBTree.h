@@ -64,14 +64,13 @@ public:
 		{
 			Node* cur = _node;
 			Node* parent = cur->_parent;
-			while (parent != nullptr && parent->_right==cur)
+			while (parent!=nullptr && parent->_right == cur)
 			{
 				cur = parent;
-				parent = parent->_parent;
+				parent = cur->_parent;
 			}
 			_node = parent;
 		}
-
 		return *this;
 	}
 
@@ -91,7 +90,7 @@ private:
 	Node* _node;
 };
 
-template<class K,class V,class GCV>
+template<class K,class V,class Compare, class GCV>
 class RBTree
 {
 public:
@@ -113,39 +112,42 @@ public:
 		return iterator(nullptr);
 	}
 
-	bool insert(const V& tmp)
+	pair<iterator,bool> insert(const V& tmp)
 	{
 		//如果根节点为空，则直接将新结点给到_root
 		if (_root == nullptr)
 		{
 			_root = new Node(tmp);
-			return true;
+			return make_pair(iterator(_root), true);
 		}
 
 		//先根据二叉搜索树的插入规则，找到可以插入的位置先
 		GCV gcv;
+		Compare com;
 		Node* curParent = nullptr;
 		Node* cur = _root;
 		while (cur != nullptr)
 		{
-			if (gcv(tmp) > gcv(cur->_data))
+			//if (gcv(tmp) > gcv(cur->_data))
+			if(com(gcv(cur->_data), gcv(tmp)))
 			{
 				curParent = cur;	
 				cur = cur->_right;
 			}
-			else if (gcv(tmp) < gcv(cur->_data))
+			else if (com(gcv(tmp), gcv(cur->_data)))
 			{
 				curParent = cur;
 				cur = cur->_left;
 			}
 			else
 			{
-				return false;
+				return make_pair(iterator(cur), false);
 			}
 		}
 		//找到空位后，接新结点进行插入
 		cur = new Node(tmp);
-		if ((cur->_data) < (curParent->_data))
+		//if ((cur->_data) < (curParent->_data))
+		if(com(gcv(cur->_data),gcv(curParent->_data)))
 		{
 			curParent->_left = cur;
 			cur->_parent = curParent;
@@ -158,6 +160,8 @@ public:
 
 		//每插入一个新结点，都将该结点的颜色默认位RED
 		cur->_col = RED;
+
+		Node* ret = cur;
 
 		//插入新结点后，要进行检查，是否要调整
 
@@ -229,6 +233,8 @@ public:
 			}
 		}
 		_root->_col = BLACK;
+
+		return make_pair(iterator(ret), true);
 
 	}
 

@@ -1,9 +1,10 @@
 #pragma once
 #include"RBTree.h"
+#include<string>
 
 namespace My_map
 {
-	template<class K, class V>
+	template<class K, class V, class Compare=less<K>>
 	class map
 	{
 	public:
@@ -15,7 +16,7 @@ namespace My_map
 			}
 		};
 
-		typedef typename RBTree<K, pair<K, V>, MapGetCompareValue>::iterator iterator;
+		typedef typename RBTree<K, pair<K, V>, Compare, MapGetCompareValue>::iterator iterator;
 
 		iterator begin()
 		{
@@ -27,18 +28,24 @@ namespace My_map
 			return _tree.end();
 		}
 
-		bool insert(const pair<K, V>& tmp)
+		pair<iterator,bool> insert(const pair<K, V>& tmp)
 		{
 			return _tree.insert(tmp);
 		}
 
+		V& operator[](const K& key)
+		{
+			pair<iterator, bool> ret = insert(make_pair(key, V()));	
+			return ret.first->second;
+		}
+
 	private:
-		RBTree<K, pair<K, V>, MapGetCompareValue> _tree;
+		RBTree<K, pair<K, V>, Compare, MapGetCompareValue> _tree;
 	};
 
 	void map_test1()
 	{
-		map<int, int> m;
+		map<int, int, greater<int>> m;
 		m.insert(make_pair(1, 1));
 		m.insert(make_pair(3, 3));
 		m.insert(make_pair(12, 12));
@@ -51,6 +58,21 @@ namespace My_map
 		{
 			cout << it->first << ":" << it->second << endl;
 			++it;
+		}
+	}
+
+	void map_test2()
+	{
+		map<string, int> m;
+		string str[] = { "Æ»¹û","Æ»¹û","Ñ©Àæ","Æ»¹û","Ïã½¶","Ïã½¶","Ñ©Àæ","Æ»¹û","Ïã½¶","Î÷¹Ï" };
+		for (auto& e : str)
+		{
+			m[e]++;
+		}
+
+		for (auto& e : m)
+		{
+			cout << e.first << ":" << e.second << endl;
 		}
 	}
 }
