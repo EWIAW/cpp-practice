@@ -255,27 +255,32 @@ void Test2()
 	root.InOrder();
 }
 
-template<class K>
+
+
+
+template<class K, class V>
 struct Blog_TreeNode
 {
 	//成员变量
 	K _key;
-	Blog_TreeNode<K>* _left;
-	Blog_TreeNode<K>* _right;
+	V _val;
+	Blog_TreeNode<K, V>* _left;
+	Blog_TreeNode<K, V>* _right;
 
 	//构造函数
-	Blog_TreeNode(const K& key)
+	Blog_TreeNode(const K& key, const V& value)
 		:_key(key)
+		,_val(value)
 		,_left(nullptr)
 		,_right(nullptr)
 	{}
 
 };
 
-template<class K>
+template<class K, class V>
 class Blog_Tree
 {
-	typedef Blog_TreeNode<K> Node;
+	typedef Blog_TreeNode<K, V> Node;
 public:
 	//构造函数
 	Blog_Tree()
@@ -289,12 +294,12 @@ public:
 	}
 
 	//插入结点
-	bool insert(const K& data)
+	bool insert(const K& key, const V& val)
 	{
 		//如果树为空，则直接将新结点给到_root
 		if (_root == nullptr)
 		{
-			_root = new Node(data);
+			_root = new Node(key, val);
 		}
 
 		//如果树不为空，这开始找空位，将新结点插入
@@ -302,12 +307,12 @@ public:
 		Node* cur_parent = nullptr;//这里要提前保留cur的parent，因为后面插入时要用到
 		while (cur != nullptr)
 		{
-			if (data > cur->_key)//如果要插入的数据大于cur，则cur往右走
+			if (key > cur->_key)//如果要插入的数据大于cur，则cur往右走
 			{
 				cur_parent = cur;//保留cur的parent
 				cur = cur->_right;
 			}
-			else if (data < cur->_key)//如果要插入的数据小于cur，则cur往左走
+			else if (key < cur->_key)//如果要插入的数据小于cur，则cur往左走
 			{
 				cur_parent = cur;//保留cur的parent
 				cur = cur->_left;
@@ -319,7 +324,7 @@ public:
 		}
 
 		//找到空位后，将新结点进行插入
-		Node* newnode = new Node(data);
+		Node* newnode = new Node(key, val);
 		if (cur_parent->_key > newnode->_key)
 		{
 			cur_parent->_left = newnode;
@@ -333,7 +338,7 @@ public:
 	}
 
 	//删除结点
-	bool erase(const K& data)
+	bool erase(const K& key)
 	{
 		if (_root == nullptr)
 		{
@@ -346,12 +351,12 @@ public:
 		while (cur != nullptr)
 		{
 			//先找到要删除的结点
-			if (data > cur->_key)
+			if (key > cur->_key)
 			{
 				cur_parent = cur;
 				cur = cur->_right;
 			}
-			else if (data < cur->_key)
+			else if (key < cur->_key)
 			{
 				cur_parent = cur;
 				cur = cur->_left;
@@ -443,16 +448,17 @@ public:
 		return false;
 	}
 
-	Node* find(const K& data)
+	//查找
+	Node* find(const K& key)
 	{
 		Node* cur = _root;
 		while (cur != nullptr)
 		{
-			if (data > cur->_key)
+			if (key > cur->_key)
 			{
 				cur = cur->_right;
 			}
-			else if (data < cur->_key)
+			else if (key < cur->_key)
 			{
 				cur = cur->_left;
 			}
@@ -478,7 +484,7 @@ private:
 			return;
 
 		_InOrder(root->_left);
-		cout << root->_key << " ";
+		cout << root->_key << ":" << root->_val << endl;
 		_InOrder(root->_right);
 	}
 
@@ -495,35 +501,4 @@ private:
 	Node* _root;
 };
 
-void Blog_test1()
-{
-	Blog_Tree<int> root;
-	int arr1[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16,14 };
-	int arr2[] = { 1,5,4,6,1,2,6,816,41,14 };
-	for (auto& e : arr1)
-	{
-		root.insert(e);
-	}
-	root.InOrder();
 
-	for (auto& e : arr2)
-	{
-		root.erase(e);
-		root.InOrder();
-	}
-	
-	root.InOrder();
-}
-
-void Blog_test2()
-{
-	Blog_Tree<int>* root = new Blog_Tree<int>;
-	int arr1[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16,14 };
-	for (auto& e : arr1)
-	{
-		root->insert(e);
-	}
-	root->InOrder();
-
-	delete root;
-}
