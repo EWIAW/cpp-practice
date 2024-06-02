@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include<time.h>
 using namespace std;
 
 namespace Close_Hash
@@ -160,8 +161,10 @@ namespace Open_Hash
 		typedef HashNode<T> Node;
 		typedef HashTableIterator Self;
 
-		HashTableIterator(Node* tmp)
+		HashTableIterator(Node* tmp, vector<Node*>* vec, size_t num)
 			:_node(tmp)
+			,_tab(vec)
+			,_num(num)
 		{}
 
 		T& operator*()
@@ -174,23 +177,75 @@ namespace Open_Hash
 			_node = _node->_next;
 			if (_node == nullptr)
 			{
-
+				size_t i;
+				for (i = _num + 1; i < _tab->size(); i++)
+				{
+					Node* cur = (*_tab)[i];
+					if (cur != nullptr)
+					{
+						_node = cur;
+						_num = i;
+						goto exit;
+					}
+				}
+				_num = i;
+				_node = nullptr;
 			}
+		exit:
 			return *this;
+		}
+
+		bool operator!=(Self tmp)
+		{
+			if (_node != tmp._node)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 
 		//成员变量
+		vector<Node*>* _tab;
+		size_t _num;
 		Node* _node;
 	};
 
-	template<class V>
+	template<class K>
+	struct Hash
+	{
+		size_t operator()(const K& tmp)
+		{
+			return tmp;
+		}
+	};
+
+	template<>
+	struct Hash<string>
+	{
+		size_t operator()(const string& tmp)
+		{
+			size_t count = 0;
+			for (int i = 0; i < tmp.size(); i++)
+			{
+				count += tmp[i];
+			}
+			return count;
+		}
+	};
+
+	template<class V, class Hash=Hash<V>>
 	class HashTable
 	{
 	public:
 		typedef HashNode<V> Node;
 		typedef HashTableIterator<V> iterator;
 	public:
+		Hash hash;
+
 		//构造函数
 		HashTable()
 			:_nums(0)
@@ -205,15 +260,15 @@ namespace Open_Hash
 				Node* cur = _tables[i];
 				if (cur != nullptr)
 				{
-					return iterator(cur);
+					return iterator(cur, &_tables, i);
 				}
 			}
-			return iterator(nullptr);
+			return iterator(nullptr, &_tables, _tables.size());
 		}
 
 		iterator end()
 		{
-			return iterator(nullptr);
+			return iterator(nullptr, &_tables, _tables.size());
 		}
 
 		//扩容
@@ -230,7 +285,7 @@ namespace Open_Hash
 				{
 					Node* next = cur->_next;//保存cur的下一个结点
 
-					size_t index = cur->_data % newtable._tables.size();
+					size_t index = hash(cur->_data) % newtable._tables.size();
 					//Node* newtable_cur = newtable._tables[index];
 
 					cur->_next = newtable._tables[index];
@@ -251,7 +306,7 @@ namespace Open_Hash
 				reserve();
 			}
 
-			size_t index = data % _tables.size();
+			size_t index = hash(data) % _tables.size();
 			//插入之前，要判断该值有没有，如果有，则不插入
 			Node* cur = _tables[index];
 			while (cur != nullptr)
@@ -274,7 +329,7 @@ namespace Open_Hash
 		//删除
 		bool erase(const V& data)
 		{
-			size_t index = data % _tables.size();
+			size_t index = hash(data) % _tables.size();
 			Node* cur = _tables[index];
 			Node* prev = nullptr;
 			while (cur != nullptr)//开始查找要删除的结点
@@ -305,7 +360,7 @@ namespace Open_Hash
 		//查找
 		Node* find(const V& data)
 		{
-			size_t index = data % _tables.size();
+			size_t index = hash(data) % _tables.size();
 			Node* cur = _tables[index];
 			while (cur != nullptr)
 			{
@@ -329,6 +384,7 @@ namespace Open_Hash
 					cur = cur->_next;
 				}
 			}
+			cout << endl;
 		}
 
 	private:
@@ -339,13 +395,51 @@ namespace Open_Hash
 	void Test1()
 	{
 		HashTable<int> table;
-		int arr[] = { 15,25,5,17,15,27,37,6,16,26,19,18 };
+		int arr[] = { 15,25,5,17,15,27,37,6,16,26,19,18,48,562,3156,499,12,65898,621,674,8,2,18,5 };
 		for (auto& e : arr)
 		{
 			table.insert(e);
 		}
 
 		table.Print();
-		table.erase(5);
+		//table.erase(5);
+		HashTable<int>::iterator it = table.begin();
+		while (it != table.end())
+		{
+			cout << *it << " ";
+			++it;
+		}
+	}
+
+	void Test2()
+	{
+		srand(time(0));
+		const int n = 10000;
+		HashTable<int> table;
+		for (int i = 0; i < n; i++)
+		{
+			table.insert(rand());
+		}
+		HashTable<int>::iterator it = table.begin();
+		while (it != table.end())
+		{
+			cout << *it << " ";
+			++it;
+		}
+	}
+
+	void Test3()
+	{
+		HashTable<string> table;
+		table.insert("sort");
+		table.insert("left");
+		table.insert("water");
+
+		HashTable<string>::iterator it = table.begin();
+		while (it != table.end())
+		{
+			cout << *it << endl;
+			++it;
+		}
 	}
 }
