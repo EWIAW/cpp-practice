@@ -6637,13 +6637,138 @@
 //	return 0;
 //}
 
-#include<iostream>
-#include<vector>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v;
+//	v.push_back(1);
+//	return 0;
+//}
 
-int main()
-{
-	vector<int> v;
-	v.push_back(1);
-	return 0;
-}
+//#include<iostream>
+//#include<unordered_map>
+//#include<string>
+//using namespace std;
+//
+//int main()
+//{
+//	//unordered_map<int, int> m;
+//	//int arr[] = { 15,23,4,9,63,4,6 };
+//	//for (auto& e : arr)
+//	//{
+//	//	m.insert(make_pair(e, e));
+//	//}
+//
+//	//unordered_map<int, int>::iterator it = m.begin();
+//	//while (it != m.end())
+//	//{
+//	//	cout << it->first << ":" << it->second << " ";
+//	//	it++;
+//	//}
+//
+//	unordered_map<string, string> m;
+//	m.insert(make_pair("排序", "sort"));
+//	m.insert(make_pair("水", "water"));
+//	m.insert(make_pair("谁", "who"));
+//
+//	unordered_map<string, string>::iterator it = m.begin();
+//	while (it != m.end())
+//	{
+//		cout << it->first << ":" << it->second << " ";
+//		it++;
+//	}
+//
+//	return 0;
+//}
+//
+//#include<iostream>
+//#include<unordered_set>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	Person(const char* name,int age)
+//		:_name(name)
+//		,_age(age)
+//	{}
+//
+//	bool operator==(const Person& tmp) const
+//	{
+//		if (strcmp(_name.c_str(), tmp._name.c_str()))
+//		{
+//			if (_age == tmp._age)
+//			{
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//
+////private:
+//	string _name;
+//	int _age;
+//};
+//
+//struct PersonHash {
+//	size_t operator()(const Person& p) const 
+//	{
+//		return p._age;
+//	}
+//};
+//
+//int main()
+//{
+//	unordered_set<Person,PersonHash> table;
+//	Person p1("xiaoming", 17);
+//	table.insert(p1);
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <unordered_set>
+//#include <string>
+//using namespace std;
+//
+//// 自定义 Person 类型
+//class Person {
+//public:
+//    string name;
+//    int age;
+//
+//    // 构造函数
+//    Person(string n, int a) : name(n), age(a) 
+//    {}
+//
+//    // 重载相等运算符
+//    bool operator==(const Person& other) const {
+//        return name == other.name && age == other.age;
+//    }
+//};
+//
+//// 自定义哈希函数
+//struct PersonHash {
+//    size_t operator()(const Person& p) const {
+//        return hash<string>()(p.name) ^ hash<int>()(p.age);
+//    }
+//};
+//
+//int main() {
+//    // 创建 unordered_set 来存储 Person 对象
+//    unordered_set<Person, PersonHash> personSet;
+//
+//    // 向 set 中插入 Person 对象
+//    personSet.insert(Person("Alice", 30));
+//    personSet.insert(Person("Bob", 25));
+//
+//    // 遍历并打印 set 中的 Person 对象
+//    for (const auto& person : personSet) {
+//        cout << "Name: " << person.name << ", Age: " << person.age << std::endl;
+//    }
+//
+//    return 0;
+//}
