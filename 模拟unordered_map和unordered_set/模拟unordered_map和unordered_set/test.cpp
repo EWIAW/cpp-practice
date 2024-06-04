@@ -6,7 +6,9 @@ using namespace my_unordered_set;
 int main()
 {
 	//my_unordered_map::Test1();
-	//my_unordered_map::Test2();
-	my_unordered_set::Test1();
+	my_unordered_map::Test2();
+	//my_unordered_map::Test3();
+
+	//my_unordered_set::Test1();
 	return 0;
 }

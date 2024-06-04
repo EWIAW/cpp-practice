@@ -40,9 +40,19 @@ namespace my_unordered_set
 			return _tables.end();
 		}
 
-		bool insert(const Key& tmp)
+		pair<iterator, bool> insert(const Key& tmp)
 		{
 			return _tables.insert(tmp);
+		}
+
+		bool erase(const Key& tmp)
+		{
+			return _tables.erase(tmp);
+		}
+
+		iterator find(const Key& tmp)
+		{
+			return _tables.find(tmp);
 		}
 
 	private:

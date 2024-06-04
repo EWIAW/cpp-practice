@@ -2,6 +2,7 @@
 #include"my_hash.h"
 #include<iostream>
 #include<string>
+#include<time.h>
 using namespace std;
 using namespace my_hash;
 
@@ -56,9 +57,25 @@ namespace my_unordered_map
 			return _tables.end();
 		}
 
-		bool insert(const pair<Key, Val>& tmp)
+		pair<iterator, bool> insert(const pair<Key, Val>& tmp)
 		{
 			return _tables.insert(tmp);
+		}
+
+		bool erase(const Key& tmp)
+		{
+			return _tables.erase(tmp);
+		}
+
+		iterator find(const Key& tmp)
+		{
+			return _tables.find(tmp);
+		}
+
+		Val& operator[](const Key& tmp)
+		{
+			pair<iterator, bool> ret = insert(make_pair(tmp, Val()));
+			return ret.first->second;
 		}
 
 	private:
@@ -73,6 +90,9 @@ namespace my_unordered_map
 		{
 			m.insert(make_pair(e, e));
 		}
+		m[1000];
+		m[250] = 156;
+
 		unordered_map<int, int>::iterator it = m.begin();
 		while (it != m.end())
 		{
@@ -88,7 +108,30 @@ namespace my_unordered_map
 		m.insert(make_pair("left", "×ó±ß"));
 		m.insert(make_pair("water", "Ë®"));
 		m.insert(make_pair("language", "ÓïÑÔ"));
+
+		m["string"] = "×Ö·û´®";
+		m["apple"];
+
 		unordered_map<string, string>::iterator it = m.begin();
+		while (it != m.end())
+		{
+			cout << it->first << ":" << it->second << endl;
+			++it;
+		}
+	}
+
+	void Test3()
+	{
+		srand(time(0));
+		unordered_map<int, int> m;
+		const int n = 10000;
+		for (int i = 0; i < n; i++)
+		{
+			int e = rand();
+			m.insert(make_pair(e, e));
+		}
+
+		unordered_map<int, int>::iterator it = m.begin();
 		while (it != m.end())
 		{
 			cout << it->first << ":" << it->second << endl;

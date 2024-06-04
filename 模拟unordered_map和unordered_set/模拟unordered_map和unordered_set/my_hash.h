@@ -86,6 +86,24 @@ namespace my_hash
 			_vec.resize(10);
 		}
 
+		//析构函数
+		~HashTable()
+		{
+			clear();
+		}
+
+		//清理函数
+		void clear()
+		{
+			Node* cur = _first;
+			while (cur != nullptr)
+			{
+				Node* next = cur->_linknext;//保存下一个结点
+				delete cur;
+				cur = next;
+			}
+		}
+
 		iterator begin()
 		{
 			return iterator(_first);
@@ -127,21 +145,21 @@ namespace my_hash
 		}
 
 		//插入
-		bool insert(const Val& tmp)
+		pair<iterator, bool> insert(const Val& tmp)
 		{
 			//插入之前要判断是否需要扩容
 			CheckCapacity();
 
 			GetCompareKey GCK;
 			Hash hash;
-			size_t index = hash(GCK(tmp)) % _vec.size();
+			size_t index = hash(GCK(tmp)) % _vec.size();//找到它的映射下标
 			//先去遍历桶，看要插入的数据有没有
 			Node* cur = _vec[index];
 			while (cur != nullptr)
 			{
-				if (cur->_val == tmp)
+				if (cur->_val == tmp)//说明桶中已经有该值
 				{
-					return false;
+					return make_pair(iterator(cur), false);
 				}
 				cur = cur->_next;
 			}
@@ -164,7 +182,7 @@ namespace my_hash
 				_prev = newnode;
 			}
 			_nums++;
-			return true;
+			return make_pair(iterator(newnode), true);
 		}
 
 		//删除
@@ -186,12 +204,12 @@ namespace my_hash
 					Node* cur_linknext = cur->_linknext;
 					if (cur_linkprev == nullptr)//说明要删除的cur在插入顺序中是第一个
 					{
-						cur_linkprev->_linkprev = nullptr;
-						_first = cur_linkprev;
+						cur_linknext->_linkprev = nullptr;
+						_first = cur_linknext;
 					}
 					else if (cur_linknext == nullptr)//说明要删除的cur是插入顺序中的最后一个
 					{
-						cur_linknext->_linknext = nullptr;
+						cur_linkprev->_linknext = nullptr;
 					}
 					else//说明要删除的cur是插入顺序中的中间位置
 					{
@@ -220,7 +238,7 @@ namespace my_hash
 		}
 
 		//查找
-		Node* find(const K& key)
+		iterator find(const K& key)
 		{
 			GetCompareKey GCK;
 			Hash hash;
@@ -230,10 +248,11 @@ namespace my_hash
 			{
 				if (GCK(cur->_val) == key)
 				{
-					return cur;
+					return iterator(cur);
 				}
 				cur = cur->_next;
 			}
+			return iterator(nullptr);
 		}
 
 	private:
