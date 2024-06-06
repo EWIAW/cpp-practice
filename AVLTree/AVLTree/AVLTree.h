@@ -6,7 +6,7 @@ using namespace std;
 
 
 	template<class K, class V>
-	struct AVLTreeNode
+struct AVLTreeNode
 	{
 		//成员变量
 		K _key;
@@ -27,19 +27,19 @@ using namespace std;
 		{}
 	};
 
-	template<class K, class V>
-	class AVLTree
-	{
-	public:
-		typedef AVLTreeNode<K, V> Node;
-	public:
+template<class K, class V>
+class AVLTree
+{
+public:
+	typedef AVLTreeNode<K, V> Node;
+public:
 		//构造函数
-		AVLTree()
-			:_root(nullptr)
-		{}
+	AVLTree()
+		:_root(nullptr)
+	{}
 
 		//插入结点
-		bool insert(const pair<K, V>& p)
+	bool insert(const pair<K, V>& p)
 		{
 			//如果此时tree为空，则直接把结点给_root
 			if (_root == nullptr)
@@ -138,7 +138,7 @@ using namespace std;
 		}
 
 		//删除结点
-		void erase(const K& key)
+	void erase(const K& key)
 		{
 			Node* cur = find(key);
 			if (cur == nullptr)
@@ -261,7 +261,7 @@ using namespace std;
 		}
 
 		//查找结点
-		Node* find(const K& key)
+	Node* find(const K& key)
 		{
 			if (_root == nullptr)
 			{
@@ -288,14 +288,14 @@ using namespace std;
 		}
 
 		//中序遍历
-		void InOrder()
+	void InOrder()
 		{
 			_InOrder(_root);
 			cout << endl;
 		}
 
 		//求二叉树的高度
-		int Height(Node* root)
+	int Height(Node* root)
 		{
 			if (root == nullptr)
 			{
@@ -306,14 +306,14 @@ using namespace std;
 		}
 
 		//判断是否平衡
-		bool JudgeBalance()
+	bool JudgeBalance()
 		{
 			Node* root = _root;
 			return _JudgeBalance(root);
 		}
 
 		//private:
-		bool _JudgeBalance(Node* root)
+	bool _JudgeBalance(Node* root)
 		{
 			if (root == nullptr)
 			{
@@ -328,7 +328,7 @@ using namespace std;
 				&& _JudgeBalance(root->_right);
 		}
 
-		void _InOrder(Node* root)
+	void _InOrder(Node* root)
 		{
 			if (root == nullptr)
 			{
@@ -343,7 +343,7 @@ using namespace std;
 		}
 
 		//左单旋
-		void RotateL(Node* first)
+	void RotateL(Node* first)
 		{
 			//1.first的right 指向 second的left
 			//2.second的left 指向 first
@@ -386,7 +386,7 @@ using namespace std;
 		}
 
 		//右单旋
-		void RotateR(Node* first)
+	void RotateR(Node* first)
 		{
 			//1.first的left  指向  second的right
 			//2.second的right  指向  first
@@ -426,7 +426,7 @@ using namespace std;
 		}
 
 		//右左双旋
-		void RotateRL(Node* first)
+	void RotateRL(Node* first)
 		{
 			Node* second = first->_right;
 			Node* third = second->_left;
@@ -458,7 +458,7 @@ using namespace std;
 		}
 
 		//左右双旋
-		void RotateLR(Node* first)
+	void RotateLR(Node* first)
 		{
 			Node* second = first->_left;
 			Node* third = second->_right;
@@ -488,13 +488,123 @@ using namespace std;
 			}
 		}
 
-		void Print()
+	void Print()
 		{
 			cout << _root->_key << endl;
 		}
 
 		//private:
+	Node* _root;
+};
+
+
+
+//再次复习AVLTree，并编写一篇博客
+namespace blog_AVLTree
+{
+	template<class T>
+	struct TreeNode
+	{
+		//成员变量
+		T _data;//树结点存储的数据类型
+		TreeNode<T>* _left;//左孩子指针
+		TreeNode<T>* _right;//右孩子指针
+		TreeNode<T>* _parent;//父结点指针
+		int _bf;//平衡因子
+
+		//成员函数
+		TreeNode(cosnt T& tmp)//构造函数
+			:_data(tmp)
+			, _left(nullptr)
+			, _right(nullptr)
+			, _parent(nullptr)
+			, _bf(0)
+		{}
+	};
+
+	template<class T>
+	class AVLTree
+	{
+		typedef TreeNode<T> Node;
+	public:
+		AVLTree()
+			:_root(nullptr)
+		{}
+
+		bool insert(const T& tmp)
+		{
+			//如果根节点为空，则直接插入
+			if (_root == nullptr)
+			{
+				_root = new Node(tmp);
+				return true;
+			}
+
+			//如果根节点不为空，则先按二叉搜索树的规则进行插入
+			Node* cur = _root;
+			Node* cur_parent = nullptr;
+			while (cur != nullptr)//往下找空位
+			{
+				if (tmp > cur->_data)
+				{
+					cur_parent = cur;
+					cur = cur->_right;
+				}
+				else if (tmp < cur->_data)
+				{
+					cur_parent = cur;
+					cur = cur->_left;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			//找到空位后，给空位一个新结点
+			cur = new Node(tmp);
+			if (cur->_data > cur_parent->_data)
+			{
+				cur_parent->_right = cur;
+				cur->_parent = cur_parent;
+			}
+			else
+			{
+				cur_parent->_left = cur;
+				cur->_parent = cur_parent;
+			}
+
+			//插入完结点后，要更新平衡因子
+			while (cur_parent != nullptr)
+			{
+				if (cur_parent->_right == cur)
+				{
+					cur_parent->_bf++;
+				}
+				else
+				{
+					cur_parent->_bf--;
+				}
+
+				if (cur_parent->_bf == 0)
+				{
+					break;
+				}
+				else if (cur_parent->_bf == 1 || cur_parent-> == -1)
+				{
+					cur = cur_parent;
+					cur_parent = cur_parent->_parent;
+				}
+				else if (cur_parent->_bf == 2 || cur_parent->_bf == -2)
+				{
+					//进行旋转处理
+				}
+			}
+		}
+
+	private:
 		Node* _root;
 	};
+}
 
 
