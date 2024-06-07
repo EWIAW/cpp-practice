@@ -63,8 +63,10 @@ void Test3()
 
 int main()
 {
-	Test1();
+	//Test1();
 	//Test2();
 	//Test3();
+	blog_AVLTree::Test1();
+	//blog_AVLTree::Test2();
 	return 0;
 }

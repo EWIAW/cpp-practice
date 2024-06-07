@@ -513,7 +513,7 @@ namespace blog_AVLTree
 		int _bf;//平衡因子
 
 		//成员函数
-		TreeNode(cosnt T& tmp)//构造函数
+		TreeNode(const T& tmp)//构造函数
 			:_data(tmp)
 			, _left(nullptr)
 			, _right(nullptr)
@@ -531,6 +531,7 @@ namespace blog_AVLTree
 			:_root(nullptr)
 		{}
 
+		//插入
 		bool insert(const T& tmp)
 		{
 			//如果根节点为空，则直接插入
@@ -590,7 +591,7 @@ namespace blog_AVLTree
 				{
 					break;
 				}
-				else if (cur_parent->_bf == 1 || cur_parent-> == -1)
+				else if (cur_parent->_bf == 1 || cur_parent->_bf == -1)
 				{
 					cur = cur_parent;
 					cur_parent = cur_parent->_parent;
@@ -598,13 +599,284 @@ namespace blog_AVLTree
 				else if (cur_parent->_bf == 2 || cur_parent->_bf == -2)
 				{
 					//进行旋转处理
+					if (cur_parent->_bf == 2)
+					{
+						if (cur->_bf == 1)//左单旋
+						{
+							RotateL(cur_parent);
+						}
+						else if(cur->_bf == -1)//右左双旋
+						{
+							RotateRL(cur_parent);
+						}
+					}
+					else if (cur_parent->_bf == -2)
+					{
+						if (cur->_bf == 1)//左右单旋
+						{
+							RotateLR(cur_parent);
+						}
+						else if (cur->_bf == -1)//右单旋
+						{
+							RotateR(cur_parent);
+						}
+					}
+					break;
 				}
 			}
+			return true;
 		}
+
+		//查找结点
+		Node* find(const T& tmp)
+		{
+			Node* cur = _root;
+			while (cur != nullptr)
+			{
+				if (tmp > cur->_data)
+				{
+					cur = cur->_right;
+				}
+				else if (tmp < cur->_data)
+				{
+					cur = cur->_left;
+				}
+				else
+				{
+					return cur;
+				}
+			}
+			return nullptr;
+		}
+
+		//中序遍历
+		void InOrder()
+		{
+			Node* cur = _root;
+			_InOrder(cur);
+		}
+
+		//求树的高度
+		int height(Node* cur)
+		{
+			if (cur == nullptr)
+				return 0;
+
+			return fmax(height(cur->_left), height(cur->_right)) + 1;
+		}
+
+		//判断是否平衡
+		bool JudgeBanlance()
+		{
+			Node* cur = _root;
+			return _JudgeBanlance(cur);
+		}
+
+	private:
+			//左单旋	
+			void RotateL(Node* cur_parent)
+			{
+				Node* cur = cur_parent->_right;
+				Node* cur_left = cur->_left;
+
+				//改变指针的链接关系
+				cur_parent->_right = cur_left;
+				if (cur_left != nullptr)
+				{
+					cur_left->_parent = cur_parent;
+				}
+
+				cur->_left = cur_parent;
+				Node* cur_parent_parent = cur_parent->_parent;
+				cur_parent->_parent = cur;
+
+				//旋转完成后要判断cur_parent是否为根
+				if (cur_parent_parent != nullptr)//说明cur_parent不是根
+				{
+					if (cur_parent_parent->_data < cur_parent->_data)
+					{
+						cur_parent_parent->_right = cur;
+						cur->_parent = cur_parent_parent;
+					}
+					else
+					{
+						cur_parent_parent->_left = cur;
+						cur->_parent = cur_parent_parent;
+					}
+				}
+				else//说明cur_parent是根
+				{
+					_root = cur;
+					cur->_parent = nullptr;
+				}
+
+				//旋转完成后，平衡因子调整为0
+				cur_parent->_bf = cur->_bf = 0;
+			}
+
+			//右单旋
+			void RotateR(Node* cur_parent)
+			{
+				Node* cur = cur_parent->_left;
+				Node* cur_right = cur->_right;
+
+				cur_parent->_left = cur_right;
+				if (cur_right != nullptr)
+				{
+					cur_right->_parent = cur_parent;
+				}
+
+				cur->_right = cur_parent;
+				Node* cur_parent_parent = cur_parent->_parent;
+				cur_parent->_parent = cur;
+
+				if (cur_parent_parent != nullptr)
+				{
+					if (cur_parent_parent->_data > cur_parent->_data)
+					{
+						cur_parent_parent->_left = cur;
+						cur->_parent = cur_parent_parent;
+					}
+					else
+					{
+						cur_parent_parent->_right = cur;
+						cur->_parent = cur_parent_parent;
+					}
+				}
+				else
+				{
+					_root = cur;
+					cur->_parent = nullptr;
+				}
+
+				cur_parent->_bf = cur->_bf = 0;
+			}
+
+			//左右双旋
+			void RotateLR(Node* cur_parent)
+			{
+				Node* cur = cur_parent->_left;
+				Node* cur_right = cur->_right;
+
+				int bf = cur_right->_bf;
+
+				//先对cur进行一个左单旋
+				RotateL(cur);
+
+				//再对cur_parent进行一个右单旋
+				RotateR(cur_parent);
+
+				//旋转完成后，要更新平衡因子
+				if (bf == -1)
+				{
+					cur->_bf = 0;
+					cur_parent->_bf = 1;
+					cur_right->_bf = 0;
+				}
+				else if (bf == 1)
+				{
+					cur->_bf = -1;
+					cur_parent->_bf = 0;
+					cur_right->_bf = 0;
+				}
+				else if (bf == 0)//特殊情况
+				{
+					cur->_bf = 0;
+					cur_parent->_bf = 0;
+					cur_right->_bf = 0;
+				}
+			}
+
+			//右左双旋
+			void RotateRL(Node* cur_parent)
+			{
+				Node* cur = cur_parent->_right;
+				Node* cur_left = cur->_left;
+
+				int bf = cur_left->_bf;
+
+				//先对cur进行一个右单旋
+				RotateR(cur);
+
+				//再对cur_parent进行一个左单旋
+				RotateL(cur_parent);
+
+				//更新平衡因子
+				if (bf == -1)
+				{
+					cur->_bf = 1;
+					cur_parent->_bf = 0;
+					cur_left->_bf = 0;
+				}
+				else if (bf == 1)
+				{
+					cur->_bf = 0;
+					cur_parent->_bf = -1;
+					cur_left->_bf = 0;
+				}
+				else if (bf == 0)
+				{
+					cur->_bf = 0;
+					cur_parent->_bf = 0;
+					cur_left->_bf = 0;
+				}
+			}
+
+			//中序遍历的子函数
+			void _InOrder(Node* cur)
+			{
+				if (cur == nullptr)
+					return;
+
+				_InOrder(cur->_left);
+				cout << cur->_data << " ";
+				_InOrder(cur->_right);
+			}
+
+			//判断是否平衡的子函数
+			bool _JudgeBanlance(Node* cur)
+			{
+				if (cur == nullptr)
+					return true;
+
+				int left_height = height(cur->_left);//求cur左子树的高度
+				int right_height = height(cur->_right);//求cur右子树的高度
+
+				return abs(left_height - right_height) < 2
+					&& _JudgeBanlance(cur->_left)
+					&& _JudgeBanlance(cur->_right);
+			}
 
 	private:
 		Node* _root;
 	};
+
+	void Test1()
+	{
+		AVLTree<int> root;
+		//int arr[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+		int arr[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+
+		for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+		{
+			root.insert(arr[i]);
+		}
+		root.InOrder();
+		cout << root.JudgeBanlance() << endl;
+	}
+
+	void Test2()
+	{
+		srand(time(0));
+		AVLTree<int> root;
+		const int n = 100;
+		for (int i = 0; i < n; i++)
+		{
+			root.insert(rand());
+		}
+		root.InOrder();
+		cout << root.JudgeBanlance() << endl;
+	}
 }
 
 
