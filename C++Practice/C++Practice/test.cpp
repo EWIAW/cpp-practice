@@ -6772,3 +6772,398 @@
 //
 //    return 0;
 //}
+
+//再次复习AVLTree，并编写一篇博客
+//namespace blog_AVLTree
+//{
+//	template<class T>
+//	struct TreeNode
+//	{
+//		//成员变量
+//		T _data;//树结点存储的数据类型
+//		TreeNode<T>* _left;//左孩子指针
+//		TreeNode<T>* _right;//右孩子指针
+//		TreeNode<T>* _parent;//父结点指针
+//		int _bf;//平衡因子
+//
+//		//成员函数
+//		TreeNode(const T& tmp)//构造函数
+//			:_data(tmp)
+//			, _left(nullptr)
+//			, _right(nullptr)
+//			, _parent(nullptr)
+//			, _bf(0)
+//		{}
+//	};
+//
+//	template<class T>
+//	class AVLTree
+//	{
+//		typedef TreeNode<T> Node;
+//	public:
+//		AVLTree()
+//			:_root(nullptr)
+//		{}
+//
+//		bool insert(const T& tmp)
+//		{
+//			//如果根节点为空，则直接插入
+//			if (_root == nullptr)
+//			{
+//				_root = new Node(tmp);
+//				return true;
+//			}
+//
+//			//如果根节点不为空，则先按二叉搜索树的规则进行插入
+//			Node* cur = _root;
+//			Node* cur_parent = nullptr;
+//			while (cur != nullptr)//往下找空位
+//			{
+//				if (tmp > cur->_data)
+//				{
+//					cur_parent = cur;
+//					cur = cur->_right;
+//				}
+//				else if (tmp < cur->_data)
+//				{
+//					cur_parent = cur;
+//					cur = cur->_left;
+//				}
+//				else
+//				{
+//					return false;
+//				}
+//			}
+//
+//			//找到空位后，给空位一个新结点
+//			cur = new Node(tmp);
+//			if (cur->_data > cur_parent->_data)
+//			{
+//				cur_parent->_right = cur;
+//				cur->_parent = cur_parent;
+//			}
+//			else
+//			{
+//				cur_parent->_left = cur;
+//				cur->_parent = cur_parent;
+//			}
+//
+//			//插入完结点后，要更新平衡因子
+//			while (cur_parent != nullptr)
+//			{
+//				if (cur_parent->_right == cur)
+//				{
+//					cur_parent->_bf++;
+//				}
+//				else
+//				{
+//					cur_parent->_bf--;
+//				}
+//
+//				if (cur_parent->_bf == 0)
+//				{
+//					break;
+//				}
+//				else if (cur_parent->_bf == 1 || cur_parent->_bf == -1)
+//				{
+//					cur = cur_parent;
+//					cur_parent = cur_parent->_parent;
+//				}
+//				else if (cur_parent->_bf == 2 || cur_parent->_bf == -2)
+//				{
+//					//进行旋转处理
+//					if (cur_parent->_bf == 2)
+//					{
+//						if (cur->_bf == 1)//左单旋
+//						{
+//							RotateL(cur_parent);
+//						}
+//						else if (cur->_bf == -1)//右左双旋
+//						{
+//							RotateRL(cur_parent);
+//						}
+//					}
+//					else if (cur_parent->_bf == -2)
+//					{
+//						if (cur->_bf == 1)//左右单旋
+//						{
+//							RotateLR(cur_parent);
+//						}
+//						else if (cur->_bf == -1)//右双旋
+//						{
+//							RotateR(cur_parent);
+//						}
+//					}
+//					break;
+//				}
+//			}
+//			return true;
+//		}
+//
+//		//左单旋
+//		void RotateL(Node* cur_parent)
+//		{
+//			Node* cur = cur_parent->_right;
+//			Node* cur_left = cur->_left;
+//
+//			//改变指针的链接关系
+//			cur_parent->_right = cur_left;
+//			if (cur_left != nullptr)
+//			{
+//				cur_left->_parent = cur_parent;
+//			}
+//
+//			cur->_left = cur_parent;
+//			Node* cur_parent_parent = cur_parent->_parent;
+//			cur_parent->_parent = cur;
+//
+//			//旋转完成后要判断cur_parent是否为根
+//			if (cur_parent_parent != nullptr)//说明cur_parent不是根
+//			{
+//				if (cur_parent_parent->_data < cur_parent->_data)
+//				{
+//					cur_parent_parent->_right = cur;
+//					cur->_parent = cur_parent_parent;
+//				}
+//				else
+//				{
+//					cur_parent_parent->_left = cur;
+//					cur->_parent = cur_parent_parent;
+//				}
+//			}
+//			else//说明cur_parent是根
+//			{
+//				_root = cur;
+//				cur->_parent = nullptr;
+//			}
+//
+//			//旋转完成后，平衡因子调整为0
+//			cur_parent->_bf = cur->_bf = 0;
+//		}
+//
+//		//右单旋
+//		void RotateR(Node* cur_parent)
+//		{
+//			Node* cur = cur_parent->_left;
+//			Node* cur_right = cur->_right;
+//
+//			cur_parent->_left = cur_right;
+//			if (cur_right != nullptr)
+//			{
+//				cur_right->_parent = cur_parent;
+//			}
+//
+//			cur->_right = cur_parent;
+//			Node* cur_parent_parent = cur_parent->_parent;
+//			cur_parent->_parent = cur;
+//
+//			if (cur_parent_parent != nullptr)
+//			{
+//				if (cur_parent_parent->_data > cur_parent->_data)
+//				{
+//					cur_parent_parent->_left = cur;
+//					cur->_parent = cur_parent_parent;
+//				}
+//				else
+//				{
+//					cur_parent_parent->_right = cur;
+//					cur->_parent = cur_parent_parent;
+//				}
+//			}
+//			else
+//			{
+//				_root = cur;
+//				cur->_parent = nullptr;
+//			}
+//
+//			cur_parent->_bf = cur->_bf = 0;
+//		}
+//
+//		//左右双旋
+//		void RotateLR(Node* cur_parent)
+//		{
+//			Node* cur = cur_parent->_left;
+//			Node* cur_right = cur->_right;
+//
+//			int bf = cur_right->_bf;
+//
+//			//先对cur进行一个左单旋
+//			RotateL(cur);
+//
+//			//再对cur_parent进行一个右单旋
+//			RotateR(cur_parent);
+//
+//			//旋转完成后，要更新平衡因子
+//			if (bf == -1)
+//			{
+//				cur->_bf = 0;
+//				cur_parent->_bf = 1;
+//				cur_right->_bf = 0;
+//			}
+//			else if (bf == 1)
+//			{
+//				cur->_bf = -1;
+//				cur_parent->_bf = 0;
+//				cur_right->_bf = 0;
+//			}
+//			else if (bf == 0)//特殊情况
+//			{
+//				cur->_bf = 0;
+//				cur_parent->_bf = 0;
+//				cur_right->_bf = 0;
+//			}
+//		}
+//
+//		//右左双旋
+//		void RotateRL(Node* cur_parent)
+//		{
+//			Node* cur = cur_parent->_right;
+//			Node* cur_left = cur->_left;
+//
+//			int bf = cur_left->_bf;
+//
+//			//先对cur进行一个右单旋
+//			RotateR(cur);
+//
+//			//再对cur_parent进行一个左单旋
+//			RotateL(cur_parent);
+//
+//			//更新平衡因子
+//			if (bf == -1)
+//			{
+//				cur->_bf = 1;
+//				cur_parent->_bf = 0;
+//				cur_left->_bf = 0;
+//			}
+//			else if (bf == 1)
+//			{
+//				cur->_bf = 0;
+//				cur_parent->_bf = -1;
+//				cur_left->_bf = 0;
+//			}
+//			else if (bf == 0)
+//			{
+//				cur->_bf = 0;
+//				cur_parent->_bf = 0;
+//				cur_left->_bf = 0;
+//			}
+//		}
+//
+//	private:
+//		Node* _root;
+//	};
+//
+//	void Test1()
+//	{
+//		AVLTree<int> root;
+//		int arr[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+//		//int arr[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+//
+//		for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+//		{
+//			root.insert(arr[i]);
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	blog_AVLTree::Test1();
+//	return 0;
+//}
+
+
+//学习C++11
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<map>
+//using namespace std;
+
+//class Person final
+//{
+//private:
+//	string _name;
+//	int _age;
+//};
+//
+//class Student :Person
+//{
+//
+//};
+
+//int main()
+//{
+//	//列表初始化
+//	//int a = 10;
+//	//int b = { 10 };
+//	//
+//	//vector<int> v = { 1,2,3,4,4 };
+//	//for (int& e : v)
+//	//{
+//	//	cout << e << " ";
+//	//}
+//	//cout << endl;
+//
+//	//string str;
+//	//cout << typeid(str).name() << endl;
+//
+//	//auto e = str;
+//	//cout << typeid(e).name() << endl;
+//	////auto不能做为函数的形参和返回值
+//
+//	//decltype(str) aaa;
+//	//cout << typeid(aaa).name() << endl;
+//
+//	//final修饰的类不能被继承，final修饰的虚函数不能被重写
+//	//override用来修饰派生类的虚函数，被修饰的虚函数必须是重写父类的虚函数而来
+//
+//	int a = 10;
+//	int& b = a;
+//	const int& c = 10;
+//
+//	int&& d = 10;
+//	int&& e = move(a);
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//void f(int& n)
+//{
+//	cout << "f(int& n)" << endl;
+//}
+//
+//void f(int&& n)
+//{
+//	cout << "f(int&& n)" << endl;
+//}
+//
+//int main()
+//{
+//	int a = 10;
+//	f(a);
+//	f(10);
+//	return 0;
+//}
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+string f(const char* str)
+{
+	string tmp(str);
+	return tmp;
+}
+
+int main()
+{
+	string s1("左值");
+	string s2(s1);
+	string s3(f("右值"));
+
+	return 0;
+}
