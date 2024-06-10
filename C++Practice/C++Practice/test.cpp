@@ -7149,21 +7149,129 @@
 //	return 0;
 //}
 
-#include<iostream>
-#include<string>
-using namespace std;
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+////string f(const char* str)
+////{
+////	string tmp(str);
+////	return tmp;
+////}
+//
+////左值引用 一般引用的都是 变量
+////右值引用 一般引用的都是 常量、表达式、返回值
+//
+////右值引用也是一种引用，在C++11中，将右值引用分为纯右值和将亡值
+////1.纯右值：内置类型的常量或者临时变量
+////2.将亡值：自定义类的临时对象
+////纯右值一般用来使用与所有需要深拷贝的类，
+//
+//class String
+//{
+//public:
+//	String(const char* str)
+//	{
+//		_str = new char[strlen(str) + 1];
+//		strcpy(_str, str);
+//	}
+//
+//	//拷贝构造
+//	//无论如何都要做深拷贝
+//	String(const String& tmp)
+//	{
+//		_str = new char[strlen(tmp._str) + 1];
+//		strcpy(_str, tmp._str);
+//		cout << "深拷贝" << endl;
+//	}
+//	
+//	//移动拷贝
+//	String(String&& tmp)
+//		:_str(nullptr)
+//	{
+//		swap(_str, tmp._str);
+//		cout << "移动拷贝" << endl;
+//	}
+//
+//private:
+//	char* _str = nullptr;
+//};
+//
+//String f(const char* str)
+//{
+//	String tmp(str);
+//	return tmp;
+//}
+//
+//int main()
+//{
+//	int x = 10;
+//	//左值引用
+//	int& y = x;
+//
+//	//右值引用
+//	int&& a = 10;
+//
+//	//左值引用不能直接引用常量，但是const左值可以引用常量
+//	/*int& b = 10;*///直接报错；
+//	const int& c = 10;//可以
+//
+//	//右值引用不能直接引用左值，但是可以引用move后的左值
+//	/*int&& e = x;*///直接报错
+//	int&& z = move(x);
+//
+//	String s1("hello world");
+//	String s2(s1);
+//	String s3(move(f("aaa")));
+//
+//	return 0;
+//}
 
-string f(const char* str)
-{
-	string tmp(str);
-	return tmp;
-}
+//#include<iostream>
+//using namespace std;
+//
+//void fun(int& tmp)
+//{
+//	cout << "左值引用" << endl;
+//}
+//
+//void fun(const int& tmp)
+//{
+//	cout << "const左值引用" << endl;
+//}
+//
+//void fun(int&& tmp)
+//{
+//	cout << "右值引用" << endl;
+//}
+//
+////模板中的 && 是万能应用的意思，既能引用左值，也能引用右值
+//template<class T>
+//void function(T&& tmp)
+//{
+//	fun(tmp);
+//}
+//
+//int main()
+//{
+//	function(10);//右值
+//	int a = 10;
+//	function(a);//左值
+//
+//	const int b = 10;
+//	
+//
+//	return 0;
+//}
+
+#include<iostream>
+using namespace std;
 
 int main()
 {
-	string s1("左值");
-	string s2(s1);
-	string s3(f("右值"));
-
+	int a = 10;
+	int b = 20;
+	auto add1 = [](int x, int y)->int {return x + y; };
+	cout << add1(a, b) << endl;
 	return 0;
 }
