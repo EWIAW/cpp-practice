@@ -1,4 +1,4 @@
-//#include<iostream>
+ï»¿//#include<iostream>
 
 //using namespace std;
 //
@@ -166,12 +166,12 @@
 //	return x + y;
 //}
 //
-//int Add(double x, double y)//ÀàĞÍ²»Í¬
+//int Add(double x, double y)//ç±»å‹ä¸åŒ
 //{
 //	return x + y;
 //}
 //
-//int Add(double x, double y, double z)//¸öÊı²»Í¬
+//int Add(double x, double y, double z)//ä¸ªæ•°ä¸åŒ
 //{
 //	return x + y + z;
 //}
@@ -182,7 +182,7 @@
 //	;
 //}
 //
-//void Add(char a, int i)//Ë³Ğò²»Í¬
+//void Add(char a, int i)//é¡ºåºä¸åŒ
 //{
 //	;
 //}
@@ -212,15 +212,15 @@
 //int main()
 //{
 //	const int a = 10;
-//	int& ra = a;//±àÒë²»ÄÜÍ¨¹ı£¬ÒòÎªconst ĞŞÊÎµÄ±äÁ¿aÖ»ÄÜ¶Á²»ÄÜĞ´£¬¶øra¿É¶Á¿ÉĞ´£¬È¨ÏŞ·Å´óÁË
+//	int& ra = a;//ç¼–è¯‘ä¸èƒ½é€šè¿‡ï¼Œå› ä¸ºconst ä¿®é¥°çš„å˜é‡aåªèƒ½è¯»ä¸èƒ½å†™ï¼Œè€Œraå¯è¯»å¯å†™ï¼Œæƒé™æ”¾å¤§äº†
 //
 //	const int b = 20;
-//	const int& rb = 20;//±àÒëÄÜÍ¨¹ı
+//	const int& rb = 20;//ç¼–è¯‘èƒ½é€šè¿‡
 //
 //	int c = 30;
-//	const int& rc = c;//±àÒëÄÜÍ¨¹ı£¬ÒòÎªc¿É¶Á¿ÉĞ´£¬rcÖ»¿É¶Á£¬È¨ÏŞËõĞ¡
+//	const int& rc = c;//ç¼–è¯‘èƒ½é€šè¿‡ï¼Œå› ä¸ºcå¯è¯»å¯å†™ï¼Œrcåªå¯è¯»ï¼Œæƒé™ç¼©å°
 //
-//	//×Ü½á£¬È¨ÏŞ¿ÉÒÔËõĞ¡£¬µ«²»ÄÜ·Å´ó
+//	//æ€»ç»“ï¼Œæƒé™å¯ä»¥ç¼©å°ï¼Œä½†ä¸èƒ½æ”¾å¤§
 //
 //	return 0;
 //}
@@ -266,7 +266,7 @@
 //#include<iostream>
 //using namespace std;
 //
-////CÓïÑÔ½»»»Á½¸öÊıµÄĞ´·¨
+////Cè¯­è¨€äº¤æ¢ä¸¤ä¸ªæ•°çš„å†™æ³•
 //void Swap_C(int* p1, int* p2)
 //{
 //	int tmp = *p1;
@@ -274,7 +274,7 @@
 //	*p2 = tmp;
 //}
 //
-////C++Ê¹ÓÃÒıÓÃ½»»»Á½¸öÊı
+////C++ä½¿ç”¨å¼•ç”¨äº¤æ¢ä¸¤ä¸ªæ•°
 //void Swap_CPP(int& a, int& b)
 //{
 //	int tmp = a;
@@ -301,7 +301,7 @@
 //#include<iostream>
 //using namespace std;
 //
-//int a = 0;//È«¾Ö±äÁ¿a
+//int a = 0;//å…¨å±€å˜é‡a
 //
 //int& Count1()
 //{
@@ -429,7 +429,7 @@
 //#include<iostream>
 //using namespace std;
 //
-//////ÓÃstruct¶¨ÒåÀà
+//////ç”¨structå®šä¹‰ç±»
 ////struct Date
 ////{
 ////	void Show()
@@ -442,7 +442,7 @@
 ////	int _day;
 ////};
 //
-////ÓÃclass¶¨ÒåÀà
+////ç”¨classå®šä¹‰ç±»
 //class date
 //{
 //	void Show()
@@ -696,7 +696,7 @@
 //
 //	~Time()
 //	{
-//		cout << "TimeÀà Îö¹¹Íê³É" << endl;
+//		cout << "Timeç±» ææ„å®Œæˆ" << endl;
 //	}
 //private:
 //	int _hour;
@@ -721,7 +721,7 @@
 //
 //	~Date()
 //	{
-//		cout << "DateÀà Îö¹¹Íê³É" << endl;
+//		cout << "Dateç±» ææ„å®Œæˆ" << endl;
 //	}
 //private:
 //	int _year;
@@ -747,13 +747,13 @@
 //class Stack
 //{
 //public:
-//	//¹¹Ôìº¯Êı
-//	Stack(int n = 10)//Õ»µÄ³õÊ¼»¯
+//	//æ„é€ å‡½æ•°
+//	Stack(int n = 10)//æ ˆçš„åˆå§‹åŒ–
 //	{
 //		int* tmp = (int*)malloc(sizeof(int) * n);
 //		if (tmp == nullptr)
 //		{
-//			cout << "¿ª±ÙÊ§°Ü" << endl;
+//			cout << "å¼€è¾Ÿå¤±è´¥" << endl;
 //			exit(-1);
 //		}
 //		_a = tmp;
@@ -761,7 +761,7 @@
 //		_capacity = n;
 //	}
 //
-//	//Õ»µÄÀ©Èİ
+//	//æ ˆçš„æ‰©å®¹
 //	void CheckCapacity()
 //	{
 //		if (_size == _capacity)
@@ -769,7 +769,7 @@
 //			int* tmp = (int*)realloc(_a, sizeof(int) * (_capacity * 2));
 //			if (tmp == nullptr)
 //			{
-//				cout << "À©ÈİÊ§°Ü" << endl;
+//				cout << "æ‰©å®¹å¤±è´¥" << endl;
 //				exit(-1);
 //			}
 //			_a = tmp;
@@ -777,7 +777,7 @@
 //		}
 //	}
 //
-//	//ÈëÕ»
+//	//å…¥æ ˆ
 //	void Push(int x)
 //	{
 //		CheckCapacity();
@@ -785,14 +785,14 @@
 //		_size++;
 //	}
 //
-//	//³öÕ»
+//	//å‡ºæ ˆ
 //	void Pop()
 //	{
 //		assert(_size > 0);
 //		_size--;
 //	}
 //
-//	//±éÀúÕ»
+//	//éå†æ ˆ
 //	void Print()
 //	{
 //		int i = 0;
@@ -803,7 +803,7 @@
 //		}
 //	}
 //
-//	//Îö¹¹º¯Êı
+//	//ææ„å‡½æ•°
 //	~Stack()
 //	{
 //		free(_a);
@@ -813,9 +813,9 @@
 //	}
 //
 //private:
-//	int* _a;//Õ»Êı×é
-//	int _size;//Õ»ÖĞÏÖÓĞÔªËØ¸öÊı
-//	int _capacity;//Õ»µÄÈİÁ¿
+//	int* _a;//æ ˆæ•°ç»„
+//	int _size;//æ ˆä¸­ç°æœ‰å…ƒç´ ä¸ªæ•°
+//	int _capacity;//æ ˆçš„å®¹é‡
 //};
 //
 //int main()
@@ -938,26 +938,26 @@
 
 
 
-//Ê±¼äÀàÍêÕûµÄÊµÏÖ
+//æ—¶é—´ç±»å®Œæ•´çš„å®ç°
 //#include<iostream>
 //using namespace std;
 //
 //class Date
 //{
 //public:
-//	//»ñÈ¡µ±ÔÂµÄÌìÊı
+//	//è·å–å½“æœˆçš„å¤©æ•°
 //	int GetMonthDay(int year, int month)
 //	{
 //		int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-//		//ÅĞ¶ÏÊÇ·ñÈòÄê
+//		//åˆ¤æ–­æ˜¯å¦é—°å¹´
 //		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
 //		{
-//			arr[2]++;//¶şÔÂ·İÌìÊı++
+//			arr[2]++;//äºŒæœˆä»½å¤©æ•°++
 //		}
 //		return arr[month];
 //	}
 //
-//	//¹¹Ôìº¯Êı
+//	//æ„é€ å‡½æ•°
 //	Date(int year = 0, int month = 0, int day = 0)
 //	{
 //		if (year >= 0 
@@ -970,14 +970,14 @@
 //		}
 //		else
 //		{
-//			/*cout << "·Ç·¨ÈÕÆÚ" << endl;*/
+//			/*cout << "éæ³•æ—¥æœŸ" << endl;*/
 //			_year = -1;
 //			_month = -1;
 //			_day = -1;
 //		}
 //	}
 //
-//	//¿½±´¹¹Ôì
+//	//æ‹·è´æ„é€ 
 //	Date(const Date& d)
 //	{
 //		_year = d._year;
@@ -985,8 +985,8 @@
 //		_day = d._day;
 //	}
 //
-//	//ÈÕÆÚ±È½Ï
-//	bool operator==(const Date& d)//ÅĞ¶ÏÈÕÆÚÊÇ·ñÏàµÈ
+//	//æ—¥æœŸæ¯”è¾ƒ
+//	bool operator==(const Date& d)//åˆ¤æ–­æ—¥æœŸæ˜¯å¦ç›¸ç­‰
 //	{
 //		if (_year == d._year
 //			&& _month == d._month
@@ -1000,7 +1000,7 @@
 //		}
 //	}
 //
-//	bool operator>(const Date& d)//ÅĞ¶ÁÈÕÆÚÊÇ·ñ´óÓÚÈÕÆÚ
+//	bool operator>(const Date& d)//åˆ¤è¯»æ—¥æœŸæ˜¯å¦å¤§äºæ—¥æœŸ
 //	{
 //		if (_year > d._year)
 //		{
@@ -1017,28 +1017,28 @@
 //		return false;
 //	}
 //
-//	bool operator>=(const Date& d)//ÅĞ¶ÁÈÕÆÚÊÇ·ñ´óÓÚµÈÓÚÈÕÆÚ
+//	bool operator>=(const Date& d)//åˆ¤è¯»æ—¥æœŸæ˜¯å¦å¤§äºç­‰äºæ—¥æœŸ
 //	{
 //		return (*this == d) || (*this > d);
 //	}
 //
-//	bool operator<(const Date& d)//ÅĞ¶ÏÈÕÆÚÊÇ·ñĞ¡ÓÚÈÕÆÚ
+//	bool operator<(const Date& d)//åˆ¤æ–­æ—¥æœŸæ˜¯å¦å°äºæ—¥æœŸ
 //	{
 //		return !(*this >= d);
 //	}
 //
-//	bool operator!=(const Date& d)//ÅĞ¶ÏÈÕÆÚÊÇ·ñ²»ÏàµÈ
+//	bool operator!=(const Date& d)//åˆ¤æ–­æ—¥æœŸæ˜¯å¦ä¸ç›¸ç­‰
 //	{
 //		return !(*this == d);
 //	}
 //
-//	bool operator<=(const Date& d)//ÅĞ¶ÏÈÕÆÚÊÇ·ñĞ¡ÓÚµÈÓÚÈÕÆÚ
+//	bool operator<=(const Date& d)//åˆ¤æ–­æ—¥æœŸæ˜¯å¦å°äºç­‰äºæ—¥æœŸ
 //	{
 //		return !(*this >= d);
 //	}
 //
-//	//ÈÕÆÚ+»ò+=ÌìÊı
-//	Date operator+(int day)//ÈÕÆÚ+ÌìÊı
+//	//æ—¥æœŸ+æˆ–+=å¤©æ•°
+//	Date operator+(int day)//æ—¥æœŸ+å¤©æ•°
 //	{
 //		Date ret(*this);
 //
@@ -1058,7 +1058,7 @@
 //		return ret;
 //	}
 //
-//	Date& operator+=(int day)//ÈÕÆÚ+=ÌìÊı
+//	Date& operator+=(int day)//æ—¥æœŸ+=å¤©æ•°
 //	{
 //		_day += day;
 //
@@ -1076,8 +1076,8 @@
 //		return (*this);
 //	}
 //
-//	//ÈÕÆÚ-»òÕß-=ÌìÊı
-//	Date operator-(int day)//ÈÕÆÚ-ÌìÊı
+//	//æ—¥æœŸ-æˆ–è€…-=å¤©æ•°
+//	Date operator-(int day)//æ—¥æœŸ-å¤©æ•°
 //	{
 //		//Date ret(*this);
 //
@@ -1101,7 +1101,7 @@
 //		return ret;
 //	}
 //
-//	Date& operator-=(int day)//ÈÕÆÚ-=ÌìÊı
+//	Date& operator-=(int day)//æ—¥æœŸ-=å¤©æ•°
 //	{
 //		_day -= day;
 //
@@ -1119,7 +1119,7 @@
 //		return (*this);
 //	}
 //
-//	//ÈÕÆÚ Ç°ÖÃ++
+//	//æ—¥æœŸ å‰ç½®++
 //	void operator++()
 //	{
 //		//_day++;
@@ -1137,7 +1137,7 @@
 //		(*this) += 1;
 //	}
 //
-//	//ÈÕÆÚ ºóÖÃ++
+//	//æ—¥æœŸ åç½®++
 //	Date operator++(int)
 //	{
 //		//Date ret(*this);
@@ -1162,7 +1162,7 @@
 //		return ret;
 //	}
 //
-//	//ÈÕÆÚ Ç°ÖÃ--
+//	//æ—¥æœŸ å‰ç½®--
 //	void operator--()
 //	{
 //		//_day--;
@@ -1181,7 +1181,7 @@
 //		(*this) -= 1;
 //	}
 //
-//	//ÈÕÆÚ ºóÖÃ--
+//	//æ—¥æœŸ åç½®--
 //	Date operator--(int)
 //	{
 //		//Date ret(*this);
@@ -1201,14 +1201,14 @@
 //		return ret;
 //	}
 //
-//	//ÈÕÆÚ-ÈÕÆÚ
+//	//æ—¥æœŸ-æ—¥æœŸ
 //	int operator-(const Date& d)
 //	{
-//		int ret = 0;//·µ»ØµÄ²îÖµÌìÊı
+//		int ret = 0;//è¿”å›çš„å·®å€¼å¤©æ•°
 //
 //		Date tmp(d);
 //
-//		//µÚÒ»ÖÖÇé¿ö d1ÈÕÆÚ´óÓÚd
+//		//ç¬¬ä¸€ç§æƒ…å†µ d1æ—¥æœŸå¤§äºd
 //		if ((*this) > d)
 //		{
 //			while (tmp._year != _year)
@@ -1241,7 +1241,7 @@
 //			}
 //		}
 //
-//		//µÚ¶şÖÖÇé¿ö d1ÈÕÆÚĞ¡ÓÚd
+//		//ç¬¬äºŒç§æƒ…å†µ d1æ—¥æœŸå°äºd
 //		if ((*this) < d)
 //		{
 //			while (tmp._year != _year)
@@ -1274,7 +1274,7 @@
 //			}
 //		}
 //
-//		//µÚÈıÖÖÇé¿ö d1ÈÕÆÚµÈÓÚd
+//		//ç¬¬ä¸‰ç§æƒ…å†µ d1æ—¥æœŸç­‰äºd
 //		if ((*this) == d)
 //		{
 //			return ret;
@@ -1282,7 +1282,7 @@
 //		return ret;
 //	}
 //
-//	//¸³ÖµÔËËã·ûÖØÔØ
+//	//èµ‹å€¼è¿ç®—ç¬¦é‡è½½
 //	Date& operator=(const Date& d)
 //	{
 //		if (this != &d)
@@ -1294,7 +1294,7 @@
 //		}
 //	}
 //
-//	//Êä³öĞÅÏ¢º¯Êı
+//	//è¾“å‡ºä¿¡æ¯å‡½æ•°
 //	void Show()
 //	{
 //		cout << _year << "-" << _month << "-" << _day << endl;
@@ -1349,27 +1349,27 @@
 
 //#include<iostream>
 //using namespace std;
-////ÀàÊµÏÖÕ»
+////ç±»å®ç°æ ˆ
 //class Stack
 //{
 //public:
-//	Stack(int n = 10)//Õ»µÄ¹¹Ôìº¯Êı
+//	Stack(int n = 10)//æ ˆçš„æ„é€ å‡½æ•°
 //	{
 //		int* tmp = (int*)malloc(sizeof(int) * n);
 //		_a = tmp;
 //		_size = 0;
 //		_capacity = 0;
 //	}
-//	~Stack()//Õ»µÄÎö¹¹º¯Êı
+//	~Stack()//æ ˆçš„ææ„å‡½æ•°
 //	{
 //		free(_a);
 //		_a = nullptr;
 //		_size = _capacity = 0;
 //	}
 //private:
-//	int* _a;//Ö¸ÏòÕ»µÄÖ¸Õë
-//	int _size;//Õ»ÖĞÔªËØ¸öÊı
-//	int _capacity;//Õ»µÄÈİÁ¿
+//	int* _a;//æŒ‡å‘æ ˆçš„æŒ‡é’ˆ
+//	int _size;//æ ˆä¸­å…ƒç´ ä¸ªæ•°
+//	int _capacity;//æ ˆçš„å®¹é‡
 //};
 //
 //int main()
@@ -1384,7 +1384,7 @@
 //class Date
 //{
 //public:
-//	Date(int year = 0, int month = 1, int day = 1)//¹¹Ôìº¯Êı
+//	Date(int year = 0, int month = 1, int day = 1)//æ„é€ å‡½æ•°
 //	{
 //		_year = year;
 //		_month = month;
@@ -1403,7 +1403,7 @@
 //int main()
 //{
 //	Date d1(2024, 3, 12);
-//	//ÏÂÃæÁ½ÖÖĞ´·¨ÏàÍ¬ Date d2(d1)µÈ¼ÛÓÚDate d3=d1
+//	//ä¸‹é¢ä¸¤ç§å†™æ³•ç›¸åŒ Date d2(d1)ç­‰ä»·äºDate d3=d1
 //	Date d2(d1);
 //	Date d3 = d1;
 //
@@ -1416,25 +1416,25 @@
 //#include<iostream>
 //using namespace std;
 //
-//class Stack//Õ»Àà
+//class Stack//æ ˆç±»
 //{
 //public:
-//	Stack(int n = 10)//Õ»µÄ¹¹Ôìº¯Êı
+//	Stack(int n = 10)//æ ˆçš„æ„é€ å‡½æ•°
 //	{
 //		int* tmp = (int*)malloc(sizeof(int) * n);
 //		_a = tmp;
 //		_size = _capacity = 0;
 //	}
-//	~Stack()//Õ»µÄÎö¹¹º¯Êı
+//	~Stack()//æ ˆçš„ææ„å‡½æ•°
 //	{
 //		free(_a);
 //		_a = nullptr;
 //		_size = _capacity = 0;
 //	}
 //private:
-//	int* _a;//Ö¸ÏòÕ»µÄÖ¸Õë
-//	int _size;//Õ»ÖĞÔªËØ¸öÊı
-//	int _capacity;//Õ»µÄÈİÁ¿
+//	int* _a;//æŒ‡å‘æ ˆçš„æŒ‡é’ˆ
+//	int _size;//æ ˆä¸­å…ƒç´ ä¸ªæ•°
+//	int _capacity;//æ ˆçš„å®¹é‡
 //};
 //
 //int main()
@@ -2176,7 +2176,7 @@
 //class Date
 //{
 //public:
-//	//³õÊ¼»¯ÁĞ±íÓÃ·¨
+//	//åˆå§‹åŒ–åˆ—è¡¨ç”¨æ³•
 //	Date(int year = 0, int month = 1, int day = 1)
 //		:_year(year)
 //		,_month(month)
@@ -2205,7 +2205,7 @@
 //class Date
 //{
 //public:
-//	//ÎŞÄ¬ÈÏ¹¹Ôìº¯Êı£¨Ä¬ÈÏ¹¹Ôìº¯ÊıÊÇÖ¸£º²»ĞèÒª´«²ÎµÄµÄ¹¹Ôìº¯Êı£©
+//	//æ— é»˜è®¤æ„é€ å‡½æ•°ï¼ˆé»˜è®¤æ„é€ å‡½æ•°æ˜¯æŒ‡ï¼šä¸éœ€è¦ä¼ å‚çš„çš„æ„é€ å‡½æ•°ï¼‰
 //	Date(int year,int month,int day)
 //		:_year(year)
 //		,_month(month)
@@ -2234,10 +2234,10 @@
 //		cout << _a << " " << _b << endl;
 //	}
 //private:
-//	//±ØĞëÒªÓÃ³õÊ¼»¯ÁĞ±íµÄÈı¸ö³ÉÔ±±äÁ¿
+//	//å¿…é¡»è¦ç”¨åˆå§‹åŒ–åˆ—è¡¨çš„ä¸‰ä¸ªæˆå‘˜å˜é‡
 //	int& _a;
 //	const int _b;
-//	Date _d;//×Ô¶¨ÒåÀàĞÍ£¬ÇÒÎŞÄ¬ÈÏ¹¹Ôìº¯Êı
+//	Date _d;//è‡ªå®šä¹‰ç±»å‹ï¼Œä¸”æ— é»˜è®¤æ„é€ å‡½æ•°
 //};
 //
 //int main()
@@ -2303,7 +2303,7 @@
 //
 //class Time
 //{
-//	friend class Date;//ÉùÃ÷DateÀàÊÇËüµÄÅóÓÑ
+//	friend class Date;//å£°æ˜Dateç±»æ˜¯å®ƒçš„æœ‹å‹
 //public:
 //	Time(int hour=0,int min=0,int second=0)
 //		:_hour(hour)
@@ -2324,7 +2324,7 @@
 //		,_month(month)
 //		,_day(day)
 //	{}
-//	void SetTime(int hour, int min, int second)//Õâ¸öº¯Êı¿ÉÒÔÍ»ÆÆ·ÃÎÊÈ¨ÏŞÈ¥·ÃÎÊTimeµÄ³ÉÔ±±äÁ¿
+//	void SetTime(int hour, int min, int second)//è¿™ä¸ªå‡½æ•°å¯ä»¥çªç ´è®¿é—®æƒé™å»è®¿é—®Timeçš„æˆå‘˜å˜é‡
 //	{
 //		_t._hour = hour;
 //		_t._min = min;
@@ -2720,34 +2720,34 @@
 //	return 0;
 //}
 
-// Ç°ÖÃÉùÃ÷
+// å‰ç½®å£°æ˜
 
 //#include<iostream>
 //
-//class A; // Ç°ÖÃÉùÃ÷
+//class A; // å‰ç½®å£°æ˜
 //
 //class B {
 //public:
-//    // ÉùÃ÷BÀàÖĞÓĞ´ı¶¨ÒåµÄdisplayº¯Êı£¬Ëü½«³ÉÎªAÀàµÄÓÑÔªº¯Êı
+//    // å£°æ˜Bç±»ä¸­æœ‰å¾…å®šä¹‰çš„displayå‡½æ•°ï¼Œå®ƒå°†æˆä¸ºAç±»çš„å‹å…ƒå‡½æ•°
 //    friend void display(A& aRef);
 //};
 //
 //class A {
 //private:
-//    int mimi = 42; // ³õÊ¼»¯Ë½ÓĞ³ÉÔ±
+//    int mimi = 42; // åˆå§‹åŒ–ç§æœ‰æˆå‘˜
 //public:
-//    // ÓÉÓÚBÀàÒÑ¾­Íê³É¶¨Òå£¬ÕâÀï¿ÉÒÔÖ±½ÓÊ¹ÓÃB::display×÷ÎªÓÑÔª
+//    // ç”±äºBç±»å·²ç»å®Œæˆå®šä¹‰ï¼Œè¿™é‡Œå¯ä»¥ç›´æ¥ä½¿ç”¨B::displayä½œä¸ºå‹å…ƒ
 //};
 //
-//// ÔÚÕâÀï¶¨ÒåBÀàµÄdisplayº¯Êı
+//// åœ¨è¿™é‡Œå®šä¹‰Bç±»çš„displayå‡½æ•°
 //void B::display(A& aRef) {
-//    std::cout << "AµÄÃØÃÜÊÇ: " << aRef.mimi << std::endl;
+//    std::cout << "Açš„ç§˜å¯†æ˜¯: " << aRef.mimi << std::endl;
 //}
 //
 //int main() {
 //    A a;
 //    B b;
-//    b.display(a); // ´ËÊ±µ÷ÓÃµÄdisplayº¯ÊıÄÜ¹»·ÃÎÊAÀàµÄË½ÓĞ³ÉÔ±
+//    b.display(a); // æ­¤æ—¶è°ƒç”¨çš„displayå‡½æ•°èƒ½å¤Ÿè®¿é—®Aç±»çš„ç§æœ‰æˆå‘˜
 //    return 0;
 //}
 
@@ -2856,13 +2856,13 @@
 //
 //int main()
 //{
-//	int* tmp1 = new int;//ÉêÇëÒ»¸öintÀàĞÍµÄ¿Õ¼ä
-//	int* tmp2 = new int[10];//ÉêÇëÒ»¸öintÀàĞÍµÄÊı×é
-//	int* tmp3 = new int(10);//ÉêÇëÒ»¸öintÀàĞÍµÄ¿Õ¼ä£¬²¢³õÊ¼»¯Îª10
+//	int* tmp1 = new int;//ç”³è¯·ä¸€ä¸ªintç±»å‹çš„ç©ºé—´
+//	int* tmp2 = new int[10];//ç”³è¯·ä¸€ä¸ªintç±»å‹çš„æ•°ç»„
+//	int* tmp3 = new int(10);//ç”³è¯·ä¸€ä¸ªintç±»å‹çš„ç©ºé—´ï¼Œå¹¶åˆå§‹åŒ–ä¸º10
 //
-//	delete tmp1;//ÊÍ·Åtmp1Ö¸ÏòµÄ¿Õ¼ä
-//	delete[] tmp2;//ÊÍ·Åtmp2Ö¸ÏòµÄÊı×é¿Õ¼ä
-//	delete tmp3;//ÊÍ·Åtmp3Ö¸ÏòµÄ¿Õ¼ä
+//	delete tmp1;//é‡Šæ”¾tmp1æŒ‡å‘çš„ç©ºé—´
+//	delete[] tmp2;//é‡Šæ”¾tmp2æŒ‡å‘çš„æ•°ç»„ç©ºé—´
+//	delete tmp3;//é‡Šæ”¾tmp3æŒ‡å‘çš„ç©ºé—´
 //	return 0;
 //}
 
@@ -2890,13 +2890,13 @@
 //
 //int main()
 //{
-//	cout << "mallocµÄ·½Ê½" << endl;
+//	cout << "mallocçš„æ–¹å¼" << endl;
 //	Date* d1 = (Date*)malloc(sizeof(Date));
 //	free(d1);
 //
-//	cout << "ÖĞ¼ä¸ô¿ª±ãÓÚ¹Û²ì" << endl;
+//	cout << "ä¸­é—´éš”å¼€ä¾¿äºè§‚å¯Ÿ" << endl;
 //
-//	cout << "newµÄ·½Ê½" << endl;
+//	cout << "newçš„æ–¹å¼" << endl;
 //	Date* d2 = new Date;
 //	delete d2;
 //	return 0;
@@ -3009,7 +3009,7 @@
 //#include<iostream>
 //using namespace std;
 //
-////×Ö·û´®×ªÊı×Ö
+////å­—ç¬¦ä¸²è½¬æ•°å­—
 //int ConvertNum(string& str)
 //{
 //	int count = 0;
@@ -3021,7 +3021,7 @@
 //	return count;
 //}
 //
-////Êı×Ö×ª×Ö·û´®
+////æ•°å­—è½¬å­—ç¬¦ä¸²
 //string ConvertStr(int num)
 //{
 //	string s;
@@ -3109,49 +3109,49 @@
 //#include<iostream>
 //using namespace std;
 //
-////¶¨ÒåÒ»¸ö×Ô¼ºµÄÕ»
+////å®šä¹‰ä¸€ä¸ªè‡ªå·±çš„æ ˆ
 //template<class T>
 //class Stack
 //{
 //public:
-//	//Õ»µÄÒ»ÏµÁĞ²Ù×÷
-//	//¡­¡­¡­¡­
+//	//æ ˆçš„ä¸€ç³»åˆ—æ“ä½œ
+//	//â€¦â€¦â€¦â€¦
 //private:
-//	T* _arr;//Ò»¸öÖ¸ÏòÕ»µÄÖ¸Õë
+//	T* _arr;//ä¸€ä¸ªæŒ‡å‘æ ˆçš„æŒ‡é’ˆ
 //};
 //
 //class Stack
 //{
 //public:
-//	//Õ»µÄÒ»ÏµÁĞ²Ù×÷
-//	//¡­¡­¡­¡­
+//	//æ ˆçš„ä¸€ç³»åˆ—æ“ä½œ
+//	//â€¦â€¦â€¦â€¦
 //private:
-//	int* _arr;//Ò»¸öÖ¸ÏòÕ»µÄÖ¸Õë
+//	int* _arr;//ä¸€ä¸ªæŒ‡å‘æ ˆçš„æŒ‡é’ˆ
 //};
 //
 //class Stack
 //{
 //public:
-//	//Õ»µÄÒ»ÏµÁĞ²Ù×÷
-//	//¡­¡­¡­¡­
+//	//æ ˆçš„ä¸€ç³»åˆ—æ“ä½œ
+//	//â€¦â€¦â€¦â€¦
 //private:
-//	double* _arr;//Ò»¸öÖ¸ÏòÕ»µÄÖ¸Õë
+//	double* _arr;//ä¸€ä¸ªæŒ‡å‘æ ˆçš„æŒ‡é’ˆ
 //};
 //
 //class Stack
 //{
 //public:
-//	//Õ»µÄÒ»ÏµÁĞ²Ù×÷
-//	//¡­¡­¡­¡­
+//	//æ ˆçš„ä¸€ç³»åˆ—æ“ä½œ
+//	//â€¦â€¦â€¦â€¦
 //private:
-//	char* _arr;//Ò»¸öÖ¸ÏòÕ»µÄÖ¸Õë
+//	char* _arr;//ä¸€ä¸ªæŒ‡å‘æ ˆçš„æŒ‡é’ˆ
 //};
 //
 //int main()
 //{
-//	Stack<int> s1;//´æ·ÅintÀàĞÍµÄÕ»
-//	Stack<double> s2;//´æ·ÅdoubleÀàĞÍµÄÕ»
-//	Stack<char> s3;//´æ·ÅcharÀàĞÍµÄÕ»
+//	Stack<int> s1;//å­˜æ”¾intç±»å‹çš„æ ˆ
+//	Stack<double> s2;//å­˜æ”¾doubleç±»å‹çš„æ ˆ
+//	Stack<char> s3;//å­˜æ”¾charç±»å‹çš„æ ˆ
 //	return 0;
 //}
 
@@ -3165,13 +3165,13 @@
 //    {
 //        vector<int> v;
 //        v.resize(32);
-//        for (int i = 0; i < nums.size(); i++)//»ñÈ¡Ã¿¸önumsµÄÖµ£»
+//        for (int i = 0; i < nums.size(); i++)//è·å–æ¯ä¸ªnumsçš„å€¼ï¼›
 //        {
 //            for (int j = 0; j < 32; j++)
 //            {
 //                int tmp = nums[i];
-//                tmp = tmp >> j;//¶Ônums[i]½øĞĞÓÒÒÆ²Ù×÷
-//                if ((tmp & 1) == 1)//Èç¹ûÓÒÒÆÖ®ºóµÄnums[i]Óë1°´Î»ÓëµÈÓÚ1£¬¼´¸Ãnums[i]µÄµÚÒ»Î»ÊÇ1£¬¼ÇÂ¼ÏÂÀ´++
+//                tmp = tmp >> j;//å¯¹nums[i]è¿›è¡Œå³ç§»æ“ä½œ
+//                if ((tmp & 1) == 1)//å¦‚æœå³ç§»ä¹‹åçš„nums[i]ä¸1æŒ‰ä½ä¸ç­‰äº1ï¼Œå³è¯¥nums[i]çš„ç¬¬ä¸€ä½æ˜¯1ï¼Œè®°å½•ä¸‹æ¥++
 //                {
 //                    v[31 - j]++;
 //                }
@@ -3179,12 +3179,12 @@
 //        }
 //
 //        int ret = 0;
-//        for (int i = v.size() - 1; i >= 0; i--)//±éÀúÊı×év
+//        for (int i = v.size() - 1; i >= 0; i--)//éå†æ•°ç»„v
 //        {
-//            v[i] %= 3;//¶ÔÃ¿¸öv[i]½øĞĞÈ¡Ä£3£¬×îºó¼´¿É±£ÁôÎ¨Ò»³öÏÖÒ»´ÎÊı×ÖµÄ¶ş½øÖÆÂë
+//            v[i] %= 3;//å¯¹æ¯ä¸ªv[i]è¿›è¡Œå–æ¨¡3ï¼Œæœ€åå³å¯ä¿ç•™å”¯ä¸€å‡ºç°ä¸€æ¬¡æ•°å­—çš„äºŒè¿›åˆ¶ç 
 //            if (v[i] == 1)
 //            {
-//                ret += pow(2, 31 - i);//Í¨¹ı¶ş½øÖÆÂëÀ´¼ÆËãËüµÄÖµ
+//                ret += pow(2, 31 - i);//é€šè¿‡äºŒè¿›åˆ¶ç æ¥è®¡ç®—å®ƒçš„å€¼
 //            }
 //        }
 //        return ret;
@@ -3214,10 +3214,10 @@
 //public:
 //    vector<int> singleNumber(vector<int>& nums)
 //    {
-//        //¶ÔÊı½øĞĞ·Ö×é£¬·Åµ½Á½¸övectorÖĞ
+//        //å¯¹æ•°è¿›è¡Œåˆ†ç»„ï¼Œæ”¾åˆ°ä¸¤ä¸ªvectorä¸­
 //        vector<int> v1;
 //        vector<int> v2;
-//        //½«numsÖĞµÄÊıÈ«²¿Òì»òÔÚÒ»Æğ£¬ÕÒµ½Î¨Ò»µÄÁ½¸öÊıµÄÒì»ò½á¹û
+//        //å°†numsä¸­çš„æ•°å…¨éƒ¨å¼‚æˆ–åœ¨ä¸€èµ·ï¼Œæ‰¾åˆ°å”¯ä¸€çš„ä¸¤ä¸ªæ•°çš„å¼‚æˆ–ç»“æœ
 //        int result = 0;
 //        for (int i = 0; i < nums.size(); i++)
 //        {
@@ -3226,7 +3226,7 @@
 //
 //        //cout<<result<<endl;
 //
-//        //¶ÔÒì»ò½á¹ûµÄ¶ş½øÖÆÎ»½øĞĞ±éÀú£¬ÕÒµ½µÚÒ»´Î³öÏÖ¶ş½øÖÆ1µÄÎ»ÖÃ£¬ºóĞøÍ¨¹ıÕâ¸ö1µÄÎ»ÖÃÀ´½øĞĞ·Ö×é
+//        //å¯¹å¼‚æˆ–ç»“æœçš„äºŒè¿›åˆ¶ä½è¿›è¡Œéå†ï¼Œæ‰¾åˆ°ç¬¬ä¸€æ¬¡å‡ºç°äºŒè¿›åˆ¶1çš„ä½ç½®ï¼Œåç»­é€šè¿‡è¿™ä¸ª1çš„ä½ç½®æ¥è¿›è¡Œåˆ†ç»„
 //        int flag = 0;
 //        for (int i = 0; i < 32; i++)
 //        {
@@ -3240,7 +3240,7 @@
 //
 //        //cout<<flag<<endl;
 //
-//        //±éÀúnums½øĞĞ·Ö×é
+//        //éå†numsè¿›è¡Œåˆ†ç»„
 //        for (int i = 0; i < nums.size(); i++)
 //        {
 //            int tmp = 1;
@@ -3299,8 +3299,8 @@
 //		return false;
 //	}
 //
-//	int brow = 0;//ĞĞ
-//	int bcol = col - 1;//ÁĞ
+//	int brow = 0;//è¡Œ
+//	int bcol = col - 1;//åˆ—
 //
 //	while (brow < row && bcol >= 0)
 //	{
@@ -3358,8 +3358,8 @@
 //
 //int main() {
 //    int arr[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };
-//    printArray1(arr); // Êä³ö£º1 2 3 4  5 6 7 8  9 10 11 12
-//    printArray2(arr); // Êä³ö£º1 2 3 4  5 6 7 8  9 10 11 12
+//    printArray1(arr); // è¾“å‡ºï¼š1 2 3 4  5 6 7 8  9 10 11 12
+//    printArray2(arr); // è¾“å‡ºï¼š1 2 3 4  5 6 7 8  9 10 11 12
 //    return 0;
 //}
 
@@ -3391,16 +3391,16 @@
 //class Solution {
 //public:
 //    /**
-//     * ´úÂëÖĞµÄÀàÃû¡¢·½·¨Ãû¡¢²ÎÊıÃûÒÑ¾­Ö¸¶¨£¬ÇëÎğĞŞ¸Ä£¬Ö±½Ó·µ»Ø·½·¨¹æ¶¨µÄÖµ¼´¿É
+//     * ä»£ç ä¸­çš„ç±»åã€æ–¹æ³•åã€å‚æ•°åå·²ç»æŒ‡å®šï¼Œè¯·å‹¿ä¿®æ”¹ï¼Œç›´æ¥è¿”å›æ–¹æ³•è§„å®šçš„å€¼å³å¯
 //     *
 //     *
-//     * @param pushV intÕûĞÍvector
-//     * @param popV intÕûĞÍvector
-//     * @return bool²¼¶ûĞÍ
+//     * @param pushV intæ•´å‹vector
+//     * @param popV intæ•´å‹vector
+//     * @return boolå¸ƒå°”å‹
 //     */
 //    bool IsPopOrder(vector<int>& pushV, vector<int>& popV)
 //    {
-//        //ÏÂÒ»¸öpopVÖµ±ØĞëÏÂÃæÕâ¸öÇø¼ä
+//        //ä¸‹ä¸€ä¸ªpopVå€¼å¿…é¡»ä¸‹é¢è¿™ä¸ªåŒºé—´
 //        int begin = 0;
 //        int end = pushV.size() - 1;
 //        while (!pushV.empty())
@@ -3408,11 +3408,11 @@
 //            for (int i = 0; i < popV.size(); i++)
 //            {
 //                int tmp = popV[i];
-//                //±éÀúÇø¼ä£¬¿´´æ²»´æÔÚ
+//                //éå†åŒºé—´ï¼Œçœ‹å­˜ä¸å­˜åœ¨
 //                int j = 0;
 //                for (j = begin; j <= end; j++)
 //                {
-//                    if (tmp == pushV[j])//µ± µ±Ç°popVÖµÔÚ¸ÃÇø¼ä´æÔÚ£¬ÔòÉ¾³ıpushVÖĞµÄpopVÖµ£¬²¢Ë¢ĞÂÇø¼ä
+//                    if (tmp == pushV[j])//å½“ å½“å‰popVå€¼åœ¨è¯¥åŒºé—´å­˜åœ¨ï¼Œåˆ™åˆ é™¤pushVä¸­çš„popVå€¼ï¼Œå¹¶åˆ·æ–°åŒºé—´
 //                    {
 //                        pushV.erase(pushV.begin() + j);
 //                        begin = j - 1;
@@ -3420,7 +3420,7 @@
 //                        break;
 //                    }
 //                }
-//                if (j == pushV.size())//Èç¹û±éÀúÕû¸öÇø¼ä¶¼Ã»ÓĞÕÒµ½ĞèÒªµÄpopVÖµ£¬ÔòËµÃ÷²»·ûºÏ£¬·µ»Øfalse
+//                if (j == pushV.size())//å¦‚æœéå†æ•´ä¸ªåŒºé—´éƒ½æ²¡æœ‰æ‰¾åˆ°éœ€è¦çš„popVå€¼ï¼Œåˆ™è¯´æ˜ä¸ç¬¦åˆï¼Œè¿”å›false
 //                {
 //                    return false;;
 //                }
@@ -3617,19 +3617,19 @@
 //	cout << ret << endl;
 //	return 0;
 //}
-//µÚÒ»´ÎÄ£ÄâÊµÏÖlist
+//ç¬¬ä¸€æ¬¡æ¨¡æ‹Ÿå®ç°list
 //namespace My_list
 //{
-//	//·â×°Á´±í½áµãÀà	
+//	//å°è£…é“¾è¡¨ç»“ç‚¹ç±»	
 //	template<class T>
 //	struct __list_node
 //	{
-//		//³ÉÔ±±äÁ¿
+//		//æˆå‘˜å˜é‡
 //		T _data;
 //		__list_node<T>* _prev;
 //		__list_node<T>* _next;
 //
-//		//³ÉÔ±º¯Êı
+//		//æˆå‘˜å‡½æ•°
 //		__list_node(const T& val = T())
 //			:_data(val)
 //			, _prev(nullptr)
@@ -3638,7 +3638,7 @@
 //		}
 //	};
 //
-//	//·â×°µü´úÆ÷Àà
+//	//å°è£…è¿­ä»£å™¨ç±»
 //	//__list_iterator<T,T&,T> -> iterator
 //	//__list_iterator<T,const T&,const T*> -> const iterator
 //	template<class T, class Ref, class Ptr>
@@ -3647,39 +3647,39 @@
 //		typedef __list_node<T> Node;
 //		typedef __list_iterator<T, Ref, Ptr> iterator;
 //
-//		//¹¹Ôìº¯Êı	¹¹Ôìµü´úÆ÷
+//		//æ„é€ å‡½æ•°	æ„é€ è¿­ä»£å™¨
 //		__list_iterator(Node* node = nullptr)
 //			:_node(node)
 //		{
 //		}
 //
-//		//·µ»Øµü´úÆ÷Ö¸ÏòÊı¾İµÄÒıÓÃ
+//		//è¿”å›è¿­ä»£å™¨æŒ‡å‘æ•°æ®çš„å¼•ç”¨
 //		Ref operator*() const
 //		{
 //			return _node->_data;
 //		}
 //
-//		//ÓÃÓÚ²âÊÔlistÀïÃæ´æDateÀàµÄ½âÒıÓÃ²Ù×÷		·µ»ØµÄÊÇµü´úÆ÷Ö¸ÏòÊı¾İµÄÖ¸Õë
+//		//ç”¨äºæµ‹è¯•listé‡Œé¢å­˜Dateç±»çš„è§£å¼•ç”¨æ“ä½œ		è¿”å›çš„æ˜¯è¿­ä»£å™¨æŒ‡å‘æ•°æ®çš„æŒ‡é’ˆ
 //		Ptr operator->() const
 //		{
 //			return &_node->_data;
 //		}
 //
-//		//µü´úÆ÷Ç°ÖÃ++²Ù×÷
+//		//è¿­ä»£å™¨å‰ç½®++æ“ä½œ
 //		iterator operator++()
 //		{
 //			_node = _node->_next;
 //			return *this;
 //		}
 //
-//		//µü´úÆ÷Ç°ÖÃ--²Ù×÷
+//		//è¿­ä»£å™¨å‰ç½®--æ“ä½œ
 //		iterator operator--()
 //		{
 //			_node = _node->_prev;
 //			return *this;
 //		}
 //
-//		//µü´úÆ÷ºóÖÃ++
+//		//è¿­ä»£å™¨åç½®++
 //		iterator operator++(int)
 //		{
 //			iterator tmp(*this);
@@ -3687,7 +3687,7 @@
 //			++(*this);
 //			return tmp;
 //		}
-//		//µü´úÆ÷ºóÖÃ--
+//		//è¿­ä»£å™¨åç½®--
 //		iterator operator--(int)
 //		{
 //			iterator tmp(*this);
@@ -3696,7 +3696,7 @@
 //			return tmp;
 //		}
 //
-//		//ÖØÔØoperator!=
+//		//é‡è½½operator!=
 //		bool operator!=(const iterator it) const
 //		{
 //			if (_node != it._node)
@@ -3709,56 +3709,56 @@
 //			}
 //		}
 //
-//		//ÖØÔØoperator==
+//		//é‡è½½operator==
 //		bool operator==(const iterator it) const
 //		{
 //			return !(*this != it);
 //		}
 //
-//		//³ÉÔ±±äÁ¿
+//		//æˆå‘˜å˜é‡
 //		Node* _node;
 //	};
 //
-//	//listÀà
+//	//listç±»
 //	template<class T>
 //	class list
 //	{
-//		//Á´±í½áµãÀà
+//		//é“¾è¡¨ç»“ç‚¹ç±»
 //		typedef __list_node<T> Node;
 //	public:
-//		//µü´úÆ÷Àà
+//		//è¿­ä»£å™¨ç±»
 //		typedef __list_iterator<T, T&, T*> iterator;
 //		typedef __list_iterator<T, const T&, const T*> const_iterator;
 //
-//		//beginµü´úÆ÷
+//		//beginè¿­ä»£å™¨
 //		iterator begin()
 //		{
 //			iterator it(_head->_next);
 //			return it;
 //		}
 //
-//		//endµü´úÆ÷
+//		//endè¿­ä»£å™¨
 //		iterator end()
 //		{
 //			iterator it(_head);
 //			return it;
 //		}
 //
-//		//const_beginµü´úÆ÷
+//		//const_beginè¿­ä»£å™¨
 //		const_iterator begin() const
 //		{
 //			const_iterator cit(_head->_next);
 //			return cit;
 //		}
 //
-//		//const_endµü´úÆ÷
+//		//const_endè¿­ä»£å™¨
 //		const_iterator end() const
 //		{
 //			const_iterator cit(_head);
 //			return cit;
 //		}
 //
-//		//¹¹Ôìº¯Êı
+//		//æ„é€ å‡½æ•°
 //		list()
 //			:_head(new Node)
 //		{
@@ -3767,7 +3767,7 @@
 //			_head->_next = _head;
 //		}
 //
-//		//Îö¹¹º¯Êı
+//		//ææ„å‡½æ•°
 //		~list()
 //		{
 //			clear();
@@ -3775,7 +3775,7 @@
 //			_head = nullptr;
 //		}
 //
-//		//¿½±´¹¹Ôì
+//		//æ‹·è´æ„é€ 
 //		//list<int> l2(l1)
 //		list(const list<T>& tmp)
 //			:_head(new Node)
@@ -3791,7 +3791,7 @@
 //			}
 //		}
 //
-//		//¸³Öµ=ÖØÔØ
+//		//èµ‹å€¼=é‡è½½
 //		//list<int> l3;
 //		//l3=l2;
 //		list<T>& operator=(const list<T>& tmp)
@@ -3804,18 +3804,18 @@
 //			return *this;
 //		}
 //
-//		//½»»»Á½¸öÁ´±í
+//		//äº¤æ¢ä¸¤ä¸ªé“¾è¡¨
 //		//l1.Swap(l2);
 //		void Swap(list<T>& tmp)
 //		{
 //			swap(_head, tmp._head);
 //		}
 //
-//		//clearÇåÀíº¯Êı	ºóĞø¸Ä½øÎªµ÷ÓÃeraseº¯Êı
+//		//clearæ¸…ç†å‡½æ•°	åç»­æ”¹è¿›ä¸ºè°ƒç”¨eraseå‡½æ•°
 //		void clear()
 //		{
-//			Node* headnext = _head->_next;//ÕÒµ½Í·½áµãµÄÏÂÒ»¸ö½áµã
-//			//ÊÍ·Å³ıÍ·½áµãÍâµÄËùÓĞ½áµã
+//			Node* headnext = _head->_next;//æ‰¾åˆ°å¤´ç»“ç‚¹çš„ä¸‹ä¸€ä¸ªç»“ç‚¹
+//			//é‡Šæ”¾é™¤å¤´ç»“ç‚¹å¤–çš„æ‰€æœ‰ç»“ç‚¹
 //			while (headnext != _head)
 //			{
 //				Node* tmp = headnext->_next;
@@ -3827,12 +3827,12 @@
 //			_head->_prev = _head;
 //		}
 //
-//		//Î²²å
+//		//å°¾æ’
 //		void push_back(const T& val)
 //		{
-//			////Éú³ÉÒ»¸öĞÂ½áµã£¬¸øĞÂ½áµã¸³Öµ
+//			////ç”Ÿæˆä¸€ä¸ªæ–°ç»“ç‚¹ï¼Œç»™æ–°ç»“ç‚¹èµ‹å€¼
 //			//Node* newnode = new Node(val);
-//			//Node* tail = _head->_prev;//ÏÈÕÒµ½Î²½áµã
+//			//Node* tail = _head->_prev;//å…ˆæ‰¾åˆ°å°¾ç»“ç‚¹
 //
 //			//tail->_next = newnode;
 //			//newnode->_prev = tail;
@@ -3842,27 +3842,27 @@
 //			insert(end(), val);
 //		}
 //
-//		//Î²É¾
+//		//å°¾åˆ 
 //		void pop_back()
 //		{
 //			iterator it = end();
 //			erase(--it);
 //		}
 //
-//		//Í·²å
+//		//å¤´æ’
 //		void push_front(const T& val)
 //		{
 //			insert(begin(), val);
 //		}
 //
-//		//Í·É¾
+//		//å¤´åˆ 
 //		void pop_front()
 //		{
 //			iterator it(begin());
 //			erase(it);
 //		}
 //
-//		//ÖĞ¼ä²åÈë
+//		//ä¸­é—´æ’å…¥
 //		iterator insert(iterator pos, const T& val)
 //		{
 //			Node* newnode = new Node(val);
@@ -3877,7 +3877,7 @@
 //			return it;
 //		}
 //
-//		//ÖĞ¼äÉ¾³ı
+//		//ä¸­é—´åˆ é™¤
 //		iterator erase(iterator pos)
 //		{
 //			assert(pos != end());
@@ -3898,7 +3898,7 @@
 //		Node* _head;
 //	};
 //
-//	//²âÊÔlistÀïÃæ´æDateÀàĞÍ
+//	//æµ‹è¯•listé‡Œé¢å­˜Dateç±»å‹
 //	class Date
 //	{
 //	public:
@@ -3959,7 +3959,7 @@
 //
 //	}
 //
-//	//²âÊÔµü´úÆ÷µÄ·ÇconstºÍconst
+//	//æµ‹è¯•è¿­ä»£å™¨çš„éconstå’Œconst
 //	void Test3()
 //	{
 //		list<int> l1;
@@ -3979,7 +3979,7 @@
 //
 //	}
 //
-//	//²âÊÔ¿½±´¹¹Ôì ºÍ ¸³Öµ=ÖØÔØ
+//	//æµ‹è¯•æ‹·è´æ„é€  å’Œ èµ‹å€¼=é‡è½½
 //	void Test4()
 //	{
 //		list<int> l1;
@@ -4148,7 +4148,7 @@
 //using namespace std;
 //
 //template<class T>
-//bool Compare(T& left, T& right)//±È½Ïº¯Êı£¬±È½ÏÁ½¸öÖµÊÇ·ñÏàµÈ
+//bool Compare(T& left, T& right)//æ¯”è¾ƒå‡½æ•°ï¼Œæ¯”è¾ƒä¸¤ä¸ªå€¼æ˜¯å¦ç›¸ç­‰
 //{
 //	if (left == right)
 //		return true;
@@ -4272,7 +4272,7 @@
 //		cout << "stdid:" << _stdid << endl;
 //	}
 //protected:
-//	int _stdid = 12345678;//Ñ§ºÅ
+//	int _stdid = 12345678;//å­¦å·
 //};
 //
 //int main()
@@ -4307,7 +4307,7 @@
 //{
 //	Student s1;
 //
-//	//×ÓÀà¶ÔÏó¿ÉÒÔ¸³Öµ¸ø¸¸Àà¶ÔÏó¡¢Ö¸Õë¡¢ÒıÓÃ
+//	//å­ç±»å¯¹è±¡å¯ä»¥èµ‹å€¼ç»™çˆ¶ç±»å¯¹è±¡ã€æŒ‡é’ˆã€å¼•ç”¨
 //	Person p1 = s1;
 //	Person* p2 = &s1;
 //	Person& p3 = s1;
@@ -4325,7 +4325,7 @@
 //	template<class T>
 //	struct less
 //	{
-//		bool operator()(const T& x1, const T& x2)//ÖØÔØÒ»¸öoperator()
+//		bool operator()(const T& x1, const T& x2)//é‡è½½ä¸€ä¸ªoperator()
 //		{
 //			return x1 < x2;
 //		}
@@ -4343,10 +4343,10 @@
 //
 //int main()
 //{
-//	My_less_greater::less<int> lessFunc;//¶¨ÒåÒ»¸ölessµÄ¶ÔÏó
+//	My_less_greater::less<int> lessFunc;//å®šä¹‰ä¸€ä¸ªlessçš„å¯¹è±¡
 //	int a = 10;
 //	int b = 20;
-//	bool ret = lessFunc(a, b);//µÈ¼ÛÓÚ lessFunc.operator()(a,b)
+//	bool ret = lessFunc(a, b);//ç­‰ä»·äº lessFunc.operator()(a,b)
 //	cout << ret << endl;
 //	return 0;
 //}
@@ -4409,25 +4409,25 @@
 //class Person
 //{
 //public:
-//	//¹¹Ôìº¯Êı
+//	//æ„é€ å‡½æ•°
 //	Person()
 //	{
 //		cout << "Person()" << endl;
 //	}
 //
-//	//Îö¹¹º¯Êı
+//	//ææ„å‡½æ•°
 //	~Person()
 //	{
 //		cout << "~Person()" << endl;
 //	}
 //
-//	//¿½±´¹¹Ôì
+//	//æ‹·è´æ„é€ 
 //	Person(const Person& tmp)
 //	{
 //		cout << "Person(const Person& tmp)" << endl;
 //	}
 //
-//	//¸³Öµ=ÖØÔØ
+//	//èµ‹å€¼=é‡è½½
 //	Person& operator=(const Person& tmp)
 //	{
 //		cout << "Person:operator=()" << endl;
@@ -4441,26 +4441,26 @@
 //class Student :public Person
 //{
 //public:
-//	//¹¹Ôìº¯Êı
+//	//æ„é€ å‡½æ•°
 //	Student()
 //	{
 //		cout << "Student()" << endl;
 //	}
 //
-//	//Îö¹¹º¯Êı
+//	//ææ„å‡½æ•°
 //	~Student()
 //	{
 //		cout << "~Student()" << endl;
 //	}
 //
-//	//¿½±´¹¹Ôì
+//	//æ‹·è´æ„é€ 
 //	Student(const Student& tmp)
 //		:Person(tmp)
 //	{
 //		cout << "Student(const Student& tmp)" << endl;
 //	}
 //
-//	//¸³Öµ=ÖØÔØ
+//	//èµ‹å€¼=é‡è½½
 //	Student& operator=(const Student& tmp)
 //	{
 //		Person::operator=(tmp);
@@ -4599,14 +4599,14 @@
 //class Person
 //{
 //public:
-//	int _age = 1;//ÄêÁä
+//	int _age = 1;//å¹´é¾„
 //};
 //
-////¼Ì³ĞÁË¸¸ÀàPersonµÄËùÓĞ³ÉÔ±
+////ç»§æ‰¿äº†çˆ¶ç±»Personçš„æ‰€æœ‰æˆå‘˜
 //class Student :public Person
 //{
 //public:
-//	int _sno = 2;//Ñ§ºÅ
+//	int _sno = 2;//å­¦å·
 //};
 //
 //int main()
@@ -4623,7 +4623,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "ÂòÆ±-È«¼Û" << endl;
+//		cout << "ä¹°ç¥¨-å…¨ä»·" << endl;
 //	}
 //};
 //
@@ -4632,7 +4632,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "ÂòÆ±-°ë¼Û" << endl;
+//		cout << "ä¹°ç¥¨-åŠä»·" << endl;
 //	}
 //};
 //
@@ -4699,7 +4699,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "ÂòÆ±-È«¼Û" << endl;
+//		cout << "ä¹°ç¥¨-å…¨ä»·" << endl;
 //	}
 //
 //	int _age;
@@ -4710,7 +4710,7 @@
 //public:
 //	//virtual void BuyTichet()
 //	//{
-//	//	cout << "ÂòÆ±-°ë¼Û" << endl;
+//	//	cout << "ä¹°ç¥¨-åŠä»·" << endl;
 //	//}
 //
 //	int _sno;
@@ -4739,7 +4739,7 @@
 //public:
 //	virtual void ButTicket()
 //	{
-//		cout << "ÂòÆ±-°ë¼Û" << endl;
+//		cout << "ä¹°ç¥¨-åŠä»·" << endl;
 //	}
 //};
 //
@@ -4801,7 +4801,7 @@
 //public:
 //	void BuyTicket()
 //	{
-//		cout << "ÂòÆ±-È«¼Û" << endl;
+//		cout << "ä¹°ç¥¨-å…¨ä»·" << endl;
 //	}
 //
 //	int _age;
@@ -4812,7 +4812,7 @@
 //public:
 //	void BuyTicket()
 //	{
-//		cout << "ÂòÆ±-°ë¼Û" << endl;
+//		cout << "ä¹°ç¥¨-åŠä»·" << endl;
 //	}
 //
 //	int _sno;
@@ -4887,12 +4887,12 @@
 //int main()
 //{
 //	Student s1;
-//	//ÒÔÏÂÕâĞ©ĞĞÎª¶¼ÊÇÔÊĞíµÄ
+//	//ä»¥ä¸‹è¿™äº›è¡Œä¸ºéƒ½æ˜¯å…è®¸çš„
 //	Person p1 = s1;
 //	Person* p2 = &s1;
 //	Person& p3 = s1;
 //
-//	s1 = p1;//·´¹ıÀ´¾Í²»¿ÉÒÔ
+//	s1 = p1;//åè¿‡æ¥å°±ä¸å¯ä»¥
 //
 //	return 0;
 //}
@@ -4920,8 +4920,8 @@
 //	Person p1;
 //	Student s1;
 //
-//	cout << s1._num << endl;//Ä¬ÈÏÇé¿öÖ±½ÓÊä³ö_numÊÇ×ÓÀàµÄ_num
-//	cout << s1.Person::_num << endl;//Èç¹ûÏëÒªÊä³ö»ùÀàµÄ_num£¬¾ÍÒªÖ¸¶¨PersonµÄ×÷ÓÃÓò
+//	cout << s1._num << endl;//é»˜è®¤æƒ…å†µç›´æ¥è¾“å‡º_numæ˜¯å­ç±»çš„_num
+//	cout << s1.Person::_num << endl;//å¦‚æœæƒ³è¦è¾“å‡ºåŸºç±»çš„_numï¼Œå°±è¦æŒ‡å®šPersonçš„ä½œç”¨åŸŸ
 //
 //	return 0;
 //}
@@ -5120,13 +5120,13 @@
 //class Student :virtual public Person
 //{
 //public:
-//	int _sno;//Ñ§ÉúÑ§ºÅ
+//	int _sno;//å­¦ç”Ÿå­¦å·
 //};
 //
 //class Teacher :virtual public Person
 //{
 //public:
-//	int _tno;//½ÌÊ¦±àºÅ
+//	int _tno;//æ•™å¸ˆç¼–å·
 //};
 //
 //class Assiant :public Student, public Teacher
@@ -5171,7 +5171,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "ÂòÆ±-È«¼Û" << endl;
+//		cout << "ä¹°ç¥¨-å…¨ä»·" << endl;
 //	}
 //};
 //
@@ -5180,7 +5180,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "ÂòÆ±-°ë¼Û" << endl;
+//		cout << "ä¹°ç¥¨-åŠä»·" << endl;
 //	}
 //};
 //
@@ -5214,7 +5214,7 @@
 //public:
 //	virtual A* BuyTicket()
 //	{
-//		cout << "ÂòÆ±-È«¼Û" << endl;
+//		cout << "ä¹°ç¥¨-å…¨ä»·" << endl;
 //		return new A;
 //	}
 //};
@@ -5224,7 +5224,7 @@
 //public:
 //	virtual B* BuyTicket()
 //	{
-//		cout << "ÂòÆ±-°ë¼Û" << endl;
+//		cout << "ä¹°ç¥¨-åŠä»·" << endl;
 //		return new B;
 //	}
 //};
@@ -5432,7 +5432,7 @@
 //    {}
 //};
 //
-////ÔÚÖĞĞò±éÀúÖĞÕÒµ½tmpµÄÏÂ±ê
+////åœ¨ä¸­åºéå†ä¸­æ‰¾åˆ°tmpçš„ä¸‹æ ‡
 //int Find(vector<int>& inorder, int begin, int end, int tmp)
 //{
 //    int ret = begin;
@@ -5450,13 +5450,13 @@
 //    return 0;
 //}
 //
-////ÏÈ¹¹½¨¸ù£¬ÔÙÈ¥µİ¹é¹¹Ôì¸ùµÄ×ó×ÓÊ÷ºÍÓÒ×ÓÊ÷
+////å…ˆæ„å»ºæ ¹ï¼Œå†å»é€’å½’æ„é€ æ ¹çš„å·¦å­æ ‘å’Œå³å­æ ‘
 //TreeNode* _buildTree(vector<int>& preorder, int begin1, int end1, vector<int>& inorder, int begin2, int end2)
 //{
-//    TreeNode* root = new TreeNode(preorder[begin1]);//ÏÈ¹¹Ôì¸ù½Úµã
+//    TreeNode* root = new TreeNode(preorder[begin1]);//å…ˆæ„é€ æ ¹èŠ‚ç‚¹
 //
-//    int mid = Find(inorder, begin2, end2, preorder[begin1]);//ÕÒµ½¸ù½ÚµãÔÚÖĞĞò±éÀúµÄÎ»ÖÃ
-//    //¸üĞÂbegin1,end1,begin2,end2
+//    int mid = Find(inorder, begin2, end2, preorder[begin1]);//æ‰¾åˆ°æ ¹èŠ‚ç‚¹åœ¨ä¸­åºéå†çš„ä½ç½®
+//    //æ›´æ–°begin1,end1,begin2,end2
 //    int left = mid - begin2;
 //    int right = end2 - mid;
 //
@@ -5603,7 +5603,7 @@
 //public:
 //	virtual A* BuyTicket()
 //	{
-//		cout << "ÆÕÍ¨ÈË£ºÂòÆ±-È«¼Û" << endl;
+//		cout << "æ™®é€šäººï¼šä¹°ç¥¨-å…¨ä»·" << endl;
 //		return new A;
 //	}
 //};
@@ -5613,7 +5613,7 @@
 //public:
 //	virtual B* BuyTicket()
 //	{
-//		cout << "Ñ§  Éú£ºÂòÆ±-°ë¼Û" << endl;
+//		cout << "å­¦  ç”Ÿï¼šä¹°ç¥¨-åŠä»·" << endl;
 //		return new B;
 //	}
 //};
@@ -5670,7 +5670,7 @@
 //public:
 //	virtual void BuyTicket() 
 //	{
-//		cout << "ÆÕÍ¨ÈË£ºÂòÆ±-È«¼Û" << endl;
+//		cout << "æ™®é€šäººï¼šä¹°ç¥¨-å…¨ä»·" << endl;
 //	}
 //};
 //
@@ -5679,7 +5679,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "Ñ§  Éú£ºÂòÆ±-°ë¼Û" << endl;
+//		cout << "å­¦  ç”Ÿï¼šä¹°ç¥¨-åŠä»·" << endl;
 //	}
 //};
 //
@@ -5711,7 +5711,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "Ñ§  Éú£ºÂòÆ±-°ë¼Û" << endl;
+//		cout << "å­¦  ç”Ÿï¼šä¹°ç¥¨-åŠä»·" << endl;
 //	}
 //};
 //
@@ -5820,7 +5820,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "ÆÕÍ¨ÈË£ºÂòÆ±-È«¼Û" << endl;
+//		cout << "æ™®é€šäººï¼šä¹°ç¥¨-å…¨ä»·" << endl;
 //	}
 //};
 //class Student :public Person
@@ -5828,7 +5828,7 @@
 //public:
 //	virtual void BuyTicket()
 //	{
-//		cout << "Ñ§  Éú£ºÂòÆ±-°ë¼Û" << endl;
+//		cout << "å­¦  ç”Ÿï¼šä¹°ç¥¨-åŠä»·" << endl;
 //	}
 //};
 //void Print()
@@ -5881,7 +5881,7 @@
 //	}
 //};
 //
-//typedef void(*VFTable) ();//º¯ÊıÖ¸Õë
+//typedef void(*VFTable) ();//å‡½æ•°æŒ‡é’ˆ
 //
 //void Print(VFTable* table)
 //{
@@ -5945,7 +5945,7 @@
 //{
 //	C c;
 //
-//	VFTable* p1 = (VFTable*)(*((int*)(&c)));//µÚÒ»ÕÅĞéº¯Êı±íµÄµÚÒ»¸öĞéº¯ÊıµÄµØÖ·
+//	VFTable* p1 = (VFTable*)(*((int*)(&c)));//ç¬¬ä¸€å¼ è™šå‡½æ•°è¡¨çš„ç¬¬ä¸€ä¸ªè™šå‡½æ•°çš„åœ°å€
 //	VFTable* p2 = (VFTable*)(*(int*)((char*)(&c) + sizeof(A)));
 //	Print(p1);
 //	Print(p2);
@@ -6054,15 +6054,15 @@
 //template<class K, class V>
 //struct AVLTreeNode
 //{
-//	//³ÉÔ±±äÁ¿
+//	//æˆå‘˜å˜é‡
 //	K _key;
 //	V _val;
 //	AVLTreeNode<K, V>* _left;
 //	AVLTreeNode<K, V>* _right;
 //	AVLTreeNode<K, V>* _parent;
-//	int _bf;//Æ½ºâÒò×Ó£¬À´¼ì²éÊ÷ÊÇ·ñÆ½ºâ£¬Æ½ºâÒò×ÓÓÉ   ÓÒÊı-×óÊ÷
+//	int _bf;//å¹³è¡¡å› å­ï¼Œæ¥æ£€æŸ¥æ ‘æ˜¯å¦å¹³è¡¡ï¼Œå¹³è¡¡å› å­ç”±   å³æ•°-å·¦æ ‘
 //
-//	//³ÉÔ±º¯Êı
+//	//æˆå‘˜å‡½æ•°
 //	AVLTreeNode(pair<K, V> p)
 //		:_key(p.first)
 //		, _val(p.second)
@@ -6079,22 +6079,22 @@
 //public:
 //	typedef AVLTreeNode<K, V> Node;
 //public:
-//	//¹¹Ôìº¯Êı
+//	//æ„é€ å‡½æ•°
 //	AVLTree()
 //		:_root(nullptr)
 //	{}
 //
-//	//²åÈë½áµã
+//	//æ’å…¥ç»“ç‚¹
 //	bool insert(const pair<K, V>& p)
 //	{
-//		//Èç¹û´ËÊ±treeÎª¿Õ£¬ÔòÖ±½Ó°Ñ½áµã¸ø_root
+//		//å¦‚æœæ­¤æ—¶treeä¸ºç©ºï¼Œåˆ™ç›´æ¥æŠŠç»“ç‚¹ç»™_root
 //		if (_root == nullptr)
 //		{
 //			_root = new Node(p);
 //			return true;
 //		}
 //
-//		//Èç¹ûtree²»Îª¿Õ£¬Ôò²éÕÒ¿ÕÎ»£¬½«½áµã½øĞĞ²åÈë
+//		//å¦‚æœtreeä¸ä¸ºç©ºï¼Œåˆ™æŸ¥æ‰¾ç©ºä½ï¼Œå°†ç»“ç‚¹è¿›è¡Œæ’å…¥
 //		Node* cur = _root;
 //		Node* curparent = nullptr;
 //		while (cur != nullptr)
@@ -6114,8 +6114,8 @@
 //			}
 //		}
 //
-//		cur = new Node(p);//Éú³ÉÒ»¸ö½áµã¸ø¿ÕÎ»ÖÃ
-//		if (curparent->_key > cur->_key)//½«ĞÂ½áµãÁ´½Óµ½Ê÷ÖĞ
+//		cur = new Node(p);//ç”Ÿæˆä¸€ä¸ªç»“ç‚¹ç»™ç©ºä½ç½®
+//		if (curparent->_key > cur->_key)//å°†æ–°ç»“ç‚¹é“¾æ¥åˆ°æ ‘ä¸­
 //		{
 //			curparent->_left = cur;
 //		}
@@ -6125,7 +6125,7 @@
 //		}
 //		cur->_parent = curparent;
 //
-//		//²åÈëĞÂ½áµãºó£¬¸üĞÂ¸¸½áµãµÄ_bfÆ½ºâÒò×Ó
+//		//æ’å…¥æ–°ç»“ç‚¹åï¼Œæ›´æ–°çˆ¶ç»“ç‚¹çš„_bfå¹³è¡¡å› å­
 //		while (curparent != nullptr)
 //		{
 //			if (curparent->_right == cur)
@@ -6148,16 +6148,16 @@
 //			}
 //			else if (curparent->_bf == 2 || curparent->_bf == -2)
 //			{
-//				//½øĞĞĞı×ª´¦Àí
-//				//1.×óµ¥Ğı
-//				//2.ÓÒ×óµ¥Ğı
-//				//3.ÓÒµ¥Ğı
-//				//4.×óÓÒµ¥Ğı
+//				//è¿›è¡Œæ—‹è½¬å¤„ç†
+//				//1.å·¦å•æ—‹
+//				//2.å³å·¦å•æ—‹
+//				//3.å³å•æ—‹
+//				//4.å·¦å³å•æ—‹
 //				if (curparent->_bf == 2)
 //				{
 //					if (curparent->_right->_bf == 1)
 //					{
-//						RotateL(curparent);//×óµ¥Ğı
+//						RotateL(curparent);//å·¦å•æ—‹
 //					}
 //					else
 //					{
@@ -6168,7 +6168,7 @@
 //				{
 //					if (curparent->_left->_bf == -1)
 //					{
-//						RotateR(curparent);//ÓÒµ¥Ğı
+//						RotateR(curparent);//å³å•æ—‹
 //					}
 //					else
 //					{
@@ -6183,7 +6183,7 @@
 //		return true;
 //	}
 //
-//	//É¾³ı½áµã
+//	//åˆ é™¤ç»“ç‚¹
 //	void erase(const K& key)
 //	{
 //		Node* cur = find(key);
@@ -6192,12 +6192,12 @@
 //			return;
 //		}
 //
-//		//1.curÃ»ÓĞ×óÓÒ½áµã
-//		//2.curÃ»ÓĞ×ó½áµã£¬ÓĞÓÒ½áµã
-//		//3.curÃ»ÓĞÓÒ½áµã£¬ÓĞ×ó½áµã
-//		//4.curÓĞ×óÓÒ½áµã
+//		//1.curæ²¡æœ‰å·¦å³ç»“ç‚¹
+//		//2.curæ²¡æœ‰å·¦ç»“ç‚¹ï¼Œæœ‰å³ç»“ç‚¹
+//		//3.curæ²¡æœ‰å³ç»“ç‚¹ï¼Œæœ‰å·¦ç»“ç‚¹
+//		//4.curæœ‰å·¦å³ç»“ç‚¹
 //
-//		//È·¶¨curµÄÎ»ÖÃ£¬ÒòÎªµÚËÄÖÖÇé¿öÆäÊµ¿ÉÒÔ±äÎª1£¬2£¬3µÄÇé¿ö
+//		//ç¡®å®šcurçš„ä½ç½®ï¼Œå› ä¸ºç¬¬å››ç§æƒ…å†µå…¶å®å¯ä»¥å˜ä¸º1ï¼Œ2ï¼Œ3çš„æƒ…å†µ
 //
 //		if (cur->_left != nullptr && cur->_right != nullptr)
 //		{
@@ -6215,7 +6215,7 @@
 //		Node* cur_parent = cur->_parent;
 //		Node* del = cur;
 //
-//		//µ÷Õû¸¸½áµãÆ½ºâÒò×Ó
+//		//è°ƒæ•´çˆ¶ç»“ç‚¹å¹³è¡¡å› å­
 //		while (cur_parent != nullptr)
 //		{
 //			if (cur_parent->_left == cur)
@@ -6227,11 +6227,11 @@
 //				cur_parent->_bf--;
 //			}
 //
-//			//µ÷ÕûÍê¸¸½áµãµÄÆ½ºâÒò×Óºó£¬Òª½øĞĞÅĞ¶ÏÊÇ·ñÍùÉÏ¼ÌĞøµ÷£¬»¹ÊÇ½øĞĞĞı×ª£¬»¹ÊÇ½áÊøµ÷Õû
+//			//è°ƒæ•´å®Œçˆ¶ç»“ç‚¹çš„å¹³è¡¡å› å­åï¼Œè¦è¿›è¡Œåˆ¤æ–­æ˜¯å¦å¾€ä¸Šç»§ç»­è°ƒï¼Œè¿˜æ˜¯è¿›è¡Œæ—‹è½¬ï¼Œè¿˜æ˜¯ç»“æŸè°ƒæ•´
 //
-//			//1.Èç¹ûcur_parentµÄÆ½ºâÒò×ÓÎª1£¬-1£¬Ôò½áÊøµ÷Õû£¬½«½áµãÉ¾³ı
-//			//2.Èç¹ûÆ½ºâÒò×ÓÎª0£¬Ôò¼ÌĞøÏòÉÏµ÷Õû
-//			//3.Èç¹ûÆ½ºâÒò×ÓÎª2£¬Ôò½øĞĞĞı×ª´¦Àí
+//			//1.å¦‚æœcur_parentçš„å¹³è¡¡å› å­ä¸º1ï¼Œ-1ï¼Œåˆ™ç»“æŸè°ƒæ•´ï¼Œå°†ç»“ç‚¹åˆ é™¤
+//			//2.å¦‚æœå¹³è¡¡å› å­ä¸º0ï¼Œåˆ™ç»§ç»­å‘ä¸Šè°ƒæ•´
+//			//3.å¦‚æœå¹³è¡¡å› å­ä¸º2ï¼Œåˆ™è¿›è¡Œæ—‹è½¬å¤„ç†
 //			if (cur_parent->_bf == 1 || cur_parent->_bf == -1)
 //			{
 //				break;
@@ -6247,7 +6247,7 @@
 //				{
 //					if (cur_parent->_right->_bf == 1)
 //					{
-//						RotateL(cur_parent);//×óµ¥Ğı
+//						RotateL(cur_parent);//å·¦å•æ—‹
 //					}
 //					else
 //					{
@@ -6258,7 +6258,7 @@
 //				{
 //					if (cur_parent->_left->_bf == -1)
 //					{
-//						RotateR(cur_parent);//ÓÒµ¥Ğı
+//						RotateR(cur_parent);//å³å•æ—‹
 //					}
 //					else
 //					{
@@ -6269,12 +6269,12 @@
 //			}
 //		}
 //
-//		//´øÕû¿ÃÊ÷Ê÷µ÷ÕûÍê³Éºó£¬ÔÙÉ¾³ı½áµã
-//		//É¾³ı½áµã·ÖÎªÁ½ÖÖÇé¿ö delÎªÒªÉ¾³ıµÄ½áµã
-//		//1.delµÄ×ó×ÓÊ÷Îªnull£¬ÓÒ×ÓÊ÷²»Îªnull
-//		//2.delµÄÓÒ×ÓÊ÷Îªnull£¬×ó×ÓÊ÷²»Îªnull
+//		//å¸¦æ•´æ£µæ ‘æ ‘è°ƒæ•´å®Œæˆåï¼Œå†åˆ é™¤ç»“ç‚¹
+//		//åˆ é™¤ç»“ç‚¹åˆ†ä¸ºä¸¤ç§æƒ…å†µ delä¸ºè¦åˆ é™¤çš„ç»“ç‚¹
+//		//1.delçš„å·¦å­æ ‘ä¸ºnullï¼Œå³å­æ ‘ä¸ä¸ºnull
+//		//2.delçš„å³å­æ ‘ä¸ºnullï¼Œå·¦å­æ ‘ä¸ä¸ºnull
 //		Node* del_parent = del->_parent;
-//		//Èç¹ûdelµÄparentÎª¿Õ£¬ËµÃ÷delÊÇÎ¨Ò»µÄ¸ù½áµã
+//		//å¦‚æœdelçš„parentä¸ºç©ºï¼Œè¯´æ˜delæ˜¯å”¯ä¸€çš„æ ¹ç»“ç‚¹
 //		if (del_parent == nullptr)
 //		{
 //			_root = nullptr;
@@ -6306,7 +6306,7 @@
 //		return;
 //	}
 //
-//	//²éÕÒ½áµã
+//	//æŸ¥æ‰¾ç»“ç‚¹
 //	Node* find(const K& key)
 //	{
 //		if (_root == nullptr)
@@ -6333,14 +6333,14 @@
 //		return nullptr;
 //	}
 //
-//	//ÖĞĞò±éÀú
+//	//ä¸­åºéå†
 //	void InOrder()
 //	{
 //		_InOrder(_root);
 //		cout << endl;
 //	}
 //
-//	//Çó¶ş²æÊ÷µÄ¸ß¶È
+//	//æ±‚äºŒå‰æ ‘çš„é«˜åº¦
 //	int Height(Node* root)
 //	{
 //		if (root == nullptr)
@@ -6351,7 +6351,7 @@
 //		return fmax(Height(root->_left), Height(root->_right)) + 1;
 //	}
 //
-//	//ÅĞ¶ÏÊÇ·ñÆ½ºâ
+//	//åˆ¤æ–­æ˜¯å¦å¹³è¡¡
 //	bool JudgeBalance()
 //	{
 //		Node* root = _root;
@@ -6388,13 +6388,13 @@
 //		_InOrder(root->_right);
 //	}
 //
-//	//×óµ¥Ğı
+//	//å·¦å•æ—‹
 //	void RotateL(Node* first)
 //	{
-//		//1.firstµÄright Ö¸Ïò secondµÄleft
-//		//2.secondµÄleft Ö¸Ïò first
+//		//1.firstçš„right æŒ‡å‘ secondçš„left
+//		//2.secondçš„left æŒ‡å‘ first
 //
-//		//£¡£¡£¡×¢Òâ£¬ÒòÎªÊÇÈı²æÁ´£¬ÒıÈëÁËparentÖ¸Õë£¬ËùÒÔµ±Ä³¸ö½áµãµÄleft»òÕßright¸Ä±ä£¬Ôò¸Ã½áµãµÄº¢×ÓµÄparentÖ¸ÕëÒ²Òª±ä
+//		//ï¼ï¼ï¼æ³¨æ„ï¼Œå› ä¸ºæ˜¯ä¸‰å‰é“¾ï¼Œå¼•å…¥äº†parentæŒ‡é’ˆï¼Œæ‰€ä»¥å½“æŸä¸ªç»“ç‚¹çš„leftæˆ–è€…rightæ”¹å˜ï¼Œåˆ™è¯¥ç»“ç‚¹çš„å­©å­çš„parentæŒ‡é’ˆä¹Ÿè¦å˜
 //		Node* second = first->_right;
 //		Node* secondLeft = second->_left;
 //
@@ -6405,16 +6405,16 @@
 //		}
 //
 //		second->_left = first;
-//		Node* ppNode = first->_parent;//±£ÁôfirstµÄ¸¸½áµã£¬ÒòÎªfirstÓĞ¿ÉÄÜÊÇÊ÷ÖĞµÄÆäÖĞÒ»¿Ã×ÓÊ÷£¬ÒªÍ¨¹ıfirstµÄ¸¸½áµãÀ´Á´½ÓÏÂÃæµÄ×ÓÊ÷
+//		Node* ppNode = first->_parent;//ä¿ç•™firstçš„çˆ¶ç»“ç‚¹ï¼Œå› ä¸ºfirstæœ‰å¯èƒ½æ˜¯æ ‘ä¸­çš„å…¶ä¸­ä¸€æ£µå­æ ‘ï¼Œè¦é€šè¿‡firstçš„çˆ¶ç»“ç‚¹æ¥é“¾æ¥ä¸‹é¢çš„å­æ ‘
 //		first->_parent = second;
 //
 //
-//		if (first == _root)//Èç¹ûfirstÊÇ_root
+//		if (first == _root)//å¦‚æœfirstæ˜¯_root
 //		{
 //			_root = second;
 //			second->_parent = nullptr;
 //		}
-//		else//Èç¹ûfirst²»ÊÇ_root
+//		else//å¦‚æœfirstä¸æ˜¯_root
 //		{
 //			if (ppNode->_left == first)
 //			{
@@ -6427,15 +6427,15 @@
 //			second->_parent = ppNode;
 //		}
 //
-//		//¸üĞÂÆ½ºâÒò×Ó
+//		//æ›´æ–°å¹³è¡¡å› å­
 //		first->_bf = second->_bf = 0;
 //	}
 //
-//	//ÓÒµ¥Ğı
+//	//å³å•æ—‹
 //	void RotateR(Node* first)
 //	{
-//		//1.firstµÄleft  Ö¸Ïò  secondµÄright
-//		//2.secondµÄright  Ö¸Ïò  first
+//		//1.firstçš„left  æŒ‡å‘  secondçš„right
+//		//2.secondçš„right  æŒ‡å‘  first
 //		Node* second = first->_left;
 //		Node* secondRight = second->_right;
 //
@@ -6471,7 +6471,7 @@
 //
 //	}
 //
-//	//ÓÒ×óË«Ğı
+//	//å³å·¦åŒæ—‹
 //	void RotateRL(Node* first)
 //	{
 //		Node* second = first->_right;
@@ -6479,10 +6479,10 @@
 //
 //		int bf = third->_bf;
 //
-//		RotateR(second);//ÏÈÓÒµ¥Ğı
-//		RotateL(first);//ÔÙ×óµ¥Ğı
+//		RotateR(second);//å…ˆå³å•æ—‹
+//		RotateL(first);//å†å·¦å•æ—‹
 //
-//		//Ğı×ªÍê³Éºó£¬¸üĞÂÆ½ºâÒò×Ó
+//		//æ—‹è½¬å®Œæˆåï¼Œæ›´æ–°å¹³è¡¡å› å­
 //		if (bf == 1)
 //		{
 //			first->_bf = -1;
@@ -6503,7 +6503,7 @@
 //		}
 //	}
 //
-//	//×óÓÒË«Ğı
+//	//å·¦å³åŒæ—‹
 //	void RotateLR(Node* first)
 //	{
 //		Node* second = first->_left;
@@ -6587,7 +6587,7 @@
 //	cout << end - begin << endl;
 //}
 //
-////²âÊÔÉ¾³ı½áµã
+////æµ‹è¯•åˆ é™¤ç»“ç‚¹
 //void Test3()
 //{
 //	int arr[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16,14 };
@@ -6670,9 +6670,9 @@
 //	//}
 //
 //	unordered_map<string, string> m;
-//	m.insert(make_pair("ÅÅĞò", "sort"));
-//	m.insert(make_pair("Ë®", "water"));
-//	m.insert(make_pair("Ë­", "who"));
+//	m.insert(make_pair("æ’åº", "sort"));
+//	m.insert(make_pair("æ°´", "water"));
+//	m.insert(make_pair("è°", "who"));
 //
 //	unordered_map<string, string>::iterator it = m.begin();
 //	while (it != m.end())
@@ -6734,23 +6734,23 @@
 //#include <string>
 //using namespace std;
 //
-//// ×Ô¶¨Òå Person ÀàĞÍ
+//// è‡ªå®šä¹‰ Person ç±»å‹
 //class Person {
 //public:
 //    string name;
 //    int age;
 //
-//    // ¹¹Ôìº¯Êı
+//    // æ„é€ å‡½æ•°
 //    Person(string n, int a) : name(n), age(a) 
 //    {}
 //
-//    // ÖØÔØÏàµÈÔËËã·û
+//    // é‡è½½ç›¸ç­‰è¿ç®—ç¬¦
 //    bool operator==(const Person& other) const {
 //        return name == other.name && age == other.age;
 //    }
 //};
 //
-//// ×Ô¶¨Òå¹şÏ£º¯Êı
+//// è‡ªå®šä¹‰å“ˆå¸Œå‡½æ•°
 //struct PersonHash {
 //    size_t operator()(const Person& p) const {
 //        return hash<string>()(p.name) ^ hash<int>()(p.age);
@@ -6758,14 +6758,14 @@
 //};
 //
 //int main() {
-//    // ´´½¨ unordered_set À´´æ´¢ Person ¶ÔÏó
+//    // åˆ›å»º unordered_set æ¥å­˜å‚¨ Person å¯¹è±¡
 //    unordered_set<Person, PersonHash> personSet;
 //
-//    // Ïò set ÖĞ²åÈë Person ¶ÔÏó
+//    // å‘ set ä¸­æ’å…¥ Person å¯¹è±¡
 //    personSet.insert(Person("Alice", 30));
 //    personSet.insert(Person("Bob", 25));
 //
-//    // ±éÀú²¢´òÓ¡ set ÖĞµÄ Person ¶ÔÏó
+//    // éå†å¹¶æ‰“å° set ä¸­çš„ Person å¯¹è±¡
 //    for (const auto& person : personSet) {
 //        cout << "Name: " << person.name << ", Age: " << person.age << std::endl;
 //    }
@@ -6773,21 +6773,21 @@
 //    return 0;
 //}
 
-//ÔÙ´Î¸´Ï°AVLTree£¬²¢±àĞ´Ò»Æª²©¿Í
+//å†æ¬¡å¤ä¹ AVLTreeï¼Œå¹¶ç¼–å†™ä¸€ç¯‡åšå®¢
 //namespace blog_AVLTree
 //{
 //	template<class T>
 //	struct TreeNode
 //	{
-//		//³ÉÔ±±äÁ¿
-//		T _data;//Ê÷½áµã´æ´¢µÄÊı¾İÀàĞÍ
-//		TreeNode<T>* _left;//×óº¢×ÓÖ¸Õë
-//		TreeNode<T>* _right;//ÓÒº¢×ÓÖ¸Õë
-//		TreeNode<T>* _parent;//¸¸½áµãÖ¸Õë
-//		int _bf;//Æ½ºâÒò×Ó
+//		//æˆå‘˜å˜é‡
+//		T _data;//æ ‘ç»“ç‚¹å­˜å‚¨çš„æ•°æ®ç±»å‹
+//		TreeNode<T>* _left;//å·¦å­©å­æŒ‡é’ˆ
+//		TreeNode<T>* _right;//å³å­©å­æŒ‡é’ˆ
+//		TreeNode<T>* _parent;//çˆ¶ç»“ç‚¹æŒ‡é’ˆ
+//		int _bf;//å¹³è¡¡å› å­
 //
-//		//³ÉÔ±º¯Êı
-//		TreeNode(const T& tmp)//¹¹Ôìº¯Êı
+//		//æˆå‘˜å‡½æ•°
+//		TreeNode(const T& tmp)//æ„é€ å‡½æ•°
 //			:_data(tmp)
 //			, _left(nullptr)
 //			, _right(nullptr)
@@ -6807,17 +6807,17 @@
 //
 //		bool insert(const T& tmp)
 //		{
-//			//Èç¹û¸ù½ÚµãÎª¿Õ£¬ÔòÖ±½Ó²åÈë
+//			//å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºï¼Œåˆ™ç›´æ¥æ’å…¥
 //			if (_root == nullptr)
 //			{
 //				_root = new Node(tmp);
 //				return true;
 //			}
 //
-//			//Èç¹û¸ù½Úµã²»Îª¿Õ£¬ÔòÏÈ°´¶ş²æËÑË÷Ê÷µÄ¹æÔò½øĞĞ²åÈë
+//			//å¦‚æœæ ¹èŠ‚ç‚¹ä¸ä¸ºç©ºï¼Œåˆ™å…ˆæŒ‰äºŒå‰æœç´¢æ ‘çš„è§„åˆ™è¿›è¡Œæ’å…¥
 //			Node* cur = _root;
 //			Node* cur_parent = nullptr;
-//			while (cur != nullptr)//ÍùÏÂÕÒ¿ÕÎ»
+//			while (cur != nullptr)//å¾€ä¸‹æ‰¾ç©ºä½
 //			{
 //				if (tmp > cur->_data)
 //				{
@@ -6835,7 +6835,7 @@
 //				}
 //			}
 //
-//			//ÕÒµ½¿ÕÎ»ºó£¬¸ø¿ÕÎ»Ò»¸öĞÂ½áµã
+//			//æ‰¾åˆ°ç©ºä½åï¼Œç»™ç©ºä½ä¸€ä¸ªæ–°ç»“ç‚¹
 //			cur = new Node(tmp);
 //			if (cur->_data > cur_parent->_data)
 //			{
@@ -6848,7 +6848,7 @@
 //				cur->_parent = cur_parent;
 //			}
 //
-//			//²åÈëÍê½áµãºó£¬Òª¸üĞÂÆ½ºâÒò×Ó
+//			//æ’å…¥å®Œç»“ç‚¹åï¼Œè¦æ›´æ–°å¹³è¡¡å› å­
 //			while (cur_parent != nullptr)
 //			{
 //				if (cur_parent->_right == cur)
@@ -6871,25 +6871,25 @@
 //				}
 //				else if (cur_parent->_bf == 2 || cur_parent->_bf == -2)
 //				{
-//					//½øĞĞĞı×ª´¦Àí
+//					//è¿›è¡Œæ—‹è½¬å¤„ç†
 //					if (cur_parent->_bf == 2)
 //					{
-//						if (cur->_bf == 1)//×óµ¥Ğı
+//						if (cur->_bf == 1)//å·¦å•æ—‹
 //						{
 //							RotateL(cur_parent);
 //						}
-//						else if (cur->_bf == -1)//ÓÒ×óË«Ğı
+//						else if (cur->_bf == -1)//å³å·¦åŒæ—‹
 //						{
 //							RotateRL(cur_parent);
 //						}
 //					}
 //					else if (cur_parent->_bf == -2)
 //					{
-//						if (cur->_bf == 1)//×óÓÒµ¥Ğı
+//						if (cur->_bf == 1)//å·¦å³å•æ—‹
 //						{
 //							RotateLR(cur_parent);
 //						}
-//						else if (cur->_bf == -1)//ÓÒË«Ğı
+//						else if (cur->_bf == -1)//å³åŒæ—‹
 //						{
 //							RotateR(cur_parent);
 //						}
@@ -6900,13 +6900,13 @@
 //			return true;
 //		}
 //
-//		//×óµ¥Ğı
+//		//å·¦å•æ—‹
 //		void RotateL(Node* cur_parent)
 //		{
 //			Node* cur = cur_parent->_right;
 //			Node* cur_left = cur->_left;
 //
-//			//¸Ä±äÖ¸ÕëµÄÁ´½Ó¹ØÏµ
+//			//æ”¹å˜æŒ‡é’ˆçš„é“¾æ¥å…³ç³»
 //			cur_parent->_right = cur_left;
 //			if (cur_left != nullptr)
 //			{
@@ -6917,8 +6917,8 @@
 //			Node* cur_parent_parent = cur_parent->_parent;
 //			cur_parent->_parent = cur;
 //
-//			//Ğı×ªÍê³ÉºóÒªÅĞ¶Ïcur_parentÊÇ·ñÎª¸ù
-//			if (cur_parent_parent != nullptr)//ËµÃ÷cur_parent²»ÊÇ¸ù
+//			//æ—‹è½¬å®Œæˆåè¦åˆ¤æ–­cur_parentæ˜¯å¦ä¸ºæ ¹
+//			if (cur_parent_parent != nullptr)//è¯´æ˜cur_parentä¸æ˜¯æ ¹
 //			{
 //				if (cur_parent_parent->_data < cur_parent->_data)
 //				{
@@ -6931,17 +6931,17 @@
 //					cur->_parent = cur_parent_parent;
 //				}
 //			}
-//			else//ËµÃ÷cur_parentÊÇ¸ù
+//			else//è¯´æ˜cur_parentæ˜¯æ ¹
 //			{
 //				_root = cur;
 //				cur->_parent = nullptr;
 //			}
 //
-//			//Ğı×ªÍê³Éºó£¬Æ½ºâÒò×Óµ÷ÕûÎª0
+//			//æ—‹è½¬å®Œæˆåï¼Œå¹³è¡¡å› å­è°ƒæ•´ä¸º0
 //			cur_parent->_bf = cur->_bf = 0;
 //		}
 //
-//		//ÓÒµ¥Ğı
+//		//å³å•æ—‹
 //		void RotateR(Node* cur_parent)
 //		{
 //			Node* cur = cur_parent->_left;
@@ -6979,7 +6979,7 @@
 //			cur_parent->_bf = cur->_bf = 0;
 //		}
 //
-//		//×óÓÒË«Ğı
+//		//å·¦å³åŒæ—‹
 //		void RotateLR(Node* cur_parent)
 //		{
 //			Node* cur = cur_parent->_left;
@@ -6987,13 +6987,13 @@
 //
 //			int bf = cur_right->_bf;
 //
-//			//ÏÈ¶Ôcur½øĞĞÒ»¸ö×óµ¥Ğı
+//			//å…ˆå¯¹curè¿›è¡Œä¸€ä¸ªå·¦å•æ—‹
 //			RotateL(cur);
 //
-//			//ÔÙ¶Ôcur_parent½øĞĞÒ»¸öÓÒµ¥Ğı
+//			//å†å¯¹cur_parentè¿›è¡Œä¸€ä¸ªå³å•æ—‹
 //			RotateR(cur_parent);
 //
-//			//Ğı×ªÍê³Éºó£¬Òª¸üĞÂÆ½ºâÒò×Ó
+//			//æ—‹è½¬å®Œæˆåï¼Œè¦æ›´æ–°å¹³è¡¡å› å­
 //			if (bf == -1)
 //			{
 //				cur->_bf = 0;
@@ -7006,7 +7006,7 @@
 //				cur_parent->_bf = 0;
 //				cur_right->_bf = 0;
 //			}
-//			else if (bf == 0)//ÌØÊâÇé¿ö
+//			else if (bf == 0)//ç‰¹æ®Šæƒ…å†µ
 //			{
 //				cur->_bf = 0;
 //				cur_parent->_bf = 0;
@@ -7014,7 +7014,7 @@
 //			}
 //		}
 //
-//		//ÓÒ×óË«Ğı
+//		//å³å·¦åŒæ—‹
 //		void RotateRL(Node* cur_parent)
 //		{
 //			Node* cur = cur_parent->_right;
@@ -7022,13 +7022,13 @@
 //
 //			int bf = cur_left->_bf;
 //
-//			//ÏÈ¶Ôcur½øĞĞÒ»¸öÓÒµ¥Ğı
+//			//å…ˆå¯¹curè¿›è¡Œä¸€ä¸ªå³å•æ—‹
 //			RotateR(cur);
 //
-//			//ÔÙ¶Ôcur_parent½øĞĞÒ»¸ö×óµ¥Ğı
+//			//å†å¯¹cur_parentè¿›è¡Œä¸€ä¸ªå·¦å•æ—‹
 //			RotateL(cur_parent);
 //
-//			//¸üĞÂÆ½ºâÒò×Ó
+//			//æ›´æ–°å¹³è¡¡å› å­
 //			if (bf == -1)
 //			{
 //				cur->_bf = 1;
@@ -7073,7 +7073,7 @@
 //}
 
 
-//Ñ§Ï°C++11
+//å­¦ä¹ C++11
 //#include<iostream>
 //#include<string>
 //#include<vector>
@@ -7094,7 +7094,7 @@
 
 //int main()
 //{
-//	//ÁĞ±í³õÊ¼»¯
+//	//åˆ—è¡¨åˆå§‹åŒ–
 //	//int a = 10;
 //	//int b = { 10 };
 //	//
@@ -7110,13 +7110,13 @@
 //
 //	//auto e = str;
 //	//cout << typeid(e).name() << endl;
-//	////auto²»ÄÜ×öÎªº¯ÊıµÄĞÎ²ÎºÍ·µ»ØÖµ
+//	////autoä¸èƒ½åšä¸ºå‡½æ•°çš„å½¢å‚å’Œè¿”å›å€¼
 //
 //	//decltype(str) aaa;
 //	//cout << typeid(aaa).name() << endl;
 //
-//	//finalĞŞÊÎµÄÀà²»ÄÜ±»¼Ì³Ğ£¬finalĞŞÊÎµÄĞéº¯Êı²»ÄÜ±»ÖØĞ´
-//	//overrideÓÃÀ´ĞŞÊÎÅÉÉúÀàµÄĞéº¯Êı£¬±»ĞŞÊÎµÄĞéº¯Êı±ØĞëÊÇÖØĞ´¸¸ÀàµÄĞéº¯Êı¶øÀ´
+//	//finalä¿®é¥°çš„ç±»ä¸èƒ½è¢«ç»§æ‰¿ï¼Œfinalä¿®é¥°çš„è™šå‡½æ•°ä¸èƒ½è¢«é‡å†™
+//	//overrideç”¨æ¥ä¿®é¥°æ´¾ç”Ÿç±»çš„è™šå‡½æ•°ï¼Œè¢«ä¿®é¥°çš„è™šå‡½æ•°å¿…é¡»æ˜¯é‡å†™çˆ¶ç±»çš„è™šå‡½æ•°è€Œæ¥
 //
 //	int a = 10;
 //	int& b = a;
@@ -7159,13 +7159,13 @@
 ////	return tmp;
 ////}
 //
-////×óÖµÒıÓÃ Ò»°ãÒıÓÃµÄ¶¼ÊÇ ±äÁ¿
-////ÓÒÖµÒıÓÃ Ò»°ãÒıÓÃµÄ¶¼ÊÇ ³£Á¿¡¢±í´ïÊ½¡¢·µ»ØÖµ
+////å·¦å€¼å¼•ç”¨ ä¸€èˆ¬å¼•ç”¨çš„éƒ½æ˜¯ å˜é‡
+////å³å€¼å¼•ç”¨ ä¸€èˆ¬å¼•ç”¨çš„éƒ½æ˜¯ å¸¸é‡ã€è¡¨è¾¾å¼ã€è¿”å›å€¼
 //
-////ÓÒÖµÒıÓÃÒ²ÊÇÒ»ÖÖÒıÓÃ£¬ÔÚC++11ÖĞ£¬½«ÓÒÖµÒıÓÃ·ÖÎª´¿ÓÒÖµºÍ½«ÍöÖµ
-////1.´¿ÓÒÖµ£ºÄÚÖÃÀàĞÍµÄ³£Á¿»òÕßÁÙÊ±±äÁ¿
-////2.½«ÍöÖµ£º×Ô¶¨ÒåÀàµÄÁÙÊ±¶ÔÏó
-////´¿ÓÒÖµÒ»°ãÓÃÀ´Ê¹ÓÃÓëËùÓĞĞèÒªÉî¿½±´µÄÀà£¬
+////å³å€¼å¼•ç”¨ä¹Ÿæ˜¯ä¸€ç§å¼•ç”¨ï¼Œåœ¨C++11ä¸­ï¼Œå°†å³å€¼å¼•ç”¨åˆ†ä¸ºçº¯å³å€¼å’Œå°†äº¡å€¼
+////1.çº¯å³å€¼ï¼šå†…ç½®ç±»å‹çš„å¸¸é‡æˆ–è€…ä¸´æ—¶å˜é‡
+////2.å°†äº¡å€¼ï¼šè‡ªå®šä¹‰ç±»çš„ä¸´æ—¶å¯¹è±¡
+////çº¯å³å€¼ä¸€èˆ¬ç”¨æ¥ä½¿ç”¨ä¸æ‰€æœ‰éœ€è¦æ·±æ‹·è´çš„ç±»ï¼Œ
 //
 //class String
 //{
@@ -7176,21 +7176,21 @@
 //		strcpy(_str, str);
 //	}
 //
-//	//¿½±´¹¹Ôì
-//	//ÎŞÂÛÈçºÎ¶¼Òª×öÉî¿½±´
+//	//æ‹·è´æ„é€ 
+//	//æ— è®ºå¦‚ä½•éƒ½è¦åšæ·±æ‹·è´
 //	String(const String& tmp)
 //	{
 //		_str = new char[strlen(tmp._str) + 1];
 //		strcpy(_str, tmp._str);
-//		cout << "Éî¿½±´" << endl;
+//		cout << "æ·±æ‹·è´" << endl;
 //	}
 //	
-//	//ÒÆ¶¯¿½±´
+//	//ç§»åŠ¨æ‹·è´
 //	String(String&& tmp)
 //		:_str(nullptr)
 //	{
 //		swap(_str, tmp._str);
-//		cout << "ÒÆ¶¯¿½±´" << endl;
+//		cout << "ç§»åŠ¨æ‹·è´" << endl;
 //	}
 //
 //private:
@@ -7206,18 +7206,18 @@
 //int main()
 //{
 //	int x = 10;
-//	//×óÖµÒıÓÃ
+//	//å·¦å€¼å¼•ç”¨
 //	int& y = x;
 //
-//	//ÓÒÖµÒıÓÃ
+//	//å³å€¼å¼•ç”¨
 //	int&& a = 10;
 //
-//	//×óÖµÒıÓÃ²»ÄÜÖ±½ÓÒıÓÃ³£Á¿£¬µ«ÊÇconst×óÖµ¿ÉÒÔÒıÓÃ³£Á¿
-//	/*int& b = 10;*///Ö±½Ó±¨´í£»
-//	const int& c = 10;//¿ÉÒÔ
+//	//å·¦å€¼å¼•ç”¨ä¸èƒ½ç›´æ¥å¼•ç”¨å¸¸é‡ï¼Œä½†æ˜¯constå·¦å€¼å¯ä»¥å¼•ç”¨å¸¸é‡
+//	/*int& b = 10;*///ç›´æ¥æŠ¥é”™ï¼›
+//	const int& c = 10;//å¯ä»¥
 //
-//	//ÓÒÖµÒıÓÃ²»ÄÜÖ±½ÓÒıÓÃ×óÖµ£¬µ«ÊÇ¿ÉÒÔÒıÓÃmoveºóµÄ×óÖµ
-//	/*int&& e = x;*///Ö±½Ó±¨´í
+//	//å³å€¼å¼•ç”¨ä¸èƒ½ç›´æ¥å¼•ç”¨å·¦å€¼ï¼Œä½†æ˜¯å¯ä»¥å¼•ç”¨moveåçš„å·¦å€¼
+//	/*int&& e = x;*///ç›´æ¥æŠ¥é”™
 //	int&& z = move(x);
 //
 //	String s1("hello world");
@@ -7232,20 +7232,20 @@
 //
 //void fun(int& tmp)
 //{
-//	cout << "×óÖµÒıÓÃ" << endl;
+//	cout << "å·¦å€¼å¼•ç”¨" << endl;
 //}
 //
 //void fun(const int& tmp)
 //{
-//	cout << "const×óÖµÒıÓÃ" << endl;
+//	cout << "constå·¦å€¼å¼•ç”¨" << endl;
 //}
 //
 //void fun(int&& tmp)
 //{
-//	cout << "ÓÒÖµÒıÓÃ" << endl;
+//	cout << "å³å€¼å¼•ç”¨" << endl;
 //}
 //
-////Ä£°åÖĞµÄ && ÊÇÍòÄÜÓ¦ÓÃµÄÒâË¼£¬¼ÈÄÜÒıÓÃ×óÖµ£¬Ò²ÄÜÒıÓÃÓÒÖµ
+////æ¨¡æ¿ä¸­çš„ && æ˜¯ä¸‡èƒ½åº”ç”¨çš„æ„æ€ï¼Œæ—¢èƒ½å¼•ç”¨å·¦å€¼ï¼Œä¹Ÿèƒ½å¼•ç”¨å³å€¼
 //template<class T>
 //void function(T&& tmp)
 //{
@@ -7254,9 +7254,9 @@
 //
 //int main()
 //{
-//	function(10);//ÓÒÖµ
+//	function(10);//å³å€¼
 //	int a = 10;
-//	function(a);//×óÖµ
+//	function(a);//å·¦å€¼
 //
 //	const int b = 10;
 //	
@@ -7264,14 +7264,276 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	auto add1 = [](int x, int y)->int {return x + y; };
+//	cout << add1(a, b) << endl;
+//	return 0;
+//}
+
+//#include<string>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//struct Goods
+//{
+//public:
+//	Goods(std::string& name, int& price, int& nums)
+//		:_name(name)
+//		,_price(price)
+//		,_nums(nums)
+//	{}
+//	std::string _name;
+//	int _price;
+//	int _nums;
+//};
+//
+//struct CompareName
+//{
+//	bool operator()(const Goods& tmp1, const Goods& tmp2)
+//	{
+//		return tmp1._nums < tmp2._nums;
+//	}
+//};
+//
+//int main()
+//{
+//	std::string s1("æ¤…å­");
+//	vector<Goods> v;
+//	Goods g1(s1, 50, 10);
+//	sort(v.begin(), v.end(), CompareName());
+//	return 0;
+//}
+
+//#include<string>
+//#include<algorithm>
+//#include<vector>
+//using namespace std;
+//struct Goods
+//{
+//	string _name; 
+//	double _price; 
+//	int _evaluate; 
+//	Goods(const char* str, double price, int evaluate)
+//		:_name(str)
+//		, _price(price)
+//		, _evaluate(evaluate)
+//	{}
+//};
+//
+//struct ComparePriceLess
+//{
+//	bool operator()(const Goods& gl, const Goods& gr)
+//	{
+//		return gl._price < gr._price;
+//	}
+//};
+//
+//struct ComparePriceGreater
+//{
+//	bool operator()(const Goods& gl, const Goods& gr)
+//	{
+//		return gl._price > gr._price;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<Goods> v = { { "è‹¹æœ", 2.1, 5 }, { "é¦™è•‰", 3, 4 }, { "æ©™å­", 2.2,3 }, { "è è", 1.5, 4 } };
+//	sort(v.begin(), v.end(), ComparePriceLess());
+//	sort(v.begin(), v.end(), ComparePriceGreater());
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//struct Goods
+//{
+//	string _name;
+//	int _price;
+//	int _number;
+//
+//	Goods(const char* name, const int price, const int number)
+//		:_name(name)
+//		,_price(price)
+//		,_number(number)
+//	{}
+//};
+//
+//struct CompareNameLess
+//{
+//	bool operator()(const Goods& g1, const Goods& g2)
+//	{
+//		return g1._name < g2._name;
+//	}
+//};
+//
+//struct ComparePriceLess
+//{
+//	bool operator()(const Goods& g1, const Goods& g2)
+//	{
+//		return g1._price < g2._price;
+//	}
+//};
+//
+//struct CompareNumberLess
+//{
+//	bool operator()(const Goods& g1, const Goods& g2)
+//	{
+//		return g1._number < g2._number;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<Goods> v = { {"æ¤…å­",20,50},{"å‡³å­",15,40},{"æ¡Œå­",50,20} };
+//	//sort(v.begin(), v.end(), CompareNameLess());
+//	//sort(v.begin(), v.end(), ComparePriceLess());
+//	//sort(v.begin(), v.end(), CompareNumberLess());
+//
+//	auto Compare1 = [](const Goods& g1, const Goods& g2)->bool {return g1._name < g2._name; };
+//	sort(v.begin(), v.end(), Compare1);
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//#include<time.h>
+//using namespace std;
+//
+//int main()
+//{
+//	//srand(time(0));
+//	const int n = 10000000;
+//	vector<int> tmp;
+//	vector<int> v1;
+//	vector<int> v2;
+//	vector<int> v3;
+//	vector<int> v4;
+//
+//	for (int i = 0; i < n; i++)
+//	{
+//		tmp.push_back(rand());
+//	}
+//
+//	//å·¦å€¼æ¯”è¾ƒ
+//	size_t begin1 = clock();
+//	for (int i = 0; i < n; i++)
+//	{
+//		v1.push_back(move(tmp[i]));
+//	}
+//	size_t end1 = clock();
+//
+//	size_t begin2 = clock();
+//	for (int i = 0; i < n; i++)
+//	{
+//		v1.emplace_back(move(tmp[i])); 
+//	}
+//	size_t end2 = clock();
+//
+//	cout << end1 - begin1 << endl;
+//	cout << end2 - begin2 << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v;
+//	v.push_back(1);
+//	v.emplace_back(1, 2, 3, 4);
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<time.h>
+//#include<string>
+//#include<map>
+//#include<vector>
+//#include<list>
+//using namespace std;
+//
+//int main()
+//{
+//	const int n = 10000000;
+//	string str[] = { "aaa","bbb","ccc","ddd","eee" };
+//	list<string> v1;
+//	list<string> v2;
+//
+//		size_t begin1 = clock();
+//		for (int i = 0; i < n; i++)
+//		{
+//			int j = i % 5;
+//			v1.push_back(str[j]);
+//		}
+//		size_t end1 = clock();
+//
+//		size_t begin2 = clock();
+//		for (int i = 0; i < n; i++)
+//		{
+//			int j = i % 5;
+//			v1.emplace_back(str[j]);
+//		}
+//		size_t end2 = clock();
+//		
+//	cout << end1 - begin1 << endl;
+//	cout << end2 - begin2 << endl;
+//	return 0;
+//}
+
+//int main()
+//{
+//	map<string, string> m1;
+//	map<string, string> m2;
+//
+//	string str[] = { "aaa","bbb","ccc","ddd","eee" };
+//
+//	const int n = 1000000;
+//
+//	size_t begin1 = clock();
+//	for (int i = 0; i < n; i++)
+//	{
+//		int j = i % 5;
+//		m1.insert(make_pair(str[j],str[j]));
+//	}
+//	size_t end1 = clock();
+//
+//	size_t begin2 = clock();
+//	for (int i = 0; i < n; i++)
+//	{
+//		int j = i % 5;
+//		m1.emplace(str[j], str[j]);
+//	}
+//	size_t end2 = clock();
+//
+//	cout << end1 - begin1 << endl;
+//	cout << end2 - begin2 << endl;
+//
+//	return 0;
+//}
+
 #include<iostream>
+#include<vector>
 using namespace std;
 
 int main()
 {
-	int a = 10;
-	int b = 20;
-	auto add1 = [](int x, int y)->int {return x + y; };
-	cout << add1(a, b) << endl;
+	vector<int> v;
+	//v.push_back();
 	return 0;
 }
