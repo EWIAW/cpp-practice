@@ -1,4 +1,5 @@
 #include"RBTree.h"
+#include"blog_RBTree.h"
 
 void Test1()
 {
@@ -37,6 +38,10 @@ void Test2()
 int main()
 {
 	//Test1();
-	Test2();
+	//Test2();
+
+	srand(time(0));
+	blog_RBTree::Test1();
+
 	return 0;
 }

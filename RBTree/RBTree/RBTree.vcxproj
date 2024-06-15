@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="blog_RBTree.h" />
     <ClInclude Include="RBTree.h" />
   </ItemGroup>
   <ItemGroup>

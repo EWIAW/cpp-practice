@@ -300,3 +300,4 @@ public:
 	private:
 		Node* _root = nullptr;
 };
+
