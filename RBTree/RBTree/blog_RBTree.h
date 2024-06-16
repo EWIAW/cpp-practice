@@ -1,4 +1,7 @@
 #pragma once
+#include<iostream>
+#include<time.h>
+using namespace std;
 namespace blog_RBTree
 {
 	enum Color
@@ -103,10 +106,11 @@ namespace blog_RBTree
 						{
 							//先进行一个左单旋
 							RotateL(cur_parent);
+							swap(cur, cur_parent);
 						}
 						//代码走到这里就一定是情况二了
 						RotateR(grandparent);
-						cur->_col = BLACK;
+						cur_parent->_col = BLACK;
 						grandparent->_col = RED;
 						break;
 					}
@@ -127,9 +131,10 @@ namespace blog_RBTree
 						if (cur_parent->_left == cur)
 						{
 							RotateR(cur_parent);
+							swap(cur, cur_parent);
 						}
 						RotateL(grandparent);
-						cur->_col = BLACK;
+						cur_parent->_col = BLACK;
 						grandparent->_col = RED;
 						break;
 					}
@@ -157,12 +162,44 @@ namespace blog_RBTree
 			return nullptr;
 		}
 
-		//检查性质3
-		bool Judge3()
+		//判断是否符合红黑树的性质
+		bool JudgeTree()
 		{
+			//空树也是红黑树
+			if (_root == nullptr)
+			{
+				return true;
+			}
+			//性质1：树结点不是红的就是黑的
+			//这条性质就没必要检查的了
+
+			//性质2：根结点一定是黑色的
+			if (_root->_col != BLACK)
+			{
+				cout << "违反性质2：根结点一定是黑色的" << endl;
+				return false;
+			}
+
+			//性质5:所有叶子结点都是黑色的
+			//这个性质也没必要检查
+
+			size_t blackcount = 0;
 			Node* cur = _root;
-			_Judge3(cur);
+			while (cur != nullptr)//先求出一条路径中的黑色结点的个数
+			{
+				if (cur->_col == BLACK)
+				{
+					blackcount++;
+				}
+				cur = cur->_left;
+			}
+			size_t k = 0;//用来存储黑色结点的个数
+			return _JudgeTree(_root, k, blackcount);//判断性质3和性质4
+
+			//性质3：如果一个结点是红色的，那么它的孩子一定是黑色的
+			//性质4：每条路径上的黑色结点的个数都相同
 		}
+
 	private:
 		//左单旋	
 		void RotateL(Node* cur_parent)
@@ -240,26 +277,49 @@ namespace blog_RBTree
 
 		}
 
-		//判断性质3的子函数
-		bool _Judge3(Node* cur)
+		//获取根节点
+		Node* GetRoot()
 		{
-			if (cur == nullptr)
-			{
-				return true;
-			}
+			return _root;
+		}
 
-			if (cur->_col == BLACK)
+		//判断是否红黑树的子函数
+		bool _JudgeTree(Node* root, size_t k, size_t blackcount)
+		{
+			//当root走到NULL的时候，判断这条路径的黑色结点个数是否==blackcount
+			if (root == nullptr)
 			{
-				return _Judge3(cur->_left) && _Judge3(cur->_right);
-			}
-
-			if (cur->_col == RED)
-			{
-				if (cur->_left->_col == RED && cur->_right->_col == RED)
+				if (k == blackcount)
 				{
 					return true;
 				}
+				else
+				{
+					cout << "违反性质4：每条路径上的黑结点个数相同" << endl;
+					return false;
+				}
+					
+
 			}
+
+			//如果结点是红色的，判断它的父结点是否也为红色
+			Node* root_parent = root->_parent;
+			if (root_parent != nullptr && root->_col == RED)
+			{
+				if (root_parent->_col == RED)
+				{
+					cout << "违反性质3：如果一个结点是红色的，那么它的孩子一定是黑色的" << endl;
+					return false;
+				}
+			}
+
+			//如果结点是黑色的，则k++
+			if (root->_col == BLACK)
+			{
+				k++;
+			}
+
+			return _JudgeTree(root->_left, k, blackcount) && _JudgeTree(root->_right, k, blackcount);
 		}
 
 	private:
@@ -268,11 +328,14 @@ namespace blog_RBTree
 
 	void Test1()
 	{
+		srand(time(0));
 		RBTree<int> root;
 		const int n = 10000;
 		for (int i = 0; i < n; i++)
 		{
-			root.insert(rand());
+			int input = rand();
+			root.insert(input);
 		}
+		cout << root.JudgeTree() << endl;
 	}
 }
