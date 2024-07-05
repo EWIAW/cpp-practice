@@ -127,6 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="blog_my_map.h" />
+    <ClInclude Include="blog_my_set.h" />
+    <ClInclude Include="blog_RBTree.h" />
     <ClInclude Include="my_map.h" />
     <ClInclude Include="my_set.h" />
     <ClInclude Include="RBTree.h" />
