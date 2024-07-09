@@ -22,7 +22,7 @@ namespace my_blog_my_set
 		typedef typename blog_RBTree::RBTree<T, GetCompareValue>::iterator iterator;
 
 		//²åÈë
-		bool insert(const T& data)
+		pair<iterator,bool> insert(const T& data)
 		{
 			return _tree.insert(data);
 		}

@@ -32,9 +32,16 @@ namespace my_blog_my_map
 		}
 
 		//²åÈë
-		bool insert(const pair<Key,T>& data)
+		pair<iterator, bool> insert(const pair<Key,T>& data)
 		{
 			return _tree.insert(data);
+		}
+
+		//ÖØÔØoperator[]
+		T& operator[](const Key& tmp)
+		{
+			pair<iterator, bool> it = insert(make_pair(tmp, T()));
+			return it.first->second;
 		}
 
 	private:
@@ -49,6 +56,8 @@ namespace my_blog_my_map
 		m.insert(make_pair(56, 56));
 		m.insert(make_pair(45, 45));
 		m.insert(make_pair(8, 8));
+		m[100];
+		m[200] = 999;
 
 		blog_my_map<int,int>::iterator it = m.begin();
 		while (it != m.end())

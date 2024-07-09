@@ -43,13 +43,13 @@ namespace blog_RBTree
 		{}
 
 		//重载*
-		T operator*()
+		T& operator*()
 		{
 			return _node->_data;
 		}
 
 		//重载->
-		T& operator->()
+		T* operator->()
 		{
 			return &_node->_data;
 		}
@@ -57,9 +57,10 @@ namespace blog_RBTree
 		//迭代器++
 		Self operator++()
 		{
-			if (_node->_right != nullptr)
+			Node* cur = _node;
+			if (cur->_right != nullptr)
 			{
-				Node* cur = _node->_right;
+				cur = cur->_right;
 				while (cur->_left != nullptr)
 				{
 					cur = cur->_left;
@@ -68,14 +69,13 @@ namespace blog_RBTree
 			}
 			else
 			{
-				Node* cur = _node;
-				Node* parent = cur->_parent;
-				while (parent != nullptr && parent->_right == cur)
+				Node* cur_parent = cur->_parent;
+				while (cur_parent != nullptr && cur_parent->_right == cur)
 				{
-					cur = parent;
-					parent = cur->_parent;
+					cur = cur_parent;
+					cur_parent = cur->_parent;
 				}
-				_node = parent;
+				_node = cur_parent;
 			}
 			return *this;
 		}
@@ -126,7 +126,7 @@ namespace blog_RBTree
 		{}
 
 		//插入结点
-		bool insert(const T& data)
+		pair<iterator,bool> insert(const T& data)
 		{
 			GCV gcv;//仿函数变量
 
@@ -135,7 +135,8 @@ namespace blog_RBTree
 			{
 				_root = new Node(data);
 				_root->_col = BLACK;//把新结点给_root后，要记得把颜色给位BLACK
-				return true;
+				iterator it(_root);
+				return make_pair(it, true);
 			}
 
 			Node* cur = _root;
@@ -154,7 +155,8 @@ namespace blog_RBTree
 				}
 				else//说明该值已经存在，不进行插入
 				{
-					return false;	
+					iterator it(cur);
+					return make_pair(it, false);
 				}
 			}
 
@@ -170,6 +172,8 @@ namespace blog_RBTree
 				cur_parent->_right = cur;
 				cur->_parent = cur_parent;
 			}
+
+			Node* ret = cur;//保存插入新结点的位置
 
 			//调整结点代码
 			while (cur_parent != nullptr && cur_parent->_col == RED)
@@ -228,6 +232,9 @@ namespace blog_RBTree
 				}
 			}
 			_root->_col = BLACK;
+
+			iterator it(ret);
+			return make_pair(it, true);
 		}
 		
 		//获取根结点
