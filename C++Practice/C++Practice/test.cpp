@@ -7527,13 +7527,467 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v;
+//	v.push_back(10);
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//
+//using namespace std;
+//
+//    void duplicateZeros(vector<int>& arr)
+//    {
+//        int left = 0;
+//        int right = arr.size() - 1;
+//        int count = 0;
+//        int flag = 0;
+//        for (left = 0; left <= right; left++)
+//        {
+//            if (arr[left] == 0)
+//            {
+//                count += 2;
+//                if (count == arr.size())
+//                {
+//                    flag = 0;
+//                    break;
+//                }
+//                else if (count > arr.size())
+//                {
+//                    flag = 1;
+//                    break;
+//                }
+//            }
+//            else if (arr[left] != 0)
+//            {
+//                count++;
+//                if (count == arr.size())
+//                {
+//                    flag = 0;
+//                    break;
+//                }
+//                else if (count > arr.size())
+//                {
+//                    flag = 1;
+//                    break;
+//                }
+//            }
+//        }
+//
+//        printf("count:%d\n", count);
+//        printf("left:%d,right:%d\n", left, right);
+//        printf("flag:%d\n", flag);
+//
+//        if (flag == 0)
+//        {
+//            arr[right--] = arr[left--];
+//        }
+//        else if (flag == 1)
+//        {
+//            arr[right--] = arr[left];
+//            arr[right--] = arr[left--];
+//        }
+//
+//        while (left >= 0)
+//        {
+//            if (arr[left] == 0)
+//            {
+//                arr[right--] = arr[left];
+//                if (right >= 0)
+//                    arr[right--] = arr[left--];
+//            }
+//            else if (arr[left] != 0)
+//            {
+//                arr[right--] = arr[left--];
+//            }
+//        }
+//    }
+//
+//int main()
+//{
+//    vector<int> arr = { 0,0,0,0,0,0,0 };
+//    duplicateZeros(arr);
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	vector<vector<int>> vv;
+//
+//	vector<int> v1 = { 0,0,0 };
+//	vector<int> v2 = { 1,1,1 };
+//	vector<int> v3 = { 2,2,2 };
+//
+//	vv.push_back(v1);
+//	vv.push_back(v2);
+//	vv.push_back(v3);
+//
+//	vector<vector<int>>::iterator first = vv.begin();
+//	vector<vector<int>>::iterator end = vv.end();
+//
+//	cout << (*first)[0] << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v1 = { 0,0,0 };
+//	vector<int> v2 = { 1,1,1 };
+//	vector<int> v3 = { 2,2,2 };
+//
+//	vector<vector<int>> vv;
+//	vv.push_back(v1);
+//	vv.push_back(v2);
+//	vv.push_back(v3);
+//
+//	vector<vector<int>>::iterator first = vv.begin();
+//	vector<vector<int>>::iterator end = vv.end();
+//
+//	while (first != end)
+//	{
+//		;
+//	}
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//
+//using namespace std;
+//
+//vector<vector<int>> threeSum(vector<int>& nums)
+//{
+//    sort(nums.begin(), nums.end());
+//    //将 三数之和 问题降维成 两数之和
+//    vector<vector<int>> ret;
+//    int end = nums.size();//nums的末尾
+//    int i = 0;
+//    while (i < end)
+//    {
+//        int left = i + 1;
+//        int right = end - 1;
+//        while (left < right)
+//        {
+//            if ((nums[left] + nums[right]) > (-nums[i]))
+//            {
+//                right--;
+//            }
+//            else if ((nums[left] + nums[right]) < (-nums[i]))
+//            {
+//                left++;
+//            }
+//            else
+//            {
+//                vector<int> tmp;
+//                tmp.push_back(nums[i]);
+//                tmp.push_back(nums[left]);
+//                tmp.push_back(nums[right]);
+//                ret.push_back(tmp);
+//                left++;
+//                right--;
+//                if (left < right)
+//                {
+//                    while (left < right && nums[left] == nums[left - 1])
+//                    {
+//                        left++;
+//                    }
+//
+//                    while (left < right && nums[right] == nums[right + 1])
+//                    {
+//                        right--;
+//                    }
+//                }
+//            }
+//        }
+//        i++;
+//        while (i < end && nums[i] == nums[i - 1])
+//        {
+//            i++;
+//        }
+//    }
+//    return ret;
+//}
+
+//#include<iostream>
+//#include<vector>
+//
+//using namespace std;
+//
+//
+//int minSubArrayLen(int target, vector<int>& nums) {
+//    int n = nums.size();
+//    int left = 0, right = 0, sum = nums[0], ret = n + 1;
+//    while (right < n)
+//    {
+//        sum += nums[right];
+//        if (sum < target)
+//        {
+//            right++;
+//        }
+//        else if (sum >= target)
+//        {
+//            int len = right - left + 1;
+//            if (len < ret)
+//            {
+//                ret = len;
+//            }
+//            sum -= nums[left++];
+//            sum -= nums[right];
+//        }
+//    }
+//    if (ret == (n + 1))
+//        return 0;
+//    else
+//        return ret;
+//}
+//
+//int main()
+//{
+//    vector<int> a = { 1,2,3,4,5 };
+//    int ret  = minSubArrayLen(15, a);
+//
+//
+//    return 0;
+//}
+
+//#include <iostream>
+//#include <vector>
+//#include <unordered_set>
+//
+//using namespace std;
+//
+//int totalFruit(vector<int>& fruits)
+//{
+//    unordered_set<int> um;
+//    int ret = 0;
+//    for (int left = 0, right = 0; right < fruits.size(); )
+//    {
+//        um.insert(fruits[right]);
+//        if (um.size() < 3)
+//        {
+//            right++;
+//        }
+//        else
+//        {
+//            //先记录长度
+//            ret = max(ret, right - left);
+//
+//            unordered_set<int>::iterator it = um.begin();
+//            int tmp = *it;
+//            int tmpleft = left;
+//            int pos = left;
+//            while (tmpleft <= right)
+//            {
+//                if (fruits[tmpleft] == tmp)
+//                {
+//                    pos = tmpleft;
+//                }
+//                tmpleft++;
+//            }
+//            left = ++pos;
+//            right++;
+//            um.erase(it);
+//        }
+//        ret = max(ret, right - left);
+//    }
+//    return ret;
+//}
+//
+//int main()
+//{
+//    vector<int> n = { 0,1,2,2 };
+//    int ret = totalFruit(n);
+//    cout << ret << endl;
+//    return 0;
+//}
+
+//#include <iostream>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	int* ptr = nullptr;
+//	int tmp = 1000;
+//	ptr = &tmp;
+//	cout << *ptr << endl;
+//	return 0;
+//}
+
+//#include <iostream>
+//
+//using namespace std;
+//
+//class String
+//{
+//public:
+//	String(const char* str = "")
+//		:_str(nullptr)
+//	{
+//		cout << "Stirng()" << endl;
+//		_str = new char[strlen(str) + 1];
+//		strcpy(_str, str);
+//	}
+//
+//	//拷贝构造
+//	//String s2(s1)
+//	String(const String& tmp)
+//	{
+//		cout << "String(&)" << endl;
+//		_str = new char[strlen(tmp._str) + 1];
+//		strcpy(_str, tmp._str);
+//	}
+//
+//	String(String&& tmp) noexcept
+//		:_str(nullptr)
+//	{
+//		cout << "String(&&)" << endl;
+//		swap(_str, tmp._str);
+//	}
+//
+//	~String()
+//	{
+//		delete _str;
+//	}
+//private:
+//	char* _str;
+//};
+//
+//String function(const char* str)
+//{
+//	String tmp(str);
+//	return tmp;
+//}
+//
+//class A
+//{
+//public:
+//	A(const int val = 0)
+//		:_val(val)
+//	{
+//		cout << "A()" << endl;
+//	}
+//
+//	A(const A& tmp)
+//	{
+//		cout << "A(&)" << endl;
+//		_val = tmp._val;
+//	}
+//
+//	A(A&& tmp)
+//	{
+//		cout << "A(&&)" << endl;
+//		swap(_val, tmp._val);
+//	}
+//
+//	~A()
+//	{
+//	}
+//
+//private:
+//	int _val;
+//};
+//
+//void f(const int& a)
+//{
+//	cout << "&" << endl;
+//}
+//
+//void f(const int&& a)
+//{
+//	cout << "&&" << endl;
+//}
+//
+//int main()
+//{
+//	//int a = 10;
+//	//decltype(a) b = 20;
+//	//cout << b << endl;
+//
+//	//int a = 10;
+//	//int& pa = a;
+//
+//	//const int& pb = 10;
+//	//int&& ppa = move(a);
+//
+//	String s1("hello");
+//	String s2(s1);
+//	//String s3(move(function("hello world")));
+//	String s4(move(String("aaa")));
+//
+//	//int a = 10;
+//	//int& pa = a;
+//	//int x = 10;
+//	//int y = 10;
+//	//int&& ppa = x + y;
+//
+//	//A a1(a);
+//	//A a2(a1);
+//	//A a3(x + y);
+//
+//	//f(10);
+//
+//	return 0;
+//}
+#include<ctime>
 #include<iostream>
-#include<vector>
+#include<string>
+
+#define NUM 1000000
+
 using namespace std;
+
+void Test1()
+{
+	string s("hello world");
+	for (int i = 0; i < NUM; i++)
+	{
+		string tmp(s);
+		s = tmp;
+	}
+}
+
+void Test2()
+{
+	string s("hello world");
+	for (int i = 0; i < NUM; i++)
+	{
+		string tmp(move(s));
+		s = move(tmp);
+	}
+}
 
 int main()
 {
-	vector<int> v;
-	v.push_back(10);
+	int begin1 = clock();
+	Test1();
+	int end1 = clock();
+	int begin2 = clock();
+	Test2();
+	int end2 = clock();
+
+	cout << end1 - begin1 << endl;
+	cout << end2 - begin2 << endl;
+
 	return 0;
 }
