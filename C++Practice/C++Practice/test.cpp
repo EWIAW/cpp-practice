@@ -7949,45 +7949,261 @@
 //
 //	return 0;
 //}
-#include<ctime>
-#include<iostream>
-#include<string>
+//#include<ctime>
+//#include<iostream>
+//#include<string>
+//
+//#define NUM 1000000
+//
+//using namespace std;
+//
+//void Test1()
+//{
+//	string s("hello world");
+//	for (int i = 0; i < NUM; i++)
+//	{
+//		string tmp(s);
+//		s = tmp;
+//	}
+//}
+//
+//void Test2()
+//{
+//	string s("hello world");
+//	for (int i = 0; i < NUM; i++)
+//	{
+//		string tmp(move(s));
+//		s = move(tmp);
+//	}
+//}
+//
+//int main()
+//{
+//	int begin1 = clock();
+//	Test1();
+//	int end1 = clock();
+//	int begin2 = clock();
+//	Test2();
+//	int end2 = clock();
+//
+//	cout << end1 - begin1 << endl;
+//	cout << end2 - begin2 << endl;
+//
+//	return 0;
+//}
 
-#define NUM 1000000
+//#include<iostream>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	char str1 = 'a';
+//	char str2 = 'f';
+//	char str3 = 'b';
+//	char str4 = 'e';
+//	char ret = str1 ^ str2 ^ str3 ^ str4;
+//	cout << (int)ret << endl;
+//
+//	return 0;
+//}
+//#include<iostream>
+//#include<unordered_map>
+//#include<vector>
+//#include<string>
+//
+//using namespace std;
+//
+//vector<int> findAnagrams(string s, string p)
+//{
+//    vector<int> ret;
+//    unordered_map<char, int> um1;//映射s
+//    unordered_map<char, int> um2;//映射p
+//
+//    for (int i = 0; i < p.size(); i++)
+//        um2[p[i]]++;
+//
+//    for (int left = 0, right = 0; right < s.size(); right++)
+//    {
+//        um1[s[right]]++;
+//        if (um1.size() == um2.size())
+//        {
+//            if (um1 == um2)
+//            {
+//                ret.push_back(left);
+//            }
+//
+//            um1[s[left]]--;
+//            if (um1[s[left]] == 0)
+//            {
+//                um1.erase(s[left]);
+//            }
+//            left++;
+//        }
+//    }
+//    return ret;
+//}
+//
+//int main()
+//{
+//    string s("cbaebabacd");
+//    string p("abc");
+//    vector<int> ret = findAnagrams(s, p);
+//
+//    return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//
+//using namespace std;
+//
+//void Fun(int& x) { cout << "左值引用" << endl; }
+//void Fun(const int& x) { cout << "const 左值引用" << endl; }
+//void Fun(int&& x) { cout << "右值引用" << endl; }
+//void Fun(const int&& x) { cout << "const 右值引用" << endl; }
+//
+//template<typename T>
+//void PerfectForward(T&& t)
+//{
+//	Fun(forward<T>(t));
+//}
+//
+//int main()
+//{
+//	PerfectForward(10);
+//	int a = 10;
+//	PerfectForward(a);
+//	PerfectForward(std::move(a));
+//	const int b = 8;
+//	PerfectForward(b);
+//	PerfectForward(std::move(b)); 
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//
+//using namespace std;
+//
+//struct Goods
+//{
+//	Goods(const int price, const int num, const char* name)
+//		:_price(price)
+//		,_num(num)
+//		,_name(name)
+//	{}
+//
+//	int _price;
+//	int _num;
+//	string _name;
+//};
+//
+////struct ComparePrice
+////{
+////	bool operator()(const Goods& g1, const Goods& g2)
+////	{
+////		return g1._name > g2._name;
+////	}
+////};
+//
+//bool ComparePrice(const Goods& g1,const Goods& g2)
+//{
+//	return g1._num > g2._num;
+//}
+//
+//int main()
+//{
+//	vector<Goods> v = { {100,200,"apple"},{90,394,"banana"},{44,243,"organe"} };
+//	
+//	//sort(v.begin(), v.end(), ComparePrice());
+//	sort(v.begin(), v.end(), ComparePrice);
+//
+//
+//	[] {};//lamber表达式
+//	//auto add = [](int x, int y)->int {return x + y; };
+//	//cout << add(1, 2) << endl;
+//
+//	//sort(v.begin(), v.end(), [](const Goods& g1, const Goods& g2)->bool {return g1._num > g2._num; });
+//
+//
+//	return 0;
+//}
+
+#include<iostream>
+#include<thread>
+#include<mutex>
+#include<vector>
 
 using namespace std;
 
-void Test1()
-{
-	string s("hello world");
-	for (int i = 0; i < NUM; i++)
-	{
-		string tmp(s);
-		s = tmp;
-	}
-}
+int count = 0;
+mutex mtx;
 
-void Test2()
+void Add(int n)
 {
-	string s("hello world");
-	for (int i = 0; i < NUM; i++)
+	mtx.lock();
+	for (int i = 0; i < n; i++)
 	{
-		string tmp(move(s));
-		s = move(tmp);
+		::count++;
 	}
+	mtx.unlock();
 }
 
 int main()
 {
-	int begin1 = clock();
-	Test1();
-	int end1 = clock();
-	int begin2 = clock();
-	Test2();
-	int end2 = clock();
+	//lamber表达式
+	//auto add = [](int n)
+	//	{
+	//		mtx.lock();
+	//		for (int i = 0; i < n; i++)
+	//		{
+	//			::count++;
+	//		}
+	//		mtx.unlock();
+	//	};
 
-	cout << end1 - begin1 << endl;
-	cout << end2 - begin2 << endl;
+	//thread t1([](int n)
+	//	{
+	//		for (int i = 0; i < n; i++)
+	//		{
+	//			::count++;
+	//		}
+	//	}, 1000000);
+
+	//thread t2([](int n)
+	//	{
+	//		for (int i = 0; i < n; i++)
+	//		{
+	//			::count++;
+	//		}
+	//	}, 1000000);
+
+	//t1.join();
+	//t2.join();
+	int n = 5;
+	vector<thread> vthreads(n);
+	int m = 1000000;
+	for (int i = 0; i < n; i++)
+	{
+		vthreads[i] = (thread([](int m)
+			{
+				mtx.lock();
+				for (int i = 0; i < m; i++)
+				{
+					::count++;
+				}
+				mtx.unlock();
+			}, m));
+	}
+
+	for (auto& thread : vthreads)
+	{
+		thread.join();
+	}
+
+	cout << ::count << endl;
 
 	return 0;
 }
