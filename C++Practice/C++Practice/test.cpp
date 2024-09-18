@@ -8131,79 +8131,252 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include<thread>
+//#include<mutex>
+//#include<vector>
+//
+//using namespace std;
+//
+//int count = 0;
+//mutex mtx;
+//
+//void Add(int n)
+//{
+//	mtx.lock();
+//	for (int i = 0; i < n; i++)
+//	{
+//		::count++;
+//	}
+//	mtx.unlock();
+//}
+//
+//int main()
+//{
+//	//lamber表达式
+//	//auto add = [](int n)
+//	//	{
+//	//		mtx.lock();
+//	//		for (int i = 0; i < n; i++)
+//	//		{
+//	//			::count++;
+//	//		}
+//	//		mtx.unlock();
+//	//	};
+//
+//	//thread t1([](int n)
+//	//	{
+//	//		for (int i = 0; i < n; i++)
+//	//		{
+//	//			::count++;
+//	//		}
+//	//	}, 1000000);
+//
+//	//thread t2([](int n)
+//	//	{
+//	//		for (int i = 0; i < n; i++)
+//	//		{
+//	//			::count++;
+//	//		}
+//	//	}, 1000000);
+//
+//	//t1.join();
+//	//t2.join();
+//	int n = 5;
+//	vector<thread> vthreads(n);
+//	int m = 1000000;
+//	for (int i = 0; i < n; i++)
+//	{
+//		vthreads[i] = (thread([](int m)
+//			{
+//				mtx.lock();
+//				for (int i = 0; i < m; i++)
+//				{
+//					::count++;
+//				}
+//				mtx.unlock();
+//			}, m));
+//	}
+//
+//	for (auto& thread : vthreads)
+//	{
+//		thread.join();
+//	}
+//
+//	cout << ::count << endl;
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <thread>
+//#include <mutex>
+//#include <condition_variable>
+//
+//using namespace std;
+//
+//int NUM = 10;
+//
+//int main()
+//{
+//	mutex mtx1, mtx2;
+//	condition_variable cond1, cond2;
+//
+//	thread t1([&]()
+//		{
+//			for (int i = 0; i < NUM; i += 2)
+//			{
+//				unique_lock<mutex> lock1(mtx1);
+//				//打印偶数
+//				cout << i << endl;
+//				cond2.notify_one();
+//				cond1.wait(lock1);
+//			}
+//		});
+//
+//	thread t2([&]()
+//		{
+//			for (int i = 1; i < NUM; i += 2)
+//			{
+//				unique_lock<mutex> lock2(mtx2);
+//				//打印奇数
+//				cond2.wait(lock2);
+//				cout << i << endl;
+//				cond1.notify_one();
+//			}
+//		});
+//
+//	t1.join();
+//	t2.join();
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <thread>
+//#include <mutex>
+//#include <condition_variable>
+//
+//using namespace std;
+//
+//int NUM = 10;
+//
+//mutex mtx1, mtx2;
+//condition_variable cond1, cond2;
+//unique_lock<mutex> lock1(mtx1);
+//unique_lock<mutex> lock2(mtx2);
+//
+//void start1(int n)
+//{
+//	for (int i = 0; i < n; i += 2)
+//	{
+//		//打印偶数
+//		cout << i << endl;
+//		cond2.notify_one();
+//		cond1.wait(lock1);
+//	}
+//}
+//
+//void start2(int n)
+//{
+//	for (int i = 1; i < n; i += 2)
+//	{
+//		//打印奇数
+//		cond2.wait(lock2);
+//		cout << i << endl;
+//		cond1.notify_one();
+//	}
+//}
+//
+//int main()
+//{
+//	try
+//	{
+//		thread t1(start1, NUM);
+//		thread t2(start2, NUM);
+//
+//		t1.join();
+//		t2.join();
+//	}
+//	catch (exception& e)
+//	{
+//		cout << e.what();
+//	}
+//
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int Div(int n, int m)
+//{
+//	if (m == 0)
+//	{
+//		throw(string("除数为0"));
+//	}
+//	return n / m;
+//}
+//
+//int main()
+//{
+//	int input1, input2;
+//	cin >> input1 >> input2;
+//	try
+//	{
+//		int ret = Div(input1, input2);
+//		cout << ret << endl;
+//	}
+//	catch (const string& err)
+//	{
+//		cout << err << endl;
+//	}
+//
+//	return 0;
+//}
+
 #include<iostream>
-#include<thread>
-#include<mutex>
-#include<vector>
 
 using namespace std;
 
-int count = 0;
-mutex mtx;
-
-void Add(int n)
+int Div(int m, int n)
 {
-	mtx.lock();
-	for (int i = 0; i < n; i++)
+	if (n == 0)
 	{
-		::count++;
+		throw(string("除数为0"));
 	}
-	mtx.unlock();
+	return m / n;
+}
+
+void func(int m, int n)
+{
+	int* space = new int[100];
+	try
+	{
+		int ret = Div(m, n);
+	}
+	catch (const string& e)
+	{
+		//cout << e << endl;
+		delete[] space;
+		throw;
+	}
+	delete[] space;
 }
 
 int main()
 {
-	//lamber表达式
-	//auto add = [](int n)
-	//	{
-	//		mtx.lock();
-	//		for (int i = 0; i < n; i++)
-	//		{
-	//			::count++;
-	//		}
-	//		mtx.unlock();
-	//	};
-
-	//thread t1([](int n)
-	//	{
-	//		for (int i = 0; i < n; i++)
-	//		{
-	//			::count++;
-	//		}
-	//	}, 1000000);
-
-	//thread t2([](int n)
-	//	{
-	//		for (int i = 0; i < n; i++)
-	//		{
-	//			::count++;
-	//		}
-	//	}, 1000000);
-
-	//t1.join();
-	//t2.join();
-	int n = 5;
-	vector<thread> vthreads(n);
-	int m = 1000000;
-	for (int i = 0; i < n; i++)
+	int m = 10;
+	int n = 0;
+	try
 	{
-		vthreads[i] = (thread([](int m)
-			{
-				mtx.lock();
-				for (int i = 0; i < m; i++)
-				{
-					::count++;
-				}
-				mtx.unlock();
-			}, m));
+		func(m, n);
 	}
-
-	for (auto& thread : vthreads)
+	catch(const string& e)
 	{
-		thread.join();
+		cout << e << endl;
 	}
-
-	cout << ::count << endl;
 
 	return 0;
 }
