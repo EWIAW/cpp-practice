@@ -8336,47 +8336,169 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//
+//using namespace std;
+//
+//int Div(int m, int n)
+//{
+//	if (n == 0)
+//	{
+//		throw(string("除数为0"));
+//	}
+//	return m / n;
+//}
+//
+//void func(int m, int n)
+//{
+//	int* space = new int[100];
+//	try
+//	{
+//		int ret = Div(m, n);
+//	}
+//	catch (const string& e)
+//	{
+//		//cout << e << endl;
+//		delete[] space;
+//		throw;
+//	}
+//	delete[] space;
+//}
+//
+//int main()
+//{
+//	int m = 10;
+//	int n = 0;
+//	try
+//	{
+//		func(m, n);
+//	}
+//	catch(const string& e)
+//	{
+//		cout << e << endl;
+//	}
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//#include"SmartPtr.h"
+//using namespace std;
+//
+//int Func1(int m, int n)
+//{
+//	int* tmp = new int;
+//	SmartPtr<int> ptr(tmp);
+//
+//	if (n == 0)
+//	{
+//		throw(string("除数为0"));
+//	}
+//
+//	return m / n;
+//}
+//
+//int main()
+//{
+//	int m = 10, n = 0;
+//	try
+//	{
+//		int ret = Func1(m, n);
+//		cout << ret << endl;
+//	}
+//	catch (const string& e)
+//	{
+//		cout << e << endl;
+//	}
+//	return 0;
+//}
+
 #include<iostream>
+#include"SmartPtr.h"
+#include<list>
 
-using namespace std;
-
-int Div(int m, int n)
+struct Data
 {
-	if (n == 0)
-	{
-		throw(string("除数为0"));
-	}
-	return m / n;
-}
+	Data(const int year, const int month, const int day)
+		:_year(year)
+		,_month(month)
+		,_day(day)
+	{}
 
-void func(int m, int n)
+	int _year;
+	int _month;
+	int _day;
+};
+
+template<class T>
+class ListNode
 {
-	int* space = new int[100];
-	try
-	{
-		int ret = Div(m, n);
-	}
-	catch (const string& e)
-	{
-		//cout << e << endl;
-		delete[] space;
-		throw;
-	}
-	delete[] space;
-}
+public:
+	ListNode(const T& val = 0)
+		:_val(val)
+		,_next(nullptr)
+		,_prev(nullptr)
+	{}
+public:
+	T _val;
+	my::share_ptr<ListNode<T>> _next;
+	my::share_ptr<ListNode<T>> _prev;
+};
 
 int main()
 {
-	int m = 10;
-	int n = 0;
-	try
-	{
-		func(m, n);
-	}
-	catch(const string& e)
-	{
-		cout << e << endl;
-	}
+	//my::auto_ptr<int> sp1(new int);
+	//*sp1 = 10;
+	//cout << *sp1 << endl;
+	//my::auto_ptr<Data> sp1(new Data(1, 1, 1));
+	//(*sp1)._day = 2;
+	//sp1->_month = 2;
+	//my::auto_ptr<int> sp1(new int(1));
+	//my::auto_ptr<int> sp2(sp1);
+
+	//my::auto_ptr<int> sp3(new int(3));
+	//sp3 = sp2;
+
+	//my::share_ptr<int> sp1(new int(1));
+	//my::share_ptr<int> sp2(sp1);
+
+	//my::share_ptr<int> sp3(new int(10));
+	//sp3 = sp1;
+
+
+
+	//int n = 10000;
+	//my::share_ptr<int> sp = new int;
+	//cout << sp.use_count() << endl;
+	//thread t1([&]()
+	//	{
+	//		for (int i = 0; i < n; i++)
+	//		{
+	//			my::share_ptr<int> tmp(sp);
+	//		}
+	//	});
+
+	//thread t2([&]()
+	//	{
+	//		for (int i = 0; i < n; i++)
+	//		{
+	//			my::share_ptr<int> tmp(sp);
+	//		}
+	//	});
+
+	//t1.join();
+	//t2.join();
+
+	//cout << sp.use_count() << endl;
+
+
+
+	my::share_ptr<ListNode<int>> sp1(new ListNode<int>);
+	my::share_ptr<ListNode<int>> sp2(new ListNode<int>);
+	
+	//sp1->_next = sp2;
+	//sp2->_prev = sp1;
 
 	return 0;
 }
