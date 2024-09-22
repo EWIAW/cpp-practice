@@ -8414,91 +8414,194 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include"SmartPtr.h"
+//#include<list>
+//
+//struct Data
+//{
+//	Data(const int year, const int month, const int day)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//template<class T>
+//class ListNode
+//{
+//public:
+//	ListNode(const T& val = 0)
+//		:_val(val)
+//		,_next(nullptr)
+//		,_prev(nullptr)
+//	{}
+//public:
+//	T _val;
+//	my::share_ptr<ListNode<T>> _next;
+//	my::share_ptr<ListNode<T>> _prev;
+//};
+//
+//int main()
+//{
+//	//my::auto_ptr<int> sp1(new int);
+//	//*sp1 = 10;
+//	//cout << *sp1 << endl;
+//	//my::auto_ptr<Data> sp1(new Data(1, 1, 1));
+//	//(*sp1)._day = 2;
+//	//sp1->_month = 2;
+//	//my::auto_ptr<int> sp1(new int(1));
+//	//my::auto_ptr<int> sp2(sp1);
+//
+//	//my::auto_ptr<int> sp3(new int(3));
+//	//sp3 = sp2;
+//
+//	//my::share_ptr<int> sp1(new int(1));
+//	//my::share_ptr<int> sp2(sp1);
+//
+//	//my::share_ptr<int> sp3(new int(10));
+//	//sp3 = sp1;
+//
+//
+//
+//	//int n = 10000;
+//	//my::share_ptr<int> sp = new int;
+//	//cout << sp.use_count() << endl;
+//	//thread t1([&]()
+//	//	{
+//	//		for (int i = 0; i < n; i++)
+//	//		{
+//	//			my::share_ptr<int> tmp(sp);
+//	//		}
+//	//	});
+//
+//	//thread t2([&]()
+//	//	{
+//	//		for (int i = 0; i < n; i++)
+//	//		{
+//	//			my::share_ptr<int> tmp(sp);
+//	//		}
+//	//	});
+//
+//	//t1.join();
+//	//t2.join();
+//
+//	//cout << sp.use_count() << endl;
+//
+//
+//
+//	my::share_ptr<ListNode<int>> sp1(new ListNode<int>);
+//	my::share_ptr<ListNode<int>> sp2(new ListNode<int>);
+//	
+//	//sp1->_next = sp2;
+//	//sp2->_prev = sp1;
+//
+//	return 0;
+//}
+
 #include<iostream>
-#include"SmartPtr.h"
-#include<list>
+#include<vector>
+#include<thread>
+using namespace std;
 
-struct Data
-{
-	Data(const int year, const int month, const int day)
-		:_year(year)
-		,_month(month)
-		,_day(day)
-	{}
-
-	int _year;
-	int _month;
-	int _day;
-};
-
-template<class T>
-class ListNode
+//编写一个只能在堆上开空间的类
+class HeapOnly
 {
 public:
-	ListNode(const T& val = 0)
-		:_val(val)
-		,_next(nullptr)
-		,_prev(nullptr)
+	static HeapOnly* CreateObject()
+	{
+		return new HeapOnly;
+	}
+private:
+	//构造函数私有
+	HeapOnly()
 	{}
-public:
-	T _val;
-	my::share_ptr<ListNode<T>> _next;
-	my::share_ptr<ListNode<T>> _prev;
+
+	//删除拷贝构造
+	HeapOnly(const HeapOnly& tmp) = delete;
+
+	////删除赋值=重载
+	//HeapOnly operator=(const HeapOnly& tmp) = delete;
 };
+
+//编写一个只能在栈上开空间的类
+class StackOnly
+{
+public:
+	static StackOnly CreateObject()
+	{
+		return StackOnly();
+	}
+private:
+	StackOnly()
+	{}
+};
+
+//单例模式
+class Singleton
+{
+public:
+	static Singleton* CreateObject()
+	{
+		if (_ptr == nullptr)
+		{
+			::_sleep(1000);
+			_ptr = new Singleton;
+		}
+		return _ptr;
+	}
+private:
+	//构造函数私有
+	Singleton()
+	{}
+private:
+	static Singleton* _ptr;
+};
+Singleton* Singleton::_ptr = nullptr;
 
 int main()
 {
-	//my::auto_ptr<int> sp1(new int);
-	//*sp1 = 10;
-	//cout << *sp1 << endl;
-	//my::auto_ptr<Data> sp1(new Data(1, 1, 1));
-	//(*sp1)._day = 2;
-	//sp1->_month = 2;
-	//my::auto_ptr<int> sp1(new int(1));
-	//my::auto_ptr<int> sp2(sp1);
+	//HeapOnly h1();
+	//HeapOnly* h1 = new HeapOnly;
+	//HeapOnly* h1 = HeapOnly::CreateObject();
+	////HeapOnly h2(*h1);
+	//HeapOnly* h3 = HeapOnly::CreateObject();
+	//*h3 = *h1;
 
-	//my::auto_ptr<int> sp3(new int(3));
-	//sp3 = sp2;
+	//StackOnly s1 = StackOnly::CreateObject();
+	//Singleton* s1 = Singleton::CreateObject();
+	//Singleton* s2 = Singleton::CreateObject();
+	//Singleton* s3 = Singleton::CreateObject();
+	//Singleton* s4 = Singleton::CreateObject();
 
-	//my::share_ptr<int> sp1(new int(1));
-	//my::share_ptr<int> sp2(sp1);
+	//cout << s1 << endl;
+	//cout << s2 << endl;
+	//cout << s3 << endl;
+	//cout << s4 << endl;
+	//const int n = 8;
+	//vector<thread> vt;
+	//for (int i = 0; i < n; i++)
+	//{
+	//	vt.push_back(thread([]() {
+	//		Singleton* s = Singleton::CreateObject();
+	//		cout << s << endl;
+	//		}));
+	//}
 
-	//my::share_ptr<int> sp3(new int(10));
-	//sp3 = sp1;
+	//for (auto& tmp : vt)
+	//{
+	//	tmp.join();
+	//}
 
-
-
-	//int n = 10000;
-	//my::share_ptr<int> sp = new int;
-	//cout << sp.use_count() << endl;
-	//thread t1([&]()
-	//	{
-	//		for (int i = 0; i < n; i++)
-	//		{
-	//			my::share_ptr<int> tmp(sp);
-	//		}
-	//	});
-
-	//thread t2([&]()
-	//	{
-	//		for (int i = 0; i < n; i++)
-	//		{
-	//			my::share_ptr<int> tmp(sp);
-	//		}
-	//	});
-
-	//t1.join();
-	//t2.join();
-
-	//cout << sp.use_count() << endl;
-
-
-
-	my::share_ptr<ListNode<int>> sp1(new ListNode<int>);
-	my::share_ptr<ListNode<int>> sp2(new ListNode<int>);
-	
-	//sp1->_next = sp2;
-	//sp2->_prev = sp1;
+	const int ci = 10;
+	int* pi = const_cast<int*>(&ci);
+	*pi = 20;
+	cout << *pi << endl;
+	cout << ci << endl;
 
 	return 0;
 }
