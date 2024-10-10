@@ -8503,105 +8503,181 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include<vector>
+//#include<thread>
+//using namespace std;
+//
+////编写一个只能在堆上开空间的类
+//class HeapOnly
+//{
+//public:
+//	static HeapOnly* CreateObject()
+//	{
+//		return new HeapOnly;
+//	}
+//private:
+//	//构造函数私有
+//	HeapOnly()
+//	{}
+//
+//	//删除拷贝构造
+//	HeapOnly(const HeapOnly& tmp) = delete;
+//
+//	////删除赋值=重载
+//	//HeapOnly operator=(const HeapOnly& tmp) = delete;
+//};
+//
+////编写一个只能在栈上开空间的类
+//class StackOnly
+//{
+//public:
+//	static StackOnly CreateObject()
+//	{
+//		return StackOnly();
+//	}
+//private:
+//	StackOnly()
+//	{}
+//};
+//
+////单例模式
+//class Singleton
+//{
+//public:
+//	static Singleton* CreateObject()
+//	{
+//		if (_ptr == nullptr)
+//		{
+//			::_sleep(1000);
+//			_ptr = new Singleton;
+//		}
+//		return _ptr;
+//	}
+//private:
+//	//构造函数私有
+//	Singleton()
+//	{}
+//private:
+//	static Singleton* _ptr;
+//};
+//Singleton* Singleton::_ptr = nullptr;
+//
+//int main()
+//{
+//	//HeapOnly h1();
+//	//HeapOnly* h1 = new HeapOnly;
+//	//HeapOnly* h1 = HeapOnly::CreateObject();
+//	////HeapOnly h2(*h1);
+//	//HeapOnly* h3 = HeapOnly::CreateObject();
+//	//*h3 = *h1;
+//
+//	//StackOnly s1 = StackOnly::CreateObject();
+//	//Singleton* s1 = Singleton::CreateObject();
+//	//Singleton* s2 = Singleton::CreateObject();
+//	//Singleton* s3 = Singleton::CreateObject();
+//	//Singleton* s4 = Singleton::CreateObject();
+//
+//	//cout << s1 << endl;
+//	//cout << s2 << endl;
+//	//cout << s3 << endl;
+//	//cout << s4 << endl;
+//	//const int n = 8;
+//	//vector<thread> vt;
+//	//for (int i = 0; i < n; i++)
+//	//{
+//	//	vt.push_back(thread([]() {
+//	//		Singleton* s = Singleton::CreateObject();
+//	//		cout << s << endl;
+//	//		}));
+//	//}
+//
+//	//for (auto& tmp : vt)
+//	//{
+//	//	tmp.join();
+//	//}
+//
+//	const int ci = 10;
+//	int* pi = const_cast<int*>(&ci);
+//	*pi = 20;
+//	cout << *pi << endl;
+//	cout << ci << endl;
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+////C++类型转换
+//int main()
+//{
+//	//C语言类型转换：隐式类型转换，显示类型转换
+//	//int i = 10;
+//	//double d = 8.8888;
+//	//int i2 = d;//隐式类型转换
+//	//cout << i2 << endl;
+//
+//	//int* pi = &i;
+//	//int address = (int)pi;//显示类型转换
+//	//cout << address << endl;
+//
+//	//C++类型转换
+//	int i = 10;
+//	double d = 8.8888;
+//	double* pd = &d;
+//	int i2 = static_cast<int>(d);//用于相似类型的转换
+//	cout << i2 << endl;
+//
+//	int* pi = &i;
+//	int address = reinterpret_cast<int>(pi);//强制类型转换，适用于任何类型
+//	cout << address << endl;
+//
+//	const int n = 10;
+//	int* pn = const_cast<int*>(&n);//用于去掉对象的const属性或者volatile属性
+//	*pn = 20;
+//	cout << n << endl;
+//	cout << *pn << endl;
+//
+//
+//	return 0;
+//}
+
 #include<iostream>
-#include<vector>
-#include<thread>
 using namespace std;
 
-//编写一个只能在堆上开空间的类
-class HeapOnly
+//ret = func(x);
+// 上面func可能是什么呢？那么func可能是函数名？函数指针？函数对象(仿函数对象)？也有可能
+//是lamber表达式对象？所以这些都是可调用的类型！如此丰富的类型，可能会导致模板的效率低下！
+//为什么呢？我们继续往下看
+template<class F, class T>
+T useF(F f, T x)
 {
-public:
-	static HeapOnly* CreateObject()
-	{
-		return new HeapOnly;
-	}
-private:
-	//构造函数私有
-	HeapOnly()
-	{}
+	static int count = 0;
+	cout << "count:" << ++count << endl;
+	cout << "count:" << &count << endl;
+	return f(x);
+}
 
-	//删除拷贝构造
-	HeapOnly(const HeapOnly& tmp) = delete;
-
-	////删除赋值=重载
-	//HeapOnly operator=(const HeapOnly& tmp) = delete;
-};
-
-//编写一个只能在栈上开空间的类
-class StackOnly
+double f(double i)
 {
-public:
-	static StackOnly CreateObject()
-	{
-		return StackOnly();
-	}
-private:
-	StackOnly()
-	{}
-};
-
-//单例模式
-class Singleton
+	return i / 2;
+}
+struct Functor
 {
-public:
-	static Singleton* CreateObject()
+	double operator()(double d)
 	{
-		if (_ptr == nullptr)
-		{
-			::_sleep(1000);
-			_ptr = new Singleton;
-		}
-		return _ptr;
+		return d / 3;
 	}
-private:
-	//构造函数私有
-	Singleton()
-	{}
-private:
-	static Singleton* _ptr;
 };
-Singleton* Singleton::_ptr = nullptr;
 
 int main()
 {
-	//HeapOnly h1();
-	//HeapOnly* h1 = new HeapOnly;
-	//HeapOnly* h1 = HeapOnly::CreateObject();
-	////HeapOnly h2(*h1);
-	//HeapOnly* h3 = HeapOnly::CreateObject();
-	//*h3 = *h1;
-
-	//StackOnly s1 = StackOnly::CreateObject();
-	//Singleton* s1 = Singleton::CreateObject();
-	//Singleton* s2 = Singleton::CreateObject();
-	//Singleton* s3 = Singleton::CreateObject();
-	//Singleton* s4 = Singleton::CreateObject();
-
-	//cout << s1 << endl;
-	//cout << s2 << endl;
-	//cout << s3 << endl;
-	//cout << s4 << endl;
-	//const int n = 8;
-	//vector<thread> vt;
-	//for (int i = 0; i < n; i++)
-	//{
-	//	vt.push_back(thread([]() {
-	//		Singleton* s = Singleton::CreateObject();
-	//		cout << s << endl;
-	//		}));
-	//}
-
-	//for (auto& tmp : vt)
-	//{
-	//	tmp.join();
-	//}
-
-	const int ci = 10;
-	int* pi = const_cast<int*>(&ci);
-	*pi = 20;
-	cout << *pi << endl;
-	cout << ci << endl;
-
+	// 函数名
+	cout << useF(f, 11.11) << endl;
+	// 函数对象
+	cout << useF(Functor(), 11.11) << endl;
+	// lamber表达式
+	cout << useF([](double d)->double { return d / 4; }, 11.11) << endl;
 	return 0;
 }
