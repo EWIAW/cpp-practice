@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="blog_hash.h" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>

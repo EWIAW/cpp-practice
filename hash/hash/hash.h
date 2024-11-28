@@ -151,7 +151,7 @@ namespace Open_Hash
 
 		HashNode(const T& data)
 			:_data(data)
-			,_next(nullptr)
+			, _next(nullptr)
 		{}
 	};
 
@@ -163,8 +163,8 @@ namespace Open_Hash
 
 		HashTableIterator(Node* tmp, vector<Node*>* vec, size_t num)
 			:_node(tmp)
-			,_tab(vec)
-			,_num(num)
+			, _tab(vec)
+			, _num(num)
 		{}
 
 		T& operator*()
@@ -214,6 +214,7 @@ namespace Open_Hash
 		Node* _node;
 	};
 
+	//int类型的hash函数
 	template<class K>
 	struct Hash
 	{
@@ -223,6 +224,7 @@ namespace Open_Hash
 		}
 	};
 
+	//string字符串类型的函数
 	template<>
 	struct Hash<string>
 	{
@@ -237,7 +239,7 @@ namespace Open_Hash
 		}
 	};
 
-	template<class V, class Hash=Hash<V>>
+	template<class V, class Hash = Hash<V>>
 	class HashTable
 	{
 	public:
@@ -276,7 +278,7 @@ namespace Open_Hash
 		{
 			HashTable<V> newtable;//开一张新的hash临时哈希表，将旧表的结点都拿过来
 			newtable._tables.resize(_nums * 2);
-			
+
 			//遍历旧表将结点拿过来
 			for (int i = 0; i < _tables.size(); i++)
 			{
