@@ -123,9 +123,7 @@ namespace my
 			, _pcount(sp._pcount)
 			, _mtx(sp._mtx)
 		{
-			_mtx->lock();
-			(*_pcount)++;
-			_mtx->unlock();
+			AddRef();
 		}
 
 		//重载=
@@ -134,25 +132,11 @@ namespace my
 		{
 			if (this != &sp)
 			{
-				_mtx->lock();
-				bool flag = false;
-				//先把原来的空间释放掉
-				if (--(*_pcount) == 0 && _pcount != nullptr)
-				{
-					cout << "赋值=delete" << endl;
-					delete _ptr;
-					delete _pcount;
-					flag = true;
-				}
+				Release();
 				_ptr = sp._ptr;
 				_pcount = sp._pcount;
 				_mtx = sp._mtx;
-				(*_pcount)++;
-				_mtx->unlock();
-				if (flag == true)
-				{
-					delete _mtx;
-				}
+				AddRef();
 			}
 			return *this;
 		}
@@ -160,20 +144,7 @@ namespace my
 		//析构函数
 		~share_ptr()
 		{
-			_mtx->lock();
-			bool flag = false;
-			if (--(*_pcount) == 0 && _ptr != nullptr)
-			{
-				cout << "delete:" << _ptr << endl;
-				delete _ptr;
-				delete _pcount;
-				flag = true;
-			}
-			_mtx->unlock();
-			if (flag == true)
-			{
-				delete _mtx;
-			}
+			Release();
 		}
 
 		T& operator*()
@@ -191,9 +162,77 @@ namespace my
 		{
 			return *_pcount;
 		}
+
+		//给外部类获取_ptr
+		T* GetPtr() const
+		{
+			return _ptr;
+		}
+
+	private:
+		//引用计数加一
+		void AddRef()
+		{
+			_mtx->lock();
+			(*_pcount)++;
+			_mtx->unlock();
+		}
+
+		//释放旧空间
+		void Release()
+		{
+			_mtx->lock();
+			bool flag = false;
+			if (--(*_pcount) == 0 && _ptr != nullptr)
+			{
+				cout << "delete:" << _ptr << endl;
+				delete _ptr;
+				_ptr = nullptr;
+				delete _pcount;
+				_pcount = nullptr;
+				flag = true;
+			}
+			_mtx->unlock();
+			if (flag == true)
+			{
+				delete _mtx;
+				_mtx = nullptr;
+			}
+		}
 	private:
 		T* _ptr;
 		int* _pcount;
 		mutex* _mtx;
+	};
+
+
+
+	//share_ptr任然有缺陷，会出现循环引用的问题
+	//为了解决这个问题，又提出了weak_ptr弱指针
+	template<class T>
+	class weak_ptr
+	{
+	public:
+		weak_ptr(const share_ptr<T>& sp)
+			:_ptr(sp.GetPtr())
+		{}
+
+		weak_ptr<T>& operator=(const share_ptr<T>& sp)
+		{
+			_ptr = sp.GetPtr();
+			return *this;
+		}
+
+		T& operator*()
+		{
+			return *_ptr;
+		}
+
+		T* operator->()
+		{
+			return _ptr;
+		}
+	private:
+		T* _ptr;
 	};
 }

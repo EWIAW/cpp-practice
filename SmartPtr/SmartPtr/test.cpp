@@ -1,35 +1,100 @@
-#include<iostream>
-#include"SmartPtr.h"
-#include<list>
+//#include<iostream>
+//#include"SmartPtr.h"
+//#include<list>
+//#include<mutex>
+//#include<memory>
+//using namespace std;
+//
+//struct Data
+//{
+//	Data(const int year, const int month, const int day)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{}
+//
+//	~Data()
+//	{
+//		cout << "delete" << endl;
+//	}
+//
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//template<class T>
+//class ListNode
+//{
+//public:
+//	ListNode(const T& val = 0)
+//		:_val(val)
+//		, _next(nullptr)
+//		, _prev(nullptr)
+//	{}
+//
+//	~ListNode()
+//	{
+//		cout << "delete" << endl;
+//	}
+//public:
+//	T _val;
+//	my::weak_ptr<ListNode<T>> _next;
+//	my::weak_ptr<ListNode<T>> _prev;
+//};
+//
+//template<class T>
+//struct DeleteArray
+//{
+//	void operator()(T* ptr)
+//	{
+//		delete[] ptr;
+//	}
+//};
+//
+//template<class T>
+//struct Free
+//{
+//	void operator()(T* ptr)
+//	{
+//		cout << "free" << endl;
+//		free(ptr);
+//	}
+//};
+//
+//class A
+//{
+//public:
+//	A(const int val = 0)
+//		:_val(val)
+//	{}
+//
+//	~A()
+//	{
+//		cout << "delete" << endl;
+//	}
+//private:
+//	int _val;
+//};
+//
+//class LockGuard
+//{
+//public:
+//	LockGuard(mutex& mtx)
+//		:_mtx(mtx)
+//	{
+//		_mtx.lock();
+//	}
+//
+//	~LockGuard()
+//	{
+//		_mtx.unlock();
+//	}
+//private:
+//	mutex& _mtx;
+//};
 
-struct Data
-{
-	Data(const int year, const int month, const int day)
-		:_year(year)
-		, _month(month)
-		, _day(day)
-	{}
-
-	int _year;
-	int _month;
-	int _day;
-};
-
-template<class T>
-class ListNode
-{
-public:
-	ListNode(const T& val = 0)
-		:_val(val)
-		, _next(nullptr)
-		, _prev(nullptr)
-	{}
-public:
-	T _val;
-	my::share_ptr<ListNode<T>> _next;
-	my::share_ptr<ListNode<T>> _prev;
-};
-
+/*
 int main()
 {
 	//my::auto_ptr<int> sp1(new int);
@@ -52,7 +117,7 @@ int main()
 
 
 
-	//int n = 10000;
+	//int n = 1000000;
 	//my::share_ptr<int> sp = new int;
 	//cout << sp.use_count() << endl;
 	//thread t1([&]()
@@ -78,11 +143,106 @@ int main()
 
 
 
-	my::share_ptr<ListNode<int>> sp1(new ListNode<int>);
-	my::share_ptr<ListNode<int>> sp2(new ListNode<int>);
+	//my::weak_ptr<ListNode<int>> sp1(new ListNode<int>);
+	//my::weak_ptr<ListNode<int>> sp2(new ListNode<int>);
 
 	//sp1->_next = sp2;
 	//sp2->_prev = sp1;
 
+
+
+	//shared_ptr<A> sp1(new A);
+	//shared_ptr<A> sp2(new A[10],DeleteArray<A>());
+	//shared_ptr<A> sp3((A*)malloc(sizeof(A)), [](A* ptr) {
+	//	free(ptr);
+	//	});
+
+	mutex mtx;
+	LockGuard lock(mtx);
+
+	return 0;
+}
+*/
+
+#include <iostream>
+#include "Blog_SmartPtr.h"
+using namespace std;
+
+//void Div()
+//{
+//	int x, y;
+//	cin >> x >> y;
+//	if (y == 0)
+//		throw invalid_argument("除数为0");
+//	else
+//		cout << x / y << endl;
+//}
+//
+//void Func()
+//{
+//	SmartPtr<int> sp(new int(10));
+//	Div();
+//}
+//
+//void Test1()
+//{
+//	try
+//	{
+//		Func();
+//	}
+//	catch (exception& e)
+//	{
+//		cout << e.what() << endl;
+//	}
+//}
+
+template<class T>
+class SmartPtr
+{
+public:
+	//构造函数
+	SmartPtr(T* ptr)
+		:_ptr(ptr)
+	{}
+	//析构函数
+	~SmartPtr()
+	{
+		delete _ptr;
+		cout << "资源已被释放" << endl;
+	}
+
+	//实现可以模拟指针的原生行为
+	//重载operator*
+	T& operator*()
+	{
+		return *_ptr;
+	}
+	//重载operator->
+	T* operator->()
+	{
+		return _ptr;
+	}
+private:
+	T* _ptr;
+};
+
+struct Data
+{
+	Data(int year,int month,int day)
+		:_year(year)
+		,_month(month)
+		,_day(day)
+	{}
+	int _year;
+	int _month;
+	int _day;
+};
+
+int main()
+{
+	SmartPtr<Data> sp(new Data(2024, 12, 28));
+	SmartPtr<Data> sp1(sp);
+	cout << (*sp)._year << endl;
+	cout << sp->_month << endl;
 	return 0;
 }
