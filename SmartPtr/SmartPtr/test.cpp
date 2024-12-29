@@ -166,7 +166,7 @@ int main()
 
 #include <iostream>
 #include "Blog_SmartPtr.h"
-using namespace std;
+using namespace blog_smartptr;
 
 //void Div()
 //{
@@ -208,7 +208,7 @@ public:
 	~SmartPtr()
 	{
 		delete _ptr;
-		cout << "资源已被释放" << endl;
+		std::cout << "资源已被释放" << std::endl;
 	}
 
 	//实现可以模拟指针的原生行为
@@ -238,11 +238,33 @@ struct Data
 	int _day;
 };
 
-int main()
+void test1()
 {
 	SmartPtr<Data> sp(new Data(2024, 12, 28));
 	SmartPtr<Data> sp1(sp);
-	cout << (*sp)._year << endl;
-	cout << sp->_month << endl;
+	std::cout << (*sp)._year << std::endl;
+	std::cout << sp->_month << std::endl;
+}
+
+void test2()
+{
+	auto_ptr<Data> sp(new Data(2024, 12, 29));
+	auto_ptr<Data> sp1(sp);
+
+	auto_ptr<Data> sp2(new Data(1111, 11, 11));
+	sp1 = sp2;
+}
+
+void test3()
+{
+	unique_ptr<int> up(new int(10));
+	//unique_ptr<int> up1(up);
+}
+
+int main()
+{
+	//test1();
+	//test2();
+	//test3();
 	return 0;
 }

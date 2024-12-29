@@ -8643,41 +8643,441 @@
 //	return 0;
 //}
 
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
+//
+////ret = func(x);
+//// 上面func可能是什么呢？那么func可能是函数名？函数指针？函数对象(仿函数对象)？也有可能
+////是lamber表达式对象？所以这些都是可调用的类型！如此丰富的类型，可能会导致模板的效率低下！
+////为什么呢？我们继续往下看
+//template<class F, class T>
+//T useF(F f, T x)
+//{
+//	static int count = 0;
+//	cout << "count:" << ++count << endl;
+//	cout << "count:" << &count << endl;
+//	return f(x);
+//}
+//
+//double f(double i)
+//{
+//	return i / 2;
+//}
+//struct Functor
+//{
+//	double operator()(double d)
+//	{
+//		return d / 3;
+//	}
+//};
+//
+//int main()
+//{
+//	// 函数名
+//	cout << useF(f, 11.11) << endl;
+//	// 函数对象
+//	cout << useF(Functor(), 11.11) << endl;
+//	// lamber表达式
+//	cout << useF([](double d)->double { return d / 4; }, 11.11) << endl;
+//	return 0;
+//}
 
-//ret = func(x);
-// 上面func可能是什么呢？那么func可能是函数名？函数指针？函数对象(仿函数对象)？也有可能
-//是lamber表达式对象？所以这些都是可调用的类型！如此丰富的类型，可能会导致模板的效率低下！
-//为什么呢？我们继续往下看
-template<class F, class T>
-T useF(F f, T x)
-{
-	static int count = 0;
-	cout << "count:" << ++count << endl;
-	cout << "count:" << &count << endl;
-	return f(x);
-}
+//#include<vector>
+//#include<string>
+//#include<unordered_map>
+//#include<iostream>
+//
+//using namespace std;
+//
+//vector<int> findSubstring(string s, vector<string>& words)
+//{
+//    vector<int> ret;
+//    unordered_map<string, int> us;//存储s的哈希表
+//    unordered_map<string, int> uw;//存储words的哈希表
+//    int uw_size = 0;
+//    //先将words中的字符串存入uw哈希表中
+//    vector<string>::iterator it = words.begin();
+//    while (it != words.end())
+//    {
+//        uw[*it]++;
+//        it++;
+//        uw_size++;
+//    }
+//
+//    int flag = words[0].size();
+//    for (int left = 0; left < flag; left++)
+//    {
+//        us.clear();
+//        int us_size = 0;
+//        for (int right = left; right < s.size(); right += flag)
+//        {
+//            string tmp = s.substr(right, flag);
+//            us[tmp]++;
+//            us_size++;
+//            if (us_size == uw_size)
+//            {
+//                if (us == uw)
+//                {
+//                    ret.push_back(left);
+//                    string del = s.substr(left, flag);
+//                    us[del]--;
+//                    us_size--;
+//                    if (us[del] == 0)
+//                    {
+//                        us.erase(del);
+//                    }
+//                    left += flag;
+//                }
+//                else
+//                {
+//                    string del = s.substr(left, flag);
+//                    us[del]--;
+//                    us_size--;
+//                    if (us[del] == 0)
+//                    {
+//                        us.erase(del);
+//                    }
+//                    left += flag;
+//                    // us.clear();
+//                    // left=right;
+//                    // right-=flag;
+//                    // us_size=0;
+//                }
+//            }
+//        }
+//        left
+//    }
+//
+//    return ret;
+//}
 
-double f(double i)
-{
-	return i / 2;
-}
-struct Functor
-{
-	double operator()(double d)
-	{
-		return d / 3;
-	}
-};
+//#include <string>
+//#include <unordered_map>
+//#include <iostream>
+//
+//using namespace std;
+//
+//string minWindow(string s, string t)
+//{
+//    int hash1[128] = { 0 };//存储t字符串中字符出现的次数
+//    int kinds = 0;//记录t字符串中字符的种类
+//    for (auto& ch : t)
+//    {
+//        if (hash1[ch] == 0)
+//        {
+//            kinds++;
+//        }
+//        hash1[ch]++;
+//    }
+//
+//    int minlen = INT_MAX;
+//    int begin;
+//    int hash2[128] = { 0 };
+//    for (int left = 0, right = 0, count = 0; right < s.size(); right++)
+//    {
+//        //进窗口
+//        char in = s[right];
+//        hash2[in]++;
+//        if (hash2[in] == hash1[in])
+//        {
+//            count++;
+//        }
+//
+//        while (count == kinds)
+//        {
+//            //更新结果
+//            if ((right - left + 1) < minlen)
+//            {
+//                minlen = right - left + 1;
+//                begin = left;
+//            }
+//
+//            //出窗口
+//            char out = s[left];
+//            if (hash2[out] == hash1[out])
+//            {
+//                count--;
+//            }
+//            hash2[out]--;
+//
+//            left++;
+//        }
+//    }
+//
+//    if (minlen != INT_MAX)
+//        return s.substr(begin, minlen);
+//    return "";
+//}
+//int main()
+//{
+//    string s("ADOBECODEBANC");
+//    string t("ABC");
+//    string ret = minWindow(s, t);
+//    cout << ret << endl;
+//	return 0;
+//}
+//#include <vector>
+//using namespace std;
+//
+//int searchInsert(vector<int>& nums, int target)
+//{
+//    int left = 0, right = nums.size();
+//    while (left <= right)
+//    {
+//        int mid = left + (right - left) / 2;
+//        if (nums[mid] > target)
+//        {
+//            right = mid - 1;
+//        }
+//        else if (nums[mid] < target)
+//        {
+//            left = mid + 1;
+//        }
+//        else
+//        {
+//            return mid;
+//        }
+//    }
+//    return left;
+//}
+//
+//int main()
+//{
+//    vector<int> num = { 1,3,5,6 };
+//    int target = 7;
+//    int ret = searchInsert(num, target);
+//    return 0;
+//}
 
-int main()
-{
-	// 函数名
-	cout << useF(f, 11.11) << endl;
-	// 函数对象
-	cout << useF(Functor(), 11.11) << endl;
-	// lamber表达式
-	cout << useF([](double d)->double { return d / 4; }, 11.11) << endl;
-	return 0;
-}
+//#include <iostream>
+//#include <unordered_map>
+//
+//using namespace std;
+//
+//int& Func()
+//{
+//	int a = 1;
+//	return a;
+//}
+//
+//int main()
+//{
+//	unordered_map<string, int> u;
+//	u.insert(make_pair("a", 1));
+//	u.insert(make_pair("b", 2));
+//	u.insert(make_pair("c", 3));
+//
+//	auto it = u.find("b");
+//
+//	auto& ret = Func();
+//
+//	return 0;
+//}
+//#include <vector>
+//using namespace std;
+//
+//int searchInsert(vector<int>& nums, int target)
+//{
+//    int left = 0, right = nums.size();
+//    while (left < right)
+//    {
+//        int mid = left + (right - left) / 2;
+//        if (nums[mid] >= target)
+//        {
+//            right = mid;
+//        }
+//        else
+//        {
+//            left = mid + 1;
+//        }
+//    }
+//    return left;
+//}
+//
+//int main()
+//{
+//    vector<int> nums = { 1,3,5,6 };
+//    int ret = searchInsert(nums, 7);
+//    return 0;
+//}
+
+//#include<iostream>
+//#include<unordered_map>
+//#include<vector>
+//using namespace std;
+//
+//int subarraysDivByK(vector<int>& nums, int k)
+//{
+//    int count = 0;//返回结果
+//    int sum = 0;//用于计算前缀和
+//    unordered_map<int, int> um;
+//    for (int i = 0; i < nums.size(); i++)
+//    {
+//        auto it = um.find((sum % k + k) % k);
+//        if (it != um.end())
+//        {
+//            count += it->second;
+//        }
+//
+//        //插入新的前缀和%k
+//        sum += nums[i];
+//        um[(sum % k + k) % k]++;
+//    }
+//    return count;
+//}
+//
+//int main()
+//{
+//    vector<int> nums = { 4, 5, 0, -2, -3, 1 };
+//    int  k = 5;
+//    int ret = subarraysDivByK(nums, k);
+//    cout << ret << endl;
+//    return 0;
+//}
+//#include <iostream>
+//#include <unordered_map>
+//#include <vector>
+//using namespace std;
+//
+//int findMaxLength(vector<int>& nums)
+//{
+//	//返回值
+//	int length = 0;
+//
+//	//先处理nums数组，把0变成-1
+//	auto it = nums.begin();
+//	while (it != nums.end())
+//	{
+//		if (*it == 0)
+//			*it = -1;
+//		it++;
+//	}
+//
+//	//定义一个哈希表，哈希表<前缀和，前缀和数组的长度>
+//	unordered_map<int, int> um;
+//	int sum = 0;//记录前缀和
+//	for (int i = 0; i < nums.size(); i++)
+//	{
+//		sum += nums[i];
+//		if (sum == 0)
+//		{
+//			length = i + 1;
+//			if (um.count(sum) == 0)
+//				um.insert(make_pair(sum, i + 1));
+//			continue;
+//		}
+//
+//		auto it = um.find(sum);
+//		if (it != um.end())
+//		{
+//			if (length < i + 1 - it->second)
+//			length = i + 1 - it->second;
+//		}
+//
+//		if (um.count(sum) == 0)
+//			um.insert(make_pair(sum, i + 1));
+//	}
+//	return length;
+//}
+//
+//int main()
+//{
+//	vector<int> nums = { 0,1,1,0,1,1,1,0 };
+//	int ret = findMaxLength(nums);
+//	return 0;
+//}
+
+//#include<vector>
+//using namespace std;
+//
+//vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k)
+//{
+//    int ret_row = mat.size() + 2 * k + 2;
+//    int ret_col = mat[0].size() + 2 * k + 2;
+//    //生成二维前缀和数组
+//    vector<vector<int>> dp(ret_row, vector<int>(ret_col, 0));
+//    for (int i = k + 1; i < (ret_row - k - 1); i++)
+//    {
+//        int end = ret_col - k - 1;
+//        for (int j = k + 1; j < end; j++)
+//        {
+//            dp[i][j] = dp[i - 1][j] + dp[i][j - 1] - dp[i - 1][j - 1] + mat[i - k - 1][j - k - 1];
+//        }
+//    }
+//
+//    printf("1\n");
+//
+//    //计算临时的tmp_answer数组
+//    vector<vector<int>> tmp_answer(ret_row, vector<int>(ret_col, 0));
+//    for (int i = k + 1; i < ret_row - k - 1; i++)
+//    {
+//        for (int j = k + 1; j < ret_col - k - 1; j++)
+//        {
+//            tmp_answer[i][j] = dp[i + k][j + k] - dp[i + k][j - k - 1] - dp[i - k - 1][j + k] + dp[i - k - 1][j - k - 1];
+//        }
+//    }
+//
+//    printf("2\n");
+//
+//    //生成返回的answer数组
+//    vector<vector<int>> answer(ret_row - 2 * k - 2, vector<int>(ret_col - 2 * k - 2, 0));
+//    for (int i = 0; i < ret_row - 2 * k - 2; i++)
+//    {
+//        for (int j = 0; j < ret_col - 2 * k - 2; j++)
+//        {
+//            answer[i][j] = tmp_answer[i + k + 1][j + k + 1];
+//        }
+//    }
+//    return answer;
+//}
+//
+//int main()
+//{
+//	vector<vector<int>> mat = { {1,2,3},{ 4,5,6, },{7,8,9,} };
+//	vector<vector<int>> ret =  matrixBlockSum(mat, 2);
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<thread>
+//#include<string>
+//#include<functional>
+//
+//using namespace std;
+//
+//class Base
+//{
+//public:
+//	Base(int a)
+//		:_a(a)
+//	{}
+//
+//	void Print(const std::string test)
+//	{
+//		cout << test << ":" << _a << endl;
+//	}
+//private:
+//	int _a;
+//};
+//
+//int main()
+//{
+//	Base b1(1);
+//	Base b2(2);
+//
+//	thread t1(bind(&Base::Print, &b1, "aaa"));
+//
+//	t1.join();
+//
+//	return 0;
+//}
+
+//#include <memory>
+//#include <vector>
+//
+//int main() {
+//	std::vector<std::auto_ptr<int>> vec;
+//	vec.push_back(std::auto_ptr<int>(new int(10))); // 会导致未定义行为
+//	return 0;
+//}
+
