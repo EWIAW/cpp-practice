@@ -97,34 +97,57 @@ namespace blog_smartptr
 	class shared_ptr
 	{
 	public:
-		shared_ptr(const T* ptr)
+		//shared_ptr() = default;
+		//构造函数
+		shared_ptr(T* ptr)
 			:_ptr(ptr)
 			, _pRefCount(new int(1))
 			, _pmtx(new std::mutex)
-		{}
-
-		shared_ptr(shared_ptr<T>& sp)
-			: _ptr(sp._ptr)
-			, _pmtx(sp._pmtx)
-			, _pRefCount(sp._pRefCount)
 		{
+			if (_ptr == nullptr)//防止拿nullptr构造智能指针
 			{
-				std::mutex lock(_pmtx);
+				*_pRefCount = 0;
+			}
+		}
+
+		//析构函数
+		~shared_ptr()
+		{
+			Release();
+		}
+
+		//拷贝构造
+		shared_ptr(shared_ptr<T>& sp)
+		{
+			std::unique_lock<std::mutex> lock(*sp._pmtx);//加锁保护
+			_ptr = sp._ptr;
+			_pRefCount = sp._pRefCount;
+			_pmtx = sp._pmtx;
+			if (_ptr != nullptr)
+			{
 				(*_pRefCount)++;
 			}
 		}
 
+		//operator=重载
 		shared_ptr<T>& operator=(shared_ptr<T>& sp)
 		{
-			//要先解决原来资源的问题
+			if (this != &sp)//防止自己给自己赋值
 			{
-				std::mutex lock(_pmtx);
-				(*_pRefCount)--;
-				if (*_pRefCount == 0)
+				//先释放原来所指向的资源
+				Release();
 				{
-					delete _ptr;
+					std::unique_lock<std::mutex> lock(*sp._pmtx);
+					_ptr = sp._ptr;
+					_pRefCount = sp._pRefCount;
+					_pmtx = sp._pmtx;
+					if (_pRefCount != nullptr)
+					{
+						(*_pRefCount)++;
+					}
 				}
 			}
+			return *this;
 		}
 
 		T& operator*()
@@ -133,11 +156,162 @@ namespace blog_smartptr
 		}
 		T* operator->()
 		{
-			return &_ptr;
+			return _ptr;
 		}
+
+		int use_count()
+		{
+			return *_pRefCount;
+		}
+
+		T* get() const
+		{
+			return _ptr;
+		}
+	private:
+		//释放资源
+		void Release()
+		{
+			if (_pmtx != nullptr)
+			{
+				_pmtx->lock();
+				bool flag = false;//辅助判断是否需要是否_pmtx
+				if (_pRefCount != nullptr && --(*_pRefCount) == 0)
+				{
+					std::cout << "shared_ptr所指向的资源已被释放" << std::endl;
+					delete _ptr;
+					delete _pRefCount;
+					flag = true;
+					//delete _pmtx;这里不能直接delete，是因为锁还在使用
+				}
+				_pmtx->unlock();
+				if (flag == true)
+				{
+					delete _pmtx;
+				}
+			}
+			_ptr = nullptr;
+			_pRefCount = nullptr;
+			_pmtx = nullptr;
+		}
+
 	private:
 		T* _ptr;
 		int* _pRefCount;
 		std::mutex* _pmtx;//需要锁，是因为操作_pRefCount的时候，需要保证是线程安全的
 	};
+
+	template<class T>
+	class weak_ptr
+	{
+	public:
+		//构造函数
+		weak_ptr(const shared_ptr<T>& sp)
+			:_ptr(sp.get())
+		{}
+
+		//operator=重载
+		weak_ptr<T>& operator=(const shared_ptr<T>& sp)
+		{
+			_ptr = sp.get();
+			return *this;
+		}
+
+	private:
+		T* _ptr;
+	};
 }
+
+//namespace bit
+//{
+//	template<class T>
+//	class shared_ptr
+//	{
+//	public:
+//		shared_ptr(T* ptr = nullptr)
+//			:_ptr(ptr)
+//			, _pRefCount(new int(1))
+//			, _pmtx(new std::mutex)
+//		{}
+//		shared_ptr(const shared_ptr<T>& sp)
+//			:_ptr(sp._ptr)
+//			, _pRefCount(sp._pRefCount)
+//			, _pmtx(sp._pmtx)
+//		{
+//			AddRef();
+//		}
+//		void Release()
+//		{
+//			_pmtx->lock();
+//			bool flag = false;
+//			if (--(*_pRefCount) == 0 && _ptr)
+//			{
+//				std::cout << "delete:" << _ptr << std::endl;
+//				delete _ptr;
+//				delete _pRefCount;
+//				flag = true;
+//			}
+//			_pmtx->unlock();
+//			if (flag == true)
+//			{
+//				delete _pmtx;
+//			}
+//		}
+//		void AddRef()
+//		{
+//			_pmtx->lock();
+//			++(*_pRefCount);
+//			_pmtx->unlock();
+//		}
+//		shared_ptr<T>& operator=(const shared_ptr<T>& sp)
+//		{
+//			//if (this != &sp)
+//			if (_ptr != sp._ptr)
+//			{
+//				Release();
+//				_ptr = sp._ptr;
+//				_pRefCount = sp._pRefCount;
+//				_pmtx = sp._pmtx;
+//				AddRef();
+//			}
+//			return *this;
+//		}
+//		int use_count()
+//		{
+//			return *_pRefCount;
+//		}
+//		~shared_ptr()
+//		{
+//			Release();
+//		}
+//		// 像指针一样使用
+//		T& operator*()
+//		{
+//			return *_ptr;
+//		}
+//		T* operator->()
+//		{
+//			return _ptr;
+//		}
+//		T* get() const
+//		{
+//			return _ptr;
+//		}
+//	private:
+//		T* _ptr;
+//		int* _pRefCount;
+//		std::mutex* _pmtx;
+//	};
+//
+//	template<class T>
+//	class weak_ptr
+//	{
+//	public:
+//		weak_ptr(const shared_ptr<T>& sp)
+//			:_ptr()
+//		{}
+//
+//	private:
+//		T* _ptr;
+//	};
+//}

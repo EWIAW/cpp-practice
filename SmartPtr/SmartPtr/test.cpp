@@ -261,10 +261,52 @@ void test3()
 	//unique_ptr<int> up1(up);
 }
 
+void test4()
+{
+	shared_ptr<int> sp1(new int(10));
+	std::cout << sp1.use_count() << std::endl;
+
+	shared_ptr<int> sp2(sp1);
+	std::cout << sp1.use_count() << std::endl;
+	std::cout << sp2.use_count() << std::endl;
+
+	shared_ptr<int> sp3(new int(20));
+	std::cout << sp3.use_count() << std::endl;
+
+	sp3 = sp2;
+	std::cout << sp1.use_count() << std::endl;
+	std::cout << sp2.use_count() << std::endl;
+	std::cout << sp3.use_count() << std::endl;
+}
+
+struct Node
+{
+	Node(int val = 0)
+		:_val(val)
+		,_next(nullptr)
+		,_prev(nullptr)
+	{}
+
+	int _val;
+	weak_ptr<Node> _next;
+	weak_ptr<Node> _prev;
+};
+
+void test5()
+{
+	shared_ptr<Node> sp1(new Node(10));
+	shared_ptr<Node> sp2(new Node(20));
+
+	sp1->_next = sp2;
+	sp2->_prev = sp1;
+}
+
 int main()
 {
 	//test1();
 	//test2();
 	//test3();
+	//test4();
+	test5();
 	return 0;
 }
