@@ -9081,3 +9081,484 @@
 //	return 0;
 //}
 
+//#include <memory>
+//using namespace std;
+//
+//int main()
+//{
+//	int* new_int = nullptr;
+//	unique_ptr<int> up1(new_int);
+//	unique_ptr<int> up2(new_int);
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//class Test
+//{
+//private:
+//	uint16_t _port;
+//
+//public:
+//	explicit Test(uint16_t port)
+//		:_port(port)
+//	{}
+//};
+//
+//int main()
+//{
+//	int n = 3489;
+//	Test t1(n);
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <thread>
+//#include <condition_variable>
+//using namespace std;
+//
+//condition_variable _cond;
+//
+//int count = 0;
+//
+//void threadfunc()
+//{
+//	while (::count != 100)
+//	{
+//		_cond.wait();
+//	}
+//}
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<memory>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	int* newnode = new int(10);
+//	shared_ptr<int> sp1(newnode);
+//	shared_ptr<int> sp2(newnode);
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <memory>
+//
+//class MyClass
+//{
+//public:
+//    void show()
+//    {
+//        // 手动生成新的 shared_ptr
+//        std::shared_ptr<MyClass> self(this);
+//        std::cout << "Object is being used" << std::endl;
+//    }
+//
+//    ~MyClass()
+//    {
+//        std::cout << "MyClass destroyed" << std::endl;
+//    }
+//};
+//
+//int main()
+//{
+//    // 创建一个 shared_ptr 管理 MyClass 对象
+//    std::shared_ptr<MyClass> obj = std::make_shared<MyClass>();
+//
+//
+//    // 调用成员函数时生成新的 shared_ptr
+//    obj->show();
+//
+//    return 0;
+//}
+
+//#include <iostream>
+//#include <vector>
+//#include <atomic>
+//
+//using namespace std;
+//
+////int main()
+////{
+////	int constantValue = 10;
+////
+////	const int* ptr = &constantValue; // 指向常ᰁ的指针
+////	const int& ref = constantValue; // 常ᰁ引⽤
+////
+////	//*ptr = 20;
+////	//constantValue = 20;
+////	ref = 20;
+////
+////	return  0;
+////}
+//
+//int main()
+//{
+//	//vector<int> v1;
+//	//vector<int> v2 = v1;//等价于vector<int> v2(v1)
+//
+//	//std::atomic<int> value = 99;
+//	//return 0;
+//
+//	int x = 10;
+//	int y = 20;
+//	const int* ptr = &x;
+//
+//	 ptr = &y; // 错误，不能修改指针的值
+//	 //*ptr = 30; // 错误，不能修改指针所指向的内容
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//void f(int)
+//{
+//	cout << "f(int)" << endl;
+//}
+//void f(int*)
+//{
+//	cout << "f(int*)" << endl;
+//}
+//int main()
+//{
+//	f(0);
+//	f(NULL);
+//	f((int*)NULL);
+//	return 0;
+//}
+
+
+
+//// 类中既有成员变量，又有成员函数
+//class A1
+//{
+//public:
+//	void f1() {}
+//private:
+//	int _a;
+//};
+//
+//// 类中仅有成员函数
+//class A2 
+//{
+//public:
+//	void f2() {}
+//};
+//// 类中什么都没有---空类
+//class A3
+//{};
+//
+//int main()
+//{
+//	cout << sizeof(A1) << endl;
+//	cout << sizeof(A2) << endl;
+//	cout << sizeof(A3) << endl;
+//	return 0;
+//}
+
+//class A
+//{
+//public:
+//	void Print()
+//	{
+//		cout << "Print()" << endl;
+//	}
+//private:
+//	int _a;
+//};
+
+//class A
+//{
+//public:
+//	void PrintA()
+//	{
+//		cout << _a << endl;
+//	}
+//private:
+//	int _a;
+//};
+//int main()
+//{
+//	A* p = nullptr;
+//	p->PrintA();
+//	return 0;
+//}
+
+//int main()
+//{
+//	A* p = nullptr;
+//	p->Print();
+//	return 0;
+//}
+
+
+
+//class Time
+//{
+//public:
+//	Time()
+//	{
+//		cout << "Time()" << endl;
+//		_hour = 0;
+//		_minute = 0;
+//		_second = 0;
+//	}
+//private:
+//	int _hour;
+//	int _minute;
+//	int _second;
+//};
+//class Date
+//{
+//private:
+//	// 基本类型(内置类型)
+//	int _year;
+//	int _month;
+//	int _day;
+//	// 自定义类型
+//	Time _t;
+//};
+
+//#include <iostream>
+//using namespace std;
+
+//class Date
+//{
+//public:
+//	Date()
+//	{
+//		_year = 1900;
+//		_month = 1;
+//		_day = 1;
+//	}
+//	Date(int year = 1900, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//// 以下测试函数能通过编译吗？
+//void Test()
+//{
+//	Date d1;
+//}
+//
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//class Data
+//{
+//public:
+//	Data(int year = 2025, int month = 2, int day = 27)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{
+//		cout << "构造函数" << endl;
+//	}
+//
+//	Data(const Data& tmp)
+//		:_year(tmp._year)
+//		, _month(tmp._month)
+//		, _day(tmp._day)
+//	{
+//		cout << "拷贝构造" << endl;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//class A
+//{
+//public:
+//	A(int a)
+//		:_a1(a)
+//		, _a2(_a1)
+//	{}
+//
+//	void Print() {
+//		cout << _a1 << " " << _a2 << endl;
+//	}
+//private:
+//	int _a2;
+//	int _a1;
+//};
+//int main() {
+//	A aa(1);
+//	aa.Print();
+//}
+
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//class Date
+//{
+//public:
+//
+//	explicit Date(int year)
+//		:_year(year)
+//	{}
+//
+//	Date& operator=(const Date& d)
+//	{
+//		if (this != &d)
+//		{
+//			_year = d._year;
+//			_month = d._month;
+//			_day = d._day;
+//		}
+//		return *this;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//void Test()
+//{
+//	Date d1(2022);
+//
+//	d1 = 2023;
+//}
+//
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+//class Time
+//{
+//	//friend class Date;
+//public:
+//	Time(int hour = 0, int minute = 0, int second = 0)
+//		: _hour(hour)
+//		, _minute(minute)
+//		, _second(second)
+//	{}
+//
+//private:
+//	int _hour;
+//	int _minute;
+//	int _second;
+//};
+//class Date
+//{
+//public:
+//	Date(int year = 1900, int month = 1, int day = 1)
+//		: _year(year)
+//		, _month(month)
+//		, _day(day)
+//	{}
+//
+//	void SetTimeOfDate(int hour, int minute, int second)
+//	{
+//		// 直接访问时间类私有的成员变量
+//		_t._hour = hour;
+//		_t._minute = minute;
+//		_t._second = second;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//	Time _t;
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+#include <iostream>
+using namespace std;
+
+class A
+{
+public:
+	A(int a = 0)
+		:_a(a)
+	{
+		cout << "A(int a)" << endl;
+	}
+	A(const A& aa)
+		:_a(aa._a)
+	{
+		cout << "A(const A& aa)" << endl;
+	}
+	A& operator=(const A& aa)
+	{
+		cout << "A& operator=(const A& aa)" << endl;
+		if (this != &aa)
+		{
+			_a = aa._a;
+		}
+		return *this;
+	}
+	~A()
+	{
+		cout << "~A()" << endl;
+	}
+private:
+	int _a;
+};
+
+void f1(A aa)
+{}
+
+A f2()
+{
+	A aa;
+	return aa;
+}
+
+int main()
+{
+	// 传值传参
+	A aa1;
+	f1(aa1);
+	cout << endl;
+	// 传值返回
+	f2();
+	cout << endl;
+	// 隐式类型，连续构造+拷贝构造->优化为直接构造
+	f1(1);
+	// 一个表达式中，连续构造+拷贝构造->优化为一个构造
+	f1(A(2));
+	cout << endl;
+	// 一个表达式中，连续拷贝构造+拷贝构造->优化一个拷贝构造
+	A aa2 = f2();
+	cout << endl;
+	// 一个表达式中，连续拷贝构造+赋值重载->无法优化
+	aa1 = f2();
+	cout << endl;
+	return 0;
+}
