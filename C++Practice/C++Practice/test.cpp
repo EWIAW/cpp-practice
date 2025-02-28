@@ -9498,67 +9498,116 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	A(int a = 0)
+//		:_a(a)
+//	{
+//		cout << "A(int a)" << endl;
+//	}
+//	A(const A& aa)
+//		:_a(aa._a)
+//	{
+//		cout << "A(const A& aa)" << endl;
+//	}
+//	A& operator=(const A& aa)
+//	{
+//		cout << "A& operator=(const A& aa)" << endl;
+//		if (this != &aa)
+//		{
+//			_a = aa._a;
+//		}
+//		return *this;
+//	}
+//	~A()
+//	{
+//		cout << "~A()" << endl;
+//	}
+//private:
+//	int _a;
+//};
+//
+//void f1(A aa)
+//{}
+//
+//A f2()
+//{
+//	A aa;
+//	return aa;
+//}
+//
+//int main()
+//{
+//	// 传值传参
+//	A aa1;
+//	f1(aa1);
+//	cout << endl;
+//	// 传值返回
+//	f2();
+//	cout << endl;
+//	// 隐式类型，连续构造+拷贝构造->优化为直接构造
+//	f1(1);
+//	// 一个表达式中，连续构造+拷贝构造->优化为一个构造
+//	f1(A(2));
+//	cout << endl;
+//	// 一个表达式中，连续拷贝构造+拷贝构造->优化一个拷贝构造
+//	A aa2 = f2();
+//	cout << endl;
+//	// 一个表达式中，连续拷贝构造+赋值重载->无法优化
+//	aa1 = f2();
+//	cout << endl;
+//	return 0;
+//}
+
 #include <iostream>
+#include <vector>
 using namespace std;
 
-class A
+class Date
 {
 public:
-	A(int a = 0)
-		:_a(a)
+	Date(int year = 0, int month = 0, int day = 0)
+		:_year(year)
+		, _month(month)
+		, _day(day)
 	{
-		cout << "A(int a)" << endl;
+		cout << "构造函数" << endl;
 	}
-	A(const A& aa)
-		:_a(aa._a)
+
+	Date& operator=(const Date& tmp)
 	{
-		cout << "A(const A& aa)" << endl;
-	}
-	A& operator=(const A& aa)
-	{
-		cout << "A& operator=(const A& aa)" << endl;
-		if (this != &aa)
+		if (this != &tmp)
 		{
-			_a = aa._a;
+			_year = tmp._year;
+			_month = tmp._month;
+			_day = tmp._day;
+			cout << "operator=" << endl;
 		}
 		return *this;
 	}
-	~A()
+
+	~Date()
 	{
-		cout << "~A()" << endl;
+		cout << "析构函数" << endl;
 	}
+
 private:
-	int _a;
+	int _year;
+	int _month;
+	int _day;
 };
-
-void f1(A aa)
-{}
-
-A f2()
-{
-	A aa;
-	return aa;
-}
 
 int main()
 {
-	// 传值传参
-	A aa1;
-	f1(aa1);
-	cout << endl;
-	// 传值返回
-	f2();
-	cout << endl;
-	// 隐式类型，连续构造+拷贝构造->优化为直接构造
-	f1(1);
-	// 一个表达式中，连续构造+拷贝构造->优化为一个构造
-	f1(A(2));
-	cout << endl;
-	// 一个表达式中，连续拷贝构造+拷贝构造->优化一个拷贝构造
-	A aa2 = f2();
-	cout << endl;
-	// 一个表达式中，连续拷贝构造+赋值重载->无法优化
-	aa1 = f2();
-	cout << endl;
+	vector<Date> v1;
+	Date d1;
+	v1.push_back(d1);
+
+	v1.clear();
+
 	return 0;
 }
