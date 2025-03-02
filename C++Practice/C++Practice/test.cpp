@@ -9563,51 +9563,69 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 0, int day = 0)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{
+//		cout << "构造函数" << endl;
+//	}
+//
+//	Date& operator=(const Date& tmp)
+//	{
+//		if (this != &tmp)
+//		{
+//			_year = tmp._year;
+//			_month = tmp._month;
+//			_day = tmp._day;
+//			cout << "operator=" << endl;
+//		}
+//		return *this;
+//	}
+//
+//	~Date()
+//	{
+//		cout << "析构函数" << endl;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	vector<Date> v1;
+//	Date d1;
+//	v1.push_back(d1);
+//
+//	v1.clear();
+//
+//	return 0;
+//}
+
 #include <iostream>
-#include <vector>
+#include <string>
+
 using namespace std;
-
-class Date
-{
-public:
-	Date(int year = 0, int month = 0, int day = 0)
-		:_year(year)
-		, _month(month)
-		, _day(day)
-	{
-		cout << "构造函数" << endl;
-	}
-
-	Date& operator=(const Date& tmp)
-	{
-		if (this != &tmp)
-		{
-			_year = tmp._year;
-			_month = tmp._month;
-			_day = tmp._day;
-			cout << "operator=" << endl;
-		}
-		return *this;
-	}
-
-	~Date()
-	{
-		cout << "析构函数" << endl;
-	}
-
-private:
-	int _year;
-	int _month;
-	int _day;
-};
 
 int main()
 {
-	vector<Date> v1;
-	Date d1;
-	v1.push_back(d1);
-
-	v1.clear();
-
+	string s1("hello world");
+	string::iterator it = s1.begin();
+	while (it != s1.end())
+	{
+		cout << *it << " ";
+		it++;
+	}
+	
 	return 0;
 }
