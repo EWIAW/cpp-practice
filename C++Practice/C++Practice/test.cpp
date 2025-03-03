@@ -9612,20 +9612,346 @@
 //	return 0;
 //}
 
-#include <iostream>
-#include <string>
+//#include <iostream>
+//#include <string>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	string s1("hello world");
+//	string::iterator it = s1.begin();
+//	while (it != s1.end())
+//	{
+//		cout << *it << " ";
+//		it++;
+//	}
+//	
+//	return 0;
+//}
 
+//#include <iostream>
+//
+//int main()
+//{
+//	const char* str[] = "\0";
+//	printf("%d\n", strlen(str));
+//	return 0;
+//}
+
+//#include <assert.h>
+//#include <string.h>
+//#include <stdio.h>
+//
+//class String
+//{
+//public:
+//	String(const char* str = "")
+//		:_str(new char[strlen(str) + 1])
+//	{
+//		strcpy(_str, str);
+//	}
+//
+//	void Print()
+//	{
+//		printf(_str);
+//	}
+//
+//	~String()
+//	{
+//		if (_str != nullptr)
+//		{
+//			delete[] _str;
+//			_str = nullptr;
+//		}
+//	}
+//
+//private:
+//	char* _str;
+//};
+//
+//int main()
+//{
+//	String s1;
+//	String s2("hello world");
+//	s1.Print();
+//	s2.Print();
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <vector>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v1;
+//	printf("%d\n", v1.capacity());
+//	v1.push_back(1);
+//	v1.push_back(1);
+//	v1.push_back(1);
+//	v1.push_back(1);
+//	v1.push_back(1);
+//	v1.push_back(1);
+//	v1.push_back(1);
+//	printf("%d\n", v1.capacity());
+//
+//	return 0;
+//}
+
+#include<iostream>
 using namespace std;
+
+#pragma once
+#include<assert.h>
+#include<iostream>
+#include<vector>
+namespace Vector_blog
+{
+	template<class T>
+	class vector
+	{
+	public:
+		typedef T* iterator;//可读可写迭代器
+		typedef const T* const_iterator;//只可读迭代器
+
+		//begin迭代器
+		iterator begin()
+		{
+			return _start;
+		}
+
+		//end迭代器
+		iterator end()
+		{
+			return _finish;
+		}
+
+		//const begin迭代器
+		const_iterator begin() const
+		{
+			return _start;
+		}
+
+		//const end迭代器
+		const_iterator end() const
+		{
+			return _finish;
+		}
+	public:
+		//无参构造函数：直接全部给nullptr即可
+		vector()
+			:_start(nullptr)
+			, _finish(nullptr)
+			, _endofstorage(nullptr)
+		{}
+
+		//拷贝构造函数
+		//vector<int> v1;
+		//vector<int> v2(v1);
+		vector(const vector<T>& v)
+			:_start(nullptr)
+			, _finish(nullptr)
+			, _endofstorage(nullptr)
+		{
+			const_iterator move = v.begin();
+			while (move != v.end())
+			{
+				push_back(*move);
+				move++;
+			}
+		}
+
+		//析构函数
+		~vector()
+		{
+			delete[] _start;
+			_start = _finish = _endofstorage = nullptr;
+		}
+
+		//交换函数，用于交换两个vector
+		void Swap(vector<T>& v)
+		{
+			swap(_start, v._start);
+			swap(_finish, v._finish);
+			swap(_endofstorage, v._endofstorage);
+		}
+
+		//赋值=重载函数
+		//vector<int> v1;
+		//v1=v2;
+		vector<T>& operator=(const vector<T>& v)
+		{
+			if (this != &v)
+			{
+				vector<T> tmp(v);
+				Swap(tmp);
+			}
+			return *this;
+		}
+
+		//调整vector的数据个数
+		void resize(const size_t n, const T& val = T())//第二个参数为一个T类型的缺省值
+		{
+			if (n < size())
+			{
+				_finish = _start + n;
+			}
+			else if (n > size())
+			{
+				if (n > capacity())//如果调整后的n大于容量，则需要扩容
+				{
+					reserve(n);
+				}
+				iterator it1 = begin() + n;
+				iterator it2 = end();
+				while (it2 < it1)
+				{
+					push_back(val);
+					it2++;
+				}
+			}
+		}
+
+		//调整vector的容量
+		void reserve(const size_t n)
+		{
+			//如果要调整的容量大于原来的容量才做调整
+			if (n > capacity())
+			{
+				T* tmp = new T[n];//开辟一块新空间
+				T* tmp_start = _start;
+				T* tmp_move = tmp;
+				while (tmp_start != _finish)
+				{
+					*tmp_move++ = *tmp_start++;
+				}
+
+				//释放旧空间，并调整_start,_finish,_endofstorage的位置
+				_finish = tmp + size();
+				_endofstorage = tmp + n;
+				delete[] _start;
+				_start = tmp;
+			}
+		}
+
+		//判断vector是否为空
+		bool empty() const
+		{
+			return !size();
+		}
+
+		//尾部插入
+		void push_back(const T& val)
+		{
+			insert(end(), val);
+		}
+
+		//尾删
+		void pop_back()
+		{
+			erase(end() - 1);
+		}
+
+		//中间插入
+		iterator insert(iterator pos, const T& val)
+		{
+			assert(pos <= end());
+			//如果容量已满，则扩容
+			if (size() == capacity())
+			{
+				size_t n = pos - begin();//扩容之前需要记住pos对于_start的偏移量，以防出现迭代器失效问题
+				size_t newcapacity = size() == 0 ? 4 : capacity() * 2;
+				reserve(newcapacity);
+				pos = _start + n;//更新pos位置
+			}
+
+			//将pos位置及其后面所以数据往后挪动
+			iterator move = end();
+			while (move != pos)
+			{
+				*move = *(move - 1);
+				move--;
+			}
+
+			*pos = val;
+			_finish++;
+
+			return pos;
+		}
+
+		//中间删除
+		iterator erase(iterator pos)
+		{
+			assert(pos < end());
+
+			iterator tmp = pos + 1;
+			while (tmp != end())
+			{
+				*(tmp - 1) = *tmp;
+				tmp++;
+			}
+
+			_finish--;
+
+			return pos;
+		}
+
+		//获取数据个数
+		size_t size() const
+		{
+			return _finish - _start;
+		}
+
+		//获取容量
+		size_t capacity() const
+		{
+			return _endofstorage - _start;
+		}
+
+		//重载operator[]
+		T& operator[](size_t pos)
+		{
+			//assert(pos < size());
+			return *(_start + pos);
+		}
+
+		//clear函数
+		void clear()
+		{
+			iterator it = begin();
+			while (it != end())
+			{
+				(*it).~T();
+				it++;
+			}
+			_finish = _start;
+		}
+	private:
+		iterator _start;
+		iterator _finish;
+		iterator _endofstorage;
+	};
+}
 
 int main()
 {
-	string s1("hello world");
-	string::iterator it = s1.begin();
-	while (it != s1.end())
+	Vector_blog::vector<string> v1;
+	v1.push_back("hello");
+	v1.push_back("world");
+
+	for (int i = 0; i < 2; i++)
 	{
-		cout << *it << " ";
-		it++;
+		cout << v1[i] << " ";
 	}
-	
+	cout << endl;
+
+	v1.clear();
+	for (int i = 0; i < 2; i++)
+	{
+		cout << v1[i] << " ";
+	}
+
 	return 0;
 }
