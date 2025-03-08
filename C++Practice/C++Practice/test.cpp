@@ -9700,258 +9700,463 @@
 //	return 0;
 //}
 
-#include<iostream>
+//#include<iostream>
+//using namespace std;
+//
+//#pragma once
+//#include<assert.h>
+//#include<iostream>
+//#include<vector>
+//namespace Vector_blog
+//{
+//	template<class T>
+//	class vector
+//	{
+//	public:
+//		typedef T* iterator;//可读可写迭代器
+//		typedef const T* const_iterator;//只可读迭代器
+//
+//		//begin迭代器
+//		iterator begin()
+//		{
+//			return _start;
+//		}
+//
+//		//end迭代器
+//		iterator end()
+//		{
+//			return _finish;
+//		}
+//
+//		//const begin迭代器
+//		const_iterator begin() const
+//		{
+//			return _start;
+//		}
+//
+//		//const end迭代器
+//		const_iterator end() const
+//		{
+//			return _finish;
+//		}
+//	public:
+//		//无参构造函数：直接全部给nullptr即可
+//		vector()
+//			:_start(nullptr)
+//			, _finish(nullptr)
+//			, _endofstorage(nullptr)
+//		{}
+//
+//		//拷贝构造函数
+//		//vector<int> v1;
+//		//vector<int> v2(v1);
+//		vector(const vector<T>& v)
+//			:_start(nullptr)
+//			, _finish(nullptr)
+//			, _endofstorage(nullptr)
+//		{
+//			const_iterator move = v.begin();
+//			while (move != v.end())
+//			{
+//				push_back(*move);
+//				move++;
+//			}
+//		}
+//
+//		//析构函数
+//		~vector()
+//		{
+//			delete[] _start;
+//			_start = _finish = _endofstorage = nullptr;
+//		}
+//
+//		//交换函数，用于交换两个vector
+//		void Swap(vector<T>& v)
+//		{
+//			swap(_start, v._start);
+//			swap(_finish, v._finish);
+//			swap(_endofstorage, v._endofstorage);
+//		}
+//
+//		//赋值=重载函数
+//		//vector<int> v1;
+//		//v1=v2;
+//		vector<T>& operator=(const vector<T>& v)
+//		{
+//			if (this != &v)
+//			{
+//				vector<T> tmp(v);
+//				Swap(tmp);
+//			}
+//			return *this;
+//		}
+//
+//		//调整vector的数据个数
+//		void resize(const size_t n, const T& val = T())//第二个参数为一个T类型的缺省值
+//		{
+//			if (n < size())
+//			{
+//				_finish = _start + n;
+//			}
+//			else if (n > size())
+//			{
+//				if (n > capacity())//如果调整后的n大于容量，则需要扩容
+//				{
+//					reserve(n);
+//				}
+//				iterator it1 = begin() + n;
+//				iterator it2 = end();
+//				while (it2 < it1)
+//				{
+//					push_back(val);
+//					it2++;
+//				}
+//			}
+//		}
+//
+//		//调整vector的容量
+//		void reserve(const size_t n)
+//		{
+//			//如果要调整的容量大于原来的容量才做调整
+//			if (n > capacity())
+//			{
+//				T* tmp = new T[n];//开辟一块新空间
+//				T* tmp_start = _start;
+//				T* tmp_move = tmp;
+//				while (tmp_start != _finish)
+//				{
+//					*tmp_move++ = *tmp_start++;
+//				}
+//
+//				//释放旧空间，并调整_start,_finish,_endofstorage的位置
+//				_finish = tmp + size();
+//				_endofstorage = tmp + n;
+//				delete[] _start;
+//				_start = tmp;
+//			}
+//		}
+//
+//		//判断vector是否为空
+//		bool empty() const
+//		{
+//			return !size();
+//		}
+//
+//		//尾部插入
+//		void push_back(const T& val)
+//		{
+//			insert(end(), val);
+//		}
+//
+//		//尾删
+//		void pop_back()
+//		{
+//			erase(end() - 1);
+//		}
+//
+//		//中间插入
+//		iterator insert(iterator pos, const T& val)
+//		{
+//			assert(pos <= end());
+//			//如果容量已满，则扩容
+//			if (size() == capacity())
+//			{
+//				size_t n = pos - begin();//扩容之前需要记住pos对于_start的偏移量，以防出现迭代器失效问题
+//				size_t newcapacity = size() == 0 ? 4 : capacity() * 2;
+//				reserve(newcapacity);
+//				pos = _start + n;//更新pos位置
+//			}
+//
+//			//将pos位置及其后面所以数据往后挪动
+//			iterator move = end();
+//			while (move != pos)
+//			{
+//				*move = *(move - 1);
+//				move--;
+//			}
+//
+//			*pos = val;
+//			_finish++;
+//
+//			return pos;
+//		}
+//
+//		//中间删除
+//		iterator erase(iterator pos)
+//		{
+//			assert(pos < end());
+//
+//			iterator tmp = pos + 1;
+//			while (tmp != end())
+//			{
+//				*(tmp - 1) = *tmp;
+//				tmp++;
+//			}
+//
+//			_finish--;
+//
+//			return pos;
+//		}
+//
+//		//获取数据个数
+//		size_t size() const
+//		{
+//			return _finish - _start;
+//		}
+//
+//		//获取容量
+//		size_t capacity() const
+//		{
+//			return _endofstorage - _start;
+//		}
+//
+//		//重载operator[]
+//		T& operator[](size_t pos)
+//		{
+//			//assert(pos < size());
+//			return *(_start + pos);
+//		}
+//
+//		//clear函数
+//		void clear()
+//		{
+//			iterator it = begin();
+//			while (it != end())
+//			{
+//				(*it).~T();
+//				it++;
+//			}
+//			_finish = _start;
+//		}
+//	private:
+//		iterator _start;
+//		iterator _finish;
+//		iterator _endofstorage;
+//	};
+//}
+//
+//int main()
+//{
+//	Vector_blog::vector<string> v1;
+//	v1.push_back("hello");
+//	v1.push_back("world");
+//
+//	for (int i = 0; i < 2; i++)
+//	{
+//		cout << v1[i] << " ";
+//	}
+//	cout << endl;
+//
+//	v1.clear();
+//	for (int i = 0; i < 2; i++)
+//	{
+//		cout << v1[i] << " ";
+//	}
+//
+//	return 0;
+//}
+
+
+//class Person
+//{
+//protected:
+//	string _name; // 姓名
+//	string _sex;// 性别
+//	int _age; // 年龄
+//};
+//class Student : public Person
+//{
+//public:
+//	int _No; // 学号
+//};
+//void Test()
+//{
+//	Student sobj;
+//	// 1.子类对象可以赋值给父类对象/指针/引用
+//	Person pobj = sobj;
+//	Person* pp = &sobj;
+//	Person& rp = sobj;
+//
+//	//2.基类对象不能赋值给派生类对象
+//	//sobj = pobj;
+//
+//	// 3.基类的指针可以通过强制类型转换赋值给派生类的指针
+//	pp = &sobj;
+//	Student * ps1 = (Student*)pp; // 这种情况转换时可以的。
+//	ps1->_No = 10;
+//
+//	pp = &pobj;
+//	Student* ps2 = (Student*)pp; // 这种情况转换时虽然可以，但是会存在越界访问的问题
+//	ps2->_No = 10;
+//}
+
+
+
+//class Person
+//{
+//protected:
+//	string _name = "小李子"; // 姓名
+//	int _num = 111; // 身份证号
+//};
+//class Student : public Person
+//{
+//public:
+//	void Print()
+//	{
+//		cout << " 姓名:" << _name << endl;
+//		cout << " 身份证号:" << Person::_num << endl;
+//		cout << " 学号:" << _num << endl;
+//	}
+//protected:
+//	int _num = 999; // 学号
+//};
+//void Test()
+//{
+//	Student s1;
+//	s1.Print();
+//};
+
+//#include<string>
+//#include<iostream>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	Person(const char* name = "peter")
+//		: _name(name)
+//	{
+//		cout << "Person()" << endl;
+//	}
+//
+//	Person(const Person& p)
+//		: _name(p._name)
+//	{
+//		cout << "Person(const Person& p)" << endl;
+//	}
+//
+//	Person& operator=(const Person& p)
+//	{
+//		cout << "Person operator=(const Person& p)" << endl;
+//		if (this != &p)
+//			_name = p._name;
+//
+//		return *this;
+//	}
+//
+//	~Person()
+//	{
+//		cout << "~Person()" << endl;
+//	}
+//protected:
+//	string _name; // 姓名
+//};
+//
+//class Student : public Person
+//{
+//public:
+//	Student(const char* name, int num)
+//		: Person(name)
+//		, _num(num)
+//	{
+//		cout << "Student()" << endl;
+//	}
+//
+//	Student(const Student& s)
+//		: Person(s)
+//		, _num(s._num)
+//	{
+//		cout << "Student(const Student& s)" << endl;
+//	}
+//
+//	Student& operator = (const Student& s)
+//	{
+//		cout << "Student& operator= (const Student& s)" << endl;
+//		if (this != &s)
+//		{
+//			Person::operator =(s);
+//			_num = s._num;
+//		}
+//		return *this;
+//	}
+//
+//	~Student()
+//	{
+//		cout << "~Student()" << endl;
+//	}
+//protected:
+//	int _num; //学号
+//};
+//
+//void Test()
+//{
+//	Student s1("jack", 18);
+//	Student s2(s1);
+//	Student s3("rose", 17);
+//	s1 = s3;
+//}
+//
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//void Fun(int& x) { cout << "左值引用" << endl; }
+//void Fun(const int& x) { cout << "const 左值引用" << endl; }
+//
+//void Fun(int&& x) { cout << "右值引用" << endl; }
+//void Fun(const int&& x) { cout << "const 右值引用" << endl; }
+//// 模板中的&&不代表右值引用，而是万能引用，其既能接收左值又能接收右值。
+//// 模板的万能引用只是提供了能够接收同时接收左值引用和右值引用的能力，
+//// 但是引用类型的唯一作用就是限制了接收的类型，后续使用中都退化成了左值，
+//// 我们希望能够在传递过程中保持它的左值或者右值的属性, 就需要用我们下面学习的完美转发
+//template<typename T>
+//void PerfectForward(T&& t)
+//{
+//	Fun(std::forward<T>(t));
+//}
+//int main()
+//{
+//	PerfectForward(10);// 右值
+//	int a;
+//	PerfectForward(a); // 左值
+//	PerfectForward(std::move(a)); // 右值
+//	const int b = 8;
+//	PerfectForward(b);// const 左值
+//	PerfectForward(std::move(b)); // const 右值
+//	return 0;
+//}
+
+#include <thread>
+#include <iostream>
 using namespace std;
-
-#pragma once
-#include<assert.h>
-#include<iostream>
-#include<vector>
-namespace Vector_blog
+void ThreadFunc1(int& x)
 {
-	template<class T>
-	class vector
-	{
-	public:
-		typedef T* iterator;//可读可写迭代器
-		typedef const T* const_iterator;//只可读迭代器
-
-		//begin迭代器
-		iterator begin()
-		{
-			return _start;
-		}
-
-		//end迭代器
-		iterator end()
-		{
-			return _finish;
-		}
-
-		//const begin迭代器
-		const_iterator begin() const
-		{
-			return _start;
-		}
-
-		//const end迭代器
-		const_iterator end() const
-		{
-			return _finish;
-		}
-	public:
-		//无参构造函数：直接全部给nullptr即可
-		vector()
-			:_start(nullptr)
-			, _finish(nullptr)
-			, _endofstorage(nullptr)
-		{}
-
-		//拷贝构造函数
-		//vector<int> v1;
-		//vector<int> v2(v1);
-		vector(const vector<T>& v)
-			:_start(nullptr)
-			, _finish(nullptr)
-			, _endofstorage(nullptr)
-		{
-			const_iterator move = v.begin();
-			while (move != v.end())
-			{
-				push_back(*move);
-				move++;
-			}
-		}
-
-		//析构函数
-		~vector()
-		{
-			delete[] _start;
-			_start = _finish = _endofstorage = nullptr;
-		}
-
-		//交换函数，用于交换两个vector
-		void Swap(vector<T>& v)
-		{
-			swap(_start, v._start);
-			swap(_finish, v._finish);
-			swap(_endofstorage, v._endofstorage);
-		}
-
-		//赋值=重载函数
-		//vector<int> v1;
-		//v1=v2;
-		vector<T>& operator=(const vector<T>& v)
-		{
-			if (this != &v)
-			{
-				vector<T> tmp(v);
-				Swap(tmp);
-			}
-			return *this;
-		}
-
-		//调整vector的数据个数
-		void resize(const size_t n, const T& val = T())//第二个参数为一个T类型的缺省值
-		{
-			if (n < size())
-			{
-				_finish = _start + n;
-			}
-			else if (n > size())
-			{
-				if (n > capacity())//如果调整后的n大于容量，则需要扩容
-				{
-					reserve(n);
-				}
-				iterator it1 = begin() + n;
-				iterator it2 = end();
-				while (it2 < it1)
-				{
-					push_back(val);
-					it2++;
-				}
-			}
-		}
-
-		//调整vector的容量
-		void reserve(const size_t n)
-		{
-			//如果要调整的容量大于原来的容量才做调整
-			if (n > capacity())
-			{
-				T* tmp = new T[n];//开辟一块新空间
-				T* tmp_start = _start;
-				T* tmp_move = tmp;
-				while (tmp_start != _finish)
-				{
-					*tmp_move++ = *tmp_start++;
-				}
-
-				//释放旧空间，并调整_start,_finish,_endofstorage的位置
-				_finish = tmp + size();
-				_endofstorage = tmp + n;
-				delete[] _start;
-				_start = tmp;
-			}
-		}
-
-		//判断vector是否为空
-		bool empty() const
-		{
-			return !size();
-		}
-
-		//尾部插入
-		void push_back(const T& val)
-		{
-			insert(end(), val);
-		}
-
-		//尾删
-		void pop_back()
-		{
-			erase(end() - 1);
-		}
-
-		//中间插入
-		iterator insert(iterator pos, const T& val)
-		{
-			assert(pos <= end());
-			//如果容量已满，则扩容
-			if (size() == capacity())
-			{
-				size_t n = pos - begin();//扩容之前需要记住pos对于_start的偏移量，以防出现迭代器失效问题
-				size_t newcapacity = size() == 0 ? 4 : capacity() * 2;
-				reserve(newcapacity);
-				pos = _start + n;//更新pos位置
-			}
-
-			//将pos位置及其后面所以数据往后挪动
-			iterator move = end();
-			while (move != pos)
-			{
-				*move = *(move - 1);
-				move--;
-			}
-
-			*pos = val;
-			_finish++;
-
-			return pos;
-		}
-
-		//中间删除
-		iterator erase(iterator pos)
-		{
-			assert(pos < end());
-
-			iterator tmp = pos + 1;
-			while (tmp != end())
-			{
-				*(tmp - 1) = *tmp;
-				tmp++;
-			}
-
-			_finish--;
-
-			return pos;
-		}
-
-		//获取数据个数
-		size_t size() const
-		{
-			return _finish - _start;
-		}
-
-		//获取容量
-		size_t capacity() const
-		{
-			return _endofstorage - _start;
-		}
-
-		//重载operator[]
-		T& operator[](size_t pos)
-		{
-			//assert(pos < size());
-			return *(_start + pos);
-		}
-
-		//clear函数
-		void clear()
-		{
-			iterator it = begin();
-			while (it != end())
-			{
-				(*it).~T();
-				it++;
-			}
-			_finish = _start;
-		}
-	private:
-		iterator _start;
-		iterator _finish;
-		iterator _endofstorage;
-	};
+	x += 10;
 }
-
+void ThreadFunc2(int* x)
+{
+	*x += 10;
+}
 int main()
 {
-	Vector_blog::vector<string> v1;
-	v1.push_back("hello");
-	v1.push_back("world");
+	int a = 10;
+	// 在线程函数中对a修改，不会影响外部实参，因为：线程函数参数虽然是引用方式，但其实际引用的是线程栈中的拷贝
+	thread t1(ThreadFunc1, std::ref(a));
+	t1.join();
+	cout << a << endl;
 
-	for (int i = 0; i < 2; i++)
-	{
-		cout << v1[i] << " ";
-	}
-	cout << endl;
-
-	v1.clear();
-	for (int i = 0; i < 2; i++)
-	{
-		cout << v1[i] << " ";
-	}
-
+	//// 如果想要通过形参改变外部实参时，必须借助std::ref()函数
+	//thread t2(ThreadFunc1, std::ref(a));
+	//t2.join();
+	//cout << a << endl;
+	//// 地址的拷贝
+	//thread t3(ThreadFunc2, &a);
+	//t3.join();
+	//cout << a << endl;
 	return 0;
 }
