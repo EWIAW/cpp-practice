@@ -10131,32 +10131,950 @@
 //	return 0;
 //}
 
-#include <thread>
+//#include <thread>
+//#include <iostream>
+//using namespace std;
+//void ThreadFunc1(int& x)
+//{
+//	x += 10;
+//}
+//void ThreadFunc2(int* x)
+//{
+//	*x += 10;
+//}
+//int main()
+//{
+//	int a = 10;
+//	// 在线程函数中对a修改，不会影响外部实参，因为：线程函数参数虽然是引用方式，但其实际引用的是线程栈中的拷贝
+//	thread t1(ThreadFunc1, std::ref(a));
+//	t1.join();
+//	cout << a << endl;
+//
+//	//// 如果想要通过形参改变外部实参时，必须借助std::ref()函数
+//	//thread t2(ThreadFunc1, std::ref(a));
+//	//t2.join();
+//	//cout << a << endl;
+//	//// 地址的拷贝
+//	//thread t3(ThreadFunc2, &a);
+//	//t3.join();
+//	//cout << a << endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class father
+//{
+//public:
+//	father(int afather = 0)
+//		:_afather(afather)
+//	{
+//
+//	}
+//protected:
+//	int _afather;
+//};
+//
+//class son :private father
+//{
+//public:
+//	son(int bson = 0)
+//		:_bson(bson)
+//	{
+//		
+//	}
+//
+//	void Print()
+//	{
+//		cout << _afather << endl;
+//	}
+//private:
+//	int _bson;
+//};
+//
+//int main()
+//{
+//	son s;
+//	s.Print();
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <unordered_map>
+//using namespace std;
+//
+//struct Node
+//{
+//public:
+//    int _val;
+//    Node* _next;
+//    Node* _prev;
+//
+//    Node(int val = 0)
+//        :_val(val),
+//        _next(nullptr),
+//        _prev(nullptr)
+//    {}
+//};
+//
+//class LRUCache
+//{
+//private:
+//    unordered_map<int, Node*> _um;
+//    Node* _head;
+//    int _size;//链表的长度
+//    int _capacity;//链表的最大长度
+//
+//public:
+//    LRUCache(int capacity)
+//        :_head(new Node(0)),
+//        _size(0),
+//        _capacity(capacity)
+//    {
+//        _head->_next = _head;
+//        _head->_prev = _head;
+//    }
+//
+//    int get(int key)
+//    {
+//        auto it = _um.find(key);
+//        if (it == _um.end())
+//        {
+//            return -1;
+//        }
+//        //如果找到key，要更新最新位置
+//        refresh(it->second);
+//        return it->second->_val;
+//    }
+//
+//    void put(int key, int value)
+//    {
+//        auto it = _um.find(key);
+//        if (it != _um.end())
+//        {
+//            it->second->_val = value;
+//            refresh(it->second);
+//        }
+//        else
+//        {
+//            if (_size == _capacity)
+//            {
+//                popfront();
+//                _size--;
+//            }
+//            Node* node(new Node(value));
+//            pushback(node);
+//            _um[key] = node;
+//            _size++;
+//        }
+//    }
+//
+//    //给一个结点的指针，更新这个结点的位置到最新的位置，即链表尾部
+//    void refresh(Node* node)
+//    {
+//        //更新这个结点的是否，需要判断，该结点是否已经是尾结点，如果是，则不动
+//        if (_head->_prev == node)
+//            return;
+//
+//        Node* prev = node->_prev;
+//        Node* tail = node->_next;
+//        Node* end = _head->_prev;//链表中最后一个结点的位置
+//        prev->_next = tail;
+//        tail->_prev = prev;
+//
+//        _head->_prev = node;
+//        node->_next = _head;
+//        node->_prev = end;
+//        end->_next = node;
+//    }
+//
+//    //将一个结点尾插到链表中
+//    void pushback(Node* node)
+//    {
+//        Node* end = _head->_prev;
+//
+//        _head->_prev = node;
+//        node->_next = _head;
+//        node->_prev = end;
+//        end->_next = node;
+//    }
+//
+//    //删除头节点
+//    void popfront()
+//    {
+//        Node* del = _head->_next;
+//        Node* cur = del->_next;
+//        _um.erase(del->_val);
+//
+//        _head->_next = cur;
+//        cur->_prev = _head;
+//        delete del;
+//    }
+//};
+//
+//int main()
+//{
+//    LRUCache* lRUCache(new LRUCache(2));
+//    lRUCache->put(1, 0);
+//    lRUCache->put(2, 2);
+//    lRUCache->get(1);
+//    lRUCache->put(3, 3);
+//    lRUCache->get(2);
+//    lRUCache->put(4, 4);
+//    lRUCache->get(1);
+//    lRUCache->get(3);
+//    lRUCache->get(4);
+//    return 0;
+//}
+
+//#include <iostream>
+//#include <memory>
+//
+//void test1() 
+//{
+//	int* p = new int(12);
+//	std::shared_ptr<int> sp1(p);
+//	std::shared_ptr<int> sp2(p);
+//}
+//
+//void test2()
+//{
+//	std::shared_ptr<int> sp1 = std::make_shared<int>();
+//	std::shared_ptr<int> sp2(sp1.get());
+//}
+//
+//int main()
+//{
+//	//test1();
+//	test2();
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <memory>
+//using namespace std;
+//
+//struct Student
+//{
+//	int _sno;
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//int numIslands(vector<vector<char>>& grid)
+//{
+//    int count = 0;
+//
+//    for (int i = 0; i < grid.size(); i++)
+//    {
+//        for (int j = 0; j < grid[i].size(); j++)
+//        {
+//            //先判断水平方向
+//            if (((j - 1) < 0 && gird[i][j + 1] == '0')
+//                || ((j + 1) == grid[i].size() && gird[i][j - 1] == '0')
+//                || (grid[i][j - 1] == '0' && gird[i][j + 1]) == '0')
+//            {
+//                count++:
+//            }
+//
+//            //再判断竖直方向
+//            if (((i - 1) < 0 && gird[i + 1][j] == '0')
+//                || ((i + 1) == gird.size() && gird[i - 1][j] == '0')
+//                || (gird[i - 1][j] == '0' && grid[i + 1][j] == '0'))
+//            {
+//                count++;
+//            }
+//        }
+//        return count;
+//    }
+//
+//#include <iostream>
+//
+//using namespace std;
+//
+////判断一个字符是不是数字
+//bool Judge(char ch)
+//{
+//    if (ch >= '1' && ch <= '9')
+//        return true;
+//    else
+//        return false;
+//}
+//
+//int main()
+//{
+//    Judge('a');
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <memory>
+//#include <functional>
+//using namespace std;
+//
+//using func = function<void()>;
+//
+//class Student :public enable_shared_from_this<Student>
+//{
+//private:
+//	int _sno;
+//
+//public:
+//	Student(int sno)
+//		:_sno(sno)
+//	{}
+//
+//	void Print()
+//	{
+//		shared_ptr<Student> tmp = shared_from_this();
+//		cout << tmp.use_count() << endl;
+//		//shared_ptr<Student> tmp(this);
+//		func cb = bind(&Student::readyPrint, tmp);
+//		cout << tmp.use_count() << endl;
+//		cb();
+//		cout << tmp.use_count() << endl;
+//	}
+//
+//	void readyPrint()
+//	{
+//		cout << _sno << endl;
+//	}
+//};
+//
+//void test1()
+//{
+//	shared_ptr<Student> sp(new Student(10));
+//	cout << sp.use_count() << endl;
+//	//Student sp(10);
+//	sp->Print();
+//	cout << sp.use_count() << endl;
+//}
+//
+//void Show(int& tmp)
+//{
+//	cout << tmp << endl;
+//	tmp += 10;
+//}
+//
+//void test2()
+//{
+//	int count = 20;
+//	func cb = bind(Show, count);
+//	cb();
+//	//Show(count);
+//	cout << "test2():count:" << count << endl;
+//}
+//
+//int main()
+//{
+//	test2();
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <memory>
+//using namespace std;
+//
+//class TcpConnection;
+//
+//class Channel
+//{
+//private:
+//	shared_ptr<TcpConnection> _tie_;
+//
+//public:
+//	Channel()
+//	{}
+//
+//	~Channel()
+//	{
+//		cout << "~Channel()" << endl;
+//	}
+//
+//	void tie(const shared_ptr<TcpConnection>& sp)
+//	{
+//		cout << sp.use_count() << endl;
+//		_tie_ = sp;
+//	}
+//};
+//
+//class TcpConnection :public enable_shared_from_this<TcpConnection>
+//{
+//private:
+//	unique_ptr<Channel> _channel_;
+//
+//public:
+//	TcpConnection()
+//		:_channel_(new Channel)
+//	{}
+//
+//	~TcpConnection()
+//	{
+//		cout << "~TcpConnction()" << endl;
+//	}
+//
+//	void test()
+//	{
+//		shared_ptr<TcpConnection> tmp(shared_from_this());
+//		cout << tmp.use_count() << endl;
+//		_channel_->tie(tmp);
+//		cout << tmp.use_count() << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	shared_ptr<TcpConnection> sp(new TcpConnection);
+//	cout << sp.unique() << endl;
+//	sp->test();
+//
+//	return 0;
+//}
+
+//#include <stdio.h>
+//
+//int main(void) 
+//{
+//	printf("%s , %3s\n", "computer", "computer");
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//void func(int& tmp)
+//{
+//	cout << "&" << endl;
+//}
+//
+//void func(int&& tmp)
+//{
+//	cout << "&&" << endl;
+//}
+//
+//int main()
+//{
+//	//int&& tmp = 42;
+//	//cout << &tmp << endl;
+//	int x = 10;
+//	func(x);
+//	func(10);
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//class String
+//{
+//private:
+//	char* _str;
+//public:
+//	String(const char* str = "")
+//		:_str(new char[strlen(str) + 1])
+//	{
+//		cout << "构造函数" << endl;
+//		strcpy(_str, str);
+//	}
+//
+//	//拷贝构造
+//	String(const String& str)
+//		:_str(nullptr)
+//	{
+//		cout << "String(&)" << endl;
+//		String tmp(str._str);
+//		swap(_str, tmp._str);
+//	}
+//
+//	//移动构造
+//	String(String&& str)
+//		:_str(nullptr)
+//	{
+//		cout << "String(&&)" << endl;
+//		swap(_str, str._str);
+//	}
+//
+//	void Print()
+//	{
+//		cout << _str << endl;
+//	}
+//};
+//
+//String func(const char* tmp)
+//{
+//	String str(tmp);
+//	return move(str);
+//}
+//
+//int main()
+//{
+//	String s3(func("aaa"));
+//	s3.Print();
+//	return 0;
+//}
+//#include <stdio.h>
+//int main()
+//{
+//	int a[] = { 1, 2, 3, 4 };
+//	int* b = a;
+//	*b += 2;
+//	*(b + 2) = 2;
+//	b++;
+//	printf("%d,%d\n", *b, *(b + 2));
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//class Student
+//{
+//private:
+//	int _chinese;
+//	int _math;
+//	int _englist;
+//public:
+//	Student(int chinese = 0, int math = 0, int english = 0)
+//		:_chinese(chinese),
+//		_math(math),
+//		_englist(english)
+//	{
+//
+//	}
+//};
+//
+//int main()
+//{
+//	Student s1(56, 25, 88);
+//	Student s1(56, 25, 88);
+//	Student s1(56, 25, 88);
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//
+//struct Student
+//{
+//	int _chinese;
+//	int _math;
+//	int _englist;
+//
+//	Student(int chinese = 0, int math = 0, int english = 0)
+//		:_chinese(chinese),
+//		_math(math),
+//		_englist(english)
+//	{}
+//};
+//
+//struct CompareChinese
+//{
+//	bool operator()(const Student& s1, const Student& s2)
+//	{
+//		return s1._chinese < s2._chinese;
+//	}
+//};
+//
+//int main()
+//{
+//	//Student s1(56, 25, 88);
+//	//Student s1(67, 32, 46);
+//	//Student s1(89, 57, 76);
+//
+//	vector<Student> v = { {56, 25, 88},{99, 32, 46},{89, 57, 76} };
+//
+//	//sort(v.begin(), v.end(),CompareChinese());
+//	sort(v.begin(), v.end(), [](const Student& s1, const Student& s2)->bool {return s1._chinese < s2._chinese; });
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//void Func(int& x)
+//{
+//	cout << "左值引用" << endl;
+//}
+//
+//void Func(const int& x)
+//{
+//	cout << "const 左值引用" << endl;
+//}
+//
+//void Func(int&& x)
+//{
+//	cout << "右值引用" << endl;
+//}
+//
+//void Func(const int&& x)
+//{
+//	cout << "cosnt 右值引用" << endl;
+//}
+//
+//template<class T>
+//void test(T&& tmp)
+//{
+//	Func(forward<T>(tmp));
+//}
+//
+//int main()
+//{
+//	int a = 10;
+//	test(a);
+//	test(move(a));
+//
+//	const int b = 20;
+//	test(b);
+//	test(move(b));
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//struct ListNode 
+//{
+//    int val;
+//    ListNode* next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode* next) : val(x), next(next) {}
+//};
+// 
+//
+////先写一个 合并两个有序链表
+//    // 先写一个 合并两个有序的链表
+//ListNode* mergeList(ListNode* head1, ListNode* head2)
+//{
+//    ListNode* head = new ListNode(0);
+//    while (head1 != nullptr && head2 != nullptr)
+//    {
+//        if (head1->val < head2->val)
+//        {
+//            head->next = head1;
+//            head1 = head1->next;
+//            head = head->next;
+//        }
+//        else
+//        {
+//            head->next = head2;
+//            head2 = head2->next;
+//            head = head->next;
+//        }
+//    }
+//
+//    if (head1 != nullptr)
+//    {
+//        head->next = head1;
+//    }
+//    if (head2 != nullptr)
+//    {
+//        head->next = head2;
+//    }
+//    return head->next;
+//}
+//
+//ListNode* sortList(ListNode* head)
+//{
+//    if (head == nullptr || head->next == nullptr)
+//        return head;
+//
+//    ListNode* first = new ListNode(0, head);
+//    // 先求链表的长度
+//    ListNode* cur = first->next;
+//    int length = 0;
+//    while (cur != nullptr)
+//    {
+//        length++;
+//        cur = cur->next;
+//    }
+//
+//    // 开始归并
+//    for (int everyLength = 1; everyLength < length; everyLength *= 2)
+//    {
+//        ListNode* prev = first;
+//        cur = first->next; // 工作指针
+//        while (cur != nullptr)
+//        {
+//            ListNode* head1 = cur;
+//            for (int i = 1; i < everyLength; i++)
+//            {
+//                if (cur->next == nullptr)
+//                {
+//                    break;
+//                }
+//                cur = cur->next;
+//            }
+//            ListNode* head2 = cur->next;
+//            cur->next = nullptr;
+//
+//            cur = head2;
+//            for (int i = 1; i < everyLength; i++)
+//            {
+//                if (cur == nullptr || cur->next == nullptr)
+//                {
+//                    break;
+//                }
+//                cur = cur->next;
+//            }
+//
+//            ListNode* next = nullptr;
+//            if (cur != nullptr)
+//            {
+//                next = cur->next;
+//                cur->next = nullptr;
+//            }
+//
+//            ListNode* ret = mergeList(head1, head2);
+//            prev->next = ret;
+//            while (prev->next != nullptr)
+//            {
+//                prev = prev->next;
+//            }
+//            cur = next;
+//        }
+//    }
+//    return first->next;
+//}
+//}
+//
+//int main()
+//{
+//    ListNode* head1(new ListNode(-1));
+//    ListNode* head2(new ListNode(5));
+//    ListNode* head3(new ListNode(3));
+//    ListNode* head4(new ListNode(4));
+//    ListNode* head5(new ListNode(0));
+//
+//    head1->next = head2;
+//    head2->next = head3;
+//    head3->next = head4;
+//    head4->next = head5;
+//
+//    ListNode* ret = sortList(head1);
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//struct TreeNode
+//{
+//	int _val;
+//	TreeNode* _left;
+//	TreeNode* _right;
+//
+//	TreeNode(int val)
+//		:_val(val),
+//		_left(nullptr),
+//		_right(nullptr)
+//	{}
+//};
+//
+//TreeNode* CreateTree(vector<int> vec, int left, int right)
+//{
+//	if (left > right)
+//		return nullptr;
+//
+//	int mid = (left + right + 1) / 2;
+//	TreeNode* root = new TreeNode(vec[mid]);
+//	root->_left = CreateTree(vec, left, mid - 1);
+//	root->_right = CreateTree(vec, mid + 1, right);
+//	return root;
+//}
+//
+//int main()
+//{
+//	vector<int> v = { 1,2,3,6,7,5 };
+//	TreeNode* ret =  CreateTree(v, 0, v.size() - 1);
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <mutex>
+//using namespace std;
+
+////饿汉单例模式
+//class Singleton
+//{
+//private:
+//	static Singleton _one;
+//
+//private:
+//	Singleton()
+//	{
+//		cout << "构造函数" << endl;
+//	}
+//	~Singleton() = default;
+//	Singleton(const Singleton& singleton) = delete;
+//	Singleton operator=(const Singleton& singleton) = delete;
+//
+//public:
+//	static Singleton* GetInstance()
+//	{
+//		return &_one;
+//	}
+//
+//	void Log(const string& message)
+//	{
+//		cout << message << endl;
+//	}
+//};
+//
+//Singleton Singleton::_one;//饿汉模式的单例，对象实例需要在类外初始化
+
+//懒汉单例模式
+//懒汉模式需要保证线程安全
+//class Singleton
+//{
+//private:
+//	static Singleton* _one;
+//	static mutex _mtx;
+//
+//	Singleton()
+//	{
+//		cout << "构造函数" << endl;
+//	}
+//	~Singleton() = default;
+//	Singleton(const Singleton& slt) = delete;
+//	Singleton& operator=(const Singleton& slt) = delete;
+//public:
+//
+//	static Singleton* GetInstance()
+//	{
+//		if (_one == nullptr)
+//		{
+//			lock_guard<mutex> lock(_mtx);
+//			if (_one == nullptr)
+//			{
+//				_one = new Singleton();
+//			}
+//		}
+//		return _one;
+//	}
+//
+//	void log(const string& message)
+//	{
+//		cout << message << endl;
+//	}
+//};
+//
+//Singleton* Singleton::_one = nullptr;
+//mutex Singleton::_mtx;
+//
+//int main()
+//{
+//	//Singleton* s = Singleton::GetInstance();
+//	//s->Log("hello world");
+//
+//	Singleton* s = Singleton::GetInstance();
+//	s->log("hello linux");
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int&& a = 10;
+//	a++;
+//	cout << a << endl;
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//class mystring
+//{
+//private:
+//	char* _str;
+//public:
+//	mystring(const char* str)
+//		:_str(new char[strlen(str) + 1])
+//	{
+//		strcpy(_str, str);
+//		_str[strlen(_str)] = 0;
+//	}
+//
+//	mystring(const mystring& tmp)
+//		:_str(nullptr)
+//	{
+//		cout << "&" << endl;
+//		mystring s(tmp._str);
+//		swap(_str, s._str);
+//	}
+//
+//	mystring(mystring&& tmp)
+//		:_str(nullptr)
+//	{
+//		cout << "&&" << endl;
+//		swap(_str, tmp._str);
+//	}
+//
+//	void Print()
+//	{
+//		cout << _str << endl;
+//	}
+//};
+//
+//mystring Func(int val)
+//{
+//	char buffer[64] = { 0 };
+//	itoa(val, buffer, 10);
+//	mystring ret(buffer);
+//	//ret.Print();
+//	return std::move(ret);
+//}
+//
+//int main()
+//{
+//	//mystring s("abc");
+//	//s.Print();
+//	mystring ret = Func(1234);
+//	return 0;
+//}
+
 #include <iostream>
 using namespace std;
-void ThreadFunc1(int& x)
+
+class A
 {
-	x += 10;
-}
-void ThreadFunc2(int* x)
+public:
+	virtual void f() {}
+};
+
+class B : public A
+{};
+
+void fun(A* pa)
 {
-	*x += 10;
+	// dynamic_cast会先检查是否能转换成功，能成功则转换，不能则返回
+	B* pb1 = static_cast<B*>(pa);
+	B* pb2 = dynamic_cast<B*>(pa);
+	cout << "pb1:" << pb1 << endl;
+	cout << "pb2:" << pb2 << endl;
 }
 int main()
 {
-	int a = 10;
-	// 在线程函数中对a修改，不会影响外部实参，因为：线程函数参数虽然是引用方式，但其实际引用的是线程栈中的拷贝
-	thread t1(ThreadFunc1, std::ref(a));
-	t1.join();
-	cout << a << endl;
-
-	//// 如果想要通过形参改变外部实参时，必须借助std::ref()函数
-	//thread t2(ThreadFunc1, std::ref(a));
-	//t2.join();
-	//cout << a << endl;
-	//// 地址的拷贝
-	//thread t3(ThreadFunc2, &a);
-	//t3.join();
-	//cout << a << endl;
+	A a;
+	B b;
+	fun(&a);
+	fun(&b);
 	return 0;
 }
