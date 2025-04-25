@@ -129,9 +129,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="string.cpp" />
+    <ClCompile Include="string_blog.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="string.h" />
+    <ClInclude Include="Full_String.h" />
+    <ClInclude Include="Simple_String.h" />
+    <ClInclude Include="String_Copy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

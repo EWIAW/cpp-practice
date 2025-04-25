@@ -1,7 +1,11 @@
-#include"string.h"
-using namespace Simple_String;
-using namespace string_blog;
-using namespace Full_String;
+//#include "Simple_String.h"
+//#include "Full_String.h"
+#include "string_blog.h"
+//#include "String_Copy.h"
+
+//using namespace Simple_String;
+//using namespace string_blog;
+//using namespace Full_String;
 
 int main()
 {
@@ -25,10 +29,10 @@ int main()
 
 
 	string_blog::Test1();
-	//string_blog::Test2();
-	//string_blog::Test3();
-	//string_blog::Test4();
-	//string_blog::Test5();
+	string_blog::Test2();
+	string_blog::Test3();
+	string_blog::Test4();
+	string_blog::Test5();
 
 	return 0;
 }

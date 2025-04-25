@@ -18,9 +18,18 @@
     <ClCompile Include="string.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="string_blog.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="string.h">
+    <ClInclude Include="Simple_String.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Full_String.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="String_Copy.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
