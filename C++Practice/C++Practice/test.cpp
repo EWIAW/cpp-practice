@@ -11050,31 +11050,482 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	virtual void f() {}
+//};
+//
+//class B : public A
+//{};
+//
+//void fun(A* pa)
+//{
+//	// dynamic_cast会先检查是否能转换成功，能成功则转换，不能则返回
+//	B* pb1 = static_cast<B*>(pa);
+//	B* pb2 = dynamic_cast<B*>(pa);
+//	cout << "pb1:" << pb1 << endl;
+//	cout << "pb2:" << pb2 << endl;
+//}
+//int main()
+//{
+//	A a;
+//	B b;
+//	fun(&a);
+//	fun(&b);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Stack//栈类
+//{
+//public:
+//	Stack(int n = 10)//栈的构造函数
+//	{
+//		int* tmp = (int*)malloc(sizeof(int) * n);
+//		_a = tmp;
+//		_size = _capacity = 0;
+//	}
+//	~Stack()//栈的析构函数
+//	{
+//		free(_a);
+//		_a = nullptr;
+//		_size = _capacity = 0;
+//	}
+//
+//	Stack(const Stack& tmp)
+//	{
+//		_a = (int*)malloc(sizeof(int) * tmp._capacity);//开一个新的堆空间给新的s2对象
+//		_size = tmp._size;
+//		_capacity = tmp._capacity;
+//	}
+//private:
+//	int* _a;//指向栈的指针
+//	int _size;//栈中元素个数
+//	int _capacity;//栈的容量
+//};
+//
+//int main()
+//{
+//	Stack s1;
+//	Stack s2(s1);
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include "mystring.h"
+//
+//int main()
+//{
+//	string_blog::Test1();
+//	string_blog::Test2();
+//	string_blog::Test3();
+//	string_blog::Test4();
+//	string_blog::Test5();
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <thread>
+//#include <mutex>
+//#include <condition_variable>
+//
+//constexpr int MAX_NUM = 200;
+//
+//// 共享状态
+//std::mutex              mtx;
+//std::condition_variable cv;
+//int                     counter = 0;
+//bool                    turn_even = true;  // true: 偶数线程打印，false: 奇数线程打印
+//
+//// 打印偶数的线程
+//void print_even() 
+//{
+//    while (true) 
+//    {
+//        std::unique_lock<std::mutex> lock(mtx);
+//        // 等待：要么轮到偶数线程，要么超出范围终止
+//        cv.wait(lock, [] { return turn_even || counter > MAX_NUM; });
+//
+//        if (counter > MAX_NUM) 
+//        {
+//            // 通知对方也退出
+//            cv.notify_all();
+//            break;
+//        }
+//
+//        // 此时 counter ≤ MAX_NUM 且 turn_even == true
+//        std::cout << counter << std::endl;
+//        ++counter;
+//
+//        // 切换为奇数线程
+//        turn_even = false;
+//        // 唤醒对方
+//        cv.notify_all();
+//    }
+//}
+//
+//// 打印奇数的线程
+//void print_odd() 
+//{
+//    while (true) 
+//    {
+//        std::unique_lock<std::mutex> lock(mtx);
+//        // 等待：要么轮到奇数线程，要么超出范围终止
+//        cv.wait(lock, [] { return !turn_even || counter > MAX_NUM; });
+//
+//        if (counter > MAX_NUM) 
+//        {
+//            cv.notify_all();
+//            break;
+//        }
+//
+//        // 此时 counter ≤ MAX_NUM 且 turn_even == false
+//        std::cout << counter << std::endl;
+//        ++counter;
+//
+//        // 切换为偶数线程
+//        turn_even = true;
+//        cv.notify_all();
+//    }
+//}
+//
+//int main() {
+//    std::thread t_even(print_even);
+//    std::thread t_odd(print_odd);
+//
+//    t_even.join();
+//    t_odd.join();
+//    return 0;
+//}
+
+//#include <iostream>
+//#include <thread>
+//#include <condition_variable>
+//#include <mutex>
+//
+//using namespace std;
+//
+//int count = 0;
+//mutex mtx;
+//
+//condition_variable cond1;
+//condition_variable cond2;
+//
+//void print_one()
+//{
+//	while (true)
+//	{
+//		unique_lock<mutex> lock(mtx);
+//		while (::count % 2 == 0)
+//		{
+//			::cond1.wait(lock);
+//		}
+//
+//		if (::count > 200)
+//		{
+//			break;
+//		}
+//
+//		cout << ::count++ << endl;
+//		cond2.notify_one();
+//	}
+//}
+//
+//void print_two()
+//{
+//	while (true)
+//	{
+//		unique_lock<mutex> lock(mtx);
+//		while (::count % 2 != 0)
+//		{
+//			::cond2.wait(lock);
+//		}
+//
+//		if (::count > 200)
+//		{
+//			break;
+//		}
+//		cout << ::count++ << endl;
+//		cond1.notify_one();
+//	}
+//}
+//
+//int main()
+//{
+//	thread t1(print_one);
+//	thread t2(print_two);
+//
+//	t1.join();
+//	cout << "t1->join" << endl;
+//	t2.join();
+//	cout << "t2->join" << endl;
+//	return 0;
+//}
+//
+//#include <iostream>
+//#include <thread>
+//#include <mutex>
+//#include <condition_variable>
+//
+//constexpr int MAX_NUM = 200;
+//
+//std::mutex              mtx;
+//std::condition_variable cv_even, cv_odd;
+//int                     counter = 0;
+//
+////打印偶数
+//void print_even() 
+//{
+//    std::unique_lock<std::mutex> lock(mtx);
+//    while (counter <= MAX_NUM) 
+//    {
+//        // 等待轮到偶数或已经结束
+//        //cv_even.wait(lock, [] { return (counter % 2 == 0) || (counter > MAX_NUM); });
+//        while (counter % 2 != 0)
+//        {
+//            cv_even.wait(lock);
+//        }
+//
+//        if (counter > MAX_NUM) 
+//            break;
+//
+//        std::cout << counter << std::endl;
+//        ++counter;
+//        // 唤醒奇数线程
+//        cv_odd.notify_one();
+//    }
+//    // 最后确保对方能退出
+//    cv_odd.notify_one();
+//}
+//
+////打印奇数
+//void print_odd() 
+//{
+//    std::unique_lock<std::mutex> lock(mtx);
+//    while (counter <= MAX_NUM) 
+//    {
+//        // 等待轮到奇数或已经结束
+//        //cv_odd.wait(lock, [] { return (counter % 2 == 1) || (counter > MAX_NUM); });
+//        while (counter % 2 == 0)
+//        {
+//            cv_odd.wait(lock);
+//        }
+//
+//        if (counter > MAX_NUM) 
+//            break;
+//
+//        std::cout << counter << std::endl;
+//        ++counter;
+//        // 唤醒偶数线程
+//        cv_even.notify_one();
+//    }
+//    cv_even.notify_one();
+//}
+//
+//int main() {
+//    std::thread t_e(print_even);
+//    std::thread t_o(print_odd);
+//    t_e.join();
+//    t_o.join();
+//    return 0;
+//}
+//
+//#include <iostream>
+//using namespace std;
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//
+//class Solution
+//{
+//    string path;
+//    vector<string> ret;
+//
+//public:
+//    vector<string> letterCasePermutation(string s)
+//    {
+//        dfs(s, 0);
+//        return ret;
+//    }
+//
+//    void dfs(const string& s, int pos)
+//    {
+//        if (path.size() == s.size())
+//        {
+//            ret.push_back(path);
+//            return;
+//        }
+//
+//        unsigned char c = static_cast<unsigned char>(s[pos]);
+//        if (isalpha(c))//说明是字母
+//        {
+//            //先统一全部转换成小写，在进行后面的操作
+//            c = tolower(s[pos]);
+//            cout << c << " ";
+//
+//            path += c;
+//            dfs(s, pos + 1);
+//            path.pop_back();
+//
+//            c = toupper(s[pos]);
+//            cout << c << " ";
+//
+//            path += c;
+//            dfs(s, pos + 1);
+//            path.pop_back();
+//
+//        }
+//        else//说明是数字
+//        {
+//            cout << s[pos] << " ";
+//
+//            path += s[pos];
+//            dfs(s, pos + 1);
+//            path.pop_back();
+//
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    string s("a1b2");
+//    vector<string> ret = Solution().letterCasePermutation(s);
+//
+//
+//	return 0;
+//}
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//
+//using namespace std;
+//
+////O(n)
+//string join(const vector<string>& arr, const string& seq)
+//{
+//	//可以进行一个预估的长度，避免频繁扩容
+//	size_t total = 0;
+//	size_t n = arr.size();
+//	for (size_t i = 0; i < n; i++)
+//	{
+//		total += arr[i].size();
+//	}
+//	total += seq.size() * (n - 1);
+//
+//	string ret;
+//	ret.reserve(total);
+//
+//	for (size_t i = 0; i < n; i++)
+//	{
+//		ret += arr[i];
+//		if (i == arr.size() - 1)
+//		{
+//			break;
+//		}
+//		ret += seq;
+//	}
+//	return ret;
+//}
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <list>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//
+//void dfs(const vector<char>& str, vector<string>& ret, string& path, int pos)
+//{
+//	if (pos == 26)
+//		return;
+//
+//	for (int i = pos; i < str.size(); i++)
+//	{
+//		path += str[i];
+//		ret.push_back(path);
+//		dfs(str, ret, path, i + 1);
+//		path.pop_back();
+//	}
+//}
+//
+//vector<string> func()
+//{
+//	vector<char> str;
+//	for (char i = 'a'; i <= 'z'; i++)
+//	{
+//		str.push_back(i);
+//	}
+//	vector<string> ret;
+//	string path;
+//	dfs(str, ret, path, 0);
+//	return ret;
+//}
+//
+//int main()
+//{
+//	vector<string> ret = func();
+//	//for (int i = 0; i < ret.size(); i++)
+//	//{
+//	//	cout << ret[i] << " ";
+//	//}
+//	cout << ret.size();
+//	return 0;
+//}
+
 #include <iostream>
+#include <vector>
 using namespace std;
 
-class A
+int func(int n)
 {
-public:
-	virtual void f() {}
-};
+	vector<bool> arr(n + 1, true);
+	arr[0] = arr[1] = false;
 
-class B : public A
-{};
+	for (int i = 2; i < arr.size(); i++)
+	{
+		if (arr[i] == true)
+		{
+			for (int j = i*2; j < arr.size(); j += i)
+			{
+				arr[j] = false;
+			}
+		}
+	}
 
-void fun(A* pa)
-{
-	// dynamic_cast会先检查是否能转换成功，能成功则转换，不能则返回
-	B* pb1 = static_cast<B*>(pa);
-	B* pb2 = dynamic_cast<B*>(pa);
-	cout << "pb1:" << pb1 << endl;
-	cout << "pb2:" << pb2 << endl;
+	for (int i = arr.size() - 1; i >= 0; i--)
+	{
+		if (arr[i] == true)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
+
 int main()
 {
-	A a;
-	B b;
-	fun(&a);
-	fun(&b);
+	cout << func(9999999999) << endl;
 	return 0;
 }
