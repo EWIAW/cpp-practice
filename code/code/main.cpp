@@ -161,72 +161,172 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//class Solution
+//{
+//    bool visited[15][15];
+//    int num;//黄金数量最大值
+//    int nownum;//当前正在走的路的值
+//
+//public:
+//    int getMaximumGold(vector<vector<int>>& grid)
+//    {
+//        num = 0;
+//        for (int i = 0; i < grid.size(); i++)
+//        {
+//            for (int j = 0; j < grid[i].size(); j++)
+//            {
+//                if (grid[i][j] != 0)
+//                {
+//                    visited[i][j] = true;
+//                    nownum = 0;
+//                    nownum += grid[i][j];
+//                    dfs(grid, i, j);
+//                    visited[i][j] = false;
+//                }
+//            }
+//        }
+//        return num;
+//    }
+//
+//    void dfs(vector<vector<int>>& grid, int i, int j)
+//    {
+//        int dx[4] = { 0,0,1,-1 };//右，左，下，上
+//        int dy[4] = { 1,-1,0,0 };
+//
+//        int k = 0;
+//        for (k = 0; k < 4; k++)
+//        {
+//            int nexti = i + dx[k];
+//            int nextj = j + dy[k];
+//            if (nexti >= 0 && nexti < grid.size()
+//                && nextj >= 0 && nextj < grid[nexti].size()
+//                && visited[nexti][nextj] != true
+//                && grid[nexti][nextj] != 0)
+//            {
+//                visited[nexti][nextj] = true;
+//                nownum += grid[nexti][nextj];
+//                dfs(grid, nexti, nextj);
+//                nownum -= grid[nexti][nextj];
+//                visited[nexti][nextj] = false;
+//            }
+//        }
+//
+//        //说明 上下左右都走不通了，无路可走了
+//        if (k == 4)
+//        {
+//            if (nownum > num)
+//                num = nownum;
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    vector<vector<int>> grid = { {0,6,0}, {5,8,7}, {0,9,0} };
+//    int ret = Solution().getMaximumGold(grid);
+//	return 0;
+//}
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
 class Solution
 {
-    bool visited[15][15];
-    int num;//黄金数量最大值
-    int nownum;//当前正在走的路的值
+    vector<vector<bool>> visited;
+    int count;
+    int gridrow;
+    int gridcol;
 
 public:
-    int getMaximumGold(vector<vector<int>>& grid)
+    int uniquePathsIII(vector<vector<int>>& grid)
     {
-        num = 0;
-        for (int i = 0; i < grid.size(); i++)
+        gridrow = grid.size();
+        gridcol = grid[0].size();
+        count = 0;
+        visited.resize(gridrow);
+        for (int i = 0; i < gridrow; i++)
         {
-            for (int j = 0; j < grid[i].size(); j++)
+            visited[i].resize(gridcol, false);
+        }
+
+        //记录其实位置1的下标
+        int row;
+        int col;
+
+        for (int i = 0; i < gridrow; i++)
+        {
+            for (int j = 0; j < gridcol; j++)
             {
-                if (grid[i][j] != 0)
+                if (grid[i][j] == 1)
+                {
+                    row = i;
+                    col = j;
+                }
+
+                if (grid[i][j] == 1 || grid[i][j] == 2 || grid[i][j] == -1)
                 {
                     visited[i][j] = true;
-                    nownum = 0;
-                    nownum += grid[i][j];
-                    dfs(grid, i, j);
-                    visited[i][j] = false;
                 }
             }
         }
-        return num;
+
+        dfs(grid, row, col);
+        return count;
     }
 
-    void dfs(vector<vector<int>>& grid, int i, int j)
+    void dfs(vector<vector<int>>& grid, int row, int col)
     {
-        int dx[4] = { 0,0,1,-1 };//右，左，下，上
-        int dy[4] = { 1,-1,0,0 };
-
-        int k = 0;
-        for (k = 0; k < 4; k++)
+        if (grid[row][col] == 2)
         {
-            int nexti = i + dx[k];
-            int nextj = j + dy[k];
-            if (nexti >= 0 && nexti < grid.size()
-                && nextj >= 0 && nextj < grid[nexti].size()
-                && visited[nexti][nextj] != true
-                && grid[nexti][nextj] != 0)
+            if (check() == true)
             {
-                visited[nexti][nextj] = true;
-                nownum += grid[nexti][nextj];
-                dfs(grid, nexti, nextj);
-                nownum -= grid[nexti][nextj];
-                visited[nexti][nextj] = false;
+                count++;
             }
         }
 
-        //说明 上下左右都走不通了，无路可走了
-        if (k == 4)
+        int dx[4] = { 0,0,-1,1 };//左、右、上、下
+        int dy[4] = { -1,1,0,0 };
+
+        for (int i = 0; i < 4; i++)
         {
-            if (nownum > num)
-                num = nownum;
+            int nexti = row + dx[i];
+            int nextj = col + dy[i];
+            if (nexti >= 0 && nexti < visited.size()
+                && nextj >= 0 && nextj < visited[nexti].size()
+                && visited[nexti][nextj] == false)
+            {
+                visited[nexti][nextj] = true;
+                dfs(grid, nexti, nextj);
+                visited[nexti][nextj] = false;
+            }
         }
+    }
+
+    //判断visited数组里面是不是全部都是true
+    bool check()
+    {
+        for (int i = 0; i < gridrow; i++)
+        {
+            for (int j = 0; j < gridcol; j++)
+            {
+                if (visited[i][j] == false)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 };
 
 int main()
 {
-    vector<vector<int>> grid = { {0,6,0}, {5,8,7}, {0,9,0} };
-    int ret = Solution().getMaximumGold(grid);
+    vector<vector<int>> grid = { {1, 0, 0, 0},{0, 0, 0, 0 }, {0, 0, 2, -1} };
+    int ret = Solution().uniquePathsIII(grid);
 	return 0;
 }
