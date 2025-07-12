@@ -231,102 +231,144 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//class Solution
+//{
+//    vector<vector<bool>> visited;
+//    int count;
+//    int gridrow;
+//    int gridcol;
+//
+//public:
+//    int uniquePathsIII(vector<vector<int>>& grid)
+//    {
+//        gridrow = grid.size();
+//        gridcol = grid[0].size();
+//        count = 0;
+//        visited.resize(gridrow);
+//        for (int i = 0; i < gridrow; i++)
+//        {
+//            visited[i].resize(gridcol, false);
+//        }
+//
+//        //记录其实位置1的下标
+//        int row;
+//        int col;
+//
+//        for (int i = 0; i < gridrow; i++)
+//        {
+//            for (int j = 0; j < gridcol; j++)
+//            {
+//                if (grid[i][j] == 1)
+//                {
+//                    row = i;
+//                    col = j;
+//                }
+//
+//                if (grid[i][j] == 1 || grid[i][j] == 2 || grid[i][j] == -1)
+//                {
+//                    visited[i][j] = true;
+//                }
+//            }
+//        }
+//
+//        dfs(grid, row, col);
+//        return count;
+//    }
+//
+//    void dfs(vector<vector<int>>& grid, int row, int col)
+//    {
+//        if (grid[row][col] == 2)
+//        {
+//            if (check() == true)
+//            {
+//                count++;
+//            }
+//        }
+//
+//        int dx[4] = { 0,0,-1,1 };//左、右、上、下
+//        int dy[4] = { -1,1,0,0 };
+//
+//        for (int i = 0; i < 4; i++)
+//        {
+//            int nexti = row + dx[i];
+//            int nextj = col + dy[i];
+//            if (nexti >= 0 && nexti < visited.size()
+//                && nextj >= 0 && nextj < visited[nexti].size()
+//                && visited[nexti][nextj] == false)
+//            {
+//                visited[nexti][nextj] = true;
+//                dfs(grid, nexti, nextj);
+//                visited[nexti][nextj] = false;
+//            }
+//        }
+//    }
+//
+//    //判断visited数组里面是不是全部都是true
+//    bool check()
+//    {
+//        for (int i = 0; i < gridrow; i++)
+//        {
+//            for (int j = 0; j < gridcol; j++)
+//            {
+//                if (visited[i][j] == false)
+//                {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//};
+//
+//int main()
+//{
+//    vector<vector<int>> grid = { {1, 0, 0, 0},{0, 0, 0, 0 }, {0, 0, 2, -1} };
+//    int ret = Solution().uniquePathsIII(grid);
+//	return 0;
+//}
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
 class Solution
 {
-    vector<vector<bool>> visited;
-    int count;
-    int gridrow;
-    int gridcol;
+    vector<vector<int>> ret;
+    vector<int> path;
+    int numsize;
 
 public:
-    int uniquePathsIII(vector<vector<int>>& grid)
+    vector<vector<int>> permute(vector<int>& nums)
     {
-        gridrow = grid.size();
-        gridcol = grid[0].size();
-        count = 0;
-        visited.resize(gridrow);
-        for (int i = 0; i < gridrow; i++)
-        {
-            visited[i].resize(gridcol, false);
-        }
-
-        //记录其实位置1的下标
-        int row;
-        int col;
-
-        for (int i = 0; i < gridrow; i++)
-        {
-            for (int j = 0; j < gridcol; j++)
-            {
-                if (grid[i][j] == 1)
-                {
-                    row = i;
-                    col = j;
-                }
-
-                if (grid[i][j] == 1 || grid[i][j] == 2 || grid[i][j] == -1)
-                {
-                    visited[i][j] = true;
-                }
-            }
-        }
-
-        dfs(grid, row, col);
-        return count;
+        numsize = nums.size();
+        dfs(nums, 0);
+        return ret;
     }
 
-    void dfs(vector<vector<int>>& grid, int row, int col)
+    void dfs(vector<int>& nums, int pos)
     {
-        if (grid[row][col] == 2)
+        if (path.size() == numsize)
         {
-            if (check() == true)
-            {
-                count++;
-            }
+            ret.push_back(path);
+            return;
         }
 
-        int dx[4] = { 0,0,-1,1 };//左、右、上、下
-        int dy[4] = { -1,1,0,0 };
-
-        for (int i = 0; i < 4; i++)
+        for (int i = pos; i < numsize; i++)
         {
-            int nexti = row + dx[i];
-            int nextj = col + dy[i];
-            if (nexti >= 0 && nexti < visited.size()
-                && nextj >= 0 && nextj < visited[nexti].size()
-                && visited[nexti][nextj] == false)
-            {
-                visited[nexti][nextj] = true;
-                dfs(grid, nexti, nextj);
-                visited[nexti][nextj] = false;
-            }
+            path.push_back(nums[i]);
+            dfs(nums, i + 1);
+            path.pop_back();
         }
-    }
-
-    //判断visited数组里面是不是全部都是true
-    bool check()
-    {
-        for (int i = 0; i < gridrow; i++)
-        {
-            for (int j = 0; j < gridcol; j++)
-            {
-                if (visited[i][j] == false)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 };
 
 int main()
 {
-    vector<vector<int>> grid = { {1, 0, 0, 0},{0, 0, 0, 0 }, {0, 0, 2, -1} };
-    int ret = Solution().uniquePathsIII(grid);
+    vector<int> nums = { 1,2,3 };
+    Solution().permute(nums);
 	return 0;
 }
