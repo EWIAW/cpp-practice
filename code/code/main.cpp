@@ -331,44 +331,126 @@
 //	return 0;
 //}
 
-#include <iostream>
-#include <vector>
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//class Solution
+//{
+//    vector<vector<int>> ret;
+//    vector<int> path;
+//    int numsize;
+//
+//public:
+//    vector<vector<int>> permute(vector<int>& nums)
+//    {
+//        numsize = nums.size();
+//        dfs(nums, 0);
+//        return ret;
+//    }
+//
+//    void dfs(vector<int>& nums, int pos)
+//    {
+//        if (path.size() == numsize)
+//        {
+//            ret.push_back(path);
+//            return;
+//        }
+//
+//        for (int i = pos; i < numsize; i++)
+//        {
+//            path.push_back(nums[i]);
+//            dfs(nums, i + 1);
+//            path.pop_back();
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    vector<int> nums = { 1,2,3 };
+//    Solution().permute(nums);
+//	return 0;
+//}
+
+/*#include <iostream>
+#include <memory>
 using namespace std;
 
-class Solution
+class Test
 {
-    vector<vector<int>> ret;
-    vector<int> path;
-    int numsize;
-
+private:
+	int _age;
 public:
-    vector<vector<int>> permute(vector<int>& nums)
-    {
-        numsize = nums.size();
-        dfs(nums, 0);
-        return ret;
-    }
+	Test(int age)
+		:_age(age)
+	{}
 
-    void dfs(vector<int>& nums, int pos)
-    {
-        if (path.size() == numsize)
-        {
-            ret.push_back(path);
-            return;
-        }
-
-        for (int i = pos; i < numsize; i++)
-        {
-            path.push_back(nums[i]);
-            dfs(nums, i + 1);
-            path.pop_back();
-        }
-    }
+	~Test()
+	{
+		cout << "~Test()" << endl;
+	}
 };
 
 int main()
 {
-    vector<int> nums = { 1,2,3 };
-    Solution().permute(nums);
+	shared_ptr<Test> sp(new Test(20));
+	sp.reset();
+	/return 0;
+}
+*/
+
+//#include <iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int a = 511;
+//	char* ptr;
+//	ptr = (char*)&a + 1;
+//	printf("%d\n", *ptr);
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//void add()
+//{
+//	static int num = 0;
+//	num++;
+//	cout << num << endl;
+//}
+//
+//int main()
+//{
+//	for (int i = 0; i < 10; i++)
+//	{
+//		add();
+//	}
+//	int a = num;
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int tmp = 10;
+//	const int* ptr = &tmp;
+//	tmp = 20;
+//	//*ptr = 20;
+//	//char str[] = "hello";
+//	//cout << sizeof(str) << endl;
+//	//return 0;
+//}
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
 	return 0;
 }
