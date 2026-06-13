@@ -12344,11 +12344,427 @@
 //    return 0;
 //}
 
+//#include <iostream>
+//#include <stdlib.h>
+//#include <string.h>
+//using namespace std;
+//
+//using pAdd1 = int (*)(int, int);
+//
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//int main()
+//{
+//	//int (*pAdd)(int, int) = &add;
+//	//pAdd1 a = &add;
+//
+//	//const char* str1 = "abc";
+//	//const char* str2 = "abz";
+//	//cout << strcmp(str1, str2) << endl;
+//
+//	unsigned char a = 0;
+//	a--;
+//
+//	cout << (int)a << endl;
+//}
+
+//#include <stdlib.h>
+//#include <string.h>
+//#include <stdio.h>
+//
+//void GetMemory(char* p)
+//{
+//	p = (char*)malloc(sizeof(100));
+//}
+//
+//void test1()
+//{
+//	char* str = NULL;
+//	GetMemory(str);
+//	strcpy(str, "hello world");
+//	printf(str);
+//}
+//
+//char* GetMemory()
+//{
+//	char p[] = "hello world";
+//	return p;
+//}
+//
+//void test2()
+//{
+//	char* str = GetMemory();
+//}
+//
+//void swap(int* p1, int* p2)
+//{
+//	int* p;
+//	*p = *p1;
+//	*p1 = *p2;
+//	*p2 = *p;
+//}
+//
+//int main()
+//{
+//	//test1();
+//	char* str = nullptr;
+//	printf(str);
+//	return 0;
+//}
+
+//#include <iostream>
+//
+//using namespace std;
+//
+//enum class color
+//{
+//	RED,
+//	RED,
+//	BULE
+//};
+//
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <string>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	int size = 160;
+//	string str;
+//	str.resize(4);
+//	memcpy(&str[0], &size, sizeof(int));
+//	printf("%s\n", str.c_str());
+//	cout << str << endl;
+//	return 0;
+//}
+
 #include <iostream>
-using namespace std;
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <random>
+#include <functional>
+#include <numeric>
+#include <iomanip>
 
-int main()
+// ---------- 关卡配置 ----------
+struct LevelConfig 
 {
+    int fullTubes;
+    std::vector<std::vector<int>> patterns; // 每个模式存储为数量列表
+};
 
-	return 0;
+const std::map<int, LevelConfig> LEVEL_CONFIG = 
+{
+    {1, {3, {{2, 2}, {1, 1, 2}}}},
+    {2, {4, {{2, 2}, {1, 1, 2}, {1, 3}}}},
+    {3, {5, {{1, 1, 2}, {1, 3}}}},
+    {4, {5, {{1, 1, 2}, {1, 3}}}},
+    {5, {6, {{1, 1, 2}, {1, 3}, {1, 1, 1, 1}}}},
+    {6, {6, {{1, 1, 2}, {1, 3}, {1, 1, 1, 1}}}},
+    {7, {7, {{1, 1, 2}, {1, 1, 1, 1}}}},
+    {8, {7, {{1, 1, 2}, {1, 1, 1, 1}}}},
+    {9, {8, {{1, 1, 1, 1}}}},
+    {10, {8, {{1, 1, 1, 1}}}}
+};
+
+// ---------- 全局随机引擎 ----------
+std::mt19937 rng(std::random_device{}());
+
+// ---------- 辅助函数：从 n 个颜色中选择 k 个的所有组合 ----------
+std::vector<std::vector<int>> selectColors(int n, int k) 
+{
+    std::vector<std::vector<int>> result;
+    std::vector<int> combination(k);
+    std::function<void(int, int)> backtrack = [&](int start, int depth) 
+        {
+        if (depth == k) 
+        {
+            result.push_back(combination);
+            return;
+        }
+        for (int i = start; i < n; ++i) 
+        {
+            combination[depth] = i;
+            backtrack(i + 1, depth + 1);
+        }
+        };
+    backtrack(0, 0);
+    return result;
+}
+
+// ---------- 辅助函数：生成一个模式的所有不同排列 ----------
+std::set<std::vector<int>> distinctPermutations(const std::vector<int>& pattern) 
+{
+    std::set<std::vector<int>> result;
+    std::vector<int> perm = pattern;
+    std::sort(perm.begin(), perm.end());
+    do 
+    {
+        result.insert(perm);
+    } while (std::next_permutation(perm.begin(), perm.end()));
+    return result;
+}
+
+// ---------- 辅助函数：尝试扣除颜色计数，成功返回 true 并修改 counts ----------
+bool tryAssign(const std::vector<int>& colors,
+    const std::vector<int>& quantities,
+    std::vector<int>& colorCounts)
+{
+    for (size_t i = 0; i < colors.size(); ++i) 
+    {
+        if (colorCounts[colors[i]] < quantities[i]) 
+        {
+            return false;
+        }
+    }
+    for (size_t i = 0; i < colors.size(); ++i) 
+    {
+        colorCounts[colors[i]] -= quantities[i];
+    }
+    return true;
+}
+
+// ---------- 回溯生成核心 ----------
+bool backtrack(int tubeIdx,
+    int C,
+    const std::vector<std::vector<int>>& patterns,
+    std::vector<int>& colorCounts,
+    std::vector<std::vector<int>>& tubes,
+    std::mt19937& rng)
+{
+    if (tubeIdx == C) 
+    {
+        return std::all_of(colorCounts.begin(), colorCounts.end(),
+            [](int cnt) { return cnt == 0; });
+    }
+
+    // 随机打乱模式顺序
+    std::vector<std::vector<int>> shuffledPatterns = patterns;
+    std::shuffle(shuffledPatterns.begin(), shuffledPatterns.end(), rng);
+
+    for (const auto& pattern : shuffledPatterns) 
+    {
+        int k = pattern.size();
+        auto colorCombinations = selectColors(C, k);
+        // 随机打乱颜色组合顺序以增加多样性
+        std::shuffle(colorCombinations.begin(), colorCombinations.end(), rng);
+
+        for (const auto& colorComb : colorCombinations) 
+        {
+            auto perms = distinctPermutations(pattern);
+            for (const auto& perm : perms) {
+                if (tryAssign(colorComb, perm, colorCounts)) 
+                {
+                    // 构造试管内容
+                    std::vector<int> tubeContent;
+                    for (size_t i = 0; i < colorComb.size(); ++i) 
+                    {
+                        tubeContent.insert(tubeContent.end(), perm[i], colorComb[i]);
+                    }
+                    std::shuffle(tubeContent.begin(), tubeContent.end(), rng);
+                    tubes.push_back(tubeContent);
+
+                    if (backtrack(tubeIdx + 1, C, patterns, colorCounts, tubes, rng)) 
+                    {
+                        return true;
+                    }
+
+                    // 回溯
+                    tubes.pop_back();
+                    for (size_t i = 0; i < colorComb.size(); ++i) 
+                    {
+                        colorCounts[colorComb[i]] += perm[i];
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// ---------- 主生成函数 ----------
+std::vector<std::vector<int>> generateLevel(int level,
+    bool shuffleTubes = true,
+    int seed = -1)
+{
+    auto it = LEVEL_CONFIG.find(level);
+    if (it == LEVEL_CONFIG.end()) 
+    {
+        throw std::invalid_argument("关卡 " + std::to_string(level) + " 未定义，仅支持 1-10");
+    }
+
+    const auto& config = it->second;
+    int C = config.fullTubes;
+    const auto& patterns = config.patterns;
+
+    // 设置随机种子
+    std::mt19937 localRng = rng;
+    if (seed != -1) 
+    {
+        localRng.seed(seed);
+    }
+    else 
+    {
+        localRng.seed(std::random_device{}());
+    }
+
+    std::vector<int> colorCounts(C, 4);
+    std::vector<std::vector<int>> tubes;
+
+    bool success = backtrack(0, C, patterns, colorCounts, tubes, localRng);
+    if (!success) 
+    {
+        throw std::runtime_error("关卡 " + std::to_string(level) + " 生成失败，请重试");
+    }
+
+    // 添加两个空试管
+    tubes.push_back({});
+    tubes.push_back({});
+
+    if (shuffleTubes) 
+    {
+        std::shuffle(tubes.begin(), tubes.end(), localRng);
+    }
+
+    return tubes;
+}
+
+// ---------- 测试统计函数 ----------
+void testLevelGeneration(int level, int numTrials = 1000, int baseSeed = 42, bool showExample = true) 
+{
+    std::cout << "\n============================================================\n";
+    std::cout << "开始测试关卡 " << level << "，生成次数: " << numTrials << "\n";
+    std::cout << "============================================================\n";
+
+    std::map<std::vector<int>, int> patternCounter;
+    int successCount = 0;
+    std::vector<std::vector<int>> exampleTubes;
+
+    for (int i = 0; i < numTrials; ++i) 
+    {
+        int seed = baseSeed + i;
+        try 
+        {
+            auto tubes = generateLevel(level, true, seed);
+            ++successCount;
+
+            // 统计每个非空试管的颜色分布模式
+            for (const auto& tube : tubes) 
+            {
+                if (tube.empty()) continue;
+                std::map<int, int> colorCount;
+                for (int color : tube) 
+                {
+                    colorCount[color]++;
+                }
+                std::vector<int> pattern;
+                for (const auto& p : colorCount) 
+                {
+                    pattern.push_back(p.second);
+                }
+                std::sort(pattern.begin(), pattern.end());
+                patternCounter[pattern]++;
+            }
+
+            if (exampleTubes.empty()) 
+            {
+                exampleTubes = tubes;
+            }
+        }
+        catch (const std::exception& e) 
+        {
+            std::cerr << "第 " << i + 1 << " 次生成失败: " << e.what() << "\n";
+        }
+    }
+
+    std::cout << "\n✅ 成功生成 " << successCount << " / " << numTrials << " 次\n";
+
+    if (showExample && !exampleTubes.empty()) 
+    {
+        std::cout << "\n📋 样例布局（第一次成功生成）:\n";
+        for (size_t idx = 0; idx < exampleTubes.size(); ++idx) 
+        {
+            std::cout << "  试管 " << std::setw(2) << idx + 1 << ": [";
+            for (size_t j = 0; j < exampleTubes[idx].size(); ++j) 
+            {
+                std::cout << exampleTubes[idx][j];
+                if (j != exampleTubes[idx].size() - 1) std::cout << ", ";
+            }
+            std::cout << "]\n";
+        }
+    }
+
+    std::cout << "\n📊 各布局模式出现总次数（所有生成中非空试管的累计）:\n";
+    int totalTubes = 0;
+    for (const auto& p : patternCounter) totalTubes += p.second;
+
+    // 按次数降序排序
+    std::vector<std::pair<std::vector<int>, int>> sorted(patternCounter.begin(), patternCounter.end());
+    std::sort(sorted.begin(), sorted.end(),
+        [](const auto& a, const auto& b) { return a.second > b.second; });
+
+    for (const auto& p : sorted) 
+    {
+        double pct = totalTubes > 0 ? (100.0 * p.second / totalTubes) : 0.0;
+        std::cout << "  [";
+        for (size_t i = 0; i < p.first.size(); ++i) 
+        {
+            std::cout << p.first[i];
+            if (i != p.first.size() - 1) std::cout << ", ";
+        }
+        std::cout << "] : " << std::setw(6) << p.second << " 次  ("
+            << std::fixed << std::setprecision(2) << pct << "%)\n";
+    }
+
+    if (successCount > 0) 
+    {
+        std::cout << "\n📈 平均每次生成中各模式试管数量:\n";
+        for (const auto& p : sorted) 
+        {
+            double avg = static_cast<double>(p.second) / successCount;
+            std::cout << "  [";
+            for (size_t i = 0; i < p.first.size(); ++i) 
+            {
+                std::cout << p.first[i];
+                if (i != p.first.size() - 1) std::cout << ", ";
+            }
+            std::cout << "] : " << std::fixed << std::setprecision(3) << avg << " 个/局\n";
+        }
+    }
+}
+
+// ---------- 批量测试所有关卡 ----------
+void batchTestAllLevels(int numTrials = 200, int baseSeed = 42) 
+{
+    for (int lv = 1; lv <= 10; ++lv) 
+    {
+        testLevelGeneration(lv, numTrials, baseSeed, true);
+    }
+}
+
+// ---------- 主函数演示 ----------
+int main() 
+{
+    // 示例1：测试第1关，生成1000次
+    testLevelGeneration(1, 1000, 42);
+
+    // 示例2：测试第5关，生成500次
+    testLevelGeneration(5, 500, 42);
+
+    // 示例3：批量测试全部关卡（每关200次）
+    // batchTestAllLevels(200, 42);
+
+    return 0;
 }
